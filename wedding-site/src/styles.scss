@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100%;
+  background-color: rgb(112, 128, 144);
+  max-width: 1280px;
+  margin: auto;
+}
+
+html {
+  height: 100%;
+}
+
+.pa-1 {
+  padding: 4px 4px !important;
+}
+
+.mat-button-toggle-label-content {
+  padding: 12px !important;
+}

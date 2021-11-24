@@ -1,0 +1,47 @@
+.top-nav-buttons {
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+  background-color: rgb(112 128 144 / 50%);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: block;
+
+  a {
+    padding: 0 36px;
+    cursor: pointer;
+    color: #fff;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .top-nav-buttons {
+    display: grid;
+    padding-bottom: 0;
+    position: inherit;
+  }
+}
+
+.top-image {
+  position: relative;
+  height: 60vw;
+}
+
+.img-wrap:before {
+  content: "";
+  background-image: linear-gradient(to top, rgba(112, 128, 144, 1), rgba(0, 0, 0, 0));
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 33%;
+}
+
+img {
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  height: 60vw;
+  object-position: top;
+}
