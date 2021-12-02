@@ -11,7 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FooterContentComponent } from './footer-content/footer-content.component';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatButtonToggleModule,
     MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

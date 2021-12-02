@@ -42,9 +42,13 @@
       <mat-icon aria-hidden="true" class="favorite-icon">favorite</mat-icon>
       <p class="mat-body-1" *ngFor="let text of tile.text">{{ text }}</p>
     </div>
-    <!-- <div *ngIf="tile.component">
-        <div [innerHtml]="tile.component"></div>
-        <mat-form-field appearance="outline"><mat-label>Outline form field</mat-label><input matInput placeholder="Placeholder"><mat-icon matSuffix>sentiment_very_satisfied</mat-icon><mat-hint>Hint</mat-hint></mat-form-field>
-    </div> -->
+    <div *ngIf="tile.component">
+      <!-- <div [innerHtml]="tile.component"></div> -->
+      <mat-form-field appearance="outline">
+        <mat-label>Outline form field</mat-label>
+        <input matInput placeholder="Placeholder" />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Hint</mat-hint></mat-form-field>
+    </div>
   </mat-grid-tile>
 </mat-grid-list>
