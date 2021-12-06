@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Firestore, collectionData, collection } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { Rsvp } from '../rsvp/rsvp.model';
 
 export interface Tile {
   section: string;
@@ -23,7 +26,10 @@ export class GridContentComponent implements OnInit {
   breakpoint: number = 8;
 
   tiles: Tile[] = [];
-  constructor(private sanitizer: DomSanitizer) {
+  item$: Observable<Rsvp[]>;
+  constructor(private sanitizer: DomSanitizer, firestore: Firestore) {
+    const myCollection = collection(firestore, 'rsvps')
+    this.item$ = collectionData(myCollection) as Observable<Rsvp[]>;
     this.tiles = [
       {
         section: 'Wedding-day',

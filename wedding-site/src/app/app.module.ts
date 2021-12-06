@@ -12,14 +12,25 @@ import { FooterContentComponent } from './footer-content/footer-content.componen
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { CreateRsvpComponent } from './create-rsvp/create-rsvp.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { RsvpService } from './rsvp/rsvp.service';
+import { MatButtonModule } from '@angular/material/button';
+
 @NgModule({
   declarations: [
     AppComponent,
     TopImageComponent,
     GridContentComponent,
     FooterContentComponent,
+    CreateRsvpComponent,
   ],
   imports: [
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -28,8 +39,11 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonToggleModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [RsvpService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

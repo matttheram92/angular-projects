@@ -1,0 +1,15 @@
+<form [formGroup]="rsvpForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="mb-3">
+      <label>Name</label>
+      <input type="text" formControlName="name" class="form-control" required>
+    </div>
+  
+    <div class="mb-3">
+      <label>Attending</label>
+      <input type="checkbox" formControlName="attending" class="form-control">
+    </div>
+  
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary" [disabled]="!rsvpForm.valid">Save</button>
+    </div>
+  </form>

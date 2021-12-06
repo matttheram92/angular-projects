@@ -1,0 +1,22 @@
+.center-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+
+    h2 {
+        margin: 36px 0 0;
+    }
+
+    .password-box {
+        height: 300px;
+        background: #ffffff;
+        width: 300px;
+        border-radius: 5px;
+    }
+
+    .password-content {
+        margin: 0 5%;
+    }
+}

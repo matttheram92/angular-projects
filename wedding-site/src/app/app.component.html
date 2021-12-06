@@ -1,7 +1,30 @@
-<app-top-image></app-top-image>
+<div *ngIf="!loggedIn">
+  <div class="center-screen">
+    <div class="password-box">
+      <h2>SARAH & MATT'S WEDDING</h2>
+      <mat-icon aria-hidden="true" class="favorite-icon">favorite</mat-icon>
+      <div class="password-content">
+        <p>Please enter the password below (can be found on invitation)</p>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput [(ngModel)]="password" />
+        </mat-form-field>
+        <p>
+          <button mat-stroked-button color="primary" (click)="logIn()">
+            Log in
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<router-outlet></router-outlet>
+<div *ngIf="loggedIn">
+  <app-top-image></app-top-image>
 
-<app-grid-content></app-grid-content>
+  <router-outlet></router-outlet>
 
-<app-footer-content></app-footer-content>
+  <app-grid-content></app-grid-content>
+
+  <app-footer-content></app-footer-content>
+</div>
