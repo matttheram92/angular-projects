@@ -39,7 +39,7 @@
     </div>
     <div *ngIf="!tile.img && !tile.map" class="grid-info">
       <h1>{{ tile.title }}</h1>
-      <mat-icon aria-hidden="true" class="favorite-icon">favorite</mat-icon>
+      <mat-icon aria-hidden="true" color="primary">favorite</mat-icon>
       <p class="mat-body-1" *ngFor="let text of tile.text">{{ text }}</p>
     </div>
     <div *ngIf="tile.component">

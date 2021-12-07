@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -21,6 +21,9 @@ html {
   padding: 12px !important;
 }
 
-.favorite-icon {
-  color: rgb(95, 158, 160);
-}
+// .mat-button.mat-primary,
+// .mat-icon-button.mat-primary,
+// .mat-stroked-button.mat-primary,
+// .mat-icon.mat-primary {
+//   color: rgb(95, 158, 160);
+// }
