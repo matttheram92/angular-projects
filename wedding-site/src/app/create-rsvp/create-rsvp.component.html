@@ -1,15 +1,28 @@
 <form [formGroup]="rsvpForm" (ngSubmit)="onSubmit()" novalidate>
-    <div class="mb-3">
-      <label>Name</label>
-      <input type="text" formControlName="name" class="form-control" required>
-    </div>
-  
-    <div class="mb-3">
-      <label>Attending</label>
-      <input type="checkbox" formControlName="attending" class="form-control">
-    </div>
-  
-    <div class="mb-3">
-      <button type="submit" class="btn btn-primary" [disabled]="!rsvpForm.valid">Save</button>
-    </div>
-  </form>
+  <div class="mb-3">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Name(s)</mat-label>
+      <input matInput type="text" formControlName="name" class="form-control" required>
+    </mat-form-field>
+  </div>
+
+  <div class="mb-3">
+    <label>Attending</label>
+    <input type="checkbox" formControlName="attending" class="form-control">
+  </div>
+
+  <mat-radio-group class="my-radio-group" aria-label="Can you make it?">
+    <mat-radio-button value="1">
+      <mat-icon>sentiment_very_satisfied</mat-icon>
+      <span>Accept with pleasure!</span>
+    </mat-radio-button>
+    <mat-radio-button value="2" class="my-radio-button">
+      <mat-icon>sentiment_very_dissatisfied</mat-icon>
+      <span>Decline with regret.</span>
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <div class="mb-3">
+    <button type="submit" class="btn btn-primary" [disabled]="!rsvpForm.valid">Save</button>
+  </div>
+</form>

@@ -19,6 +19,7 @@ import { CreateRsvpComponent } from './create-rsvp/create-rsvp.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RsvpService } from './rsvp/rsvp.service';
 import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -42,8 +43,9 @@ import { MatButtonModule } from '@angular/material/button';
     FormsModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatRadioModule
   ],
   providers: [RsvpService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

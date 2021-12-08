@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+export interface TopButton {
+  id: string;
+  name: string;
+}
+
 @Component({
   selector: 'app-top-image',
   templateUrl: './top-image.component.html',
@@ -7,7 +12,14 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TopImageComponent implements OnInit {
-  topButtons = ['Wedding-day', 'Getting-there', 'Gifts', 'Hotels', 'RSVP'];
+  topButtons: TopButton[] =
+    [
+      { id: 'Wedding-day', name: 'Wedding day' },
+      { id: 'Getting-there', name: 'Getting there' },
+      { id: 'Gifts', name: 'Gifts' },
+      { id: 'Hotels', name: 'Hotels' },
+      { id: 'RSVP', name: 'RSVP' },
+    ];
   constructor() { }
 
   ngOnInit(): void {
@@ -18,6 +30,6 @@ export class TopImageComponent implements OnInit {
     if (!element) {
       return;
     }
-    element.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
+    element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
   }
 }

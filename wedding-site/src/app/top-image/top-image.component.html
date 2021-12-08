@@ -1,8 +1,10 @@
-<div class="top-image">
-    <div class="img-wrap">
-        <img src='https://live.staticflickr.com/65535/51698425739_eebafc8bcc_k.jpg'/>
-    </div>
-</div>
 <div class="top-nav-buttons">
-    <a *ngFor="let button of topButtons" (click)="scrollToElement(button)" class="mat-h3">{{ button }}</a>
+  <a *ngFor="let button of topButtons" (click)="scrollToElement(button.id)" class="mat-h3">
+    {{ button.name }}
+  </a>
+</div>
+<div class="top-image">
+  <div class="img-wrap">
+    <img src='https://live.staticflickr.com/65535/51698425739_eebafc8bcc_k.jpg' />
+  </div>
 </div>

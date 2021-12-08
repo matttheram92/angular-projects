@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Firestore, collectionData, collection } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { Rsvp } from '../rsvp/rsvp.model';
 
 export interface Tile {
   section: string;
@@ -26,10 +23,7 @@ export class GridContentComponent implements OnInit {
   breakpoint: number = 8;
 
   tiles: Tile[] = [];
-  item$: Observable<Rsvp[]>;
-  constructor(private sanitizer: DomSanitizer, firestore: Firestore) {
-    const myCollection = collection(firestore, 'rsvps')
-    this.item$ = collectionData(myCollection) as Observable<Rsvp[]>;
+  constructor(private sanitizer: DomSanitizer) {
     this.tiles = [
       {
         section: 'Wedding-day',
@@ -101,7 +95,7 @@ export class GridContentComponent implements OnInit {
           'a contribution to our honeymoon pot,',
           'would be appreciated such a lot',
           '',
-          'And just remember, what means the most,',
+          'But just remember, what means the most,',
           "is that you're with us to raise a toast!",
         ],
       },
@@ -111,7 +105,7 @@ export class GridContentComponent implements OnInit {
         rows: 4,
         color: '#ffffff',
         title: 'Hotels',
-        text: ['Some nearby hotels', 'Travelodge Nottingham Wollaton Park – 0.9 miles', 'De Vere Orchard Hotel – 2 miles'],
+        text: ['Some nearby hotels:', 'Travelodge Nottingham Wollaton Park – 0.9 miles', 'De Vere Orchard Hotel – 2 miles'],
       },
       {
         section: 'Hotels',
@@ -128,7 +122,7 @@ export class GridContentComponent implements OnInit {
         rows: 4,
         color: '#ffffff',
         title: 'RSVP',
-        text: ['RSVP below'],
+        text: ['Kindly respond by 18th Feburary 2022'],
         component: '<mat-form-field appearance="outline"><mat-label>Outline form field</mat-label><input matInput placeholder="Placeholder"><mat-icon matSuffix>sentiment_very_satisfied</mat-icon><mat-hint>Hint</mat-hint></mat-form-field>'
       },
     ];

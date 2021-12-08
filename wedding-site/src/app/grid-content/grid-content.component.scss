@@ -28,3 +28,9 @@ mat-icon {
   background-image: url("https://media.istockphoto.com/vectors/watercolor-vector-wreath-with-green-eucalyptus-leaves-and-branches-vector-id878121918");
   background-color: #cccccc;
 }
+
+.grid-info {
+  mat-icon {
+    margin: 16px auto;
+  }
+}

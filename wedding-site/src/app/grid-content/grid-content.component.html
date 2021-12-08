@@ -1,59 +1,27 @@
-<mat-grid-list
-  [cols]="breakpoint"
-  rowHeight="100px"
-  (window:resize)="onResize($event)"
-  gutterSize="0"
->
-  <mat-grid-tile
-    *ngFor="let tile of tiles"
-    [id]="tile.section"
-    [colspan]="breakpoint === 1 ? 1 : tile.cols"
-    [rowspan]="tile.rows"
-    [style.background]="tile.color"
-    class="grid-tile"
-  >
+<mat-grid-list [cols]="breakpoint" rowHeight="100px" (window:resize)="onResize($event)" gutterSize="0">
+  <mat-grid-tile *ngFor="let tile of tiles" [id]="tile.section" [colspan]="breakpoint === 1 ? 1 : tile.cols"
+    [rowspan]="tile.rows" [style.background]="tile.color" class="grid-tile">
     <div *ngIf="tile.img || tile.map" class="grid-image">
       <img *ngIf="tile.imageOrMap === 'image'" src="{{ tile.img }}" />
-      <iframe
-        *ngIf="tile.map"
-        [src]="tile.map"
-        width="95%"
-        [height]="tile.imageOrMap === 'map' ? '90%' : 0"
-        style="border: 0"
-        allowfullscreen=""
-        loading="lazy"
-      ></iframe>
-      <mat-button-toggle-group
-        name="imageOrMap"
-        *ngIf="tile.img && tile.map"
-        aria-label="Image or map"
-        [(value)]="tile.imageOrMap"
-      >
+      <iframe *ngIf="tile.map" [src]="tile.map" width="95%" [height]="tile.imageOrMap === 'map' ? '90%' : 0"
+        style="border: 0" allowfullscreen="" loading="lazy"></iframe>
+      <mat-button-toggle-group name="imageOrMap" *ngIf="tile.img && tile.map" aria-label="Image or map"
+        [(value)]="tile.imageOrMap">
         <mat-button-toggle value="image">
-          <mat-icon aria-hidden="true">image</mat-icon></mat-button-toggle
-        >
+          <mat-icon aria-hidden="true">image</mat-icon>
+        </mat-button-toggle>
         <mat-button-toggle value="map">
-          <mat-icon aria-hidden="true">place</mat-icon></mat-button-toggle
-        >
+          <mat-icon aria-hidden="true">place</mat-icon>
+        </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
     <div *ngIf="!tile.img && !tile.map" class="grid-info">
       <h1>{{ tile.title }}</h1>
       <mat-icon aria-hidden="true" color="primary">favorite</mat-icon>
       <p class="mat-body-1" *ngFor="let text of tile.text">{{ text }}</p>
-    </div>
-    <div *ngIf="tile.component">
-      <app-create-rsvp></app-create-rsvp>
-      <!-- <mat-form-field appearance="outline">
-        <mat-label>Outline form field</mat-label>
-        <input matInput placeholder="Placeholder" />
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-        <mat-hint>Hint</mat-hint></mat-form-field> -->
+      <p *ngIf="tile.component">
+        <app-create-rsvp></app-create-rsvp>
+      </p>
     </div>
   </mat-grid-tile>
 </mat-grid-list>
-<ul>
-  <li *ngFor="let item of item$ | async">
-    {{ item.name }}
-  </li>
-</ul>
