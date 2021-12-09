@@ -119,7 +119,7 @@ export class GridContentComponent implements OnInit {
       {
         section: 'RSVP',
         cols: 8,
-        rows: 4,
+        rows: 6,
         color: '#ffffff',
         title: 'RSVP',
         text: ['Kindly respond by 18th Feburary 2022'],

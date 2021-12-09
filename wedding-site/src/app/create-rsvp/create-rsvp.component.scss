@@ -1,4 +1,49 @@
-span.mat-radio-label-content {
-  display: grid !important;
-  justify-items: center;
+@import "~@angular/material/theming";
+$theme-success: mat-palette($mat-green);
+$theme-error: mat-palette($mat-red);
+
+.my-radio-button {
+  margin-bottom: 12px;
+
+  label {
+    cursor: pointer;
+    display: inline-grid;
+    justify-items: center;
+    border: 1px solid rgba(0, 0, 0, .2);
+    padding: 16px;
+    margin: 4px;
+    width: 150px;
+    border-radius: 8px;
+
+    mat-icon {
+      color: #708090;
+      font-size: 46px;
+      display: contents;
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  .selected-radio {
+    background-color: rgba(0, 0, 0, .1);
+  }
+
+  .green-radio {
+    mat-icon {
+      color: mat-color($theme-success, 1);
+    }
+  }
+
+  .red-radio {
+    mat-icon {
+      color: mat-color($theme-error, 1);
+    }
+  }
+}
+
+.example-full-width {
+  width: 100%;
+  margin: 0 4px;
 }

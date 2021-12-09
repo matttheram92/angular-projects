@@ -10,6 +10,7 @@ import { RsvpService } from '../rsvp/rsvp.service';
 
 export class CreateRsvpComponent implements OnInit {
   public rsvpForm: FormGroup;
+  attendingStatus?: number;
 
   constructor(
     public rsvpService: RsvpService,
@@ -17,7 +18,8 @@ export class CreateRsvpComponent implements OnInit {
   ) { 
     this.rsvpForm = this.formBuilder.group({
       name: [''],
-      attending: ['']
+      attending: [''],
+      dietryRequirements: ['']
     })      
   }
 
