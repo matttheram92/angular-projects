@@ -1,18 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-export interface Tile {
-  section: string;
-  color: string;
-  cols: number;
-  rows: number;
-  title?: string;
-  text?: string[];
-  img?: string;
-  map?: SafeResourceUrl;
-  imageOrMap?: string;
-  component?: string;
-}
+import { DomSanitizer } from '@angular/platform-browser';
+import { Tile } from "./tile.model";
 
 @Component({
   selector: 'app-grid-content',
@@ -114,7 +102,13 @@ export class GridContentComponent implements OnInit {
         color: '#efefef',
         img: '',
         map: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps/d/embed?mid=1WXWURNZ_msxFkFo4B8Qi1r9_iYQPRR3-&hl=en'),
-        imageOrMap: 'map'
+        imageOrMap: 'map',
+        mapKey: [
+          { icon: 'church', name: 'Church' },
+          { icon: 'local_bar', name: 'Reception' },
+          { icon: 'hotel', name: 'Travelodge' },
+          { icon: 'hotel', name: 'De Vere' }
+        ]
       },
       {
         section: 'RSVP',

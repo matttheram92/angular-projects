@@ -1,10 +1,14 @@
 <mat-grid-list [cols]="breakpoint" rowHeight="100px" (window:resize)="onResize($event)" gutterSize="0">
   <mat-grid-tile *ngFor="let tile of tiles" [id]="tile.section" [colspan]="breakpoint === 1 ? 1 : tile.cols"
     [rowspan]="tile.rows" [style.background]="tile.color" class="grid-tile">
+
     <div *ngIf="tile.img || tile.map" class="grid-image">
+
       <img *ngIf="tile.imageOrMap === 'image'" src="{{ tile.img }}" />
+
       <iframe *ngIf="tile.map" [src]="tile.map" width="95%" [height]="tile.imageOrMap === 'map' ? '90%' : 0"
         style="border: 0" allowfullscreen="" loading="lazy"></iframe>
+
       <mat-button-toggle-group name="imageOrMap" *ngIf="tile.img && tile.map" aria-label="Image or map"
         [(value)]="tile.imageOrMap">
         <mat-button-toggle value="image">
@@ -14,7 +18,15 @@
           <mat-icon aria-hidden="true">place</mat-icon>
         </mat-button-toggle>
       </mat-button-toggle-group>
+
+      <div *ngIf="tile.mapKey" class="map-key">
+        <div *ngFor="let keyObject of tile.mapKey" class="map-key-item">
+          <mat-icon>{{ keyObject.icon }}</mat-icon>
+          <span>{{ keyObject.name }}</span>
+        </div>
+      </div>
     </div>
+
     <div *ngIf="!tile.img && !tile.map" class="grid-info">
       <h1>{{ tile.title }}</h1>
       <mat-icon aria-hidden="true" color="primary">favorite</mat-icon>
@@ -23,5 +35,6 @@
         <app-create-rsvp></app-create-rsvp>
       </p>
     </div>
+
   </mat-grid-tile>
 </mat-grid-list>

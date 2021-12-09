@@ -34,3 +34,15 @@ mat-icon {
     margin: 16px auto;
   }
 }
+
+.map-key {
+  display: inline-flex;
+  width: 80%;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, .2);
+  min-width: 300px;
+
+  .map-key-item {
+    width: 25%;
+  }
+}

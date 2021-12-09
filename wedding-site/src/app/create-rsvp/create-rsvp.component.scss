@@ -1,4 +1,5 @@
 @import "~@angular/material/theming";
+@import "../../customTheme.scss";
 $theme-success: mat-palette($mat-green);
 $theme-error: mat-palette($mat-red);
 
@@ -27,7 +28,7 @@ $theme-error: mat-palette($mat-red);
   }
 
   .selected-radio {
-    background-color: rgba(0, 0, 0, .1);
+    background-color: mat-color($primary, .2);
   }
 
   .green-radio {
