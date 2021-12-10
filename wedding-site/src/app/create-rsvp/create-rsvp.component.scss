@@ -17,9 +17,14 @@ $theme-error: mat-palette($mat-red);
     border-radius: 8px;
 
     mat-icon {
-      color: #708090;
       font-size: 46px;
       display: contents;
+    }
+  }
+
+  label:not(.selected-radio) {
+    mat-icon {
+      color: #708090;
     }
   }
 
@@ -27,20 +32,14 @@ $theme-error: mat-palette($mat-red);
     display: none;
   }
 
-  .selected-radio {
-    background-color: mat-color($primary, .2);
-  }
-
   .green-radio {
-    mat-icon {
-      color: mat-color($theme-success, 1);
-    }
+    background-color: #13c77d;
+    color: #fff;
   }
 
   .red-radio {
-    mat-icon {
-      color: mat-color($theme-error, 1);
-    }
+    background-color: mat-color($theme-error, 1);
+    color: #fff;
   }
 }
 

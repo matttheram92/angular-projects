@@ -35,6 +35,17 @@ mat-icon {
   }
 }
 
+.grid-image-and-text {
+  padding: 12px;
+  height: 270px;
+
+  mat-icon {
+    display: table;
+    font-size: 72px;
+    margin: 16px auto;
+  }
+}
+
 .map-key {
   display: inline-flex;
   width: 80%;

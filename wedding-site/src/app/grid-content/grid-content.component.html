@@ -1,8 +1,9 @@
 <mat-grid-list [cols]="breakpoint" rowHeight="100px" (window:resize)="onResize($event)" gutterSize="0">
   <mat-grid-tile *ngFor="let tile of tiles" [id]="tile.section" [colspan]="breakpoint === 1 ? 1 : tile.cols"
-    [rowspan]="tile.rows" [style.background]="tile.color" class="grid-tile">
+    [rowspan]="tile.component === 'empty' && breakpoint === 1 ? 0 : tile.rows" [style.background]="tile.color"
+    class="grid-tile">
 
-    <div *ngIf="tile.img || tile.map" class="grid-image">
+    <div *ngIf="tile.component === 'image-and-map' || tile.component === 'map'" class="grid-image">
 
       <img *ngIf="tile.imageOrMap === 'image'" src="{{ tile.img }}" />
 
@@ -27,13 +28,19 @@
       </div>
     </div>
 
-    <div *ngIf="!tile.img && !tile.map" class="grid-info">
+    <div *ngIf="tile.component === 'simple-text' || tile.component === 'create-rsvp'" class="grid-info">
       <h1>{{ tile.title }}</h1>
       <mat-icon aria-hidden="true" color="primary">favorite</mat-icon>
       <p class="mat-body-1" *ngFor="let text of tile.text">{{ text }}</p>
-      <p *ngIf="tile.component">
+      <p *ngIf="tile.component === 'create-rsvp'">
         <app-create-rsvp></app-create-rsvp>
       </p>
+    </div>
+
+    <div *ngIf="tile.component === 'image-and-text'" class="grid-image-and-text">
+      <mat-icon aria-hidden="true" color="primary">{{ tile.img }}</mat-icon>
+      <h1>{{ tile.title }}</h1>
+      <p class="mat-body-1" *ngFor="let text of tile.text">{{ text }}</p>
     </div>
 
   </mat-grid-tile>

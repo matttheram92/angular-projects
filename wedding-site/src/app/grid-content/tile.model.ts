@@ -6,11 +6,11 @@ export interface Tile {
     color: string;
     cols: number;
     rows: number;
+    component: string;
     title?: string;
     text?: string[];
     img?: string;
     map?: SafeResourceUrl;
     imageOrMap?: string;
-    component?: string;
     mapKey?: MapKey[];
   }
