@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import { doc, getDoc } from '@firebase/firestore';
+import { AccessLevel, getAccessLevelFromString } from './access-level';
 
 const eveningAccess = "evening-access";
 const fullAccess = "fullAccess";
@@ -13,9 +14,10 @@ const fullAccess = "fullAccess";
 export class AppComponent {
   title = 'wedding-site';
   loggedIn = false;
-  password= '';
+  password = '';
   firestore: Firestore;
-
+  accessLevel: AccessLevel = AccessLevel.NoAccess;
+  
   constructor(firestore: Firestore) {
     this.firestore = firestore;
   }
@@ -32,8 +34,9 @@ export class AppComponent {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      const accessLevel = docSnap.data().value;
+      const accessLevel: string = docSnap.data().value;
       sessionStorage.setItem("access", accessLevel.toString());
+      this.accessLevel = getAccessLevelFromString(accessLevel);
       this.loggedIn = true;
     } else {
       console.log("Invalid password");

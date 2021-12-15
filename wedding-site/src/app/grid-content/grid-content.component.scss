@@ -56,4 +56,22 @@ mat-icon {
   .map-key-item {
     width: 25%;
   }
+
+  .map-key-icon {
+    width: 24px;
+    margin: auto;
+    border-radius: 100%;
+    border: 1px solid #fff;
+    color: #fff;
+    box-shadow: #000 0px 0px 4px;
+  }
+}
+
+.icon-display-1 {
+  transform: scale(0.75);
+}
+
+.icon-bold {
+  font-weight: 900;
+  line-height: 16px;
 }

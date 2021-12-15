@@ -20,11 +20,11 @@
 </div>
 
 <div *ngIf="loggedIn">
-  <app-top-image></app-top-image>
+  <app-top-image [accessLevel]="accessLevel"></app-top-image>
 
   <router-outlet></router-outlet>
 
-  <app-grid-content></app-grid-content>
+  <app-grid-content [accessLevel]="accessLevel"></app-grid-content>
 
   <app-footer-content></app-footer-content>
 </div>

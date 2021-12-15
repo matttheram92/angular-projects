@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AccessLevel } from '../access-level';
 import { Tile } from "./tile.model";
 
 @Component({
@@ -8,10 +9,16 @@ import { Tile } from "./tile.model";
   styleUrls: ['./grid-content.component.scss'],
 })
 export class GridContentComponent implements OnInit {
+  @Input() accessLevel!: AccessLevel;
   breakpoint: number = 8;
 
   tiles: Tile[] = [];
   constructor(private sanitizer: DomSanitizer) {
+    
+  }
+
+  ngOnInit(): void {
+    this.breakpoint = window.innerWidth <= 500 ? 1 : 8;
     this.tiles = [
       {
         section: 'Wedding-day',
@@ -25,7 +32,7 @@ export class GridContentComponent implements OnInit {
         ],
       },
       {
-        section: 'Getting-there',
+        section: 'Ceremony',
         cols: 3,
         rows: 4,
         component: 'simple-text',
@@ -41,7 +48,7 @@ export class GridContentComponent implements OnInit {
         ],
       },
       {
-        section: 'Getting-there',
+        section: 'Ceremony',
         cols: 5,
         rows: 4,
         component: 'image-and-map',
@@ -51,7 +58,7 @@ export class GridContentComponent implements OnInit {
         imageOrMap: 'image'
       },
       {
-        section: 'Getting-there',
+        section: 'Reception',
         cols: 3,
         rows: 4,
         component: 'image-and-map',
@@ -61,27 +68,29 @@ export class GridContentComponent implements OnInit {
         imageOrMap: 'image'
       },
       {
-        section: 'Getting-there',
+        section: 'Reception',
         cols: 5,
         rows: 4,
         component: 'simple-text',
         color: '#ffffff',
-        title: 'The Reception',
+        title: this.accessLevel === AccessLevel.FullAccess ? 'The Reception' : 'Evening Reception',
         text: [
+          this.accessLevel === AccessLevel.FullAccess ? '' : 'Saturday, 30 April 2022',
+          this.accessLevel === AccessLevel.FullAccess ? '' : '19:00',
           'The Walled Garden at Beeston Fields',
           'Beeston',
           'Nottingham, NG9 3DA',
         ],
       },
       {
-        section: 'Getting-there',
+        section: 'Reception',
         cols: 1,
         rows: 3,
         component: 'empty',
         color: '#ffffff',
       },
       {
-        section: 'Getting-there',
+        section: 'Reception',
         cols: 2,
         rows: 3,
         component: 'image-and-text',
@@ -91,7 +100,7 @@ export class GridContentComponent implements OnInit {
         img: 'emoji_people'
       },
       {
-        section: 'Getting-there',
+        section: 'Reception',
         cols: 2,
         rows: 3,
         component: 'image-and-text',
@@ -101,7 +110,7 @@ export class GridContentComponent implements OnInit {
         img: 'local_parking'
       },
       {
-        section: 'Getting-there',
+        section: 'Reception',
         cols: 2,
         rows: 3,
         component: 'image-and-text',
@@ -111,7 +120,7 @@ export class GridContentComponent implements OnInit {
         img: 'credit_card'
       },
       {
-        section: 'Getting-there',
+        section: 'Reception',
         cols: 1,
         rows: 3,
         component: 'empty',
@@ -127,12 +136,12 @@ export class GridContentComponent implements OnInit {
         text: [
           'All we want is for you to be there,',
           'but if you have some pennies to spare.',
-          '',
+          ' ',
           'And if a gift is your intention,',
           'we thought that we would mention,',
           'a contribution to our honeymoon pot,',
           'would be appreciated such a lot',
-          '',
+          ' ',
           'But just remember, what means the most,',
           "is that you're with us to raise a toast!",
         ],
@@ -156,10 +165,10 @@ export class GridContentComponent implements OnInit {
         map: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps/d/embed?mid=1WXWURNZ_msxFkFo4B8Qi1r9_iYQPRR3-&hl=en'),
         imageOrMap: 'map',
         mapKey: [
-          { icon: 'church', name: 'Church' },
-          { icon: 'local_bar', name: 'Reception' },
-          { icon: 'hotel', name: 'Travelodge' },
-          { icon: 'hotel', name: 'De Vere' }
+          { icon: '✝', name: 'Church', color: '#0197a7', isIcon: false },
+          { icon: 'local_bar', name: 'Reception', color: '#006064', isIcon: true },
+          { icon: 'hotel', name: 'Travelodge', color: '#3949ab', isIcon: true },
+          { icon: 'hotel', name: 'De Vere', color: '#7cb342', isIcon: true }
         ]
       },
       {
@@ -172,10 +181,6 @@ export class GridContentComponent implements OnInit {
         component: 'create-rsvp'
       },
     ];
-  }
-
-  ngOnInit(): void {
-    this.breakpoint = window.innerWidth <= 500 ? 1 : 8;
   }
 
   onResize(event: any): void {

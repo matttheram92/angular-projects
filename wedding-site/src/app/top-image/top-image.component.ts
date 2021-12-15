@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AccessLevel } from '../access-level';
 
 export interface TopButton {
   id: string;
@@ -12,17 +13,19 @@ export interface TopButton {
 })
 
 export class TopImageComponent implements OnInit {
-  topButtons: TopButton[] =
+  @Input() accessLevel!: AccessLevel;
+  topButtons: TopButton[] = [];
+  constructor() { }
+
+  ngOnInit(): void {
+    this.topButtons =
     [
-      { id: 'Wedding-day', name: 'Wedding day' },
-      { id: 'Getting-there', name: 'Getting there' },
+      { id: 'Ceremony', name: 'Ceremony' },
+      { id: 'Reception', name: this.accessLevel === AccessLevel.FullAccess ? 'Reception' : 'Evening' },
       { id: 'Gifts', name: 'Gifts' },
       { id: 'Hotels', name: 'Hotels' },
       { id: 'RSVP', name: 'RSVP' },
     ];
-  constructor() { }
-
-  ngOnInit(): void {
   }
 
   scrollToElement(title: string): void {

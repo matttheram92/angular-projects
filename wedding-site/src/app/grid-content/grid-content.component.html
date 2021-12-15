@@ -2,7 +2,7 @@
   <mat-grid-tile *ngFor="let tile of tiles" [id]="tile.section" [colspan]="breakpoint === 1 ? 1 : tile.cols"
     [rowspan]="tile.component === 'empty' && breakpoint === 1 ? 0 : tile.rows" [style.background]="tile.color"
     class="grid-tile">
-
+    
     <div *ngIf="tile.component === 'image-and-map' || tile.component === 'map'" class="grid-image">
 
       <img *ngIf="tile.imageOrMap === 'image'" src="{{ tile.img }}" />
@@ -22,7 +22,10 @@
 
       <div *ngIf="tile.mapKey" class="map-key">
         <div *ngFor="let keyObject of tile.mapKey" class="map-key-item">
-          <mat-icon>{{ keyObject.icon }}</mat-icon>
+          <div class="map-key-icon" [style.background-color]="keyObject.color">
+            <mat-icon class="icon-display-1" [ngClass]="!keyObject.isIcon ? 'icon-bold' : ''">{{ keyObject.icon }}
+            </mat-icon>
+          </div>
           <span>{{ keyObject.name }}</span>
         </div>
       </div>
