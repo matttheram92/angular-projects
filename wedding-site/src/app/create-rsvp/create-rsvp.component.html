@@ -1,4 +1,4 @@
-<form [formGroup]="rsvpForm" (ngSubmit)="openDialog()" novalidate>
+<form [formGroup]="rsvpForm" (ngSubmit)="openDialog()" novalidate *ngIf="!success">
   <div class="mb-3">
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Name(s)</mat-label>
@@ -33,3 +33,14 @@
     </button>
   </div>
 </form>
+
+<div class="success-form" *ngIf="success">
+  <div>
+    <iframe src="https://giphy.com/embed/f4DhsqfXa6Mz5sF0Ml" width="100%" height="100%" frameborder="0"
+      class="giphy-embed" allowfullscreen=""></iframe>
+      <mat-icon>check</mat-icon>
+    <h2>{{ attendingStatus === 1 ? "Woo hoo" : "All done" }}</h2>
+  </div>
+  <p>{{ attendingStatus === 1 ? "We can't wait to see you there!" : "We're sorry you can't make it." }}</p>
+  <button mat-raised-button (click)="closeSuccessForm()">Done</button>
+</div>

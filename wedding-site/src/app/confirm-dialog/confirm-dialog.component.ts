@@ -6,9 +6,9 @@ import { Rsvp } from '../rsvp/rsvp.model';
     selector: 'confirm-dialog',
     templateUrl: 'confirm-dialog.component.html',
 })
-export class ConfirmDialog {
+export class ConfirmDialogComponent {
     constructor(
-        public dialogRef: MatDialogRef<ConfirmDialog>,
+        public dialogRef: MatDialogRef<ConfirmDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Rsvp,
     ) { }
 

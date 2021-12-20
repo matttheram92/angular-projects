@@ -21,6 +21,7 @@ import { RsvpService } from './rsvp/rsvp.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     GridContentComponent,
     FooterContentComponent,
     CreateRsvpComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

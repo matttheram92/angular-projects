@@ -15,6 +15,7 @@ $theme-error: mat-palette($mat-red);
     margin: 4px;
     width: 150px;
     border-radius: 8px;
+    max-width: 33vw;
 
     mat-icon {
       font-size: 46px;
@@ -45,5 +46,52 @@ $theme-error: mat-palette($mat-red);
 
 .example-full-width {
   width: 100%;
+  max-width: 90vw;
   margin: 0 4px;
+}
+
+.success-form {
+  height: 320px;
+  border-radius: 26px;
+  width: 384px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 2px 10px;
+  padding-bottom: 16px;
+  max-width: 90vw;
+  margin: auto;
+
+  div {
+    padding: 16px 0 16px;
+    width: 100%;
+    background-color: mediumspringgreen;
+    border-radius: 26px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 10px;
+    margin: 0 0 16px;
+  }
+
+  iframe {
+    z-index: 1;
+    position: relative;
+  }
+
+  mat-icon {
+    margin: -78px auto 0;
+    position: absolute;
+    font-size: 53px;
+    color: #fff;
+    height: 53px;
+    width: 100%;
+    display: block;
+    left: 0;
+  }
+
+  h2 {
+    font-size: 46px;
+    color: #fff;
+    font-family: 'Playfair Display';
+  }
+
+  button {
+    background-color: mediumspringgreen;
+    color: #fff;
+  }
 }

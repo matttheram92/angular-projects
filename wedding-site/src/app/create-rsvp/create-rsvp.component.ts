@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { RsvpService } from '../rsvp/rsvp.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialog } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-create-rsvp',
@@ -13,6 +13,7 @@ import { ConfirmDialog } from '../confirm-dialog/confirm-dialog.component';
 export class CreateRsvpComponent implements OnInit {
   public rsvpForm: FormGroup;
   attendingStatus?: number;
+  success = false;
 
   constructor(
     public rsvpService: RsvpService,
@@ -26,7 +27,7 @@ export class CreateRsvpComponent implements OnInit {
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ConfirmDialog, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
       data: { name: this.rsvpForm.value.name, attending: this.rsvpForm.value.attending },
     });
@@ -39,10 +40,15 @@ export class CreateRsvpComponent implements OnInit {
   }
 
   onSubmit() {
-    //this.rsvpService.createRsvp(this.rsvpForm.value);
-    alert(`${this.rsvpForm.value.name} said ${this.rsvpForm.value.attending === 1 ? 'yes' : 'no'}`);
+    this.rsvpService.createRsvp(this.rsvpForm.value);
+    this.success = true;
     this.rsvpForm = this.emptyForm;
   };
+
+  closeSuccessForm() {
+    this.success = false;
+    this.attendingStatus = undefined;
+  }
 
   get emptyForm(): FormGroup {
     return this.formBuilder.group({
