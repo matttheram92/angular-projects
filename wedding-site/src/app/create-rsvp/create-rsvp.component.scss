@@ -44,12 +44,6 @@ $theme-error: mat-palette($mat-red);
   }
 }
 
-.example-full-width {
-  width: 100%;
-  max-width: 90vw;
-  margin: 0 4px;
-}
-
 .success-form {
   height: 320px;
   border-radius: 26px;
@@ -68,9 +62,10 @@ $theme-error: mat-palette($mat-red);
     margin: 0 0 16px;
   }
 
-  iframe {
+  img {
     z-index: 1;
     position: relative;
+    width: 126px;
   }
 
   mat-icon {
@@ -91,7 +86,8 @@ $theme-error: mat-palette($mat-red);
   }
 
   button {
-    background-color: mediumspringgreen;
+    background-color: #00fa9a;
     color: #fff;
+    border-radius: 18px;
   }
 }

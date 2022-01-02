@@ -15,13 +15,6 @@ export class RsvpService {
     this.firestore = firestore;
   }
 
-  // getRsvp(id: string) {
-  //   const myCollection = collection(this.firestore, 'rsvps')
-  //   const items = collectionData(myCollection) as Observable<Rsvp[]>;
-
-  //   return items;
-  // }
-
   getRsvpList() {
     const myCollection = collection(this.firestore, 'rsvps');
     const items = collectionData(myCollection) as Observable<Rsvp[]>;
@@ -30,37 +23,15 @@ export class RsvpService {
   }
 
   async createRsvp(rsvp: Rsvp) {
+    rsvp.dateSubmitted = new Date();
     const db = getFirestore();
     const docRef = await addDoc(collection(db, 'rsvps'), rsvp);
     console.log(docRef.id);
-    // return new Promise<any>((resolve, reject) => {
-    //   this.angularFirestore
-    //     .collection('rsvp')
-    //     .add(rsvp)
-    //     .then(
-    //       (response) => {
-    //         console.log(response);
-    //       },
-    //       (error) => reject(error)
-    //     );
-    // });
   }
 
-  // deleteUser(user) {
-  //   return this.angularFirestore
-  //     .collection("user-collection")
-  //     .doc(user.id)
-  //     .delete();
-  // }
-
-  // updateUser(user: User, id) {
-  //   return this.angularFirestore
-  //     .collection("user-collection")
-  //     .doc(id)
-  //     .update({
-  //       name: user.name,
-  //       email: user.email,
-  //       contact: user.contact
-  //     });
-  // }
+  async addSong(songName: string) {
+    const db = getFirestore();
+    const docRef = await addDoc(collection(db, 'songs'), { name: songName });
+    console.log(docRef.id);
+  }
 }

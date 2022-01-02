@@ -22,6 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { SongRequestsComponent } from './song-requests/song-requests.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     GridContentComponent,
     FooterContentComponent,
     CreateRsvpComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    SongRequestsComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -47,7 +50,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ReactiveFormsModule,
     MatButtonModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
   ],
   providers: [RsvpService],
   bootstrap: [AppComponent],

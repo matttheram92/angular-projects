@@ -63,7 +63,7 @@ export class GridContentComponent implements OnInit {
         rows: 4,
         component: 'image-and-map',
         color: '#efefef',
-        img: 'https://scontent-lhr8-1.xx.fbcdn.net/v/t1.6435-9/68665190_2426106220816958_1757098196267433984_n.jpg?_nc_cat=106&ccb=1-5&_nc_sid=09cbfe&_nc_eui2=AeHo4OAa-IcZLndk8J7Dw5g1L-fOy5mhOXIv587LmaE5chMTXgdaKC_OjlinrnJbFKA&_nc_ohc=m9W5BUTNmc0AX8D4r3Y&_nc_ht=scontent-lhr8-1.xx&oh=a5bb62ea81c9aa25c98904b2dc1272e4&oe=61C00F7B',
+        img: 'https://live.staticflickr.com/65535/51793469517_2e13d91cbb_m.jpg',
         map: this.sanitizer.bypassSecurityTrustResourceUrl('https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d4810.158385216913!2d-1.2249343496767655!3d52.92900208657566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x4879e9c6813dd74d%3A0x24cfe5545327b13!2sBeeston%20Methodist%20Church%2C%20Chilwell%20Road%2C%20Beeston%2C%20Nottingham!3m2!1d52.9241939!2d-1.2180834!4m5!1s0x4879e9eac6e7ecd7%3A0xeab3d97eb0a0d335!2sThe%20Walled%20Garden%20at%20Beeston%20Fields%2C%20Old%20Drive%2C%20Wollaton%20Rd%2C%20Beeston%2C%20Nottingham%20NG9%203DA!3m2!1d52.932755799999995!2d-1.2310793!5e0!3m2!1sen!2suk!4v1637666932912!5m2!1sen!2suk'),
         imageOrMap: 'image'
       },
@@ -177,9 +177,17 @@ export class GridContentComponent implements OnInit {
         rows: 6,
         color: '#ffffff',
         title: 'RSVP',
-        text: ['Kindly respond by 18th Feburary 2022'],
+        text: ['Please RSVP by Friday 18th Feburary'],
         component: 'create-rsvp'
       },
+      {
+        section: 'Song-request',
+        cols: 8,
+        rows: 3,
+        color: '#efefef',
+        title: 'Request a song',
+        component: 'song-requests'
+      }
     ];
   }
 

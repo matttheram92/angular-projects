@@ -45,6 +45,11 @@
       <h1>{{ tile.title }}</h1>
       <p class="mat-body-1" *ngFor="let text of tile.text">{{ text }}</p>
     </div>
+    
+    <div *ngIf="tile.component === 'song-requests'">
+      <h1>{{ tile.title }}</h1>
+      <app-song-requests></app-song-requests>
+    </div>
 
   </mat-grid-tile>
 </mat-grid-list>

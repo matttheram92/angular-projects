@@ -1,0 +1,12 @@
+<div class="mb-3 song-request-form">
+  <mat-icon *ngIf="!loading && !success" aria-hidden="true" color="primary">favorite</mat-icon>
+  <mat-spinner *ngIf="loading && !success" diameter="24" color="primary"></mat-spinner>
+  <mat-icon *ngIf="!loading && success" aria-hidden="true" class="success">check_circle</mat-icon>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Song requests</mat-label>
+    <input matInput [(ngModel)]="songTitle" id="song-name" type="text" class="form-control">
+  </mat-form-field>
+  <div class="mb-3">
+    <button mat-raised-button color="primary" (click)="submitSongRequest()" [disabled]="songTitle === ''">Add</button>
+  </div>
+</div>
