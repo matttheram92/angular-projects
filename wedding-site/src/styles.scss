@@ -24,5 +24,15 @@ html {
 .example-full-width {
   width: 100%;
   max-width: 90vw;
-  margin: 0 4px;
+}
+
+@media only screen and (max-width: 715px) {
+  .submit-button {
+    width: 100%;
+    max-width: 90vw;
+
+    &.mat-raised-button {
+      max-width: 82vw;
+    }
+  }
 }

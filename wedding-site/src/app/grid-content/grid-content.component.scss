@@ -15,7 +15,15 @@ p {
 
   img {
     max-width: 100%;
-    max-height: 300px;
+    max-height: 250px;
+    box-shadow: rgb(0 0 0 / 20%) 0px 0px 16px;
+  }
+
+  .map-toggle {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    width: 100%;
   }
 }
 
@@ -24,14 +32,35 @@ mat-icon {
   margin: auto;
 }
 
-.grid-tile {
-  background-image: url("https://media.istockphoto.com/vectors/watercolor-vector-wreath-with-green-eucalyptus-leaves-and-branches-vector-id878121918");
-  background-color: #cccccc;
-}
-
 .grid-info {
+  padding: 8px;
+
   mat-icon {
     margin: 16px auto;
+  }
+
+  img:first-child {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 27%;
+  }
+
+  img:nth-child(2) {
+    position: absolute;
+    bottom: 0;
+    opacity: 27%;
+    left: 0;
+    transform: rotate(180deg);
+  }
+}
+
+.grid-links {
+  a {
+    color: #20b2aa;
+    font-size: 14px;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
   }
 }
 
@@ -74,4 +103,9 @@ mat-icon {
 .icon-bold {
   font-weight: 900;
   line-height: 16px;
+}
+
+.key-image {
+  height: 24px;
+  display: block;
 }

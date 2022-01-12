@@ -47,6 +47,13 @@ export class CreateRsvpComponent implements OnInit {
 
   closeSuccessForm() {
     this.success = false;
+    if (this.attendingStatus === 1) {
+      const element = document.querySelector(`#Song-request`);
+      if (!element) {
+        return;
+      }
+      element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    }
     this.attendingStatus = undefined;
   }
 

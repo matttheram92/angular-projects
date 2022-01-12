@@ -15,7 +15,20 @@
   }
 }
 
-@media only screen and (max-width: 700px) {
+.mobile-menu-button {
+  display: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 715px) {
+  .mobile-menu-button {
+    display: block;
+    padding: 8px;
+    height: 26px;
+    width: 26px;
+    color: #fff;
+  }
+
   .top-nav-buttons {
     display: grid;
     padding-bottom: 0;
@@ -26,6 +39,7 @@
 .top-image {
   position: relative;
   height: 60vw;
+  max-height: 100vh;
 }
 
 .img-wrap:before {
@@ -44,4 +58,25 @@ img {
   overflow: hidden;
   height: 60vw;
   object-position: top;
+}
+
+.center-button {
+  position: absolute;
+  bottom: 10%;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+
+  button {
+    background-color: #54929f;
+    width: 160px;
+    color: #fff;
+    border-radius: 20px;
+    font-family: "Playfair Display", serif !important;
+    font-size: 20px;
+  }
+
+  button:hover {
+    background-color: #4b7781;
+  }
 }

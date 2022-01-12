@@ -28,7 +28,7 @@
   </div>
 
   <div class="mb-3">
-    <button mat-stroked-button color="primary" type="submit" [disabled]="!rsvpForm.valid">
+    <button mat-stroked-button class="submit-button" color="primary" type="submit" [disabled]="!rsvpForm.valid">
       Confirm
     </button>
   </div>
@@ -41,5 +41,5 @@
     <h2>Thank you!</h2>
   </div>
   <p>{{ attendingStatus === 1 ? "We can't wait to see you there!" : "We're sorry you can't make it." }}</p>
-  <button mat-raised-button (click)="closeSuccessForm()">Done</button>
+  <button mat-raised-button class="submit-button" (click)="closeSuccessForm()">Done</button>
 </div>

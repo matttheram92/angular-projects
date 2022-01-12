@@ -1,8 +1,9 @@
 <mat-grid-list [cols]="breakpoint" rowHeight="100px" (window:resize)="onResize($event)" gutterSize="0">
-  <mat-grid-tile *ngFor="let tile of tiles" [id]="tile.section" [colspan]="breakpoint === 1 ? 1 : tile.cols"
+  <mat-grid-tile *ngFor="let tile of tiles" [id]="tile.section"
+    [colspan]="tile.component === 'empty' && breakpoint === 1 ? 0 : (breakpoint === 1 ? 1 : tile.cols)"
     [rowspan]="tile.component === 'empty' && breakpoint === 1 ? 0 : tile.rows" [style.background]="tile.color"
     class="grid-tile">
-    
+
     <div *ngIf="tile.component === 'image-and-map' || tile.component === 'map'" class="grid-image">
 
       <img *ngIf="tile.imageOrMap === 'image'" src="{{ tile.img }}" />
@@ -10,21 +11,16 @@
       <iframe *ngIf="tile.map" [src]="tile.map" width="95%" [height]="tile.imageOrMap === 'map' ? '90%' : 0"
         style="border: 0" allowfullscreen="" loading="lazy"></iframe>
 
-      <mat-button-toggle-group name="imageOrMap" *ngIf="tile.img && tile.map" aria-label="Image or map"
-        [(value)]="tile.imageOrMap">
-        <mat-button-toggle value="image">
-          <mat-icon aria-hidden="true">image</mat-icon>
-        </mat-button-toggle>
-        <mat-button-toggle value="map">
-          <mat-icon aria-hidden="true">place</mat-icon>
-        </mat-button-toggle>
-      </mat-button-toggle-group>
+      <button mat-button *ngIf="tile.img && tile.map" class="map-toggle" color="primary"
+        (click)="tile.imageOrMap === 'image' ? tile.imageOrMap = 'map' : tile.imageOrMap = 'image'">
+        {{tile.imageOrMap === 'image' ? 'Show map' : 'Show image'}}
+      </button>
 
       <div *ngIf="tile.mapKey" class="map-key">
         <div *ngFor="let keyObject of tile.mapKey" class="map-key-item">
           <div class="map-key-icon" [style.background-color]="keyObject.color">
-            <mat-icon class="icon-display-1" [ngClass]="!keyObject.isIcon ? 'icon-bold' : ''">{{ keyObject.icon }}
-            </mat-icon>
+            <mat-icon *ngIf="keyObject.isIcon" class="icon-display-1">{{ keyObject.icon }}</mat-icon>
+            <img *ngIf="!keyObject.isIcon" src="{{ keyObject.icon }}" class="key-image" />
           </div>
           <span>{{ keyObject.name }}</span>
         </div>
@@ -32,9 +28,21 @@
     </div>
 
     <div *ngIf="tile.component === 'simple-text' || tile.component === 'create-rsvp'" class="grid-info">
+      <div *ngIf="tile.cols < 8">
+        <img
+          [src]="tile.color === '#ffffff' ? 'https://live.staticflickr.com/65535/51808753879_efbf12a1b9_t.jpg' : 'https://live.staticflickr.com/65535/51808441116_9d72b580e4_t.jpg'" />
+        <img
+          [src]="tile.color === '#ffffff' ? 'https://live.staticflickr.com/65535/51808753879_efbf12a1b9_t.jpg' : 'https://live.staticflickr.com/65535/51808441116_9d72b580e4_t.jpg'" />
+      </div>
       <h1>{{ tile.title }}</h1>
       <mat-icon aria-hidden="true" color="primary">favorite</mat-icon>
       <p class="mat-body-1" *ngFor="let text of tile.text">{{ text }}</p>
+      <div *ngIf="tile.links" class="grid-links">
+        <mat-nav-list>
+          <a mat-list-item class="mat-body-1" *ngFor="let textAndLink of tile.links" href="{{ textAndLink[1] }}"
+            target="_blank">{{ textAndLink[0] }}</a>
+        </mat-nav-list>
+      </div>
       <p *ngIf="tile.component === 'create-rsvp'">
         <app-create-rsvp></app-create-rsvp>
       </p>
@@ -45,10 +53,10 @@
       <h1>{{ tile.title }}</h1>
       <p class="mat-body-1" *ngFor="let text of tile.text">{{ text }}</p>
     </div>
-    
+
     <div *ngIf="tile.component === 'song-requests'">
       <h1>{{ tile.title }}</h1>
-      <app-song-requests></app-song-requests>
+      <app-song-requests [infoText]="tile.text"></app-song-requests>
     </div>
 
   </mat-grid-tile>

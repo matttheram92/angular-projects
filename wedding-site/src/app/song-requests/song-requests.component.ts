@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RsvpService } from '../rsvp/rsvp.service';
 
 @Component({
@@ -7,6 +7,7 @@ import { RsvpService } from '../rsvp/rsvp.service';
   styleUrls: ['./song-requests.component.scss']
 })
 export class SongRequestsComponent implements OnInit {
+  @Input() infoText?: string[];
   songTitle: string = '';
   loading = false;
   success = false;

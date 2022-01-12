@@ -1,22 +1,45 @@
 .center-screen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
 
-    h2 {
-        margin: 36px 0 0;
+  h2 {
+    margin: 8px 0 4px 0;
+    font-family: "Playfair Display", serif !important;
+  }
+
+  .password-box {
+    height: 270px;
+    background: #ffffff;
+    width: 270px;
+    border-radius: 5px;
+    padding: 20px;
+
+    button {
+      width: 100%;
+    }
+  }
+
+  .password-content {
+    p:first-child {
+      margin: 0;
     }
 
-    .password-box {
-        height: 300px;
-        background: #ffffff;
-        width: 300px;
-        border-radius: 5px;
+    mat-form-field {
+      margin-top: 8px;
     }
 
-    .password-content {
-        margin: 0 5%;
+    mat-error {
+      display: block;
+      margin-bottom: 8px;
+      margin-top: -12px;
+      height: 20px;
     }
+  }
+
+  mat-spinner {
+    margin: auto;
+  }
 }

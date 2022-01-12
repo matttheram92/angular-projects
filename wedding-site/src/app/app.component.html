@@ -1,19 +1,24 @@
 <div *ngIf="!loggedIn">
   <div class="center-screen">
     <div class="password-box">
-      <h2>SARAH & MATT'S WEDDING</h2>
+      <h2>Sarah & Matt's Wedding</h2>
       <mat-icon aria-hidden="true" color="primary">favorite</mat-icon>
       <div class="password-content">
-        <p>Please enter the password below (can be found on invitation)</p>
+        <p>Please enter the password below</p>
+        <p>(can be found on your invitation)</p>
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Password</mat-label>
-          <input id="password" matInput [(ngModel)]="password" />
+          <input id="password" matInput [(ngModel)]="password" (ngModelChange)="incorrectPassword=false" (keyup.enter)="logIn()" />
         </mat-form-field>
-        <p>
-          <button mat-stroked-button color="primary" type="submit" (click)="logIn()">
-            Log in
-          </button>
-        </p>
+        <mat-error>
+          <span *ngIf="incorrectPassword">Password is <strong>incorrect</strong></span>
+        </mat-error>
+      </div>
+      <div>
+        <button *ngIf="!loading" mat-stroked-button color="primary" type="submit" (click)="logIn()">
+          Log in
+        </button>
+        <mat-spinner *ngIf="loading" diameter="24" color="primary"></mat-spinner>
       </div>
     </div>
   </div>

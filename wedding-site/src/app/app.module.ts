@@ -24,6 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { SongRequestsComponent } from './song-requests/song-requests.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     MatRadioModule,
     MatDialogModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ],
   providers: [RsvpService],
   bootstrap: [AppComponent],

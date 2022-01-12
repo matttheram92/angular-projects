@@ -1,10 +1,18 @@
-<div class="top-nav-buttons">
-  <a *ngFor="let button of topButtons" (click)="scrollToElement(button.id)" class="mat-h3">
-    {{ button.name }}
+<div (window:resize)="onResize($event)">
+  <a class="mobile-menu-button" (click)="toggleMenu()" [style.position]="showMenu ? 'absolute' : 'inherit'">
+    <mat-icon>{{showMenu ? 'close' : 'menu'}}</mat-icon>
   </a>
-</div>
-<div class="top-image">
-  <div class="img-wrap">
-    <img src='https://live.staticflickr.com/65535/51698425739_eebafc8bcc_k.jpg' />
+  <div class="top-nav-buttons" *ngIf="showMenu">
+    <a *ngFor="let button of topButtons" (click)="scrollToElement(button.id)" class="mat-h3">
+      {{ button.name }}
+    </a>
+  </div>
+  <div class="top-image">
+    <div class="img-wrap">
+      <img src='https://live.staticflickr.com/65535/51698425739_eebafc8bcc_k.jpg' />
+    </div>
+    <div class="center-button">
+      <button mat-raised-button (click)="scrollToElement('RSVP')">RSVP</button>
+    </div>
   </div>
 </div>
