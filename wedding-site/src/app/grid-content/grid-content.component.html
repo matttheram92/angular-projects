@@ -1,4 +1,4 @@
-<mat-grid-list [cols]="breakpoint" rowHeight="100px" (window:resize)="onResize($event)" gutterSize="0">
+<mat-grid-list [cols]="breakpoint" rowHeight="10px" (window:resize)="onResize($event)" gutterSize="0">
   <mat-grid-tile *ngFor="let tile of tiles" [id]="tile.section"
     [colspan]="tile.component === 'empty' && breakpoint === 1 ? 0 : (breakpoint === 1 ? 1 : tile.cols)"
     [rowspan]="tile.component === 'empty' && breakpoint === 1 ? 0 : tile.rows" [style.background]="tile.color"
@@ -28,7 +28,7 @@
     </div>
 
     <div *ngIf="tile.component === 'simple-text' || tile.component === 'create-rsvp'" class="grid-info">
-      <div *ngIf="tile.cols < 8">
+      <div *ngIf="tile.cols < 8 && breakpoint === 8">
         <img
           [src]="tile.color === '#ffffff' ? 'https://live.staticflickr.com/65535/51808753879_efbf12a1b9_t.jpg' : 'https://live.staticflickr.com/65535/51808441116_9d72b580e4_t.jpg'" />
         <img

@@ -17,13 +17,13 @@
     <input [value]="1" id="yes" [(ngModel)]="attendingStatus" formControlName="attending" type="radio" required />
     <label for="yes" [ngClass]="{'selected-radio green-radio': attendingStatus === 1}">
       <mat-icon>sentiment_very_satisfied</mat-icon>
-      <span>Accept with pleasure!</span>
+      <span>I/we would love to be there</span>
     </label>
 
     <input [value]="0" id="no" [(ngModel)]="attendingStatus" formControlName="attending" type="radio" required />
     <label for="no" [ngClass]="{'selected-radio red-radio': attendingStatus === 0}">
       <mat-icon>sentiment_very_dissatisfied</mat-icon>
-      <span>Decline with regret.</span>
+      <span>Sorry, I/we can't make it</span>
     </label>
   </div>
 
