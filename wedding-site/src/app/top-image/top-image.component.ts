@@ -24,7 +24,7 @@ export class TopImageComponent implements OnInit {
     this.topButtons =
     [
       { id: 'Ceremony', name: 'Ceremony' },
-      { id: 'Reception', name: this.accessLevel === AccessLevel.FullAccess ? 'Reception' : 'Evening Reception' },
+      { id: 'Reception', name: this.accessLevel === AccessLevel.FullAccess || this.accessLevel === AccessLevel.AdminAccess ? 'Reception' : 'Evening Reception' },
       { id: 'Gifts', name: 'Gifts' },
       { id: 'Hotels', name: 'Hotels' },
       { id: 'RSVP', name: 'RSVP' },

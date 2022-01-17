@@ -94,7 +94,7 @@ export class GridContentComponent implements OnInit {
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Bus',
-        text: ['The Indigo and number 36 stop right outside the church.'],
+        text: ['The Indigo and number 36 both stop right outside the church.'],
         img: 'directions_bus'
       },
       {
@@ -102,7 +102,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 3,
         section: 'Ceremony',
         cols: 2,
-        rows: isTablet ? 35 : isMobile ? 20 : 30,
+        rows: isTablet ? 35 : isMobile ? 22 : 30,
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Tram',
@@ -117,6 +117,15 @@ export class GridContentComponent implements OnInit {
         rows: isTablet ? 35 : 30,
         component: 'empty',
         color: '#ffffff',
+      },
+      {
+        position: 3,
+        mobilePosition: 3,
+        section: 'Ceremony',
+        cols: isMobile ? 8 : 0,
+        rows: isMobile ? 1 : 0,
+        component: 'image-and-text',
+        color: '#efefef',
       },
       {
         position: 4,
@@ -138,10 +147,10 @@ export class GridContentComponent implements OnInit {
         rows: 30,
         component: 'simple-text',
         color: '#ffffff',
-        title: this.accessLevel === AccessLevel.FullAccess ? 'The Reception' : 'Evening Reception',
+        title: this.accessLevel === AccessLevel.FullAccess || this.accessLevel === AccessLevel.AdminAccess ? 'The Reception' : 'Evening Reception',
         text: [
-          this.accessLevel === AccessLevel.FullAccess ? '' : 'Saturday 30th April 2022',
-          this.accessLevel === AccessLevel.FullAccess ? '' : '19:00',
+          this.accessLevel === AccessLevel.FullAccess || this.accessLevel === AccessLevel.AdminAccess ? '' : 'Saturday 30th April 2022',
+          this.accessLevel === AccessLevel.FullAccess || this.accessLevel === AccessLevel.AdminAccess ? '' : '19:00',
           'The Walled Garden at Beeston Fields',
           'Beeston',
           'Nottingham, NG9 3DA',
@@ -177,7 +186,7 @@ export class GridContentComponent implements OnInit {
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Parking',
-        text: ['Free overnight parking is available at The Walled Garden. You will need to collect your car by 11am on the next day.'],
+        text: ['Free overnight parking is available at The Walled Garden. You will need to collect your car by 11am the following morning.'],
         img: 'local_parking'
       },
       {
@@ -345,6 +354,17 @@ export class GridContentComponent implements OnInit {
         color: '#ffffff',
       },
     ];
+    if (this.accessLevel === AccessLevel.AdminAccess) {
+      this.tiles.push({
+        position: 23,
+        mobilePosition: 23,
+        section: 'Admin',
+        cols: 8,
+        rows: 40,
+        component: 'admin-view',
+        color: '#efefef'
+      });
+    }
     this.reorderGrid(isMobile);
   }
 

@@ -25,6 +25,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { SongRequestsComponent } from './song-requests/song-requests.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
+import { AdminViewComponent } from './admin-view/admin-view.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { MatListModule } from '@angular/material/list';
     FooterContentComponent,
     CreateRsvpComponent,
     ConfirmDialogComponent,
-    SongRequestsComponent
+    SongRequestsComponent,
+    AdminViewComponent
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -53,7 +56,8 @@ import { MatListModule } from '@angular/material/list';
     MatRadioModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatListModule
+    MatListModule,
+    MatTableModule
   ],
   providers: [RsvpService],
   bootstrap: [AppComponent],

@@ -61,7 +61,7 @@ export class CreateRsvpComponent implements OnInit {
     return this.formBuilder.group({
       name: [''],
       attending: [''],
-      dietryRequirements: ['']
+      dietaryRequirements: ['']
     });
   }
 }

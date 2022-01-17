@@ -111,6 +111,12 @@ mat-icon {
   display: block;
 }
 
+.admin-container {
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+}
+
 @media only screen and (max-width: 715px) {
   .map-key.ng-star-inserted span {
     font-size: 10px;

@@ -1,5 +1,5 @@
 <div (window:resize)="onResize($event)">
-  <a class="mobile-menu-button" (click)="toggleMenu()" [style.position]="showMenu ? 'absolute' : 'inherit'">
+  <a class="mobile-menu-button" (click)="toggleMenu()">
     <mat-icon>{{showMenu ? 'close' : 'menu'}}</mat-icon>
   </a>
   <div class="top-nav-buttons" *ngIf="showMenu">

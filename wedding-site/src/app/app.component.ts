@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
 import { doc, getDoc } from '@firebase/firestore';
 import { DocumentData, DocumentReference } from 'rxfire/firestore/interfaces';
 import { AccessLevel, getAccessLevelFromString } from './access-level';
 
 const eveningAccess = "evening-access";
 const fullAccess = "fullAccess";
+const adminAccess = "adminAccess";
 
 @Component({
   selector: 'app-root',
@@ -28,8 +28,9 @@ export class AppComponent {
 
   ngOnInit(): void {
     const userAccessLevel = sessionStorage.getItem("access");
-    if (userAccessLevel && (userAccessLevel === eveningAccess || userAccessLevel === fullAccess)) {
+    if (userAccessLevel && (userAccessLevel === eveningAccess || userAccessLevel === fullAccess || userAccessLevel === adminAccess)) {
       this.loggedIn = true;
+      this.accessLevel = getAccessLevelFromString(userAccessLevel);
     }
   }
 
@@ -53,6 +54,7 @@ export class AppComponent {
       this.accessLevel = getAccessLevelFromString(accessLevel);
       this.loading = false;
       this.loggedIn = true;
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     } else {
       this.showIncorrectPasswordMessage();
     }

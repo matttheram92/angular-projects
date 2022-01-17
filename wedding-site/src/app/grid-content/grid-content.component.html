@@ -59,5 +59,9 @@
       <app-song-requests [infoText]="tile.text"></app-song-requests>
     </div>
 
+    <div *ngIf="tile.component === 'admin-view'" class="admin-container">
+      <app-admin-view></app-admin-view>
+    </div>
+
   </mat-grid-tile>
 </mat-grid-list>
