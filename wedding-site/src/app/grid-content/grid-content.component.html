@@ -1,4 +1,4 @@
-<mat-grid-list [cols]="breakpoint" rowHeight="10px" (window:resize)="onResize($event)" gutterSize="0">
+<mat-grid-list [cols]="breakpoint" rowHeight="10px" (window:resize)="onResize()" gutterSize="0">
   <mat-grid-tile *ngFor="let tile of tiles" [id]="tile.section"
     [colspan]="tile.component === 'empty' && breakpoint === 1 ? 0 : (breakpoint === 1 ? 1 : tile.cols)"
     [rowspan]="tile.component === 'empty' && breakpoint === 1 ? 0 : tile.rows" [style.background]="tile.color"

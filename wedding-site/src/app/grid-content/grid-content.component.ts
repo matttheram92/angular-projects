@@ -11,15 +11,34 @@ import { Tile } from "./tile.model";
 export class GridContentComponent implements OnInit {
   @Input() accessLevel!: AccessLevel;
   breakpoint: number = 8;
+  previousScreenSize: string = 'desktop';
 
   tiles: Tile[] = [];
   constructor(private sanitizer: DomSanitizer) {
 
   }
 
+  get isMobile(): boolean {
+    return window.innerWidth <= 500;
+  }
+
+  get isTablet(): boolean {
+    return window.innerWidth > 500 && window.innerWidth <= 900
+  }
+
+  get currentScreenSize(): string {
+    if (this.isMobile) {
+      return 'mobile';
+    }
+
+    if (this.isTablet) {
+      return 'tablet';
+    }
+
+    return 'desktop';
+  }
+
   ngOnInit(): void {
-    const isMobile = window.innerWidth <= 500;
-    const isTablet = window.innerWidth > 500 && window.innerWidth <= 900;
     this.tiles = [
       {
         position: 1,
@@ -68,8 +87,8 @@ export class GridContentComponent implements OnInit {
         position: 3,
         mobilePosition: 3,
         section: 'Ceremony',
-        cols: isTablet ? 0 : 1,
-        rows: isTablet ? 35 : 30,
+        cols: this.isTablet ? 0 : 1,
+        rows: this.isTablet ? 35 : 30,
         component: 'empty',
         color: '#ffffff',
       },
@@ -77,8 +96,8 @@ export class GridContentComponent implements OnInit {
         position: 3,
         mobilePosition: 3,
         section: 'Ceremony',
-        cols: isTablet ? 4 : 2,
-        rows: isTablet ? 35 : isMobile ? 25 : 30,
+        cols: this.isTablet ? 4 : 2,
+        rows: this.isTablet ? 35 : this.isMobile ? 25 : 30,
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Car',
@@ -90,7 +109,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 3,
         section: 'Ceremony',
         cols: 2,
-        rows: isTablet ? 35 : isMobile ? 22 : 30,
+        rows: this.isTablet ? 35 : this.isMobile ? 22 : 30,
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Bus',
@@ -102,7 +121,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 3,
         section: 'Ceremony',
         cols: 2,
-        rows: isTablet ? 35 : isMobile ? 22 : 30,
+        rows: this.isTablet ? 35 : this.isMobile ? 22 : 30,
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Tram',
@@ -113,8 +132,8 @@ export class GridContentComponent implements OnInit {
         position: 3,
         mobilePosition: 3,
         section: 'Ceremony',
-        cols: isTablet ? 0 : 1,
-        rows: isTablet ? 35 : 30,
+        cols: this.isTablet ? 0 : 1,
+        rows: this.isTablet ? 35 : 30,
         component: 'empty',
         color: '#ffffff',
       },
@@ -122,8 +141,8 @@ export class GridContentComponent implements OnInit {
         position: 3,
         mobilePosition: 3,
         section: 'Ceremony',
-        cols: isMobile ? 8 : 0,
-        rows: isMobile ? 1 : 0,
+        cols: this.isMobile ? 8 : 0,
+        rows: this.isMobile ? 1 : 0,
         component: 'image-and-text',
         color: '#efefef',
       },
@@ -161,7 +180,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 6,
         section: 'Reception',
         cols: 1,
-        rows: isTablet ? 32 : 25,
+        rows: this.isTablet ? 32 : 25,
         component: 'empty',
         color: '#ffffff',
       },
@@ -170,7 +189,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 7,
         section: 'Reception',
         cols: 2,
-        rows: isTablet ? 32 : isMobile ? 21 : 25,
+        rows: this.isTablet ? 32 : this.isMobile ? 21 : 25,
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Ceilidh',
@@ -182,7 +201,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 8,
         section: 'Reception',
         cols: 2,
-        rows: isTablet ? 32 : isMobile ? 22 : 25,
+        rows: this.isTablet ? 32 : this.isMobile ? 22 : 25,
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Parking',
@@ -194,7 +213,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 9,
         section: 'Reception',
         cols: 2,
-        rows: isTablet ? 32 : isMobile ? 21 : 25,
+        rows: this.isTablet ? 32 : this.isMobile ? 21 : 25,
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Card payments',
@@ -206,7 +225,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 10,
         section: 'Reception',
         cols: 1,
-        rows: isTablet ? 32 : 25,
+        rows: this.isTablet ? 32 : 25,
         component: 'empty',
         color: '#ffffff',
       },
@@ -214,7 +233,7 @@ export class GridContentComponent implements OnInit {
         position: 11,
         mobilePosition: 11,
         section: 'Reception',
-        cols: isTablet ? 1 : 2,
+        cols: this.isTablet ? 1 : 2,
         rows: 30,
         component: 'empty',
         color: '#ffffff',
@@ -224,7 +243,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 12,
         section: 'Reception',
         cols: 2,
-        rows: isMobile ? 18 : 30,
+        rows: this.isMobile ? 18 : 30,
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Carriages',
@@ -235,8 +254,8 @@ export class GridContentComponent implements OnInit {
         position: 13,
         mobilePosition: 13,
         section: 'Reception',
-        cols: isTablet ? 4 : 2,
-        rows: isMobile ? 26 : 30,
+        cols: this.isTablet ? 4 : 2,
+        rows: this.isMobile ? 26 : 30,
         component: 'image-and-text',
         color: '#ffffff',
         title: 'Taxis',
@@ -247,7 +266,7 @@ export class GridContentComponent implements OnInit {
         position: 14,
         mobilePosition: 14,
         section: 'Reception',
-        cols: isTablet ? 1 : 2,
+        cols: this.isTablet ? 1 : 2,
         rows: 30,
         component: 'empty',
         color: '#ffffff',
@@ -272,7 +291,7 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 16,
         section: 'Hotels',
         cols: 3,
-        rows: isMobile ? 30 : 40,
+        rows: this.isMobile ? 30 : 40,
         component: 'simple-text',
         color: '#ffffff',
         title: 'Hotels',
@@ -365,15 +384,21 @@ export class GridContentComponent implements OnInit {
         color: '#efefef'
       });
     }
-    this.reorderGrid(isMobile);
+    
+    this.reorderGrid();
+    this.previousScreenSize = this.currentScreenSize;
   }
 
-  onResize(event: any): void {
+  onResize(): void {
+    if (this.previousScreenSize === this.currentScreenSize) {
+      return;
+    }
+
     this.ngOnInit();
   }
 
-  reorderGrid(isMobile: boolean): void {
-    if (isMobile) {
+  reorderGrid(): void {
+    if (this.isMobile) {
       this.breakpoint = 1;
       this.tiles.sort((a, b) => (a.mobilePosition < b.mobilePosition ? -1 : 1));
     } else {
