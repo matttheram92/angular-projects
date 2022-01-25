@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Firestore, getFirestore } from '@angular/fire/firestore';
-import { addDoc, collection, query, getDocs } from '@firebase/firestore';
-import { collectionData } from 'rxfire/firestore';
-import { Observable } from 'rxjs';
+import { addDoc, collection, getDocs } from '@firebase/firestore';
 import { SongRequest } from '../song-requests/song-requests.model';
 import { Rsvp } from './rsvp.model';
 import { v4 as uuidv4 } from 'uuid';
+import { AccessLevel } from '../access-level';
 
 @Injectable({
   providedIn: 'root',
@@ -39,9 +38,10 @@ export class RsvpService {
     return songs;
   }
 
-  async createRsvp(rsvp: Rsvp) {
+  async createRsvp(rsvp: Rsvp, accessLevel: AccessLevel) {
     rsvp.id = uuidv4();
     rsvp.dateSubmitted = new Date();
+    rsvp.accessLevel = accessLevel;
     this.currentUser = rsvp.name;
     const db = getFirestore();
     const docRef = await addDoc(collection(db, 'rsvps'), rsvp);

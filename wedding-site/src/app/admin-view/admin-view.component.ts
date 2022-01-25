@@ -15,13 +15,18 @@ export class AdminViewComponent implements OnInit {
   songs!: SongRequest[];
   songColumns: string[] = ['songName', 'personName'];
 
-  constructor(rsvpService: RsvpService) { 
+  constructor(rsvpService: RsvpService) {
     this.rsvpService = rsvpService;
   }
 
   async ngOnInit(): Promise<void> {
-    this.rsvps = await this.rsvpService.getRsvpList();
-    this.songs = await this.rsvpService.getSongList();
+    await this.getLatestData();
   }
 
+  async getLatestData(): Promise<void> {
+    this.rsvps = await this.rsvpService.getRsvpList();
+    this.rsvps.sort((a, b) => (a.dateSubmitted < b.dateSubmitted ? 1 : -1));
+    this.songs = await this.rsvpService.getSongList();
+    this.songs.sort((a, b) => (a.dateSubmitted < b.dateSubmitted ? 1 : -1));
+  }
 }

@@ -44,7 +44,7 @@
         </mat-nav-list>
       </div>
       <p *ngIf="tile.component === 'create-rsvp'">
-        <app-create-rsvp></app-create-rsvp>
+        <app-create-rsvp [accessLevel]="accessLevel"></app-create-rsvp>
       </p>
     </div>
 

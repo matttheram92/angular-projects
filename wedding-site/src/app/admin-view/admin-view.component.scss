@@ -3,6 +3,11 @@ table {
     margin: 12px auto;
 }
 
+.refresh-table-button {
+    position: absolute;
+    right: 2%;
+}
+
 @media only screen and (max-width: 715px) {
     table {
         width: 95%;
