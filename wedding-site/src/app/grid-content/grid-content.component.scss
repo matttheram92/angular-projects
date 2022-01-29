@@ -117,6 +117,10 @@ mat-icon {
   height: 100%;
 }
 
+.grid-subtitle {
+  max-width: 500px;
+}
+
 @media only screen and (max-width: 715px) {
   .map-key.ng-star-inserted span {
     font-size: 10px;

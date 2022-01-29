@@ -325,10 +325,13 @@ export class GridContentComponent implements OnInit {
         mobilePosition: 18,
         section: 'RSVP',
         cols: 8,
-        rows: 50,
+        rows: this.accessLevel === AccessLevel.EveningAccess ? 65 : 50,
         color: '#ffffff',
-        title: 'RSVP',
-        text: ['Please RSVP by Friday 18th Feburary'],
+        title: this.accessLevel === AccessLevel.EveningAccess ? 'Evening Guest RSVP' : 'RSVP',
+        text: [
+          'Please RSVP by Friday 18th Feburary',
+          this.accessLevel === AccessLevel.EveningAccess ? 'Please let us know below if you can make it to the evening celebration. You are also more than welcome to join us for the church ceremony, details of which can be found above or on your invitation.' : ''
+        ],
         component: 'create-rsvp'
       },
       {
@@ -384,7 +387,7 @@ export class GridContentComponent implements OnInit {
         color: '#efefef'
       });
     }
-    
+
     this.reorderGrid();
     this.previousScreenSize = this.currentScreenSize;
   }

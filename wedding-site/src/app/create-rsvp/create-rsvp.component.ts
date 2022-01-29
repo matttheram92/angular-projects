@@ -26,7 +26,7 @@ export class CreateRsvpComponent implements OnInit {
     this.rsvpForm = this.emptyForm;
   }
 
-  get commentBoxLabe(): string {
+  get commentBoxLabel(): string {
     let commentBoxLabel = '';
     if (this.attendingStatus === AttendingStatus.notAttending) {
       commentBoxLabel = 'Message';
