@@ -13,18 +13,38 @@ export class QuestionService {
     const questions: QuestionBase<string>[] = [
 
       new TextboxQuestion({
-        key: 'firstName',
-        label: 'First name',
+        key: 'description',
+        label: 'Description',
         value: undefined,
-        required: true,
+        required: false,
         order: 1
       }),
 
       new TextboxQuestion({
-        key: 'emailAddress',
-        label: 'Email',
-        type: 'email',
+        key: 'costumeType',
+        label: 'Costume type',
+        type: 'select',
         order: 2
+      }),
+
+      new TextboxQuestion({
+        key: 'catalogueNumber',
+        label: 'Catalogue number',
+        order: 3
+      }),
+
+      new TextboxQuestion({
+        key: 'quantity',
+        label: 'Quantity',
+        type: 'number',
+        order: 4
+      }),
+
+      new TextboxQuestion({
+        key: 'notes',
+        label: 'Notes',
+        type: '',
+        order: 5
       })
     ];
 
