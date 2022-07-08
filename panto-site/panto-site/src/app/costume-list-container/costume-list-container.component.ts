@@ -8,7 +8,6 @@ import { CostumeService } from './services/costume-service';
 })
 export class CostumeListContainerComponent implements OnInit {
   costumeService: CostumeService;
-  imageUrl = '';
 
   costumes: any[] = [];
   constructor(costumeService: CostumeService) {
@@ -17,6 +16,5 @@ export class CostumeListContainerComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.costumes = await this.costumeService.getCostumes();
-    this.imageUrl = await this.costumeService.getImageUrl('Picture1.jpg');
   }
 }

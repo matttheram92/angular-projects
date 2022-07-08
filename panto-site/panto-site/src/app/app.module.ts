@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { getStorage } from 'firebase/storage';
 
 import { AppComponent } from './app.component';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
@@ -13,6 +12,7 @@ import { DynamicFormQuestionComponent } from './dynamic-form/components/dynamic-
 import { TopNavComponent } from './top-nav/top-nav.component';
 import { CostumeListContainerComponent } from './costume-list-container/costume-list-container.component';
 import { CostumeService } from './costume-list-container/services/costume-service';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -20,6 +20,7 @@ import { CostumeService } from './costume-list-container/services/costume-servic
     provideFirestore(() => getFirestore()),
     BrowserModule,
     ReactiveFormsModule,
+    MatIconModule
   ],
   declarations: [
     AppComponent,

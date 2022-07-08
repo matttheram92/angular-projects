@@ -1,49 +1,69 @@
 <ul class="w-2/6" *ngFor="let costume of costumes">
-    <article class="flex items-start space-x-6 p-6">
-        <img [src]="imageUrl" alt="" width="60" height="88" class="flex-none rounded-md bg-slate-100" />
-        <div class="min-w-0 relative flex-auto">
-          <h2 class="font-semibold text-slate-900 truncate pr-20">{{ costume.description }}</h2>
-          <dl class="mt-2 flex flex-wrap text-sm leading-6 font-medium">
-            <div class="absolute top-0 right-0 flex items-center space-x-1">
-              <dt class="text-sky-500">
-                <span class="sr-only">Star rating</span>
-                <svg width="16" height="20" fill="currentColor">
-                  <path d="M7.05 3.691c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.372 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.539 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.363-1.118L.98 9.483c-.784-.57-.381-1.81.587-1.81H5.03a1 1 0 00.95-.69L7.05 3.69z" />
-                </svg>
-              </dt>
-              <dd>1.1</dd>
-            </div>
-            <div>
-              <dt class="sr-only">Rating</dt>
-              <dd class="px-1.5 ring-1 ring-slate-200 rounded">6</dd>
-            </div>
-            <div class="ml-2">
-              <dt class="sr-only">Year</dt>
-              <dd>3 sizes</dd>
-            </div>
-            <div>
-              <dt class="sr-only">Genre</dt>
-              <dd class="flex items-center">
-                <svg width="2" height="2" fill="currentColor" class="mx-2 text-slate-300" aria-hidden="true">
-                  <circle cx="1" cy="1" r="1" />
-                </svg>
-                Chorus
-              </dd>
-            </div>
-            <div>
-              <dt class="sr-only">Runtime</dt>
-              <dd class="flex items-center">
-                <svg width="2" height="2" fill="currentColor" class="mx-2 text-slate-300" aria-hidden="true">
-                  <circle cx="1" cy="1" r="1" />
-                </svg>
-                Added by Martin
-              </dd>
-            </div>
-            <div class="flex-none w-full mt-2 font-normal">
-              <dt class="sr-only">Cast</dt>
-              <dd class="text-slate-400">Green, white, yellow</dd>
-            </div>
-          </dl>
+  <article class="flex items-start space-x-6 p-6 border rounded">
+    <img
+      [src]="costume.imageUrl"
+      alt=""
+      width="70"
+      height="114"
+      class="flex-none rounded-md bg-slate-100"
+    />
+    <div class="min-w-0 relative flex-auto">
+      <h2 class="font-semibold text-slate-900 truncate pr-20">
+        {{ costume.description }}
+      </h2>
+      <div>
+        <dt class="sr-only">Type</dt>
+        <div class="text-sm text-slate-400">
+          {{ costume.type }}
         </div>
-      </article>
+      </div>
+      <dl class="mt-2 flex flex-wrap text-sm leading-6">
+        <div class="absolute top-0 right-0 flex items-center space-x-1">
+          <dt class="text-sky-500">
+            <span class="sr-only">Catalogue Number</span>
+            <mat-icon>bookmarks_outlined</mat-icon>
+          </dt>
+          <dd class="font-medium">{{ costume.catalogueNo }}</dd>
+        </div>
+        <div class="flex">
+          <dt class="sr-only">Sizes</dt>
+          <dd
+            *ngFor="let size of costume.quantity"
+            class="px-1.5 ring-1 ring-slate-200 rounded mr-2 flex"
+          >
+            <p class="mr-1 text-slate-400">{{ size.count }} x </p>
+            <p class="font-medium">{{ size.name }}</p>
+          </dd>
+        </div>
+        <div>
+          <dt class="sr-only">Runtime</dt>
+          <dd class="flex items-center">
+            <svg
+              width="2"
+              height="2"
+              fill="currentColor"
+              class="mr-2 text-slate-300"
+              aria-hidden="true"
+            >
+              <circle cx="1" cy="1" r="1" />
+            </svg>
+            <div class="text-slate-400">{{ costume.count }} in total</div>
+          </dd>
+        </div>
+        <div class="flex w-full mt-2 font-normal">
+          <dt class="sr-only">Colours</dt>
+          <div
+            class="flex px-2 mr-2 border rounded-full"
+            *ngFor="let colour of costume.colours"
+          >
+            <div
+              [ngClass]="colour.class"
+              class="h-3 w-3 my-auto mr-1 rounded-full border border-inherit"
+            ></div>
+            <dd class="text-slate-400">{{ colour.name }}</dd>
+          </div>
+        </div>
+      </dl>
+    </div>
+  </article>
 </ul>
