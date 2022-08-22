@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CostumeService } from './services/costume-service';
+import { Costume, CostumeFilters } from './models/costume';
 
 @Component({
   selector: 'app-costume-list-container',
@@ -9,12 +10,20 @@ import { CostumeService } from './services/costume-service';
 export class CostumeListContainerComponent implements OnInit {
   costumeService: CostumeService;
 
-  costumes: any[] = [];
+  costumes: Costume[] = [];
+  
+  @Input()
+  colours: string[] = [];
+
   constructor(costumeService: CostumeService) {
     this.costumeService = costumeService;
   }
 
   async ngOnInit(): Promise<void> {
     this.costumes = await this.costumeService.getCostumes();
+  }
+
+  public async filterChanged(filters: CostumeFilters): Promise<void> {
+    this.costumes = await this.costumeService.getCostumes(filters);
   }
 }

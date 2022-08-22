@@ -8,9 +8,13 @@ export interface CostumeModel {
   type: string;
 }
 
+enum ColourClasses {
+
+}
+
 export class Costume {
   catalogueNo!: number;
-  colours!: { name: string; class: string }[];
+  colours!: string[];
   description!: string;
   imageUrl!: string;
   notes!: string;
@@ -20,27 +24,13 @@ export class Costume {
 
   constructor(costume: CostumeModel) {
     this.catalogueNo = costume.catalogueNo;
-    this.colours = costume.colours.map((colour) => this.setupColours(colour));
+    this.colours = costume.colours;
     this.description = costume.description;
     this.imageUrl = '';
     this.notes = costume.notes;
     this.quantity = this.setupQuantity(costume.quantity);
     this.count = costume.quantity.length;
     this.type = costume.type;
-  }
-
-  private setupColours(colourName: string): { name: string; class: string } {
-    let colourClass = '';
-    switch (colourName.toLowerCase()) {
-      case 'white':
-      case 'black':
-        colourClass = `bg-${colourName.toLowerCase()}`;
-        break;
-      default:
-        colourClass = `bg-${colourName.toLowerCase()}-500`;
-        break;
-    }
-    return { name: colourName, class: colourClass };
   }
 
   private setupQuantity(quantity: string[]): { name: string; count: number }[] {
@@ -52,5 +42,17 @@ export class Costume {
         }
     })
     return sizes;
+  }
+}
+
+export class CostumeFilters {
+  colours!: string[];
+  types!: string[];
+  sizes!: string[];
+
+  constructor() {
+    this.colours = [];
+    this.types = [];
+    this.sizes = [];
   }
 }

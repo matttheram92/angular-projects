@@ -1,11 +1,8 @@
-<div class="bg-slate-500 h-full">
-  <div class="py-6 px-10 ml-60 bg-slate-100 h-full">
-    <app-top-nav class="mb-6 block"></app-top-nav>
-    <h2 class="font-sans text-2xl font-bold">Costumes</h2>
-    <app-costume-list-container class="flex"></app-costume-list-container>
-    <app-dynamic-form
-      class="w-full hidden"
-      [questions]="questions$ | async"
-    ></app-dynamic-form>
+<div class="bg-white h-full mt-8 mx-56 rounded-md">
+  <app-costume-filters class="absolute flex" (filterChanged)="filterChanged($event)"></app-costume-filters>
+  <div class="py-6 px-10 ml-60 h-full">
+    <app-top-nav class="mb-6" (addNew)="toggleForm()"></app-top-nav>
+    <h2 class="font-sans text-2xl h-10 font-bold">Costumes</h2>
+    <app-costume-list-container #costumeListContainer></app-costume-list-container>
   </div>
 </div>
