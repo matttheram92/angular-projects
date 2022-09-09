@@ -1,0 +1,27 @@
+<div>
+  <div *ngFor="let inputControl of inputControlIterable; let index = index" class="input-group-control">
+    <input
+      class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-1/2 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 px-4 ring-1 ring-slate-200 shadow-sm"
+      id="text1"
+      placeholder="Size"
+      [(ngModel)]="inputControlIterable[index].size"
+      (ngModelChange)="onChange()"
+    />
+    <input
+      class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-1/2 text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 px-4 ring-1 ring-slate-200 shadow-sm"
+      id="number1"
+      type="number"
+      placeholder="Quantity"
+      [(ngModel)]="inputControlIterable[index].quantity"
+      (ngModelChange)="onChange()"
+    />
+    <button
+      class="btn-delete-block"
+      [hidden]="index === 0 && inputControlIterable.length === 1"
+      (click)="removeAtIndex(index)"
+    >
+      X
+    </button>
+  </div>
+  <button class="btn-add-row" (click)="addNewControl()">+</button>
+</div>

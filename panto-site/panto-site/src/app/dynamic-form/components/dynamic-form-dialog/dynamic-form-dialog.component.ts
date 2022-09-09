@@ -17,7 +17,10 @@ export class DynamicFormDialogComponent implements OnInit {
     this.questions$ = service.getQuestions();
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  saveForm(): void {
+
   }
 
 }

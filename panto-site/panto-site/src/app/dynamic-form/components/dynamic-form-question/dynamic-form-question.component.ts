@@ -4,10 +4,17 @@ import { QuestionBase } from '../../models/question-base';
 
 @Component({
   selector: 'app-question',
-  templateUrl: './dynamic-form-question.component.html'
+  templateUrl: './dynamic-form-question.component.html',
 })
 export class DynamicFormQuestionComponent {
   @Input() question!: QuestionBase<string>;
   @Input() form!: FormGroup;
-  get isValid() { return this.form.controls[this.question.key].valid; }
+
+  get isValid() {
+    return this.form.controls[this.question.key].valid;
+  }
+
+  public inputGroupOnChange(event: any, controlName: string): void {
+    this.form.patchValue({ [controlName]: event });
+  }
 }

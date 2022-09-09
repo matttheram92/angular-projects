@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { addDoc, collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import { Costume, CostumeFilters, CostumeModel } from '../models/costume';
 
@@ -14,12 +14,14 @@ export class CostumeService {
 
   async getCostumes(filters?: CostumeFilters): Promise<Costume[]> {
     const costumes: Costume[] = [];
-    
+
     const ref = collection(this.firestore, 'costumes');
     const queryConstraints = [];
 
     if (filters && filters.colours.length > 0) {
-      queryConstraints.push(where('colours', 'array-contains-any', filters.colours));
+      queryConstraints.push(
+        where('colours', 'array-contains-any', filters.colours)
+      );
     }
 
     if (filters && filters.types.length > 0) {
@@ -43,24 +45,24 @@ export class CostumeService {
 
   async getCostumeFilters(): Promise<CostumeFilters> {
     const filters: CostumeFilters = new CostumeFilters();
-    
+
     const q = query(collection(this.firestore, 'costumes'));
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach(async (doc) => {
       const costumeModel = doc.data() as CostumeModel;
       costumeModel.colours.forEach((colour) => {
-        if (filters.colours.findIndex(x => x === colour) === -1) {
+        if (filters.colours.findIndex((x) => x === colour) === -1) {
           filters.colours.push(colour);
         }
       });
 
-      if (filters.types.findIndex(x => x === costumeModel.type) === -1) {
+      if (filters.types.findIndex((x) => x === costumeModel.type) === -1) {
         filters.types.push(costumeModel.type);
       }
-      
+
       costumeModel.quantity.forEach((size) => {
-        if (filters.sizes.findIndex(x => x === size) === -1) {
+        if (filters.sizes.findIndex((x) => x === size) === -1) {
           filters.sizes.push(size);
         }
       });
@@ -93,7 +95,7 @@ export class CostumeService {
     if (nameA2 > nameB2) {
       return 1;
     }
-  
+
     return 0;
   }
 
@@ -107,5 +109,11 @@ export class CostumeService {
     });
 
     return imageUrl;
+  }
+
+  async createCostume(costume: CostumeModel) {
+    const db = getFirestore();
+    const docRef = await addDoc(collection(db, 'costumes'), costume);
+    console.log(docRef.id);
   }
 }

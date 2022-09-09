@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -17,6 +17,8 @@ import { CostumeFiltersComponent } from './costume-filters/costume-filters.compo
 import { DynamicFormDialogComponent } from './dynamic-form/components/dynamic-form-dialog/dynamic-form-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DualInputGroupComponent } from './dynamic-form/components/dual-input-group/dual-input-group.component';
+import { InputDropdownComponent } from './dynamic-form/components/input-dropdown/input-dropdown.component';
 
 @NgModule({
   imports: [
@@ -26,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     MatIconModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
@@ -36,6 +39,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CostumeListContainerComponent,
     CostumeFiltersComponent,
     DynamicFormDialogComponent,
+    DualInputGroupComponent,
+    InputDropdownComponent,
   ],
   providers: [CostumeService],
   bootstrap: [AppComponent],

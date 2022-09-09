@@ -8,10 +8,6 @@ export interface CostumeModel {
   type: string;
 }
 
-enum ColourClasses {
-
-}
-
 export class Costume {
   catalogueNo!: number;
   colours!: string[];

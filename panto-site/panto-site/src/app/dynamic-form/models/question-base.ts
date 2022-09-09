@@ -30,3 +30,8 @@ export class QuestionBase<T> {
     this.options = options.options || [];
   }
 }
+
+export class Sizes {
+  size!: string;
+  quantity?: number;
+}

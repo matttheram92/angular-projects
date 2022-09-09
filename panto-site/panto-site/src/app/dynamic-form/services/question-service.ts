@@ -7,9 +7,7 @@ import { TextboxQuestion } from '../models/question-textbox';
 @Injectable()
 export class QuestionService {
 
-  // TODO: get from a remote source of question metadata
   getQuestions() {
-
     const questions: QuestionBase<string>[] = [
 
       new TextboxQuestion({
@@ -17,34 +15,46 @@ export class QuestionService {
         label: 'Description',
         value: undefined,
         required: false,
-        order: 1
+        order: 1,
+        controlType: 'textbox'
+      }),
+
+      new TextboxQuestion({
+        key: 'colour',
+        label: 'Colour',
+        order: 2,
+        controlType: 'inputDropdown'
       }),
 
       new TextboxQuestion({
         key: 'costumeType',
         label: 'Costume type',
         type: 'select',
-        order: 2
+        order: 3,
+        controlType: 'dropdown',
+        options: [{ key: '123', value: '123' }]
       }),
 
       new TextboxQuestion({
         key: 'catalogueNumber',
         label: 'Catalogue number',
-        order: 3
+        order: 4,
+        controlType: 'textbox'
       }),
 
       new TextboxQuestion({
-        key: 'quantity',
-        label: 'Quantity',
-        type: 'number',
-        order: 4
+        key: 'sizes',
+        label: 'Sizes',
+        order: 5,
+        controlType: 'dualInput'
       }),
 
       new TextboxQuestion({
         key: 'notes',
         label: 'Notes',
         type: '',
-        order: 5
+        order: 6,
+        controlType: 'textbox'
       })
     ];
 
