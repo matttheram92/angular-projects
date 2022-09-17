@@ -1,0 +1,8 @@
+.form-question {
+    max-height: 65vh;
+    overflow: auto;
+}
+
+.form-submit {
+    margin: 10px 0 -10px 0;
+}

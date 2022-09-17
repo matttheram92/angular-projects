@@ -1,29 +1,30 @@
 import { Injectable } from '@angular/core';
 
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { QuestionBase } from '../models/question-base';
 import { TextboxQuestion } from '../models/question-textbox';
 
 @Injectable()
 export class QuestionService {
-
-  getQuestions() {
+  public getQuestions(
+    colours: { key: string; value: string }[]
+  ): QuestionBase<string>[] {
     const questions: QuestionBase<string>[] = [
-
       new TextboxQuestion({
         key: 'description',
         label: 'Description',
         value: undefined,
         required: false,
         order: 1,
-        controlType: 'textbox'
+        controlType: 'textbox',
       }),
 
       new TextboxQuestion({
         key: 'colour',
-        label: 'Colour',
+        label: 'Colours',
         order: 2,
-        controlType: 'inputDropdown'
+        controlType: 'inputDropdown',
+        options: colours,
       }),
 
       new TextboxQuestion({
@@ -32,21 +33,21 @@ export class QuestionService {
         type: 'select',
         order: 3,
         controlType: 'dropdown',
-        options: [{ key: '123', value: '123' }]
+        options: [{ key: '123', value: '123' }],
       }),
 
       new TextboxQuestion({
         key: 'catalogueNumber',
         label: 'Catalogue number',
         order: 4,
-        controlType: 'textbox'
+        controlType: 'textbox',
       }),
 
       new TextboxQuestion({
         key: 'sizes',
         label: 'Sizes',
         order: 5,
-        controlType: 'dualInput'
+        controlType: 'dualInput',
       }),
 
       new TextboxQuestion({
@@ -54,10 +55,17 @@ export class QuestionService {
         label: 'Notes',
         type: '',
         order: 6,
-        controlType: 'textbox'
-      })
+        controlType: 'textbox',
+      }),
+
+      new TextboxQuestion({
+        key: 'picture',
+        label: 'Picture',
+        order: 7,
+        controlType: 'fileUpload',
+      }),
     ];
 
-    return of(questions.sort((a, b) => a.order - b.order));
+    return questions.sort((a, b) => a.order - b.order);
   }
 }

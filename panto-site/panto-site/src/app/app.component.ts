@@ -1,8 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-import { Observable } from 'rxjs';
-import { QuestionBase } from './dynamic-form/models/question-base';
-import { QuestionService } from './dynamic-form/services/question-service';
 import { CostumeListContainerComponent } from './costume-list-container/costume-list-container.component';
 import { CostumeFilters } from './costume-list-container/models/costume';
 import { MatDialog } from '@angular/material/dialog';

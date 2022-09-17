@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-8">
+    <label>
+      <input
+        type="file"
+        class="text-nowrap text-truncate"
+        (change)="selectFile($event)"
+      />
+    </label>
+  </div>
+</div>
+
+<div *ngIf="currentFileUpload && currentFileUpload.url" class="progress mt-2">
+  <img
+    [src]="currentFileUpload.url"
+    alt=""
+    width="70"
+    height="114"
+    class="flex-none rounded-md bg-slate-100"
+  />
+</div>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { FileUpload } from 'src/app/file-upload/models/file-upload.model';
 import { QuestionBase } from '../../models/question-base';
 
 @Component({
@@ -16,5 +17,13 @@ export class DynamicFormQuestionComponent {
 
   public inputGroupOnChange(event: any, controlName: string): void {
     this.form.patchValue({ [controlName]: event });
+  }
+
+  public inputDropdownOnChange(event: any, controlName: string): void {
+    this.form.patchValue({ [controlName]: event });
+  }
+
+  public fileUploaded(event: FileUpload, controlName: string): void {
+    this.form.patchValue({ [controlName]: event.name }); 
   }
 }

@@ -1,0 +1,18 @@
+.input-dropdown {
+    position: relative;
+}
+
+.input-dropdown-options {
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 8px;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow: auto;
+}
+
+.input-dropdown-options > p {
+    padding: 4px 12px;
+    position: relative;
+}

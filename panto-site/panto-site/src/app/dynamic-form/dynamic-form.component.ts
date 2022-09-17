@@ -11,7 +11,8 @@ import { QuestionControlService } from './services/question-control-service';
   providers: [QuestionControlService],
 })
 export class DynamicFormComponent implements OnInit {
-  @Input() questions: QuestionBase<string>[] | null = [];
+  @Input() 
+  questions: QuestionBase<string>[] | null = [];
   form!: FormGroup;
 
   constructor(
@@ -22,15 +23,15 @@ export class DynamicFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
   }
-
+  
   onSubmit() {
     const costume: CostumeModel = {
       description: this.form.value.description,
       catalogueNo: this.form.value.catalogueNumber,
-      colours: [],
-      imageName: '',
+      colours: this.form.value.colour,
+      imageName: this.form.value.picture,
       notes: this.form.value.notes,
-      quantity: [],
+      quantity: this.form.value.sizes,
       type: this.form.value.costumeType,
     };
     this.costumeService.createCostume(costume);

@@ -28,13 +28,23 @@
       (changed)="inputGroupOnChange($event, question.key)"
     >
     </app-dual-input-group>
-    
+
     <app-input-dropdown
       [id]="question.key"
       *ngSwitchCase="'inputDropdown'"
       [formControlName]="question.key"
+      [options]="question.options"
+      (selected)="inputDropdownOnChange($event, question.key)"
     >
     </app-input-dropdown>
+
+    <app-file-upload
+      [id]="question.key"
+      *ngSwitchCase="'fileUpload'"
+      [formControlName]="question.key"
+      (uploaded)="fileUploaded($event, question.key)"
+    >
+    </app-file-upload>
 
     <div class="errorMessage" *ngIf="!isValid">
       {{ question.label }} is required

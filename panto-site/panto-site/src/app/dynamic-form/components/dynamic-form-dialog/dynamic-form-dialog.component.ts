@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { CostumeService } from 'src/app/costume-list-container/services/costume-service';
 import { QuestionBase } from '../../models/question-base';
 import { QuestionService } from '../../services/question-service';
 
@@ -8,19 +8,27 @@ import { QuestionService } from '../../services/question-service';
   selector: 'app-dynamic-form-dialog',
   templateUrl: './dynamic-form-dialog.component.html',
   styleUrls: ['./dynamic-form-dialog.component.css'],
-  providers:  [QuestionService]
+  providers: [QuestionService, CostumeService],
 })
 export class DynamicFormDialogComponent implements OnInit {
-  questions$: Observable<QuestionBase<any>[]>;
+  questions: QuestionBase<any>[] = [];
 
-  constructor(public dialogRef: MatDialogRef<DynamicFormDialogComponent>, service: QuestionService) {
-    this.questions$ = service.getQuestions();
+  constructor(
+    public dialogRef: MatDialogRef<DynamicFormDialogComponent>,
+    private questionService: QuestionService,
+    private costumeService: CostumeService
+  ) {
+    this.questions = this.questionService.getQuestions([]);
   }
 
-  ngOnInit(): void {}
-
-  saveForm(): void {
-
+  async ngOnInit(): Promise<void> {
+    const costumeColours = await this.costumeService
+      .getCostumeFilters()
+      .then((x) => {
+        return x.colours.map((colour) => {
+          return { key: colour, value: colour };
+        });
+      });
+    this.questions = this.questionService.getQuestions(costumeColours);
   }
-
 }

@@ -19,6 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DualInputGroupComponent } from './dynamic-form/components/dual-input-group/dual-input-group.component';
 import { InputDropdownComponent } from './dynamic-form/components/input-dropdown/input-dropdown.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { FileUploadService } from './file-upload/services/file-upload.service';
 
 @NgModule({
   imports: [
@@ -29,7 +31,7 @@ import { InputDropdownComponent } from './dynamic-form/components/input-dropdown
     MatIconModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [
     AppComponent,
@@ -41,8 +43,9 @@ import { InputDropdownComponent } from './dynamic-form/components/input-dropdown
     DynamicFormDialogComponent,
     DualInputGroupComponent,
     InputDropdownComponent,
+    FileUploadComponent,
   ],
-  providers: [CostumeService],
+  providers: [CostumeService, FileUploadService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
