@@ -43,4 +43,14 @@ export class CostumeFiltersComponent implements OnInit {
     }
     this.filterChanged.emit(this.filters);
   }
+
+  sizeChecked(costumeSize: string): void {
+    const index = this.filters.sizes.findIndex((x) => x === costumeSize);
+    if (index >= 0) {
+      this.filters.sizes.splice(index, 1);
+    } else {
+      this.filters.sizes.push(costumeSize);
+    }
+    this.filterChanged.emit(this.filters);
+  }
 }

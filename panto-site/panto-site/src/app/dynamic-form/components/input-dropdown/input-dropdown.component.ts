@@ -10,6 +10,8 @@ export class InputDropdownComponent implements OnInit {
   public selected: EventEmitter<any> = new EventEmitter<any>();
   @Input()
   options!: { key: string; value: string }[];
+  @Input()
+  single: boolean = false;
 
   opened: boolean = false;
   searchValue: string = '';
@@ -53,9 +55,13 @@ export class InputDropdownComponent implements OnInit {
     this.selectedKeys.splice(index, 1);
   }
 
-  public select(key: any): void {
+  public select(key: string): void {
     this.searchValue = '';
-    this.selectedKeys.push(key);
+    if (this.single) {
+      this.selectedKeys = [ key ];
+    } else {
+      this.selectedKeys.push(key);
+    }
     this.opened = false;
     this._emitChange();
   }

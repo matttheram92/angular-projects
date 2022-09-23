@@ -21,6 +21,11 @@ import { DualInputGroupComponent } from './dynamic-form/components/dual-input-gr
 import { InputDropdownComponent } from './dynamic-form/components/input-dropdown/input-dropdown.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { FileUploadService } from './file-upload/services/file-upload.service';
+import { DotsMenuComponent } from './costume-list-container/components/dots-menu/dots-menu.component';
+import { CheckOutDialogComponent } from './costume-list-container/components/check-out-dialog/check-out-dialog.component';
+import { CheckInDialogComponent } from './costume-list-container/components/check-in-dialog/check-in-dialog.component';
+import { DeleteDialogComponent } from './costume-list-container/components/delete-dialog/delete-dialog.component';
+import { LargeImageDialogComponent } from './costume-list-container/components/large-image-dialog/large-image-dialog.component';
 
 @NgModule({
   imports: [
@@ -44,6 +49,11 @@ import { FileUploadService } from './file-upload/services/file-upload.service';
     DualInputGroupComponent,
     InputDropdownComponent,
     FileUploadComponent,
+    DotsMenuComponent,
+    CheckOutDialogComponent,
+    CheckInDialogComponent,
+    DeleteDialogComponent,
+    LargeImageDialogComponent,
   ],
   providers: [CostumeService, FileUploadService],
   bootstrap: [AppComponent],

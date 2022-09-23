@@ -7,7 +7,8 @@ import { TextboxQuestion } from '../models/question-textbox';
 @Injectable()
 export class QuestionService {
   public getQuestions(
-    colours: { key: string; value: string }[]
+    colours: { key: string; value: string }[],
+    costumeTypes: { key: string; value: string }[],
   ): QuestionBase<string>[] {
     const questions: QuestionBase<string>[] = [
       new TextboxQuestion({
@@ -32,8 +33,8 @@ export class QuestionService {
         label: 'Costume type',
         type: 'select',
         order: 3,
-        controlType: 'dropdown',
-        options: [{ key: '123', value: '123' }],
+        controlType: 'inputDropdownSingle',
+        options: costumeTypes,
       }),
 
       new TextboxQuestion({
@@ -59,7 +60,7 @@ export class QuestionService {
       }),
 
       new TextboxQuestion({
-        key: 'picture',
+        key: 'imageName',
         label: 'Picture',
         order: 7,
         controlType: 'fileUpload',

@@ -35,6 +35,6 @@ export class FileUploadComponent implements OnInit {
   }
 
   private _emitChange(): void {
-    this.uploaded.emit(this.currentFileUpload);
+    this.uploaded.emit(this.currentFileUpload?.name);
   }
 }

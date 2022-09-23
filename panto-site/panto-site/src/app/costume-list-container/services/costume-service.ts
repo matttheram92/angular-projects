@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
-import { addDoc, collection, getDocs, getFirestore, query, where } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, getFirestore, query, updateDoc, where } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref } from 'firebase/storage';
-import { Costume, CostumeFilters, CostumeModel } from '../models/costume';
+import { Costume, CostumeFilters, CostumeModel, CostumeSize, CostumeSizeModel } from '../models/costume';
 
 @Injectable()
 export class CostumeService {
@@ -34,13 +34,37 @@ export class CostumeService {
 
     querySnapshot.forEach(async (doc) => {
       const costumeModel = doc.data() as CostumeModel;
-      const costume = new Costume(costumeModel);
-      costume.imageUrl = await this.getImageUrl(costumeModel.imageName);
-      costumes.push(costume);
+
+      
+      if (this.costumeMatchesFilteredSize(costumeModel, filters)) {
+        const costume = new Costume(costumeModel, doc.id);
+        costume.imageUrl = await this.getImageUrl(costumeModel.imageName);
+        costumes.push(costume);
+        costumes.sort((a, b) => a.catalogueNo - b.catalogueNo);
+      }
     });
 
-    costumes.sort((a, b) => a.catalogueNo + b.catalogueNo);
     return costumes;
+  }
+
+  private costumeMatchesFilteredSize(costume: CostumeModel, filters?: CostumeFilters): boolean {
+    if (!filters || filters.sizes.length === 0) {
+      return true;
+    }
+    
+    const filteredBySize = [];
+    costume.quantity.forEach(x => {
+      if (filters.sizes.includes(x.name)) {
+        filteredBySize.push(x.name);
+        return;
+      }
+    });
+
+    if (filteredBySize.length === 0) {
+      return false;
+    }
+
+    return true;
   }
 
   async getCostumeFilters(): Promise<CostumeFilters> {
@@ -62,8 +86,8 @@ export class CostumeService {
       }
 
       costumeModel.quantity.forEach((size) => {
-        if (filters.sizes.findIndex((x) => x === size) === -1) {
-          filters.sizes.push(size);
+        if (filters.sizes.findIndex((x) => x === size.name) === -1) {
+          filters.sizes.push(size.name);
         }
       });
     });
@@ -114,6 +138,27 @@ export class CostumeService {
   async createCostume(costume: CostumeModel) {
     const db = getFirestore();
     const docRef = await addDoc(collection(db, 'costumes'), costume);
-    console.log(docRef.id);
+  }
+
+  async updateCostumeSizes(costumeId: string, checkedOutSizeIds: string[], checkedOutBy: string): Promise<void> {
+    const db = getFirestore();
+    const costumeToUpdateDoc = doc(db, 'costumes', costumeId);
+    const costumeToUpdateData = await getDoc(costumeToUpdateDoc);
+    const costumeToUpdate = costumeToUpdateData.data() as CostumeModel;
+    
+    costumeToUpdate.quantity.forEach(size => {
+      if (checkedOutSizeIds.includes(size.id)) {
+        size.checkedOutBy = checkedOutBy;
+      }
+    })
+
+    await updateDoc(costumeToUpdateDoc, {
+      "quantity": costumeToUpdate.quantity,
+    });
+  }
+
+  async deleteCostume(costumeId: string): Promise<void> {
+    const db = getFirestore();
+    await deleteDoc(doc(db, "costumes", costumeId));
   }
 }

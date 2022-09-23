@@ -24,6 +24,6 @@ export class DynamicFormQuestionComponent {
   }
 
   public fileUploaded(event: FileUpload, controlName: string): void {
-    this.form.patchValue({ [controlName]: event.name }); 
+    this.form.patchValue({ [controlName]: event }); 
   }
 }

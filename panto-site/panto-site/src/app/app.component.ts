@@ -12,12 +12,13 @@ export class AppComponent implements OnInit {
   @ViewChild('costumeListContainer', { static: true })
   costumeListContainer!: CostumeListContainerComponent;
 
+  mobileFilterVisible: boolean = false;
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {}
 
   filterChanged(filters: CostumeFilters) {
-    console.log('filter changed');
     this.costumeListContainer.filterChanged(filters);
   }
 

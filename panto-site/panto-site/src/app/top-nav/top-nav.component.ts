@@ -8,6 +8,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class TopNavComponent implements OnInit {
   @Output()
   addNew: EventEmitter<void> = new EventEmitter();
+  @Output()
+  openFilter: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 

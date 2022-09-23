@@ -1,4 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Guid } from 'guid-typescript';
+import { CostumeSizeModel } from 'src/app/costume-list-container/models/costume';
 import { Sizes } from '../../models/question-base';
 
 @Component({
@@ -11,7 +13,7 @@ export class DualInputGroupComponent implements OnInit {
   public changed: EventEmitter<any> = new EventEmitter<any>();
 
   public inputControlIterable: Sizes[] = [{ size: '', quantity: undefined }];
-  private convertedArray: string[] = [];
+  private convertedArray: CostumeSizeModel[] = [];
 
   constructor() {}
 
@@ -33,11 +35,11 @@ export class DualInputGroupComponent implements OnInit {
   }
 
   private convertSizesToArray(): void {
-    const sizes: string[] = [];
+    const sizes: CostumeSizeModel[] = [];
     this.inputControlIterable.forEach((item) => {
       if (item.quantity) {
         for (let i = 0; i < item.quantity; i++) {
-          sizes.push(item.size);
+          sizes.push({ id: Guid.create().toString(), name: item.size, checkedOutBy: ''});
         }
       }
     });

@@ -1,5 +1,5 @@
 <div>
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+  <form *ngIf="!savedState" (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-question">
       <div *ngFor="let question of questions" class="form-row">
         <app-question [question]="question" [form]="form"></app-question>
@@ -7,7 +7,11 @@
     </div>
 
     <div class="form-row form-submit">
-      <button type="submit" [disabled]="!form.valid">Save</button>
+      <button class="float-right bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg" type="submit" [disabled]="!form.valid">Save</button>
     </div>
   </form>
+  <div *ngIf="savedState">
+    Successfully Saved!
+    <button class="float-right bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg" type="button" (click)="onClose()">Close</button>
+  </div>
 </div>

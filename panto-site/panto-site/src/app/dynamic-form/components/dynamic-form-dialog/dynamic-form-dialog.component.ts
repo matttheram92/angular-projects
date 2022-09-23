@@ -18,17 +18,18 @@ export class DynamicFormDialogComponent implements OnInit {
     private questionService: QuestionService,
     private costumeService: CostumeService
   ) {
-    this.questions = this.questionService.getQuestions([]);
+    this.questions = this.questionService.getQuestions([], []);
   }
 
   async ngOnInit(): Promise<void> {
-    const costumeColours = await this.costumeService
-      .getCostumeFilters()
-      .then((x) => {
-        return x.colours.map((colour) => {
-          return { key: colour, value: colour };
-        });
-      });
-    this.questions = this.questionService.getQuestions(costumeColours);
+    const costumeFilters = await this.costumeService.getCostumeFilters();
+    const costumeColours = costumeFilters.colours.map((colour) => {
+      return { key: colour, value: colour };
+    });
+    const costumeTypes = costumeFilters.types.map((type) => {
+      return { key: type, value: type };
+    });
+
+    this.questions = this.questionService.getQuestions(costumeColours, costumeTypes);
   }
 }

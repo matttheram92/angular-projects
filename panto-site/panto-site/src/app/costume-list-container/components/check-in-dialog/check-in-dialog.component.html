@@ -1,0 +1,22 @@
+<div class="relative">
+  <h1 mat-dialog-title>Check in costume ({{data.costume.description}})</h1>
+  <button (click)="close()"
+    class="absolute top-0 right-0 text-sm leading-6 font-medium py-1 px-3 hover:bg-slate-100 rounded-full">X</button>
+  <div mat-dialog-content class="dialog-content">
+    <p>{{ data.costume.notes }}</p>
+    <div>
+      <p class="font-sans font-medium">Sizes</p>
+      <div class="form-check" *ngFor="let costumeSize of sizes; let index = index">
+        <input
+          class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2"
+          type="checkbox" (change)="sizeChecked(costumeSize)" [value]="costumeSize.id"
+          [id]="'checkOutSizeBox' + index" />
+        <label class="form-check-label inline-block text-gray-800" [for]="'checkOutSizeBox' + index">
+          {{ costumeSizeLabel(costumeSize) }}
+        </label>
+      </div>
+    </div>
+    <button (click)="save()"
+      class="float-right bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg">Save</button>
+  </div>
+</div>
