@@ -14,7 +14,7 @@ export class CostumeFiltersComponent implements OnInit {
   filters: CostumeFilters = new CostumeFilters();
 
   @Output()
-  filterChanged: EventEmitter<CostumeFilters> = new EventEmitter<CostumeFilters>();
+  filterChanged: EventEmitter<{filters: CostumeFilters, closePanel?: boolean}> = new EventEmitter<{filters: CostumeFilters, closePanel?: boolean}>();
 
   constructor(costumeService: CostumeService) {
     this.costumeService = costumeService;
@@ -31,7 +31,7 @@ export class CostumeFiltersComponent implements OnInit {
     } else {
       this.filters.colours.push(val);
     }
-    this.filterChanged.emit(this.filters);
+    this.filterChanged.emit({filters: this.filters, closePanel: false});
   }
 
   typeChecked(val: string): void {
@@ -41,7 +41,7 @@ export class CostumeFiltersComponent implements OnInit {
     } else {
       this.filters.types.push(val);
     }
-    this.filterChanged.emit(this.filters);
+    this.filterChanged.emit({filters: this.filters, closePanel: false});
   }
 
   sizeChecked(costumeSize: string): void {
@@ -51,6 +51,15 @@ export class CostumeFiltersComponent implements OnInit {
     } else {
       this.filters.sizes.push(costumeSize);
     }
-    this.filterChanged.emit(this.filters);
+    this.filterChanged.emit({filters: this.filters, closePanel: false});
+  }
+
+  public getBgColour(colour: string): string {
+    switch(colour) {
+      case 'Burgundy':
+        return 'maroon';
+      default:
+        return colour;
+    }
   }
 }

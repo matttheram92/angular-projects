@@ -48,7 +48,7 @@ export class InputDropdownComponent implements OnInit {
   public clearInput(): void {
     this.searchValue = '';
     this.selectedKeys = [];
-    this._emitChange();
+    this._emitChange([]);
   }
 
   public removeSelectedKey(index: number): void {
@@ -59,11 +59,12 @@ export class InputDropdownComponent implements OnInit {
     this.searchValue = '';
     if (this.single) {
       this.selectedKeys = [ key ];
+      this._emitChange(this.selectedKeys[0]);
     } else {
       this.selectedKeys.push(key);
+      this._emitChange(this.selectedKeys);
     }
     this.opened = false;
-    this._emitChange();
   }
 
   private itemIsInList(item: string, list: string[]): boolean {
@@ -72,7 +73,7 @@ export class InputDropdownComponent implements OnInit {
     ) > -1
   }
 
-  private _emitChange(): void {
-    this.selected.emit(this.selectedKeys);
+  private _emitChange(selectedKeys: string | string[]): void {
+    this.selected.emit(selectedKeys);
   }
 }

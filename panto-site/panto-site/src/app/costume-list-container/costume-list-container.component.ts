@@ -44,4 +44,13 @@ export class CostumeListContainerComponent implements OnInit {
       }
     });
   }
+
+  public getBgColour(colour: string): string {
+    switch(colour) {
+      case 'Burgundy':
+        return 'maroon';
+      default:
+        return colour;
+    }
+  }
 }

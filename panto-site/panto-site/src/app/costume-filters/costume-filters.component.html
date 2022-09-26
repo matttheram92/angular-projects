@@ -1,4 +1,6 @@
-<div *ngIf="filterOptions" class="mt-20 mx-auto w-60">
+<div *ngIf="filterOptions" class="my-6 lg:mt-20 mx-auto w-60">
+  <button type="button" class="block lg:hidden bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 m-auto rounded-lg"
+      (click)="filterChanged.emit({filters: filters, closePanel: true})">Apply filters</button>
   <div class="ml-20 mr-4 justify-center flow-root">
     <div>
       <p class="font-sans font-medium">Colours</p>
@@ -9,7 +11,7 @@
           (change)="colourChecked(costumeColour)"
           [value]="costumeColour"
           [id]="'flexCheckDefault' + index"
-          [style.background-color]="costumeColour"
+          [style.background-color]="getBgColour(costumeColour)"
         />
         <label [for]="'flexCheckDefault' + index">
           <mat-icon *ngIf="filters.colours.includes(costumeColour)" class="absolute central-icon cursor-pointer">done</mat-icon>

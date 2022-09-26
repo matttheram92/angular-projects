@@ -34,7 +34,6 @@ export class CostumeService {
 
     querySnapshot.forEach(async (doc) => {
       const costumeModel = doc.data() as CostumeModel;
-
       
       if (this.costumeMatchesFilteredSize(costumeModel, filters)) {
         const costume = new Costume(costumeModel, doc.id);
@@ -124,6 +123,10 @@ export class CostumeService {
   }
 
   async getImageUrl(fileName: string): Promise<string> {
+    if (fileName === '') {
+      return '';
+    }
+
     let imageUrl = '';
     const storage = getStorage();
     const storageRef = ref(storage, `costumes/${fileName}`);

@@ -18,8 +18,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  filterChanged(filters: CostumeFilters) {
-    this.costumeListContainer.filterChanged(filters);
+  filterChanged(event: {filters: CostumeFilters, closePanel?: boolean}) {
+    if (event.closePanel) {
+      this.mobileFilterVisible = false;
+    }
+    this.costumeListContainer.filterChanged(event.filters);
   }
 
   toggleForm(): void {

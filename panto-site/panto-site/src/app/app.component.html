@@ -1,8 +1,7 @@
-<div class="bg-white h-full mt-8 mx-2 2xl:mx-56 rounded-md">
+<div class="bg-white fixed h-full w-full lg:w-auto m-0 lg:mt-8 md:mx-2 2xl:mx-56 rounded-md overflow-y-auto">
   <app-costume-filters class="absolute flex bg-white z-10" [ngClass]="mobileFilterVisible ? 'block' : 'hidden lg:block'" (filterChanged)="filterChanged($event)"></app-costume-filters>
-  <div class="py-6 px-10 lg:ml-60 h-full">
-    <app-top-nav class="mb-6" (addNew)="toggleForm()" (openFilter)="mobileFilterVisible = !mobileFilterVisible"></app-top-nav>
-    <h2 class="font-sans text-2xl h-10 font-bold">Costumes</h2>
+  <div class="py-6 px-0 md:px-10 lg:ml-60 h-full">
+    <app-top-nav class="mb-6 absolute w-full contents" (addNew)="toggleForm()" (openFilter)="mobileFilterVisible = !mobileFilterVisible"></app-top-nav>
     <app-costume-list-container #costumeListContainer></app-costume-list-container>
   </div>
 </div>
