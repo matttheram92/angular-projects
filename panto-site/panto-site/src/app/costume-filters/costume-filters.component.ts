@@ -12,9 +12,14 @@ export class CostumeFiltersComponent implements OnInit {
 
   filterOptions!: CostumeFilters;
   filters: CostumeFilters = new CostumeFilters();
+  colourHover: string = '';
+  descriptionSearchValue: string = '';
 
   @Output()
-  filterChanged: EventEmitter<{filters: CostumeFilters, closePanel?: boolean}> = new EventEmitter<{filters: CostumeFilters, closePanel?: boolean}>();
+  filterChanged: EventEmitter<{
+    filters: CostumeFilters;
+    closePanel?: boolean;
+  }> = new EventEmitter<{ filters: CostumeFilters; closePanel?: boolean }>();
 
   constructor(costumeService: CostumeService) {
     this.costumeService = costumeService;
@@ -24,6 +29,11 @@ export class CostumeFiltersComponent implements OnInit {
     this.filterOptions = await this.costumeService.getCostumeFilters();
   }
 
+  onDescriptionChange(): void {
+    this.filters.description = this.descriptionSearchValue;
+    this.filterChanged.emit({ filters: this.filters, closePanel: false });
+  }
+
   colourChecked(val: string): void {
     const index = this.filters.colours.findIndex((x) => x === val);
     if (index >= 0) {
@@ -31,7 +41,7 @@ export class CostumeFiltersComponent implements OnInit {
     } else {
       this.filters.colours.push(val);
     }
-    this.filterChanged.emit({filters: this.filters, closePanel: false});
+    this.filterChanged.emit({ filters: this.filters, closePanel: false });
   }
 
   typeChecked(val: string): void {
@@ -41,7 +51,7 @@ export class CostumeFiltersComponent implements OnInit {
     } else {
       this.filters.types.push(val);
     }
-    this.filterChanged.emit({filters: this.filters, closePanel: false});
+    this.filterChanged.emit({ filters: this.filters, closePanel: false });
   }
 
   sizeChecked(costumeSize: string): void {
@@ -51,13 +61,15 @@ export class CostumeFiltersComponent implements OnInit {
     } else {
       this.filters.sizes.push(costumeSize);
     }
-    this.filterChanged.emit({filters: this.filters, closePanel: false});
+    this.filterChanged.emit({ filters: this.filters, closePanel: false });
   }
 
   public getBgColour(colour: string): string {
-    switch(colour) {
+    switch (colour) {
       case 'Burgundy':
         return 'maroon';
+      case 'Mauve':
+        return 'mediumpurple';
       default:
         return colour;
     }

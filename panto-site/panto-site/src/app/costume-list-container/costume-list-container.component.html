@@ -1,37 +1,87 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 pt-4 md:pt-0 gap-1 md:gap-4">
-  <ul class="min-h-40 md:h-40 flex mt-0 md:mt-4 drop-shadow-lg transition hover:drop-shadow-2xl bg-white"
-    *ngFor="let costume of costumes">
+<div class="flex flex-row-reverse mr-4 md:mr-0">
+  <div class="border border-gray-300 rounded-md flex">
+    <input
+      type="checkbox"
+      id="imagesOnly"
+      (change)="imagesOnly = !imagesOnly"
+      [value]="imagesOnly"
+      class="ml-2"
+    />
+    <label for="imagesOnly" class="p-2">Images only</label>
+  </div>
+</div>
+<div
+  class="grid pt-4 md:pt-0 gap-1 md:gap-4"
+  [ngClass]="
+    imagesOnly
+      ? 'grid-cols-3 md:grid-cols-6 2xl:grid-cols-8'
+      : 'grid-cols-1 lg:grid-cols-2'
+  "
+>
+  <ul
+    class="min-h-40 md:h-40 flex mt-0 md:mt-4 drop-shadow-lg transition hover:drop-shadow-2xl bg-white"
+    *ngFor="let costume of costumes; let i = index"
+    id="target{{ i + 1 }}"
+  >
     <article class="w-full flex items-start space-x-6 p-6">
-      <img [src]="costume.imageUrl" alt="" width="70" height="114" class="flex-none rounded-md bg-slate-100"
-        (click)="openLargeImage(costume)" />
-      <div class="min-w-0 relative flex-auto">
-        <h2 class="font-semibold text-slate-900 truncate pr-8 whitespace-normal md:whitespace-nowrap">
+      <img
+        [src]="costume.imageUrl"
+        alt=""
+        width="70"
+        height="114"
+        class="flex-none rounded-md bg-slate-100 max-h-full"
+        [ngClass]="imagesOnly ? 'm-auto' : ''"
+        (click)="openLargeImage(costume)"
+      />
+      <div *ngIf="!imagesOnly" class="min-w-0 relative flex-auto">
+        <h2
+          class="font-semibold text-slate-900 truncate pr-8 whitespace-normal md:whitespace-nowrap"
+        >
           {{ costume.description }}
         </h2>
         <div>
           <dt class="sr-only">Type</dt>
           <div class="text-sm text-slate-400 flex items-center">
             {{ costume.type }}
-            <svg *ngIf="costume.notes !== ''" width="2" height="2" fill="currentColor" class="mx-2 text-slate-300" aria-hidden="true">
+            <svg
+              *ngIf="costume.notes !== ''"
+              width="2"
+              height="2"
+              fill="currentColor"
+              class="mx-2 text-slate-300"
+              aria-hidden="true"
+            >
               <circle cx="1" cy="1" r="1" />
-            </svg> 
-            {{ costume.notes !== '' ? costume.notes : '' }}
+            </svg>
+            {{ costume.notes !== "" ? costume.notes : "" }}
           </div>
         </div>
         <dl class="mt-2 flex flex-wrap text-sm leading-6">
           <div class="absolute top-0 right-0 flex items-center space-x-1">
-            <app-dots-menu class="float-right" [costume]="costume"></app-dots-menu>
+            <app-dots-menu
+              class="float-right"
+              [costume]="costume"
+            ></app-dots-menu>
           </div>
           <div class="contents md:flex">
             <dt class="sr-only">Sizes</dt>
-            <dd *ngFor="let size of costume.quantity" class="px-1.5 ring-1 ring-slate-200 rounded mr-2 flex h-min">
+            <dd
+              *ngFor="let size of costume.quantity"
+              class="px-1.5 ring-1 ring-slate-200 rounded mr-2 flex h-min"
+            >
               <p class="mr-1 text-slate-400">{{ size.count }} x</p>
               <p class="font-medium">{{ size.name }}</p>
             </dd>
           </div>
           <div class="hidden xl:block">
             <dd class="flex items-center">
-              <svg width="2" height="2" fill="currentColor" class="mr-2 text-slate-300" aria-hidden="true">
+              <svg
+                width="2"
+                height="2"
+                fill="currentColor"
+                class="mr-2 text-slate-300"
+                aria-hidden="true"
+              >
                 <circle cx="1" cy="1" r="1" />
               </svg>
               <div class="text-slate-400">{{ costume.count }} in total</div>
@@ -39,26 +89,46 @@
           </div>
           <div *ngIf="costume.checkedOutCount > 0">
             <dd class="flex items-center">
-              <svg width="2" height="2" fill="currentColor" class="mx-2 hidden md:block text-slate-300"
-                aria-hidden="true">
+              <svg
+                width="2"
+                height="2"
+                fill="currentColor"
+                class="mx-2 hidden md:block text-slate-300"
+                aria-hidden="true"
+              >
                 <circle cx="1" cy="1" r="1" />
               </svg>
-              <div class="text-slate-400 cursor-pointer hover:underline" (click)="openCheckOutDialog(costume)"
-                (mouseover)="checkOutHover = costume.id" (mouseout)="checkOutHover = ''">{{ costume.checkedOutCount }}
-                checked out</div>
+              <div
+                class="text-slate-400 cursor-pointer hover:underline"
+                (click)="openCheckOutDialog(costume)"
+                (mouseover)="checkOutHover = costume.id"
+                (mouseout)="checkOutHover = ''"
+              >
+                {{ costume.checkedOutCount }} checked out
+              </div>
               <div
                 class="absolute bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold bottom-14 min-w-28 max-w-40 ml-2 py-1 px-2 rounded-sm"
-                *ngIf="checkOutHover === costume.id">
-                <div *ngFor="let checkedOutByName of costume.checkedOutBy"
-                  class="text-ellipsis overflow-hidden whitespace-nowrap">{{ checkedOutByName }}</div>
+                *ngIf="checkOutHover === costume.id"
+              >
+                <div
+                  *ngFor="let checkedOutByName of costume.checkedOutBy"
+                  class="text-ellipsis overflow-hidden whitespace-nowrap"
+                >
+                  {{ checkedOutByName }}
+                </div>
               </div>
             </dd>
           </div>
           <div class="flex w-full mt-2 font-normal">
             <dt class="sr-only">Colours</dt>
-            <div class="flex px-2 mr-2 border rounded-full" *ngFor="let colour of costume.colours">
-              <div [style.background-color]="getBgColour(colour)" class="h-3 w-3 my-auto mr-1 rounded-full border border-inherit">
-              </div>
+            <div
+              class="flex px-2 mr-2 border rounded-full"
+              *ngFor="let colour of costume.colours"
+            >
+              <div
+                [style.background-color]="getBgColour(colour)"
+                class="h-3 w-3 my-auto mr-1 rounded-full border border-inherit"
+              ></div>
               <dd class="text-slate-400">{{ colour }}</dd>
             </div>
           </div>

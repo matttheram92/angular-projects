@@ -52,11 +52,13 @@ export class Costume {
 }
 
 export class CostumeFilters {
+  description!: string;
   colours!: string[];
   types!: string[];
   sizes!: string[];
 
   constructor() {
+    this.description = '';
     this.colours = [];
     this.types = [];
     this.sizes = [];

@@ -1,10 +1,37 @@
 <div *ngIf="filterOptions" class="my-6 lg:mt-20 mx-auto w-60">
-  <button type="button" class="block lg:hidden bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 m-auto rounded-lg"
-      (click)="filterChanged.emit({filters: filters, closePanel: true})">Apply filters</button>
+  <button
+    type="button"
+    class="block lg:hidden bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 m-auto rounded-lg"
+    (click)="filterChanged.emit({ filters: filters, closePanel: true })"
+  >
+    Apply filters
+  </button>
+  <div class="ml-20 mr-4 justify-center flow-root">
+    <div>
+      <p class="font-sans font-medium">Description</p>
+      <div>
+        <input
+          class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-1 px-4 ring-1 ring-slate-200 shadow-sm"
+          type="text"
+          [(ngModel)]="descriptionSearchValue"
+          (ngModelChange)="onDescriptionChange()"
+        />
+      </div>
+    </div>
+  </div>
   <div class="ml-20 mr-4 justify-center flow-root">
     <div>
       <p class="font-sans font-medium">Colours</p>
-      <div class="form-check inline-block" *ngFor="let costumeColour of filterOptions.colours; let index = index">
+      <div
+        class="form-check inline-block"
+        *ngFor="let costumeColour of filterOptions.colours; let index = index"
+      >
+        <p
+          *ngIf="colourHover === costumeColour"
+          class="absolute bg-slate-400 opacity-90 text-white -mt-5 px-2 rounded-sm"
+        >
+          {{ costumeColour }}
+        </p>
         <input
           class="form-check-input appearance-none h-6 w-6 border rounded-full border-gray-300 bg-white checked:border-gray-400 checked:border-2 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
           type="checkbox"
@@ -12,9 +39,15 @@
           [value]="costumeColour"
           [id]="'flexCheckDefault' + index"
           [style.background-color]="getBgColour(costumeColour)"
+          (mouseover)="colourHover = costumeColour"
+          (mouseout)="colourHover = ''"
         />
         <label [for]="'flexCheckDefault' + index">
-          <mat-icon *ngIf="filters.colours.includes(costumeColour)" class="absolute central-icon cursor-pointer">done</mat-icon>
+          <mat-icon
+            *ngIf="filters.colours.includes(costumeColour)"
+            class="absolute central-icon cursor-pointer"
+            >done</mat-icon
+          >
         </label>
       </div>
     </div>
@@ -23,16 +56,19 @@
   <div class="ml-20 mr-4 justify-center">
     <div>
       <p class="font-sans font-medium">Types</p>
-      <div class="form-check" *ngFor="let costumeType of filterOptions.types; let index = index">
+      <div
+        class="form-check flex"
+        *ngFor="let costumeType of filterOptions.types; let index = index"
+      >
         <input
-          class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+          class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
           type="checkbox"
           (change)="typeChecked(costumeType)"
           [value]="costumeType"
           [id]="'typeCheckBox' + index"
         />
         <label
-          class="form-check-label inline-block text-gray-800"
+          class="form-check-label inline-block text-gray-800 w-3/4 pl-2"
           [for]="'typeCheckBox' + index"
         >
           {{ costumeType }}
@@ -44,16 +80,19 @@
   <div class="ml-20 mr-4 justify-center">
     <div>
       <p class="font-sans font-medium">Sizes</p>
-      <div class="form-check" *ngFor="let costumeSize of filterOptions.sizes; let index = index">
+      <div
+        class="form-check flex"
+        *ngFor="let costumeSize of filterOptions.sizes; let index = index"
+      >
         <input
-          class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+          class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
           type="checkbox"
           (change)="sizeChecked(costumeSize)"
           [value]="costumeSize"
           [id]="'sizeCheckBox' + index"
         />
         <label
-          class="form-check-label inline-block text-gray-800"
+          class="form-check-label inline-block text-gray-800 w-3/4 pl-2"
           [for]="'sizeCheckBox' + index"
         >
           {{ costumeSize }}
