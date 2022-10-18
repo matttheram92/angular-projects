@@ -126,7 +126,7 @@
               *ngFor="let colour of costume.colours"
             >
               <div
-                [style.background-color]="getBgColour(colour)"
+                [style.background-color]="localGetBgColour(colour)"
                 class="h-3 w-3 my-auto mr-1 rounded-full border border-inherit"
               ></div>
               <dd class="text-slate-400">{{ colour }}</dd>

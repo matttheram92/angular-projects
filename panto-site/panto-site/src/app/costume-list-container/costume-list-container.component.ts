@@ -4,6 +4,7 @@ import { Costume, CostumeFilters } from './models/costume';
 import { MatDialog } from '@angular/material/dialog';
 import { CheckOutDialogComponent } from './components/check-out-dialog/check-out-dialog.component';
 import { LargeImageDialogComponent } from './components/large-image-dialog/large-image-dialog.component';
+import { getBgColour } from '../helpers/costume-helper';
 
 @Component({
   selector: 'app-costume-list-container',
@@ -55,14 +56,7 @@ export class CostumeListContainerComponent implements OnInit {
     });
   }
 
-  public getBgColour(colour: string): string {
-    switch (colour) {
-      case 'Burgundy':
-        return 'maroon';
-      case 'Mauve':
-        return 'mediumpurple';
-      default:
-        return colour;
-    }
+  public localGetBgColour(colour: string): string {
+    return getBgColour(colour);
   }
 }

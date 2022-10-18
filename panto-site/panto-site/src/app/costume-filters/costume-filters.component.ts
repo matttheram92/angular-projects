@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CostumeService } from '../costume-list-container/services/costume-service';
 import { CostumeFilters } from '../costume-list-container/models/costume';
+import { getBgColour } from '../helpers/costume-helper';
 
 @Component({
   selector: 'app-costume-filters',
@@ -64,14 +65,7 @@ export class CostumeFiltersComponent implements OnInit {
     this.filterChanged.emit({ filters: this.filters, closePanel: false });
   }
 
-  public getBgColour(colour: string): string {
-    switch (colour) {
-      case 'Burgundy':
-        return 'maroon';
-      case 'Mauve':
-        return 'mediumpurple';
-      default:
-        return colour;
-    }
+  public localGetBgColour(colour: string): string {
+    return getBgColour(colour);
   }
 }
