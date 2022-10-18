@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import {
+  deleteObject,
   FirebaseStorage,
   getDownloadURL,
   getStorage,
   ref,
   StorageError,
   uploadBytesResumable,
+  uploadString,
 } from 'firebase/storage';
 
 import { FileUpload } from '../models/file-upload.model';
@@ -20,13 +22,32 @@ export class FileUploadService {
 
   ngOnInit(): void {}
 
-  async pushFileToStorage(fileUpload: FileUpload): Promise<string> {
+  async pushFileToStorage(
+    fileUpload: FileUpload,
+    message: string
+  ): Promise<string> {
     const storage = getStorage();
     const filePath = `${this.basePath}/${fileUpload.name}`;
     const storageRef = ref(storage, filePath);
-    const uploadTask = await uploadBytesResumable(storageRef, fileUpload.file);
+
+    const uploadTask = await uploadString(storageRef, message, 'data_url');
+
     const url = await getDownloadURL(uploadTask.ref);
     return url;
+  }
+
+  async deleteFileFromStorage(fileUpload: FileUpload): Promise<void> {
+    const storage = getStorage();
+    const filePath = `${this.basePath}/${fileUpload.name}`;
+    const storageRef = ref(storage, filePath);
+
+    deleteObject(storageRef)
+      .then(() => {
+        console.log(`deleted file '${fileUpload.name}' successfully`);
+      })
+      .catch((error) => {
+        console.log('error deleting file', error);
+      });
   }
 
   // private saveFileData(fileUpload: FileUpload): void {

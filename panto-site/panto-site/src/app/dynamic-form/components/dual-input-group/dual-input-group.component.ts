@@ -47,7 +47,6 @@ export class DualInputGroupComponent implements OnInit {
   }
 
   private _emitChange(): void {
-    console.log(this.convertedArray);
     this.changed.emit(this.convertedArray);
   }
 }
