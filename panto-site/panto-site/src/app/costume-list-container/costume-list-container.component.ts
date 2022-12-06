@@ -33,8 +33,10 @@ export class CostumeListContainerComponent implements OnInit {
 
   public async filterChanged(filters: CostumeFilters): Promise<void> {
     this.filters = filters;
-    if (filters.description !== '' && filters.colours.length === 0 && filters.sizes.length === 0 && filters.types.length === 0) {
-      this.costumes = this.rawCostumes.filter(costume => costume.description.toLowerCase().includes(filters.description.toLowerCase()));
+    //if (filters.description !== '' && filters.colours.length === 0 && filters.sizes.length === 0 && filters.types.length === 0) {
+    if (filters.description !== '' || filters.sizes.length > 0) {
+      //this.costumes = this.rawCostumes.filter(costume => costume.description.toLowerCase().includes(filters.description.toLowerCase()));
+      this.costumes = await this.costumeService.getCostumesWithLocalFilters(filters);
     } else {
       this.costumes = await this.costumeService.getCostumes(filters);
     }
@@ -63,10 +65,18 @@ export class CostumeListContainerComponent implements OnInit {
   }
 
   public async nextPage(): Promise<void> {
-    this.costumes = await this.costumeService.getCostumes(this.filters, true, false);
+    if (this.filters && (this.filters.description !== '' || this.filters.sizes.length > 0)) {
+      this.costumes = await this.costumeService.getCostumesWithLocalFilters(this.filters, true, false);
+    } else {
+      this.costumes = await this.costumeService.getCostumes(this.filters, true, false);
+    }
   }
 
   public async prevPage(): Promise<void> {
-    this.costumes = await this.costumeService.getCostumes(this.filters, false, true);
+    if (this.filters && (this.filters.description !== '' || this.filters.sizes.length > 0)) {
+      this.costumes = await this.costumeService.getCostumesWithLocalFilters(this.filters, false, true);
+    } else {
+      this.costumes = await this.costumeService.getCostumes(this.filters, false, true);
+    }
   }
 }

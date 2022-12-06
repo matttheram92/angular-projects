@@ -69,17 +69,50 @@ export class CostumeService {
 
     querySnapshot.forEach(async (doc) => {
       const costumeModel = doc.data() as CostumeModel;
+      const costume = new Costume(costumeModel, doc.id);
+      costume.imageUrl = await this.getImageUrl(costumeModel.imageName);
+      costumes.push(costume);
+      costumes.sort((a, b) =>
+        CostumeService.sortBySplitChar(
+          a.catalogueNo.toString(),
+          b.catalogueNo.toString(),
+          '.'
+        )
+      );      
+    });
 
+    return costumes;
+  }
+
+  async getCostumesWithLocalFilters(filters?: CostumeFilters, next?: boolean, prev?: boolean): Promise<Costume[]> {
+    let costumes: Costume[] = [];
+
+    const ref = collection(this.firestore, 'costumes');
+    const queryConstraints = [];
+
+    if (filters && filters.colours.length > 0) {
+      queryConstraints.push(
+        where('colours', 'array-contains-any', filters.colours)
+      );
+    }
+
+    if (filters && filters.types.length > 0) {
+      queryConstraints.push(where('type', 'in', filters.types));
+    }
+
+    const q = query(ref, ...queryConstraints, orderBy("sortableCatNo"));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      const costumeModel = doc.data() as CostumeModel;
       if (
         this.costumeMatchesFilteredSize(costumeModel, filters) ||
-        (filters?.description !== '' &&
-          costumeModel.description
+          (filters?.description !== '' &&
+            costumeModel.description
             .toLowerCase()
-            .includes(filters?.description.toLowerCase() || ''))
+            .includes(filters?.description.toLowerCase() ?? ''))
       ) {
         const costume = new Costume(costumeModel, doc.id);
-        costume.imageUrl = await this.getImageUrl(costumeModel.imageName);
-        costumes.push(costume);
         costumes.sort((a, b) =>
           CostumeService.sortBySplitChar(
             a.catalogueNo.toString(),
@@ -87,10 +120,47 @@ export class CostumeService {
             '.'
           )
         );
+        costumes.push(costume);
       }
     });
 
-    return costumes;
+    if (next) {
+      const lastVisibleIndex = costumes.findIndex(x => x.id === this.lastVisible.id);
+      costumes = costumes.slice(lastVisibleIndex+1, lastVisibleIndex+9);
+    } else if (prev) {
+      const firstVisibleIndex = costumes.findIndex(x => x.id === this.firstVisible.id);
+      if (firstVisibleIndex-8 > -1) {
+        costumes = costumes.slice(firstVisibleIndex-8, firstVisibleIndex);
+      } else {
+        costumes = costumes.slice(0, 8);  
+      }
+    } else {
+      costumes = costumes.slice(0, 8);
+    }
+
+    const trimmedCostumes: Costume[] = [];
+    costumes.forEach(async (costume, index) => {
+      this.getImageUrl(costume.imageName).then((url) => {
+        costume.imageUrl = url;
+
+        trimmedCostumes.push(costume);
+        trimmedCostumes.sort((a, b) =>
+          CostumeService.sortBySplitChar(
+            a.catalogueNo.toString(),
+            b.catalogueNo.toString(),
+            '.'
+          )
+        );
+
+        if (index === 0) {
+          this.firstVisible = costume;
+        } else if (index === 7) {
+          this.lastVisible = costume;
+        }
+      });
+    });
+
+    return trimmedCostumes;
   }
 
   private costumeMatchesFilteredSize(
@@ -98,6 +168,9 @@ export class CostumeService {
     filters?: CostumeFilters
   ): boolean {
     if (!filters || filters.sizes.length === 0) {
+      if (filters?.description !== '') {
+        return false;
+      }
       return true;
     }
 

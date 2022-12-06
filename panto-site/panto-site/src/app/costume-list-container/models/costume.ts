@@ -30,7 +30,7 @@ export class Costume {
     this.colours = costume.colours;
     this.description = costume.description;
     this.imageUrl = '';
-    this.imageName = '';
+    this.imageName = costume.imageName;
     this.notes = costume.notes;
     this.quantity = this.setupQuantity(costume.quantity);
     this.uniqueSizes = costume.quantity;

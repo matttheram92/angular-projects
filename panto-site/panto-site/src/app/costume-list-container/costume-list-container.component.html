@@ -19,7 +19,7 @@
   "
 >
   <ul
-    class="min-h-40 md:h-40 flex mt-0 md:mt-4 drop-shadow-lg transition hover:drop-shadow-2xl bg-white"
+    class="min-h-40 flex mt-0 md:mt-4 drop-shadow-lg transition hover:drop-shadow-2xl bg-white"
     *ngFor="let costume of costumes; let i = index"
     id="target{{ i + 1 }}"
   >
@@ -132,7 +132,7 @@
               <dd class="text-slate-400">{{ colour }}</dd>
             </div>
           </div>
-          <div class="absolute bottom-0 right-0 flex items-center space-x-1">
+          <div class="absolute bottom-6 right-0 flex items-center space-x-1">
             <dt class="text-sky-500">
               <span class="sr-only">Catalogue Number</span>
               <mat-icon>bookmarks_outlined</mat-icon>
@@ -146,5 +146,5 @@
 </div>
 <div class="fixed bottom-0 inline-flex right-0 lg:right-auto">
   <a (click)="prevPage()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 cursor-pointer rounded-l-lg inline-flex"><mat-icon>chevron_left</mat-icon>Previous</a>
-  <a (click)="nextPage()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 cursor-pointer rounded-r-lg inline-flex">Next<mat-icon>chevron_right</mat-icon></a>
+  <a (click)="nextPage()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 cursor-pointer rounded-r-lg inline-flex ml-1">Next<mat-icon>chevron_right</mat-icon></a>
 </div>
