@@ -6,6 +6,7 @@ export interface CostumeModel {
   notes: string;
   quantity: CostumeSizeModel[];
   type: string;
+  sortableCatNo?: number;
 }
 
 export class Costume {

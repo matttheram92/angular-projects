@@ -30,15 +30,30 @@ export class DynamicFormComponent implements OnInit {
   async onSubmit(): Promise<void> {
     const costume: CostumeModel = {
       description: this.form.value.description,
-      catalogueNo: this.form.value.catalogueNumber,
+      catalogueNo: Number(this.form.value.catalogueNumber),
       colours: this.form.value.colour,
       imageName: this.form.value.imageName,
       notes: this.form.value.notes,
       quantity: this.form.value.sizes,
       type: this.form.value.costumeType,
+      sortableCatNo: this.getSortableCatNo(this.form.value.catalogueNumber)
     };
     await this.costumeService.createCostume(costume);
     this.savedState = true;
+  }  
+
+  private getSortableCatNo(catalogueNumber: string): number {    
+    const splitNo = catalogueNumber.toString().split('.');
+    let sortableString;
+    if (splitNo[1].length === 1) {
+      sortableString = `${splitNo[0]}.0${splitNo[1]}`;
+    } else {
+      sortableString = `${splitNo[0]}.${splitNo[1]}`;
+    }    
+    
+    const sortableCatNo = Number(sortableString);
+
+    return sortableCatNo;
   }
 
   onClose(): void {

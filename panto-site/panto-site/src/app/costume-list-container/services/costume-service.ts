@@ -1,14 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Query } from '@angular/core';
 import { Firestore } from '@angular/fire/firestore';
 import {
   addDoc,
   collection,
   deleteDoc,
   doc,
+  DocumentData,
+  endBefore,
   getDoc,
   getDocs,
   getFirestore,
+  limit,
+  limitToLast,
+  orderBy,
   query,
+  QueryDocumentSnapshot,
+  setDoc,
+  startAfter,
   updateDoc,
   where,
 } from 'firebase/firestore';
@@ -17,19 +25,19 @@ import {
   Costume,
   CostumeFilters,
   CostumeModel,
-  CostumeSize,
-  CostumeSizeModel,
 } from '../models/costume';
 
 @Injectable()
 export class CostumeService {
   private firestore: Firestore;
+  private firstVisible!: any;
+  private lastVisible!: any;
 
   constructor(firestore: Firestore) {
     this.firestore = firestore;
   }
 
-  async getCostumes(filters?: CostumeFilters): Promise<Costume[]> {
+  async getCostumes(filters?: CostumeFilters, next?: boolean, prev?: boolean): Promise<Costume[]> {
     const costumes: Costume[] = [];
 
     const ref = collection(this.firestore, 'costumes');
@@ -45,16 +53,29 @@ export class CostumeService {
       queryConstraints.push(where('type', 'in', filters.types));
     }
 
-    const q = query(ref, ...queryConstraints);
+    let q: any;
+    if (!next && !prev) {
+      q = query(ref, ...queryConstraints, orderBy("sortableCatNo"), limit(8));
+    } else if (next) {
+      q = query(ref, ...queryConstraints, orderBy("sortableCatNo"), startAfter(this.lastVisible), limit(8));
+    } else if (prev) {
+      q = query(ref, ...queryConstraints, orderBy("sortableCatNo"), endBefore(this.firstVisible), limitToLast(8));
+    }
 
     const querySnapshot = await getDocs(q);
+
+    this.firstVisible = querySnapshot.docs[0];
+    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
 
     querySnapshot.forEach(async (doc) => {
       const costumeModel = doc.data() as CostumeModel;
 
       if (
         this.costumeMatchesFilteredSize(costumeModel, filters) ||
-        (filters?.description !== '' && costumeModel.description.toLowerCase().includes(filters?.description.toLowerCase() || ''))
+        (filters?.description !== '' &&
+          costumeModel.description
+            .toLowerCase()
+            .includes(filters?.description.toLowerCase() || ''))
       ) {
         const costume = new Costume(costumeModel, doc.id);
         costume.imageUrl = await this.getImageUrl(costumeModel.imageName);
@@ -220,5 +241,19 @@ export class CostumeService {
   async deleteCostume(costumeId: string): Promise<void> {
     const db = getFirestore();
     await deleteDoc(doc(db, 'costumes', costumeId));
+  }
+
+  async editCostume(id: string, costume: CostumeModel): Promise<void> {
+    const db = getFirestore();
+    await setDoc(doc(db, "costumes", id), {
+      catalogueNo: costume.catalogueNo,
+      colours: costume.colours,
+      description: costume.description,
+      imageName: costume.imageName,
+      notes: costume.notes,
+      quantity: costume.quantity,
+      type: costume.type,
+      sortableCatNo: costume.sortableCatNo
+    });
   }
 }

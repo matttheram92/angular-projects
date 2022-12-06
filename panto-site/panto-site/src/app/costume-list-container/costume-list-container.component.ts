@@ -16,6 +16,7 @@ export class CostumeListContainerComponent implements OnInit {
   rawCostumes: Costume[] = [];
   checkOutHover: string = '';
   imagesOnly: boolean = false;
+  filters!: CostumeFilters;
 
   @Input()
   colours: string[] = [];
@@ -31,6 +32,7 @@ export class CostumeListContainerComponent implements OnInit {
   }
 
   public async filterChanged(filters: CostumeFilters): Promise<void> {
+    this.filters = filters;
     if (filters.description !== '' && filters.colours.length === 0 && filters.sizes.length === 0 && filters.types.length === 0) {
       this.costumes = this.rawCostumes.filter(costume => costume.description.toLowerCase().includes(filters.description.toLowerCase()));
     } else {
@@ -58,5 +60,13 @@ export class CostumeListContainerComponent implements OnInit {
 
   public localGetBgColour(colour: string): string {
     return getBgColour(colour);
+  }
+
+  public async nextPage(): Promise<void> {
+    this.costumes = await this.costumeService.getCostumes(this.filters, true, false);
+  }
+
+  public async prevPage(): Promise<void> {
+    this.costumes = await this.costumeService.getCostumes(this.filters, false, true);
   }
 }
