@@ -1,5 +1,5 @@
 export interface CostumeModel {
-  catalogueNo: number;
+  catalogueNo: string;
   colours: string[];
   description: string;
   imageName: string;
@@ -11,7 +11,7 @@ export interface CostumeModel {
 
 export class Costume {
   id!: string;
-  catalogueNo!: number;
+  catalogueNo!: string;
   colours!: string[];
   description!: string;
   imageUrl!: string;

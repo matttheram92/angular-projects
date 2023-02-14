@@ -4,14 +4,15 @@ import { QuestionBase } from '../models/question-base';
 
 @Injectable()
 export class QuestionControlService {
-  constructor() { }
+  constructor() {}
 
-  toFormGroup(questions: QuestionBase<string>[] ) {
+  toFormGroup(questions: QuestionBase<string>[]) {
     const group: any = {};
 
-    questions.forEach(question => {
-      group[question.key] = question.required ? new FormControl(question.value || '', Validators.required)
-                                              : new FormControl(question.value || '');
+    questions.forEach((question) => {
+      group[question.key] = question.required
+        ? new FormControl(question.value || '', Validators.required)
+        : new FormControl(question.value || '');
     });
     return new FormGroup(group);
   }

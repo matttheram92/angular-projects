@@ -6,6 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DynamicFormDialogComponent } from 'src/app/dynamic-form/components/dynamic-form-dialog/dynamic-form-dialog.component';
 import { Costume } from '../../models/costume';
 import { CheckInDialogComponent } from '../check-in-dialog/check-in-dialog.component';
 import { CheckOutDialogComponent } from '../check-out-dialog/check-out-dialog.component';
@@ -58,5 +59,12 @@ export class DotsMenuComponent implements OnInit {
         costume: this.costume,
       },
     });
+  }
+
+  toggleForm(): void {
+    const dialogRef = this.dialog.open(DynamicFormDialogComponent, {
+      width: '500px',
+    });
+    dialogRef.componentInstance.costumeToEdit = this.costume;
   }
 }

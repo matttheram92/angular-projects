@@ -1,13 +1,17 @@
 export function getBgColour(colour: string): string {
-  switch (colour) {
-    case 'Burgundy':
+  switch (colour.toLowerCase()) {
+    case 'burgundy':
       return 'maroon';
-    case 'Mauve':
+    case 'mauve':
       return 'mediumpurple';
-    case 'Mustard':
+    case 'mustard':
       return '#FFDB58';
-    case 'Cream':
+    case 'cream':
       return '#FFFDD0';
+    case 'peach':
+      return '#FFE5B4';
+    case 'lilac':
+      return '#C8A2C8';
     default:
       return colour;
   }

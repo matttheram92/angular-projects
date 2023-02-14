@@ -21,11 +21,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref } from 'firebase/storage';
-import {
-  Costume,
-  CostumeFilters,
-  CostumeModel,
-} from '../models/costume';
+import { Costume, CostumeFilters, CostumeModel } from '../models/costume';
 
 @Injectable()
 export class CostumeService {
@@ -37,7 +33,11 @@ export class CostumeService {
     this.firestore = firestore;
   }
 
-  async getCostumes(filters?: CostumeFilters, next?: boolean, prev?: boolean): Promise<Costume[]> {
+  async getCostumes(
+    filters?: CostumeFilters,
+    next?: boolean,
+    prev?: boolean
+  ): Promise<Costume[]> {
     const costumes: Costume[] = [];
 
     const ref = collection(this.firestore, 'costumes');
@@ -55,17 +55,29 @@ export class CostumeService {
 
     let q: any;
     if (!next && !prev) {
-      q = query(ref, ...queryConstraints, orderBy("sortableCatNo"), limit(8));
+      q = query(ref, ...queryConstraints, orderBy('sortableCatNo'), limit(8));
     } else if (next) {
-      q = query(ref, ...queryConstraints, orderBy("sortableCatNo"), startAfter(this.lastVisible), limit(8));
+      q = query(
+        ref,
+        ...queryConstraints,
+        orderBy('sortableCatNo'),
+        startAfter(this.lastVisible),
+        limit(8)
+      );
     } else if (prev) {
-      q = query(ref, ...queryConstraints, orderBy("sortableCatNo"), endBefore(this.firstVisible), limitToLast(8));
+      q = query(
+        ref,
+        ...queryConstraints,
+        orderBy('sortableCatNo'),
+        endBefore(this.firstVisible),
+        limitToLast(8)
+      );
     }
 
     const querySnapshot = await getDocs(q);
 
     this.firstVisible = querySnapshot.docs[0];
-    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length-1];
+    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
 
     querySnapshot.forEach(async (doc) => {
       const costumeModel = doc.data() as CostumeModel;
@@ -78,13 +90,17 @@ export class CostumeService {
           b.catalogueNo.toString(),
           '.'
         )
-      );      
+      );
     });
 
     return costumes;
   }
 
-  async getCostumesWithLocalFilters(filters?: CostumeFilters, next?: boolean, prev?: boolean): Promise<Costume[]> {
+  async getCostumesWithLocalFilters(
+    filters?: CostumeFilters,
+    next?: boolean,
+    prev?: boolean
+  ): Promise<Costume[]> {
     let costumes: Costume[] = [];
 
     const ref = collection(this.firestore, 'costumes');
@@ -100,15 +116,15 @@ export class CostumeService {
       queryConstraints.push(where('type', 'in', filters.types));
     }
 
-    const q = query(ref, ...queryConstraints, orderBy("sortableCatNo"));
+    const q = query(ref, ...queryConstraints, orderBy('sortableCatNo'));
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
       const costumeModel = doc.data() as CostumeModel;
       if (
         this.costumeMatchesFilteredSize(costumeModel, filters) ||
-          (filters?.description !== '' &&
-            costumeModel.description
+        (filters?.description !== '' &&
+          costumeModel.description
             .toLowerCase()
             .includes(filters?.description.toLowerCase() ?? ''))
       ) {
@@ -125,14 +141,18 @@ export class CostumeService {
     });
 
     if (next) {
-      const lastVisibleIndex = costumes.findIndex(x => x.id === this.lastVisible.id);
-      costumes = costumes.slice(lastVisibleIndex+1, lastVisibleIndex+9);
+      const lastVisibleIndex = costumes.findIndex(
+        (x) => x.id === this.lastVisible.id
+      );
+      costumes = costumes.slice(lastVisibleIndex + 1, lastVisibleIndex + 9);
     } else if (prev) {
-      const firstVisibleIndex = costumes.findIndex(x => x.id === this.firstVisible.id);
-      if (firstVisibleIndex-8 > -1) {
-        costumes = costumes.slice(firstVisibleIndex-8, firstVisibleIndex);
+      const firstVisibleIndex = costumes.findIndex(
+        (x) => x.id === this.firstVisible.id
+      );
+      if (firstVisibleIndex - 8 > -1) {
+        costumes = costumes.slice(firstVisibleIndex - 8, firstVisibleIndex);
       } else {
-        costumes = costumes.slice(0, 8);  
+        costumes = costumes.slice(0, 8);
       }
     } else {
       costumes = costumes.slice(0, 8);
@@ -197,21 +217,22 @@ export class CostumeService {
 
     querySnapshot.forEach(async (doc) => {
       const costumeModel = doc.data() as CostumeModel;
-      costumeModel.colours.forEach((colour) => {
+
+      for (const colour of costumeModel.colours) {
         if (filters.colours.findIndex((x) => x === colour) === -1) {
           filters.colours.push(colour);
         }
-      });
+      }
 
       if (filters.types.findIndex((x) => x === costumeModel.type) === -1) {
         filters.types.push(costumeModel.type);
       }
 
-      costumeModel.quantity.forEach((size) => {
+      for (const size of costumeModel.quantity) {
         if (filters.sizes.findIndex((x) => x === size.name) === -1) {
           filters.sizes.push(size.name);
         }
-      });
+      }
     });
 
     filters.sizes.sort(this.sortSizes);
@@ -318,7 +339,7 @@ export class CostumeService {
 
   async editCostume(id: string, costume: CostumeModel): Promise<void> {
     const db = getFirestore();
-    await setDoc(doc(db, "costumes", id), {
+    await setDoc(doc(db, 'costumes', id), {
       catalogueNo: costume.catalogueNo,
       colours: costume.colours,
       description: costume.description,
@@ -326,7 +347,7 @@ export class CostumeService {
       notes: costume.notes,
       quantity: costume.quantity,
       type: costume.type,
-      sortableCatNo: costume.sortableCatNo
+      sortableCatNo: costume.sortableCatNo,
     });
   }
 }

@@ -4,29 +4,62 @@
   <div [ngSwitch]="question.controlType">
     <input
       class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 px-4 ring-1 ring-slate-200 shadow-sm"
-      *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type" />
+      *ngSwitchCase="'textbox'"
+      [formControlName]="question.key"
+      ngDefaultControl
+      [id]="question.key"
+      [type]="question.type"
+    />
 
-    <select [id]="question.key" *ngSwitchCase="'dropdown'" [formControlName]="question.key"
-      class="focus:ring-2 focus:ring-blue-500 focus:outline-none h-10 w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 px-4 ring-1 ring-slate-200 shadow-sm">
+    <select
+      [id]="question.key"
+      *ngSwitchCase="'dropdown'"
+      [formControlName]="question.key"
+      ngDefaultControl
+      class="focus:ring-2 focus:ring-blue-500 focus:outline-none h-10 w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 px-4 ring-1 ring-slate-200 shadow-sm"
+    >
       <option *ngFor="let opt of question.options" [value]="opt.key">
         {{ opt.value }}
       </option>
     </select>
 
-    <app-dual-input-group [id]="question.key" *ngSwitchCase="'dualInput'" [formControlName]="question.key"
-      (changed)="inputGroupOnChange($event, question.key)">
+    <app-dual-input-group
+      [id]="question.key"
+      *ngSwitchCase="'dualInput'"
+      [formControlName]="question.key"
+      ngDefaultControl
+      (changed)="inputGroupOnChange($event, question.key)"
+    >
     </app-dual-input-group>
 
-    <app-input-dropdown [id]="question.key" *ngSwitchCase="'inputDropdown'" [formControlName]="question.key"
-      [options]="question.options" (selected)="inputDropdownOnChange($event, question.key)">
+    <app-input-dropdown
+      [id]="question.key"
+      *ngSwitchCase="'inputDropdown'"
+      [formControlName]="question.key"
+      ngDefaultControl
+      [options]="question.options"
+      (selected)="inputDropdownOnChange($event, question.key)"
+    >
     </app-input-dropdown>
 
-    <app-input-dropdown [id]="question.key" *ngSwitchCase="'inputDropdownSingle'" [formControlName]="question.key"
-      [options]="question.options" [single]="true" (selected)="inputDropdownOnChange($event, question.key)">
+    <app-input-dropdown
+      [id]="question.key"
+      *ngSwitchCase="'inputDropdownSingle'"
+      [formControlName]="question.key"
+      ngDefaultControl
+      [options]="question.options"
+      [single]="true"
+      (selected)="inputDropdownOnChange($event, question.key)"
+    >
     </app-input-dropdown>
 
-    <app-file-upload [id]="question.key" *ngSwitchCase="'fileUpload'" [formControlName]="question.key"
-      (uploaded)="fileUploaded($event, question.key)">
+    <app-file-upload
+      [id]="question.key"
+      *ngSwitchCase="'fileUpload'"
+      [formControlName]="question.key"
+      ngDefaultControl
+      (uploaded)="fileUploaded($event, question.key)"
+    >
     </app-file-upload>
 
     <div class="errorMessage" *ngIf="!isValid">

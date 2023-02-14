@@ -29,16 +29,24 @@
         alt=""
         width="70"
         height="114"
-        class="flex-none rounded-md bg-slate-100 max-h-full"
+        class="flex-none rounded-md bg-slate-100 max-h-full cursor-pointer"
         [ngClass]="imagesOnly ? 'm-auto' : ''"
         (click)="openLargeImage(costume)"
       />
-      <div *ngIf="!imagesOnly" class="min-w-0 relative flex-auto">
+      <div class="absolute top-0 right-0 flex items-center space-x-1 z-10">
+        <app-dots-menu class="float-right" [costume]="costume"></app-dots-menu>
+      </div>
+      <div
+        *ngIf="!imagesOnly"
+        class="min-w-0 relative flex-auto cursor-pointer"
+        (click)="openLargeImage(costume)"
+      >
         <h2
           class="font-semibold text-slate-900 truncate pr-8 whitespace-normal md:whitespace-nowrap"
         >
           {{ costume.description }}
         </h2>
+
         <div>
           <dt class="sr-only">Type</dt>
           <div class="text-sm text-slate-400 flex items-center">
@@ -56,13 +64,8 @@
             {{ costume.notes !== "" ? costume.notes : "" }}
           </div>
         </div>
+
         <dl class="mt-2 flex flex-wrap text-sm leading-6">
-          <div class="absolute top-0 right-0 flex items-center space-x-1">
-            <app-dots-menu
-              class="float-right"
-              [costume]="costume"
-            ></app-dots-menu>
-          </div>
           <div class="contents md:flex">
             <dt class="sr-only">Sizes</dt>
             <dd
@@ -145,6 +148,14 @@
   </ul>
 </div>
 <div class="fixed bottom-0 inline-flex right-0 lg:right-auto">
-  <a (click)="prevPage()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 cursor-pointer rounded-l-lg inline-flex"><mat-icon>chevron_left</mat-icon>Previous</a>
-  <a (click)="nextPage()" class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 cursor-pointer rounded-r-lg inline-flex ml-1">Next<mat-icon>chevron_right</mat-icon></a>
+  <a
+    (click)="prevPage()"
+    class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 cursor-pointer rounded-l-lg inline-flex"
+    ><mat-icon>chevron_left</mat-icon>Previous</a
+  >
+  <a
+    (click)="nextPage()"
+    class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 cursor-pointer rounded-r-lg inline-flex ml-1"
+    >Next<mat-icon>chevron_right</mat-icon></a
+  >
 </div>

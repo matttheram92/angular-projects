@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { Observable, of } from 'rxjs';
+import { Costume } from 'src/app/costume-list-container/models/costume';
 import { QuestionBase } from '../models/question-base';
 import { TextboxQuestion } from '../models/question-textbox';
 
@@ -9,12 +8,13 @@ export class QuestionService {
   public getQuestions(
     colours: { key: string; value: string }[],
     costumeTypes: { key: string; value: string }[],
+    costume?: Costume
   ): QuestionBase<string>[] {
     const questions: QuestionBase<string>[] = [
       new TextboxQuestion({
         key: 'description',
         label: 'Description',
-        value: undefined,
+        value: costume?.description,
         required: false,
         order: 1,
         controlType: 'textbox',

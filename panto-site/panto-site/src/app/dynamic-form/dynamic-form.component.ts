@@ -30,7 +30,7 @@ export class DynamicFormComponent implements OnInit {
   async onSubmit(): Promise<void> {
     const costume: CostumeModel = {
       description: this.form.value.description,
-      catalogueNo: Number(this.form.value.catalogueNumber),
+      catalogueNo: this.form.value.catalogueNumber,
       colours: this.form.value.colour,
       imageName: this.form.value.imageName,
       notes: this.form.value.notes,
