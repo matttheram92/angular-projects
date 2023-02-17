@@ -52,7 +52,7 @@ export class InputDropdownComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (this.defaultValues && this.defaultValues.length > 0) {
+    if (this.defaultValues && this.defaultValues.length > 0 && this.defaultValues[0] !== '') {
       this.selectedKeys = this.defaultValues;
     }
   }
