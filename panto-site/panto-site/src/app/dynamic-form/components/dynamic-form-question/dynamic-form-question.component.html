@@ -31,6 +31,7 @@
       <app-dual-input-group
         [id]="question.key"
         (changed)="inputGroupOnChange($event, question.key)"
+        [defaultValues]="form.value[question.key]"
       >
       </app-dual-input-group>
     </ng-container>
@@ -42,6 +43,7 @@
       ngDefaultControl
       [options]="question.options"
       (selected)="inputDropdownOnChange($event, question.key)"
+      [defaultValues]="form.value[question.key]"
     >
     </app-input-dropdown>
 
@@ -53,6 +55,7 @@
       [options]="question.options"
       [single]="true"
       (selected)="inputDropdownOnChange($event, question.key)"
+      [defaultValues]="[form.value[question.key]]"
     >
     </app-input-dropdown>
 

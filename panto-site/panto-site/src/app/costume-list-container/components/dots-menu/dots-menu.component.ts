@@ -62,9 +62,11 @@ export class DotsMenuComponent implements OnInit {
   }
 
   toggleForm(): void {
-    const dialogRef = this.dialog.open(DynamicFormDialogComponent, {
+    this.dialog.open(DynamicFormDialogComponent, {
       width: '500px',
+      data: {
+        costumeToEdit: this.costume,
+      },
     });
-    dialogRef.componentInstance.costumeToEdit = this.costume;
   }
 }

@@ -12,6 +12,8 @@ export class InputDropdownComponent implements OnInit {
   options!: { key: string; value: string }[];
   @Input()
   single: boolean = false;
+  @Input()
+  defaultValues?: string[];
 
   opened: boolean = false;
   searchValue: string = '';
@@ -20,7 +22,10 @@ export class InputDropdownComponent implements OnInit {
   get filteredOptions(): { key: string; value: string }[] {
     let filteredOptions = this.options.filter((option) => {
       const hasSearchValue = this.searchValue !== '';
-      return !hasSearchValue || option.value.toLowerCase().includes(this.searchValue.toLowerCase());
+      return (
+        !hasSearchValue ||
+        option.value.toLowerCase().includes(this.searchValue.toLowerCase())
+      );
     });
 
     filteredOptions = filteredOptions.filter((option) => {
@@ -29,7 +34,10 @@ export class InputDropdownComponent implements OnInit {
 
     if (
       this.searchValue !== '' &&
-      !this.itemIsInList(this.searchValue, this.options.map(x => x.key)) && 
+      !this.itemIsInList(
+        this.searchValue,
+        this.options.map((x) => x.key)
+      ) &&
       !this.itemIsInList(this.searchValue, this.selectedKeys)
     ) {
       filteredOptions.unshift({
@@ -43,7 +51,11 @@ export class InputDropdownComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.defaultValues && this.defaultValues.length > 0) {
+      this.selectedKeys = this.defaultValues;
+    }
+  }
 
   public clearInput(): void {
     this.searchValue = '';
@@ -58,7 +70,7 @@ export class InputDropdownComponent implements OnInit {
   public select(key: string): void {
     this.searchValue = '';
     if (this.single) {
-      this.selectedKeys = [ key ];
+      this.selectedKeys = [key];
       this._emitChange(this.selectedKeys[0]);
     } else {
       this.selectedKeys.push(key);
@@ -68,9 +80,10 @@ export class InputDropdownComponent implements OnInit {
   }
 
   private itemIsInList(item: string, list: string[]): boolean {
-    return list.findIndex(
-      (option) => option.toLowerCase() === item.toLowerCase()
-    ) > -1
+    return (
+      list.findIndex((option) => option.toLowerCase() === item.toLowerCase()) >
+      -1
+    );
   }
 
   private _emitChange(selectedKeys: string | string[]): void {

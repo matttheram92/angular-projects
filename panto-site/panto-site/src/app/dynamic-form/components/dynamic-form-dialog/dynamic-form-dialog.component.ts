@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Costume } from 'src/app/costume-list-container/models/costume';
 import { CostumeService } from 'src/app/costume-list-container/services/costume-service';
 import { QuestionBase } from '../../models/question-base';
@@ -12,14 +12,14 @@ import { QuestionService } from '../../services/question-service';
   providers: [QuestionService, CostumeService],
 })
 export class DynamicFormDialogComponent implements OnInit {
-  @Input()
-  public costumeToEdit?: Costume;
   questions: QuestionBase<any>[] = [];
+  loaded = false;
 
   constructor(
     public dialogRef: MatDialogRef<DynamicFormDialogComponent>,
     private questionService: QuestionService,
-    private costumeService: CostumeService
+    private costumeService: CostumeService,
+    @Inject(MAT_DIALOG_DATA) public data: { costumeToEdit: Costume }
   ) {
     this.questions = this.questionService.getQuestions([], []);
   }
@@ -36,7 +36,9 @@ export class DynamicFormDialogComponent implements OnInit {
     this.questions = this.questionService.getQuestions(
       costumeColours,
       costumeTypes,
-      this.costumeToEdit
+      this.data?.costumeToEdit
     );
+
+    this.loaded = true;
   }
 }

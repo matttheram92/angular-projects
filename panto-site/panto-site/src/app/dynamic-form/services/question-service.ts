@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Costume } from 'src/app/costume-list-container/models/costume';
 import { QuestionBase } from '../models/question-base';
-import { TextboxQuestion } from '../models/question-textbox';
+import {
+  ArrayQuestion,
+  CostumeSizeQuestion,
+  TextboxQuestion,
+} from '../models/question-types';
 
 @Injectable()
 export class QuestionService {
@@ -9,8 +13,8 @@ export class QuestionService {
     colours: { key: string; value: string }[],
     costumeTypes: { key: string; value: string }[],
     costume?: Costume
-  ): QuestionBase<string>[] {
-    const questions: QuestionBase<string>[] = [
+  ): QuestionBase<any>[] {
+    const questions: QuestionBase<any>[] = [
       new TextboxQuestion({
         key: 'description',
         label: 'Description',
@@ -20,9 +24,10 @@ export class QuestionService {
         controlType: 'textbox',
       }),
 
-      new TextboxQuestion({
+      new ArrayQuestion({
         key: 'colour',
         label: 'Colours',
+        value: costume?.colours,
         order: 2,
         controlType: 'inputDropdown',
         options: colours,
@@ -31,6 +36,7 @@ export class QuestionService {
       new TextboxQuestion({
         key: 'costumeType',
         label: 'Costume type',
+        value: costume?.type,
         type: 'select',
         order: 3,
         controlType: 'inputDropdownSingle',
@@ -40,13 +46,15 @@ export class QuestionService {
       new TextboxQuestion({
         key: 'catalogueNumber',
         label: 'Catalogue number',
+        value: costume?.catalogueNo,
         order: 4,
         controlType: 'textbox',
       }),
 
-      new TextboxQuestion({
+      new CostumeSizeQuestion({
         key: 'sizes',
         label: 'Sizes',
+        value: costume?.quantity,
         order: 5,
         controlType: 'dualInput',
       }),
@@ -54,18 +62,23 @@ export class QuestionService {
       new TextboxQuestion({
         key: 'notes',
         label: 'Notes',
+        value: costume?.notes,
         type: '',
         order: 6,
         controlType: 'textbox',
       }),
-
-      new TextboxQuestion({
-        key: 'imageName',
-        label: 'Picture',
-        order: 7,
-        controlType: 'fileUpload',
-      }),
     ];
+
+    if (!costume) {
+      questions.push(
+        new TextboxQuestion({
+          key: 'imageName',
+          label: 'Picture',
+          order: 7,
+          controlType: 'fileUpload',
+        })
+      );
+    }
 
     return questions.sort((a, b) => a.order - b.order);
   }

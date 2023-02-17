@@ -19,16 +19,13 @@ export class DynamicFormQuestionComponent {
 
   public inputGroupOnChange(event: any, controlName: string): void {
     this.changed.emit(event);
-    //this.form.patchValue({ [controlName]: event });
   }
 
   public inputDropdownOnChange(event: any, controlName: string): void {
     this.changed.emit(event);
-    //this.form.patchValue({ [controlName]: event });
   }
 
   public fileUploaded(event: FileUpload, controlName: string): void {
     this.changed.emit(event);
-    //this.form.patchValue({ [controlName]: event }); 
   }
 }

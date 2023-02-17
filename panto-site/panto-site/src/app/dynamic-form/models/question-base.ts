@@ -32,6 +32,5 @@ export class QuestionBase<T> {
 }
 
 export class Sizes {
-  size!: string;
-  quantity?: number;
+  constructor(public size: string, public quantity?: number) {}
 }
