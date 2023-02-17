@@ -1,5 +1,5 @@
-import { Injectable, Query } from '@angular/core';
-import { Firestore } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
+import { Firestore, getDocsFromCache } from '@angular/fire/firestore';
 import {
   addDoc,
   collection,
@@ -13,8 +13,8 @@ import {
   limit,
   limitToLast,
   orderBy,
+  Query,
   query,
-  QueryDocumentSnapshot,
   setDoc,
   startAfter,
   updateDoc,
@@ -22,6 +22,8 @@ import {
 } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import { Costume, CostumeFilters, CostumeModel } from '../models/costume';
+
+const COSTUME_COLLECTION = 'costumes-dev';
 
 @Injectable()
 export class CostumeService {
@@ -40,7 +42,7 @@ export class CostumeService {
   ): Promise<Costume[]> {
     const costumes: Costume[] = [];
 
-    const ref = collection(this.firestore, 'costumes');
+    const ref = collection(this.firestore, COSTUME_COLLECTION);
     const queryConstraints = [];
 
     if (filters && filters.colours.length > 0) {
@@ -74,7 +76,7 @@ export class CostumeService {
       );
     }
 
-    const querySnapshot = await getDocs(q);
+    const querySnapshot = await this.tryGetDocsFromCache(q);
 
     this.firstVisible = querySnapshot.docs[0];
     this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
@@ -103,7 +105,7 @@ export class CostumeService {
   ): Promise<Costume[]> {
     let costumes: Costume[] = [];
 
-    const ref = collection(this.firestore, 'costumes');
+    const ref = collection(this.firestore, COSTUME_COLLECTION);
     const queryConstraints = [];
 
     if (filters && filters.colours.length > 0) {
@@ -117,7 +119,7 @@ export class CostumeService {
     }
 
     const q = query(ref, ...queryConstraints, orderBy('sortableCatNo'));
-    const querySnapshot = await getDocs(q);
+    let querySnapshot = await this.tryGetDocsFromCache(q);
 
     querySnapshot.forEach((doc) => {
       const costumeModel = doc.data() as CostumeModel;
@@ -183,6 +185,19 @@ export class CostumeService {
     return trimmedCostumes;
   }
 
+  private async tryGetDocsFromCache(q: Query<DocumentData>) {
+    let querySnapshot;
+    try {
+      querySnapshot = await getDocsFromCache(q);
+      if (querySnapshot.empty) {
+        querySnapshot = await getDocs(q);
+      }
+    } catch (e) {
+      querySnapshot = await getDocs(q);
+    }
+    return querySnapshot;
+  }
+
   private costumeMatchesFilteredSize(
     costume: CostumeModel,
     filters?: CostumeFilters
@@ -212,8 +227,8 @@ export class CostumeService {
   async getCostumeFilters(): Promise<CostumeFilters> {
     const filters: CostumeFilters = new CostumeFilters();
 
-    const q = query(collection(this.firestore, 'costumes'));
-    const querySnapshot = await getDocs(q);
+    const q = query(collection(this.firestore, COSTUME_COLLECTION));
+    const querySnapshot = await this.tryGetDocsFromCache(q);
 
     querySnapshot.forEach(async (doc) => {
       const costumeModel = doc.data() as CostumeModel;
@@ -308,7 +323,7 @@ export class CostumeService {
 
   async createCostume(costume: CostumeModel) {
     const db = getFirestore();
-    const docRef = await addDoc(collection(db, 'costumes'), costume);
+    const docRef = await addDoc(collection(db, COSTUME_COLLECTION), costume);
   }
 
   async updateCostumeSizes(
@@ -317,7 +332,7 @@ export class CostumeService {
     checkedOutBy: string
   ): Promise<void> {
     const db = getFirestore();
-    const costumeToUpdateDoc = doc(db, 'costumes', costumeId);
+    const costumeToUpdateDoc = doc(db, COSTUME_COLLECTION, costumeId);
     const costumeToUpdateData = await getDoc(costumeToUpdateDoc);
     const costumeToUpdate = costumeToUpdateData.data() as CostumeModel;
 
@@ -334,12 +349,12 @@ export class CostumeService {
 
   async deleteCostume(costumeId: string): Promise<void> {
     const db = getFirestore();
-    await deleteDoc(doc(db, 'costumes', costumeId));
+    await deleteDoc(doc(db, COSTUME_COLLECTION, costumeId));
   }
 
   async editCostume(id: string, costume: CostumeModel): Promise<void> {
     const db = getFirestore();
-    await setDoc(doc(db, 'costumes', id), {
+    await setDoc(doc(db, COSTUME_COLLECTION, id), {
       catalogueNo: costume.catalogueNo,
       colours: costume.colours,
       description: costume.description,
