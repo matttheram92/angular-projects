@@ -12,7 +12,7 @@ import { QuestionControlService } from './services/question-control-service';
   providers: [QuestionControlService],
 })
 export class DynamicFormComponent implements OnInit {
-  @Input() 
+  @Input()
   questions: QuestionBase<string>[] | null = [];
   form!: FormGroup;
   savedState: boolean = false;
@@ -26,7 +26,7 @@ export class DynamicFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
   }
-  
+
   async onSubmit(): Promise<void> {
     const costume: CostumeModel = {
       description: this.form.value.description,
@@ -36,21 +36,21 @@ export class DynamicFormComponent implements OnInit {
       notes: this.form.value.notes,
       quantity: this.form.value.sizes,
       type: this.form.value.costumeType,
-      sortableCatNo: this.getSortableCatNo(this.form.value.catalogueNumber)
+      sortableCatNo: this.getSortableCatNo(this.form.value.catalogueNumber),
     };
     await this.costumeService.createCostume(costume);
     this.savedState = true;
-  }  
+  }
 
-  private getSortableCatNo(catalogueNumber: string): number {    
+  private getSortableCatNo(catalogueNumber: string): number {
     const splitNo = catalogueNumber.toString().split('.');
     let sortableString;
     if (splitNo[1].length === 1) {
       sortableString = `${splitNo[0]}.0${splitNo[1]}`;
     } else {
       sortableString = `${splitNo[0]}.${splitNo[1]}`;
-    }    
-    
+    }
+
     const sortableCatNo = Number(sortableString);
 
     return sortableCatNo;
@@ -59,5 +59,9 @@ export class DynamicFormComponent implements OnInit {
   onClose(): void {
     this.dialog.closeAll();
     window.location.reload();
+  }
+
+  valueChanged(event: any, controlName: string): void {
+    this.form.patchValue({ [controlName]: event });
   }
 }

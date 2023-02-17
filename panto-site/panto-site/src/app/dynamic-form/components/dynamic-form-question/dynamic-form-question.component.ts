@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FileUpload } from 'src/app/file-upload/models/file-upload.model';
 import { QuestionBase } from '../../models/question-base';
@@ -10,20 +10,25 @@ import { QuestionBase } from '../../models/question-base';
 export class DynamicFormQuestionComponent {
   @Input() question!: QuestionBase<string>;
   @Input() form!: FormGroup;
+  @Output()
+  public changed: EventEmitter<any> = new EventEmitter<any>();
 
   get isValid() {
     return this.form.controls[this.question.key].valid;
   }
 
   public inputGroupOnChange(event: any, controlName: string): void {
-    this.form.patchValue({ [controlName]: event });
+    this.changed.emit(event);
+    //this.form.patchValue({ [controlName]: event });
   }
 
   public inputDropdownOnChange(event: any, controlName: string): void {
-    this.form.patchValue({ [controlName]: event });
+    this.changed.emit(event);
+    //this.form.patchValue({ [controlName]: event });
   }
 
   public fileUploaded(event: FileUpload, controlName: string): void {
-    this.form.patchValue({ [controlName]: event }); 
+    this.changed.emit(event);
+    //this.form.patchValue({ [controlName]: event }); 
   }
 }

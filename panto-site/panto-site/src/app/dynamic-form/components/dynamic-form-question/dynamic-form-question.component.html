@@ -23,14 +23,17 @@
       </option>
     </select>
 
-    <app-dual-input-group
-      [id]="question.key"
+    <ng-container
       *ngSwitchCase="'dualInput'"
-      [formControlName]="question.key"
       ngDefaultControl
-      (changed)="inputGroupOnChange($event, question.key)"
+      [formControlName]="question.key"
     >
-    </app-dual-input-group>
+      <app-dual-input-group
+        [id]="question.key"
+        (changed)="inputGroupOnChange($event, question.key)"
+      >
+      </app-dual-input-group>
+    </ng-container>
 
     <app-input-dropdown
       [id]="question.key"
