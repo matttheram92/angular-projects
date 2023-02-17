@@ -3,10 +3,11 @@ import { CostumeListContainerComponent } from './costume-list-container/costume-
 import { CostumeFilters } from './costume-list-container/models/costume';
 import { MatDialog } from '@angular/material/dialog';
 import { DynamicFormDialogComponent } from './dynamic-form/components/dynamic-form-dialog/dynamic-form-dialog.component';
+import { enableIndexedDbPersistence, getFirestore } from 'firebase/firestore';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
   @ViewChild('costumeListContainer', { static: true })
@@ -14,11 +15,13 @@ export class AppComponent implements OnInit {
 
   mobileFilterVisible: boolean = false;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    enableIndexedDbPersistence(getFirestore());
+  }
 
-  filterChanged(event: {filters: CostumeFilters, closePanel?: boolean}) {
+  filterChanged(event: { filters: CostumeFilters; closePanel?: boolean }) {
     if (event.closePanel) {
       this.mobileFilterVisible = false;
     }
@@ -27,7 +30,7 @@ export class AppComponent implements OnInit {
 
   toggleForm(): void {
     this.dialog.open(DynamicFormDialogComponent, {
-      width: '500px'
+      width: '500px',
     });
   }
 }

@@ -23,7 +23,8 @@ import {
 import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import { Costume, CostumeFilters, CostumeModel } from '../models/costume';
 
-const COSTUME_COLLECTION = 'costumes-dev';
+//const COSTUME_COLLECTION = 'costumes-dev';
+const COSTUME_COLLECTION = 'costumes';
 
 @Injectable()
 export class CostumeService {
