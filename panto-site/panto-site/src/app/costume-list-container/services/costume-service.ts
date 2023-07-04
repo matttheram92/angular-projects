@@ -57,7 +57,7 @@ export class CostumeService {
     }
 
     let q: any;
-    if (!next && !prev) {
+    if ((!next && !prev) || (!this.firstVisible && !this.lastVisible)) {
       q = query(ref, ...queryConstraints, orderBy('sortableCatNo'), limit(8));
     } else if (next) {
       q = query(
@@ -78,6 +78,12 @@ export class CostumeService {
     }
 
     const querySnapshot = await this.tryGetDocsFromCache(q);
+
+    if (querySnapshot.empty) {
+      this.firstVisible = null;
+      this.lastVisible = null;
+      return costumes;
+    }
 
     this.firstVisible = querySnapshot.docs[0];
     this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
