@@ -6,9 +6,9 @@
   >
     Apply filters
   </button>
-  <div class="ml-20 mr-4 justify-center flow-root">
+  <div class="ml-20 mr-4 mb-5 justify-center flow-root">
     <div>
-      <p class="font-sans font-medium">Description</p>
+      <p class="py-4 font-sans font-medium">Description</p>
       <div>
         <input
           class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-1 px-4 ring-1 ring-slate-200 shadow-sm"
@@ -19,85 +19,95 @@
       </div>
     </div>
   </div>
-  <div class="ml-20 mr-4 justify-center flow-root">
-    <div>
-      <p class="font-sans font-medium">Colours</p>
-      <div
-        class="form-check inline-block"
-        *ngFor="let costumeColour of filterOptions.colours; let index = index"
-      >
-        <p
-          *ngIf="colourHover === costumeColour"
-          class="absolute bg-slate-400 opacity-90 text-white -mt-5 px-2 rounded-sm"
+  <div class="ml-20 mr-4 border-gray-100 border-t justify-center flow-root">
+    <details>
+      <summary>
+        <p class="py-4 font-sans font-medium">Colours</p>
+      </summary>
+      <div class="pb-4 filter-group">
+        <div
+          class="form-check inline-block"
+          *ngFor="let costumeColour of filterOptions.colours; let index = index"
         >
-          {{ costumeColour }}
-        </p>
-        <input
-          class="form-check-input appearance-none h-6 w-6 border rounded-full border-gray-300 bg-white checked:border-gray-400 checked:border-2 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-          type="checkbox"
-          (change)="colourChecked(costumeColour)"
-          [value]="costumeColour"
-          [id]="'flexCheckDefault' + index"
-          [style.background]="localGetBgColour(costumeColour)"
-          (mouseover)="colourHover = costumeColour"
-          (mouseout)="colourHover = ''"
-        />
-        <label [for]="'flexCheckDefault' + index">
-          <mat-icon
-            *ngIf="filters.colours.includes(costumeColour)"
-            class="absolute central-icon cursor-pointer"
-            >done</mat-icon
+          <p
+            *ngIf="colourHover === costumeColour.label"
+            class="absolute bg-slate-400 opacity-90 text-white mt-7 px-2 rounded-sm"
           >
-        </label>
+            {{ costumeColour.label }} ({{ costumeColour.count }})
+          </p>
+          <input
+            class="form-check-input appearance-none h-6 w-6 border rounded-full border-gray-300 bg-white checked:border-gray-400 checked:border-2 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+            type="checkbox"
+            (change)="colourChecked(costumeColour)"
+            [value]="costumeColour.label"
+            [id]="'flexCheckDefault' + index"
+            [style.background]="localGetBgColour(costumeColour.label)"
+            (mouseover)="colourHover = costumeColour.label"
+            (mouseout)="colourHover = ''"
+          />
+          <label [for]="'flexCheckDefault' + index">
+            <mat-icon
+              *ngIf="filters.colours.includes(costumeColour)"
+              class="absolute central-icon cursor-pointer"
+              >done</mat-icon
+            >
+          </label>
+        </div>
       </div>
-    </div>
+    </details>
   </div>
 
-  <div class="ml-20 mr-4 justify-center">
-    <div>
-      <p class="font-sans font-medium">Types</p>
-      <div
-        class="form-check flex"
-        *ngFor="let costumeType of filterOptions.types; let index = index"
-      >
-        <input
-          class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
-          type="checkbox"
-          (change)="typeChecked(costumeType)"
-          [value]="costumeType"
-          [id]="'typeCheckBox' + index"
-        />
-        <label
-          class="form-check-label inline-block text-gray-800 w-3/4 pl-2"
-          [for]="'typeCheckBox' + index"
+  <div class="ml-20 mr-4 border-gray-100 border-t justify-center">
+    <details>
+      <summary>
+        <p class="py-4 font-sans font-medium">Types</p>
+      </summary>
+      <div class="pb-4 filter-group">
+        <div
+          class="px-2 py-1 mr-2 my-1 border rounded-lg inline-block cursor-pointer"
+          [ngClass]="
+            filters.types.includes(costumeType)
+              ? 'bg-black text-white'
+              : 'bg-white text-gray-800'
+          "
+          (click)="typeChecked(costumeType)"
+          *ngFor="let costumeType of filterOptions.types; let index = index"
         >
-          {{ costumeType }}
-        </label>
+          <label
+            class="form-check-label inline-block text-sm cursor-pointer"
+            [for]="'typeCheckBox' + index"
+          >
+            {{ costumeType.label }} ({{ costumeType.count }})
+          </label>
+        </div>
       </div>
-    </div>
+    </details>
   </div>
 
-  <div class="ml-20 mr-4 justify-center">
-    <div>
-      <p class="font-sans font-medium">Sizes</p>
-      <div
-        class="form-check flex"
-        *ngFor="let costumeSize of filterOptions.sizes; let index = index"
-      >
-        <input
-          class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
-          type="checkbox"
-          (change)="sizeChecked(costumeSize)"
-          [value]="costumeSize"
-          [id]="'sizeCheckBox' + index"
-        />
-        <label
-          class="form-check-label inline-block text-gray-800 w-3/4 pl-2"
-          [for]="'sizeCheckBox' + index"
+  <div class="ml-20 mr-4 border-gray-100 border-t justify-center">
+    <details>
+      <summary>
+        <p class="py-4 font-sans font-medium">Sizes</p>
+      </summary>
+      <div class="pb-4 filter-group">
+        <div
+          class="px-2 py-1 mr-2 my-1 border rounded-lg inline-block cursor-pointer"
+          [ngClass]="
+            filters.sizes.includes(costumeSize)
+              ? 'bg-black text-white'
+              : 'bg-white text-gray-800'
+          "
+          (click)="sizeChecked(costumeSize)"
+          *ngFor="let costumeSize of filterOptions.sizes; let index = index"
         >
-          {{ costumeSize }}
-        </label>
+          <label
+            class="form-check-label inline-block text-sm cursor-pointer"
+            [for]="'sizeCheckBox' + index"
+          >
+            {{ costumeSize.label }}
+          </label>
+        </div>
       </div>
-    </div>
+    </details>
   </div>
 </div>

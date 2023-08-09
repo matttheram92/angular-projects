@@ -21,7 +21,12 @@ import {
   where,
 } from 'firebase/firestore';
 import { getDownloadURL, getStorage, ref } from 'firebase/storage';
-import { Costume, CostumeFilters, CostumeModel } from '../models/costume';
+import {
+  Costume,
+  CostumeFilters,
+  CostumeModel,
+  FilterItem,
+} from '../models/costume';
 
 //const COSTUME_COLLECTION = 'costumes-dev';
 const COSTUME_COLLECTION = 'costumes';
@@ -48,24 +53,38 @@ export class CostumeService {
 
     if (filters && filters.colours.length > 0) {
       queryConstraints.push(
-        where('colours', 'array-contains-any', filters.colours)
+        where(
+          'colours',
+          'array-contains-any',
+          filters.colours.map((c) => c.label)
+        )
       );
     }
 
     if (filters && filters.types.length > 0) {
-      queryConstraints.push(where('type', 'in', filters.types));
+      queryConstraints.push(
+        where(
+          'type',
+          'in',
+          filters.types.map((t) => t.label)
+        )
+      );
+    }
+
+    if (filters && filters.folders.length > 0) {
+      queryConstraints.push(where('folder', '==', filters.folders[0].label));
     }
 
     let q: any;
     if ((!next && !prev) || (!this.firstVisible && !this.lastVisible)) {
-      q = query(ref, ...queryConstraints, orderBy('sortableCatNo'), limit(8));
+      q = query(ref, ...queryConstraints, orderBy('sortableCatNo'), limit(9));
     } else if (next) {
       q = query(
         ref,
         ...queryConstraints,
         orderBy('sortableCatNo'),
         startAfter(this.lastVisible),
-        limit(8)
+        limit(9)
       );
     } else if (prev) {
       q = query(
@@ -73,22 +92,30 @@ export class CostumeService {
         ...queryConstraints,
         orderBy('sortableCatNo'),
         endBefore(this.firstVisible),
-        limitToLast(8)
+        limitToLast(9)
       );
     }
 
     const querySnapshot = await this.tryGetDocsFromCache(q);
 
-    if (querySnapshot.empty) {
-      this.firstVisible = null;
-      this.lastVisible = null;
-      return costumes;
-    }
+    // if (querySnapshot.empty) {
+    //   this.firstVisible = null;
+    //   this.lastVisible = null;
+    //   return costumes;
+    // }
 
     this.firstVisible = querySnapshot.docs[0];
-    this.lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+    this.lastVisible =
+      querySnapshot.docs[
+        querySnapshot.docs.length === 9 ? 7 : querySnapshot.docs.length - 1
+      ];
 
+    let index = 0;
     querySnapshot.forEach(async (doc) => {
+      index++;
+      if (index === 8) {
+        return;
+      }
       const costumeModel = doc.data() as CostumeModel;
       const costume = new Costume(costumeModel, doc.id);
       costume.imageUrl = await this.getImageUrl(costumeModel.imageName);
@@ -117,12 +144,26 @@ export class CostumeService {
 
     if (filters && filters.colours.length > 0) {
       queryConstraints.push(
-        where('colours', 'array-contains-any', filters.colours)
+        where(
+          'colours',
+          'array-contains-any',
+          filters.colours.map((c) => c.label)
+        )
       );
     }
 
     if (filters && filters.types.length > 0) {
-      queryConstraints.push(where('type', 'in', filters.types));
+      queryConstraints.push(
+        where(
+          'type',
+          'in',
+          filters.types.map((t) => t.label)
+        )
+      );
+    }
+
+    if (filters && filters.folders.length > 0) {
+      queryConstraints.push(where('folder', '==', filters.folders[0].label));
     }
 
     const q = query(ref, ...queryConstraints, orderBy('sortableCatNo'));
@@ -218,7 +259,7 @@ export class CostumeService {
 
     const filteredBySize = [];
     costume.quantity.forEach((x) => {
-      if (filters.sizes.includes(x.name)) {
+      if (filters.sizes.map((s) => s.label).includes(x.name)) {
         filteredBySize.push(x.name);
         return;
       }
@@ -237,45 +278,69 @@ export class CostumeService {
     const q = query(collection(this.firestore, COSTUME_COLLECTION));
     const querySnapshot = await this.tryGetDocsFromCache(q);
 
+    filters.folders.push({ label: 'All', count: 0 });
+
     querySnapshot.forEach(async (doc) => {
       const costumeModel = doc.data() as CostumeModel;
 
       for (const colour of costumeModel.colours) {
-        if (filters.colours.findIndex((x) => x === colour) === -1) {
-          filters.colours.push(colour);
+        const colourIndex = filters.colours.findIndex(
+          (x) => x.label === colour
+        );
+        if (colourIndex === -1) {
+          filters.colours.push({ label: colour, count: 1 });
+        } else {
+          filters.colours[colourIndex].count++;
         }
       }
 
-      if (filters.types.findIndex((x) => x === costumeModel.type) === -1) {
-        filters.types.push(costumeModel.type);
+      const typeIndex = filters.types.findIndex(
+        (x) => x.label === costumeModel.type
+      );
+      if (typeIndex === -1) {
+        filters.types.push({ label: costumeModel.type, count: 1 });
+      } else {
+        filters.types[typeIndex].count++;
+      }
+
+      const folderName = costumeModel.folder ?? 'All';
+      const folderItem = filters.folders.find((x) => x.label === folderName);
+      if (!folderItem) {
+        filters.folders.push({ label: folderName, count: 1 });
+      } else {
+        folderItem.count++;
       }
 
       for (const size of costumeModel.quantity) {
-        if (filters.sizes.findIndex((x) => x === size.name) === -1) {
-          filters.sizes.push(size.name);
+        const sizeIndex = filters.sizes.findIndex((x) => x.label === size.name);
+        if (sizeIndex === -1) {
+          filters.sizes.push({ label: size.name, count: 1 });
+        } else {
+          filters.sizes[sizeIndex].count++;
         }
       }
     });
 
     filters.sizes.sort(this.sortSizes);
+    filters.types.sort((a, b) => (a.label > b.label ? 1 : -1));
 
     return filters;
   }
 
-  private sortSizes(a: string, b: string): number {
-    if (a.includes('-') && b.includes('-')) {
-      return CostumeService.sortBySplitChar(a, b, '-');
+  private sortSizes(a: FilterItem, b: FilterItem): number {
+    if (a.label.includes('-') && b.label.includes('-')) {
+      return CostumeService.sortBySplitChar(a.label, b.label, '-');
     }
 
-    if (a.includes('-') && !b.includes('-')) {
+    if (a.label.includes('-') && !b.label.includes('-')) {
       return -1;
     }
 
-    if (b.includes('-') && !a.includes('-')) {
+    if (b.label.includes('-') && !a.label.includes('-')) {
       return 1;
     }
 
-    return CostumeService.sortBySplitChar(a, b, '"');
+    return CostumeService.sortBySplitChar(a.label, b.label, '"');
   }
 
   private static sortBySplitChar(
@@ -331,6 +396,22 @@ export class CostumeService {
   async createCostume(costume: CostumeModel) {
     const db = getFirestore();
     const docRef = await addDoc(collection(db, COSTUME_COLLECTION), costume);
+  }
+
+  async updateFolder(
+    costumeId: string,
+    folder: string
+  ): Promise<void> {
+    const db = getFirestore();
+    const costumeToUpdateDoc = doc(db, COSTUME_COLLECTION, costumeId);
+    const costumeToUpdateData = await getDoc(costumeToUpdateDoc);
+    const costumeToUpdate = costumeToUpdateData.data() as CostumeModel;
+
+    costumeToUpdate.folder = folder;
+
+    await updateDoc(costumeToUpdateDoc, {
+      folder: costumeToUpdate.folder,
+    });
   }
 
   async updateCostumeSizes(

@@ -5,6 +5,7 @@
     class="absolute flex bg-white z-10 drop-shadow-lg h-full overflow-auto"
     [ngClass]="mobileFilterVisible ? 'block' : 'hidden lg:block'"
     (filterChanged)="filterChanged($event)"
+    (filtersFetched)="setFilters($event)"
   ></app-costume-filters>
   <div class="pt-6 pb-12 px-0 md:px-10 lg:ml-60 h-full">
     <app-top-nav
@@ -14,6 +15,7 @@
     ></app-top-nav>
     <app-costume-list-container
       #costumeListContainer
+      [folders]="filterOptions.folders"
     ></app-costume-list-container>
   </div>
 </div>

@@ -1,4 +1,41 @@
 .central-icon {
-    margin: 4px -32px 0;
-    color: rgb(156 163 175);
+  margin: 4px -32px 0;
+  color: rgb(156 163 175);
+}
+
+details {
+  user-select: none;
+}
+
+/* details > summary span.icon {
+  width: 24px;
+  height: 24px;
+  transition: all 0.3s;
+  margin-left: auto;
+}
+
+details[open] summary span.icon {
+  transform: rotate(180deg);
+} */
+
+summary {
+  display: flex;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary {
+  list-style: none;
+}
+
+summary::after {
+  content: " ►";
+  margin: auto 0 auto auto;
+}
+details[open] summary:after {
+  content: " ▼";
+  margin: auto 0 auto auto;
 }

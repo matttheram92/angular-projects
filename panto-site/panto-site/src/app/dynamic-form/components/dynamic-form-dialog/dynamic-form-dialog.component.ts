@@ -27,10 +27,10 @@ export class DynamicFormDialogComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     const costumeFilters = await this.costumeService.getCostumeFilters();
     const costumeColours = costumeFilters.colours.map((colour) => {
-      return { key: colour, value: colour };
+      return { key: colour.label, value: colour.label };
     });
     const costumeTypes = costumeFilters.types.map((type) => {
-      return { key: type, value: type };
+      return { key: type.label, value: type.label };
     });
 
     this.questions = this.questionService.getQuestions(

@@ -7,10 +7,11 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DynamicFormDialogComponent } from 'src/app/dynamic-form/components/dynamic-form-dialog/dynamic-form-dialog.component';
-import { Costume } from '../../models/costume';
+import { Costume, FilterItem } from '../../models/costume';
 import { CheckInDialogComponent } from '../check-in-dialog/check-in-dialog.component';
 import { CheckOutDialogComponent } from '../check-out-dialog/check-out-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { FolderDialogComponent } from '../folder-dialog/folder-dialog.component';
 
 @Component({
   selector: 'app-dots-menu',
@@ -20,6 +21,8 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 export class DotsMenuComponent implements OnInit {
   @Input()
   costume!: Costume;
+  @Input()
+  folders: FilterItem[] = [];
 
   constructor(public dialog: MatDialog, private eRef: ElementRef) {}
 
@@ -48,6 +51,18 @@ export class DotsMenuComponent implements OnInit {
       width: '500px',
       data: {
         costume: this.costume,
+      },
+    });
+  }
+
+  addToFolderClicked(): void {
+    this.dialog.open(FolderDialogComponent, {
+      width: '500px',
+      data: {
+        costume: this.costume,
+        folders: this.folders
+          .filter((f) => f.label !== 'All')
+          .map((f) => f.label),
       },
     });
   }

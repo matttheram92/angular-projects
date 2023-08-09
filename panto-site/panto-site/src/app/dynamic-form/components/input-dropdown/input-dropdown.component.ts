@@ -52,7 +52,11 @@ export class InputDropdownComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (this.defaultValues && this.defaultValues.length > 0 && this.defaultValues[0] !== '') {
+    if (
+      this.defaultValues &&
+      this.defaultValues.length > 0 &&
+      this.defaultValues[0] !== ''
+    ) {
       this.selectedKeys = this.defaultValues;
     }
   }
@@ -65,6 +69,11 @@ export class InputDropdownComponent implements OnInit {
 
   public removeSelectedKey(index: number): void {
     this.selectedKeys.splice(index, 1);
+    if (this.single) {
+      this._emitChange(null);
+    } else {
+      this._emitChange(this.selectedKeys);
+    }
   }
 
   public select(key: string): void {
@@ -86,7 +95,7 @@ export class InputDropdownComponent implements OnInit {
     );
   }
 
-  private _emitChange(selectedKeys: string | string[]): void {
+  private _emitChange(selectedKeys: string | string[] | null): void {
     this.selected.emit(selectedKeys);
   }
 }

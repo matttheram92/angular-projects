@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   costumeListContainer!: CostumeListContainerComponent;
 
   mobileFilterVisible: boolean = false;
+  filterOptions: CostumeFilters = new CostumeFilters();
 
   constructor(public dialog: MatDialog) {}
 
@@ -32,5 +33,9 @@ export class AppComponent implements OnInit {
     this.dialog.open(DynamicFormDialogComponent, {
       width: '500px',
     });
+  }
+
+  setFilters(event: { filters: CostumeFilters }): void {
+    this.filterOptions = event.filters;
   }
 }

@@ -27,6 +27,7 @@ import { CheckInDialogComponent } from './costume-list-container/components/chec
 import { DeleteDialogComponent } from './costume-list-container/components/delete-dialog/delete-dialog.component';
 import { LargeImageDialogComponent } from './costume-list-container/components/large-image-dialog/large-image-dialog.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { FolderDialogComponent } from './costume-list-container/components/folder-dialog/folder-dialog.component';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
     CheckInDialogComponent,
     DeleteDialogComponent,
     LargeImageDialogComponent,
+    FolderDialogComponent
   ],
   providers: [CostumeService, FileUploadService, NgxImageCompressService],
   bootstrap: [AppComponent],

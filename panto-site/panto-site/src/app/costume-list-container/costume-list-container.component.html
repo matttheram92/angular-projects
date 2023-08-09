@@ -1,5 +1,5 @@
 <div class="flex flex-row-reverse mr-4 md:mr-0">
-  <div class="border border-gray-300 rounded-md flex">
+  <div class="border border-gray-300 rounded-md flex cursor-pointer">
     <input
       type="checkbox"
       id="imagesOnly"
@@ -8,6 +8,17 @@
       class="ml-2"
     />
     <label for="imagesOnly" class="p-2">Images only</label>
+  </div>
+  <div class="flex mr-auto mt-2">
+    <div
+      *ngFor="let folder of folders"
+      class="px-3 ml-1 mt-auto border-t border-l border-r border-gray-300 flex cursor-pointer"
+      (click)="folderSelected(folder)"
+    >
+      <p class="text-sm mt-auto font-sans">
+        {{ folder.label }} ({{ folder.count }})
+      </p>
+    </div>
   </div>
 </div>
 <div
@@ -34,7 +45,11 @@
         (click)="openLargeImage(costume)"
       />
       <div class="absolute top-0 right-0 flex items-center space-x-1 z-10">
-        <app-dots-menu class="float-right" [costume]="costume"></app-dots-menu>
+        <app-dots-menu
+          class="float-right"
+          [costume]="costume"
+          [folders]="folders"
+        ></app-dots-menu>
       </div>
       <div
         *ngIf="!imagesOnly"
@@ -148,14 +163,20 @@
   </ul>
 </div>
 <div class="fixed bottom-0 inline-flex right-0 lg:right-auto">
-  <a
+  <button
     (click)="prevPage()"
-    class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 cursor-pointer rounded-l-lg inline-flex"
-    ><mat-icon>chevron_left</mat-icon>Previous</a
+    [disabled]="firstPage"
+    [ngClass]="firstPage ? 'bg-gray-200' : 'bg-indigo-600 cursor-pointer'"
+    class="text-white text-sm leading-6 font-medium py-2 px-3 rounded-l-lg inline-flex"
   >
-  <a
+    <mat-icon>chevron_left</mat-icon>Previous
+  </button>
+  <button
     (click)="nextPage()"
-    class="bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 cursor-pointer rounded-r-lg inline-flex ml-1"
-    >Next<mat-icon>chevron_right</mat-icon></a
+    [disabled]="lastPage"
+    [ngClass]="lastPage ? 'bg-gray-200' : 'bg-indigo-600 cursor-pointer'"
+    class="text-white text-sm leading-6 font-medium py-2 px-3 rounded-r-lg inline-flex ml-1"
   >
+    Next<mat-icon>chevron_right</mat-icon>
+  </button>
 </div>

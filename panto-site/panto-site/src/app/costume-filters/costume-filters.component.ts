@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CostumeService } from '../costume-list-container/services/costume-service';
-import { CostumeFilters } from '../costume-list-container/models/costume';
+import {
+  CostumeFilters,
+  FilterItem,
+} from '../costume-list-container/models/costume';
 import { getBgColour } from '../helpers/costume-helper';
 
 @Component({
@@ -15,6 +18,7 @@ export class CostumeFiltersComponent implements OnInit {
   filters: CostumeFilters = new CostumeFilters();
   colourHover: string = '';
   descriptionSearchValue: string = '';
+  openFilterGroups: FilterTypes[] = [];
 
   @Output()
   filterChanged: EventEmitter<{
@@ -22,12 +26,18 @@ export class CostumeFiltersComponent implements OnInit {
     closePanel?: boolean;
   }> = new EventEmitter<{ filters: CostumeFilters; closePanel?: boolean }>();
 
+  @Output()
+  filtersFetched: EventEmitter<{ filters: CostumeFilters }> = new EventEmitter<{
+    filters: CostumeFilters;
+  }>();
+
   constructor(costumeService: CostumeService) {
     this.costumeService = costumeService;
   }
 
   async ngOnInit(): Promise<void> {
     this.filterOptions = await this.costumeService.getCostumeFilters();
+    this.filtersFetched.emit({ filters: this.filterOptions });
   }
 
   onDescriptionChange(): void {
@@ -35,8 +45,8 @@ export class CostumeFiltersComponent implements OnInit {
     this.filterChanged.emit({ filters: this.filters, closePanel: false });
   }
 
-  colourChecked(val: string): void {
-    const index = this.filters.colours.findIndex((x) => x === val);
+  colourChecked(val: FilterItem): void {
+    const index = this.filters.colours.findIndex((x) => x.label === val.label);
     if (index >= 0) {
       this.filters.colours.splice(index, 1);
     } else {
@@ -45,8 +55,8 @@ export class CostumeFiltersComponent implements OnInit {
     this.filterChanged.emit({ filters: this.filters, closePanel: false });
   }
 
-  typeChecked(val: string): void {
-    const index = this.filters.types.findIndex((x) => x === val);
+  typeChecked(val: FilterItem): void {
+    const index = this.filters.types.findIndex((x) => x.label === val.label);
     if (index >= 0) {
       this.filters.types.splice(index, 1);
     } else {
@@ -55,8 +65,10 @@ export class CostumeFiltersComponent implements OnInit {
     this.filterChanged.emit({ filters: this.filters, closePanel: false });
   }
 
-  sizeChecked(costumeSize: string): void {
-    const index = this.filters.sizes.findIndex((x) => x === costumeSize);
+  sizeChecked(costumeSize: FilterItem): void {
+    const index = this.filters.sizes.findIndex(
+      (x) => x.label === costumeSize.label
+    );
     if (index >= 0) {
       this.filters.sizes.splice(index, 1);
     } else {
@@ -68,4 +80,10 @@ export class CostumeFiltersComponent implements OnInit {
   public localGetBgColour(colour: string): string {
     return getBgColour(colour);
   }
+}
+
+enum FilterTypes {
+  Colours,
+  Types,
+  Sizes,
 }

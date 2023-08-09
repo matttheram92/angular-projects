@@ -8,7 +8,7 @@
   </button>
   <ul
     *ngIf="menuVisible"
-    class="absolute bg-white w-max py-1 -ml-9 drop-shadow-md rounded-lg z-10 right-0 md:right-auto"
+    class="absolute bg-white w-max py-1 -ml-9 drop-shadow-md rounded-lg z-10 right-0"
   >
     <li
       class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0"
@@ -28,6 +28,12 @@
       (click)="checkInClicked()"
     >
       <button>Check in</button>
+    </li>
+    <li
+      class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0"
+      (click)="addToFolderClicked()"
+    >
+      <button>Add to folder</button>
     </li>
     <li
       class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0 text-red-500"

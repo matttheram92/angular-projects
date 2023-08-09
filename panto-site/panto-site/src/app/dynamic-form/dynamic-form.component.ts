@@ -19,6 +19,8 @@ export class DynamicFormComponent implements OnInit {
   questions: QuestionBase<string>[] | null = [];
   @Input()
   costumeToEdit?: Costume;
+  @Input()
+  formType: 'costume' | 'folder' = 'costume';
   form!: FormGroup;
   savedState: boolean = false;
 
@@ -33,6 +35,15 @@ export class DynamicFormComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
+    if (this.formType === 'costume') {
+      await this.submitCostume();
+    } else if (this.formType === 'folder') {
+      await this.submitFolder();
+    }
+    this.savedState = true;
+  }
+
+  async submitCostume(): Promise<void> {
     const costume: CostumeModel = {
       description: this.form.value.description,
       catalogueNo: this.form.value.catalogueNumber,
@@ -41,6 +52,7 @@ export class DynamicFormComponent implements OnInit {
       notes: this.form.value.notes,
       quantity: this.form.value.sizes,
       type: this.form.value.costumeType,
+      folder: this.form.value.folder,
       sortableCatNo: this.getSortableCatNo(this.form.value.catalogueNumber),
     };
     if (!!this.costumeToEdit) {
@@ -49,7 +61,17 @@ export class DynamicFormComponent implements OnInit {
     } else {
       await this.costumeService.createCostume(costume);
     }
-    this.savedState = true;
+  }
+
+  async submitFolder(): Promise<void> {
+    if (!this.costumeToEdit) {
+      return;
+    }
+
+    await this.costumeService.updateFolder(
+      this.costumeToEdit.id,
+      this.form.value.folder
+    );
   }
 
   private getSortableCatNo(catalogueNumber: string): number {

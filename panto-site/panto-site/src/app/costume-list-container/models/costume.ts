@@ -6,6 +6,7 @@ export interface CostumeModel {
   notes: string;
   quantity: CostumeSizeModel[];
   type: string;
+  folder: string;
   sortableCatNo?: number;
 }
 
@@ -22,6 +23,7 @@ export class Costume {
   count!: number;
   checkedOutCount!: number;
   checkedOutBy!: string[];
+  folder!: string;
   type!: string;
 
   constructor(costume: CostumeModel, id: string) {
@@ -37,6 +39,7 @@ export class Costume {
     this.count = costume.quantity.length;
     this.checkedOutCount = costume.quantity.filter(size => size.checkedOutBy !== '').length;
     this.checkedOutBy = costume.quantity.filter(size => size.checkedOutBy !== '').map(size => size.checkedOutBy);
+    this.folder = costume.folder;
     this.type = costume.type;
   }
 
@@ -54,17 +57,24 @@ export class Costume {
 
 export class CostumeFilters {
   description!: string;
-  colours!: string[];
-  types!: string[];
-  sizes!: string[];
+  colours!: FilterItem[];
+  types!: FilterItem[];
+  sizes!: FilterItem[];
+  folders!: FilterItem[];
 
   constructor() {
     this.description = '';
     this.colours = [];
     this.types = [];
     this.sizes = [];
+    this.folders = [];
   }
 }
 
 export interface CostumeSizeModel { id: string; name: string; checkedOutBy: string; }
 export interface CostumeSize { id: string; name: string; count: number; checkedOutBy: string; }
+
+export interface FilterItem {
+  label: string;
+  count: number;
+}
