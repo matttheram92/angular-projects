@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { FileUpload } from 'src/app/file-upload/models/file-upload.model';
 import { QuestionBase } from '../../models/question-base';
 
@@ -9,7 +9,7 @@ import { QuestionBase } from '../../models/question-base';
 })
 export class DynamicFormQuestionComponent {
   @Input() question!: QuestionBase<string>;
-  @Input() form!: FormGroup;
+  @Input() form!: UntypedFormGroup;
   @Output()
   public changed: EventEmitter<any> = new EventEmitter<any>();
 

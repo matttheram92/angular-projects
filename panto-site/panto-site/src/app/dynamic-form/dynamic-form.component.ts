@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import {
   Costume,
@@ -21,7 +21,7 @@ export class DynamicFormComponent implements OnInit {
   costumeToEdit?: Costume;
   @Input()
   formType: 'costume' | 'folder' = 'costume';
-  form!: FormGroup;
+  form!: UntypedFormGroup;
   savedState: boolean = false;
 
   constructor(
