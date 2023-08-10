@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CostumeListContainerComponent } from './costume-list-container/costume-list-container.component';
 import { CostumeFilters } from './costume-list-container/models/costume';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { DynamicFormDialogComponent } from './dynamic-form/components/dynamic-form-dialog/dynamic-form-dialog.component';
 import { enableIndexedDbPersistence, getFirestore } from 'firebase/firestore';
 

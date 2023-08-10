@@ -15,7 +15,7 @@ import { CostumeService } from './costume-list-container/services/costume-servic
 import { MatIconModule } from '@angular/material/icon';
 import { CostumeFiltersComponent } from './costume-filters/costume-filters.component';
 import { DynamicFormDialogComponent } from './dynamic-form/components/dynamic-form-dialog/dynamic-form-dialog.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DualInputGroupComponent } from './dynamic-form/components/dual-input-group/dual-input-group.component';
 import { InputDropdownComponent } from './dynamic-form/components/input-dropdown/input-dropdown.component';

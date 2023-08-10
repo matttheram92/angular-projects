@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CostumeService } from './services/costume-service';
 import { Costume, CostumeFilters, FilterItem } from './models/costume';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { CheckOutDialogComponent } from './components/check-out-dialog/check-out-dialog.component';
 import { LargeImageDialogComponent } from './components/large-image-dialog/large-image-dialog.component';
 import { getBgColour } from '../helpers/costume-helper';
