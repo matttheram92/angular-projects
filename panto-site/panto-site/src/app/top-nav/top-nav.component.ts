@@ -25,7 +25,7 @@ export class TopNavComponent implements OnInit {
     const storage = getStorage();
     const storageRef = ref(storage, `icons/EP-small.png`);
 
-    await getDownloadURL(storageRef).then((url) => {
+    await getDownloadURL(storageRef).then((url: string) => {
       imageUrl = url;
     });
 
