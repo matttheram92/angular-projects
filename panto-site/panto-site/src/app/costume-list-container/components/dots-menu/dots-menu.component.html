@@ -1,45 +1,51 @@
 <div>
   <button
-    class="hover:bg-slate-100 text-black font-black text-sm bg-gray-100 font-medium m-2 pt-0 px-2 pb-2 rounded-full"
+    id="dots-dropdown-button"
+    data-dropdown-toggle="dots-dropdown"
+    class="hover:bg-slate-100 text-black font-black text-sm bg-gray-100 font-medium m-2 pt-0 px-2 pb-2 rounded-full inline-flex"
     type="button"
-    (click)="menuVisible = !menuVisible"
   >
     ...
   </button>
-  <ul
-    *ngIf="menuVisible"
-    class="absolute bg-white w-max py-1 -ml-9 drop-shadow-md rounded-lg z-10 right-0"
+  <div
+    id="dots-dropdown"
+    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
   >
-    <li
-      class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0"
-      (click)="toggleForm()"
+    <ul
+      aria-labelledby="dots-dropdown-button"
+      class="absolute bg-white w-max -ml-9 drop-shadow-md rounded-lg z-10 right-0 py-2 text-sm text-gray-700"
     >
-      <button>Edit</button>
-    </li>
-    <li
-      class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0"
-      (click)="checkOutClicked()"
-    >
-      <button>Check out</button>
-    </li>
-    <li
-      class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0"
-      *ngIf="costume.checkedOutCount > 0"
-      (click)="checkInClicked()"
-    >
-      <button>Check in</button>
-    </li>
-    <li
-      class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0"
-      (click)="addToFolderClicked()"
-    >
-      <button>Add to folder</button>
-    </li>
-    <li
-      class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0 text-red-500"
-      (click)="deleteClicked()"
-    >
-      <button>Delete</button>
-    </li>
-  </ul>
+      <li
+        class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0 block"
+        (click)="toggleForm()"
+      >
+        <button>Edit</button>
+      </li>
+      <li
+        class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0 block"
+        (click)="checkOutClicked()"
+      >
+        <button>Check out</button>
+      </li>
+      <li
+        class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0 block"
+        *ngIf="costume.checkedOutCount > 0"
+        (click)="checkInClicked()"
+      >
+        <button>Check in</button>
+      </li>
+      <li
+        class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0 block"
+        (click)="addToFolderClicked()"
+      >
+        <button>Add to folder</button>
+      </li>
+      <li
+        class="hover:bg-slate-100 px-4 md:px-3 py-1 md:py-0 block text-red-500"
+        (click)="deleteClicked()"
+      >
+        <button>Delete</button>
+      </li>
+    </ul>
+  </div>
 </div>
