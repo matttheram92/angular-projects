@@ -37,6 +37,7 @@ export class CostumeService {
   private lastVisible!: any;
   public firstPage: boolean = false;
   public lastPage: boolean = false;
+  private absoluteFirstId: string = '';
 
   constructor() {}
 
@@ -111,9 +112,15 @@ export class CostumeService {
       if (index === 8) {
         return;
       }
-      index++;
       const costumeModel = doc.data() as CostumeModel;
       const costume = new Costume(costumeModel, doc.id);
+      if (index === 0 && (!next && !prev)) {
+        this.absoluteFirstId = costume.id;
+      }
+      if (index === 0 && this.absoluteFirstId === costume.id) {
+        this.firstPage = true;
+      }
+      index++;
       costume.imageUrl = await this.getImageUrl(costumeModel.imageName);
       costumes.push(costume);
       costumes.sort((a, b) =>
@@ -131,10 +138,10 @@ export class CostumeService {
   private checkPages(length: number, next?: boolean, prev?: boolean): void {
     if (next) {
       this.lastPage = length > 0 && length < 9;
-      this.firstPage = !(length > 0 && length < 9);
+      this.firstPage = false;
     } else if (prev) {
-      this.lastPage = !(length > 0 && length < 9);
-      this.firstPage = length > 0 && length < 9;
+      this.lastPage = false;
+      this.firstPage = false;
     } else {
       this.lastPage = length > 0 && length < 9;
       this.firstPage = true;
