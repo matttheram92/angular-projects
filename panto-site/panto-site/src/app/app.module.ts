@@ -2,9 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { provideFirebaseApp } from '@angular/fire/app';
+import { provideFirestore } from '@angular/fire/firestore';
+import { provideStorage } from '@angular/fire/storage';
 
 import { AppComponent } from './app.component';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
@@ -29,10 +33,12 @@ import { LargeImageDialogComponent } from './costume-list-container/components/l
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { FolderDialogComponent } from './costume-list-container/components/folder-dialog/folder-dialog.component';
 
+
 @NgModule({
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     BrowserModule,
     ReactiveFormsModule,
     MatIconModule,
@@ -56,11 +62,12 @@ import { FolderDialogComponent } from './costume-list-container/components/folde
     CheckInDialogComponent,
     DeleteDialogComponent,
     LargeImageDialogComponent,
-    FolderDialogComponent
+    FolderDialogComponent,
   ],
   providers: [CostumeService, FileUploadService, NgxImageCompressService],
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor() {}
+  constructor() {
+  }
 }

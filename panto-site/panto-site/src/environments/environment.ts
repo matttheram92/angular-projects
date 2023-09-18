@@ -2,18 +2,32 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { initializeApp } from '@angular/fire/app';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+
 export const environment = {
   firebase: {
-    apiKey: "AIzaSyBY0mLyUreXUgrvOu4hYaAQi9pGcDQvXKU",
-    authDomain: "panto-site.firebaseapp.com",
-    projectId: "panto-site",
-    storageBucket: "panto-site.appspot.com",
-    messagingSenderId: "741583810223",
-    appId: "1:741583810223:web:29f8e3f9422b739b66ae5a",
-    measurementId: "G-P7XXGEX6ZE",
+    apiKey: 'AIzaSyBY0mLyUreXUgrvOu4hYaAQi9pGcDQvXKU',
+    authDomain: 'panto-site.firebaseapp.com',
+    projectId: 'panto-site',
+    storageBucket: 'panto-site.appspot.com',
+    messagingSenderId: '741583810223',
+    appId: '1:741583810223:web:29f8e3f9422b739b66ae5a',
+    measurementId: 'G-P7XXGEX6ZE',
   },
-  production: false
+  production: false,
 };
+
+// // Initialize Firebase
+// const app = initializeApp(environment.firebase);
+
+// // Initialize Cloud Firestore and get a reference to the service
+// export const db = getFirestore(app);
+
+// initializeApp(environment.firebase);
+// const defaultStorage = getStorage();
+// const defaultFirestore = getFirestore();
 
 /*
  * For easier debugging in development mode, you can import the following file

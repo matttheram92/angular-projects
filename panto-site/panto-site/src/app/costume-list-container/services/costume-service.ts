@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Firestore, getDocsFromCache } from '@angular/fire/firestore';
 import {
   addDoc,
   collection,
@@ -9,6 +8,7 @@ import {
   endBefore,
   getDoc,
   getDocs,
+  getDocsFromCache,
   getFirestore,
   limit,
   limitToLast,
@@ -33,13 +33,12 @@ const COSTUME_COLLECTION = 'costumes';
 
 @Injectable()
 export class CostumeService {
-  private firestore: Firestore;
   private firstVisible!: any;
   private lastVisible!: any;
+  public firstPage: boolean = false;
+  public lastPage: boolean = false;
 
-  constructor(firestore: Firestore) {
-    this.firestore = firestore;
-  }
+  constructor() {}
 
   async getCostumes(
     filters?: CostumeFilters,
@@ -48,7 +47,8 @@ export class CostumeService {
   ): Promise<Costume[]> {
     const costumes: Costume[] = [];
 
-    const ref = collection(this.firestore, COSTUME_COLLECTION);
+    const db = getFirestore();
+    const ref = collection(db, COSTUME_COLLECTION);
     const queryConstraints = [];
 
     if (filters && filters.colours.length > 0) {
@@ -98,24 +98,20 @@ export class CostumeService {
 
     const querySnapshot = await this.tryGetDocsFromCache(q);
 
-    // if (querySnapshot.empty) {
-    //   this.firstVisible = null;
-    //   this.lastVisible = null;
-    //   return costumes;
-    // }
-
     this.firstVisible = querySnapshot.docs[0];
     this.lastVisible =
       querySnapshot.docs[
         querySnapshot.docs.length === 9 ? 7 : querySnapshot.docs.length - 1
       ];
 
+    this.checkPages(querySnapshot.docs.length, next, prev);
+
     let index = 0;
     querySnapshot.forEach(async (doc) => {
-      index++;
       if (index === 8) {
         return;
       }
+      index++;
       const costumeModel = doc.data() as CostumeModel;
       const costume = new Costume(costumeModel, doc.id);
       costume.imageUrl = await this.getImageUrl(costumeModel.imageName);
@@ -132,6 +128,19 @@ export class CostumeService {
     return costumes;
   }
 
+  private checkPages(length: number, next?: boolean, prev?: boolean): void {
+    if (next) {
+      this.lastPage = length > 0 && length < 9;
+      this.firstPage = !(length > 0 && length < 9);
+    } else if (prev) {
+      this.lastPage = !(length > 0 && length < 9);
+      this.firstPage = length > 0 && length < 9;
+    } else {
+      this.lastPage = length > 0 && length < 9;
+      this.firstPage = true;
+    }
+  }
+
   async getCostumesWithLocalFilters(
     filters?: CostumeFilters,
     next?: boolean,
@@ -139,7 +148,8 @@ export class CostumeService {
   ): Promise<Costume[]> {
     let costumes: Costume[] = [];
 
-    const ref = collection(this.firestore, COSTUME_COLLECTION);
+    const db = getFirestore();
+    const ref = collection(db, COSTUME_COLLECTION);
     const queryConstraints = [];
 
     if (filters && filters.colours.length > 0) {
@@ -275,7 +285,8 @@ export class CostumeService {
   async getCostumeFilters(): Promise<CostumeFilters> {
     const filters: CostumeFilters = new CostumeFilters();
 
-    const q = query(collection(this.firestore, COSTUME_COLLECTION));
+    const db = getFirestore();
+    const q = query(collection(db, COSTUME_COLLECTION));
     const querySnapshot = await this.tryGetDocsFromCache(q);
 
     filters.folders.push({ label: 'All', count: 0 });
@@ -303,13 +314,7 @@ export class CostumeService {
         filters.types[typeIndex].count++;
       }
 
-      const folderName = costumeModel.folder ?? 'All';
-      const folderItem = filters.folders.find((x) => x.label === folderName);
-      if (!folderItem) {
-        filters.folders.push({ label: folderName, count: 1 });
-      } else {
-        folderItem.count++;
-      }
+      this.populateFolders(filters, costumeModel);
 
       for (const size of costumeModel.quantity) {
         const sizeIndex = filters.sizes.findIndex((x) => x.label === size.name);
@@ -325,6 +330,25 @@ export class CostumeService {
     filters.types.sort((a, b) => (a.label > b.label ? 1 : -1));
 
     return filters;
+  }
+
+  private populateFolders(filters: CostumeFilters, costumeModel: CostumeModel) {
+    const allFolderItem = filters.folders.find((x) => x.label === 'All');
+    if (!allFolderItem) {
+      filters.folders.push({ label: 'All', count: 1 });
+    } else {
+      allFolderItem.count++;
+    }
+
+    const folderName = !!costumeModel.folder ? costumeModel.folder : 'All';
+    const folderItem = filters.folders.find((x) => x.label === folderName);
+    if (folderName !== 'All') {
+      if (!folderItem) {
+        filters.folders.push({ label: folderName, count: 1 });
+      } else {
+        folderItem.count++;
+      }
+    }
   }
 
   private sortSizes(a: FilterItem, b: FilterItem): number {
@@ -395,13 +419,12 @@ export class CostumeService {
 
   async createCostume(costume: CostumeModel) {
     const db = getFirestore();
-    const docRef = await addDoc(collection(db, COSTUME_COLLECTION), costume);
+    const costumesRef = collection(db, COSTUME_COLLECTION);
+    const docRef = await addDoc(costumesRef, costume);
+    //const docRef = await setDoc(doc(db, COSTUME_COLLECTION), costume);
   }
 
-  async updateFolder(
-    costumeId: string,
-    folder: string
-  ): Promise<void> {
+  async updateFolder(costumeId: string, folder: string): Promise<void> {
     const db = getFirestore();
     const costumeToUpdateDoc = doc(db, COSTUME_COLLECTION, costumeId);
     const costumeToUpdateData = await getDoc(costumeToUpdateDoc);
@@ -450,6 +473,7 @@ export class CostumeService {
       notes: costume.notes,
       quantity: costume.quantity,
       type: costume.type,
+      folder: costume.folder,
       sortableCatNo: costume.sortableCatNo,
     });
   }

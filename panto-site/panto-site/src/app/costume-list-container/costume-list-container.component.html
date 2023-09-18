@@ -49,6 +49,7 @@
           class="float-right"
           [costume]="costume"
           [folders]="folders"
+          type="list"
         ></app-dots-menu>
       </div>
       <div
@@ -165,16 +166,16 @@
 <div class="fixed bottom-0 inline-flex right-0 lg:right-auto">
   <button
     (click)="prevPage()"
-    [disabled]="firstPage"
-    [ngClass]="firstPage ? 'bg-gray-200' : 'bg-indigo-600 cursor-pointer'"
+    [disabled]="costumeService.firstPage"
+    [ngClass]="costumeService.firstPage ? 'bg-gray-200' : 'bg-indigo-600 cursor-pointer'"
     class="text-white text-sm leading-6 font-medium py-2 px-3 rounded-l-lg inline-flex"
   >
     <mat-icon>chevron_left</mat-icon>Previous
   </button>
   <button
     (click)="nextPage()"
-    [disabled]="lastPage"
-    [ngClass]="lastPage ? 'bg-gray-200' : 'bg-indigo-600 cursor-pointer'"
+    [disabled]="costumeService.lastPage"
+    [ngClass]="costumeService.lastPage ? 'bg-gray-200' : 'bg-indigo-600 cursor-pointer'"
     class="text-white text-sm leading-6 font-medium py-2 px-3 rounded-r-lg inline-flex ml-1"
   >
     Next<mat-icon>chevron_right</mat-icon>

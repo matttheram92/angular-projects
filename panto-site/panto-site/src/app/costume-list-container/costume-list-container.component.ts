@@ -17,8 +17,6 @@ export class CostumeListContainerComponent implements OnInit {
   checkOutHover: string = '';
   imagesOnly: boolean = false;
   filters!: CostumeFilters;
-  firstPage: boolean = false;
-  lastPage: boolean = false;
 
   @Input()
   colours: string[] = [];
@@ -33,11 +31,6 @@ export class CostumeListContainerComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.costumes = await this.costumeService.getCostumes();
     this.rawCostumes = Object.assign(this.costumes);
-
-    this.firstPage = true;
-    if (this.costumes.length > 0 && this.costumes.length < 9) {
-      this.lastPage = true;
-    }
   }
 
   public async folderSelected(folder: FilterItem): Promise<void> {
@@ -73,11 +66,6 @@ export class CostumeListContainerComponent implements OnInit {
       );
     } else {
       this.costumes = await this.costumeService.getCostumes(filters);
-    }
-
-    this.firstPage = true;
-    if (this.costumes.length > 0 && this.costumes.length < 9) {
-      this.lastPage = true;
     }
   }
 
@@ -120,11 +108,6 @@ export class CostumeListContainerComponent implements OnInit {
         false
       );
     }
-
-    if (this.costumes.length > 0 && this.costumes.length < 9) {
-      this.lastPage = true;
-      this.firstPage = false;
-    }
   }
 
   public async prevPage(): Promise<void> {
@@ -143,11 +126,6 @@ export class CostumeListContainerComponent implements OnInit {
         false,
         true
       );
-    }
-
-    if (this.costumes.length > 0 && this.costumes.length < 9) {
-      this.lastPage = false;
-      this.firstPage = true;
     }
   }
 }

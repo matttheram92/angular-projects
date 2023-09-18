@@ -13,7 +13,7 @@
   />
   <div
     *ngIf="showInfo"
-    class="min-w-0 absolute flex-auto bottom-0 w-full overflow-hidden bg-white p-2"
+    class="min-w-0 absolute flex-auto bottom-0 w-full overflow-hidden bg-white/90 p-2"
   >
     <div>
       <h2
@@ -41,8 +41,9 @@
       <dl class="mt-2 flex flex-wrap text-sm leading-6">
         <div class="absolute top-0 right-0 flex items-center space-x-1">
           <app-dots-menu
-            class="float-right "
+            class="float-right hidden sm:inline"
             [costume]="costume"
+            type="selected"
           ></app-dots-menu>
         </div>
         <div class="contents md:flex">

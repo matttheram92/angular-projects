@@ -12,6 +12,7 @@ import { CheckInDialogComponent } from '../check-in-dialog/check-in-dialog.compo
 import { CheckOutDialogComponent } from '../check-out-dialog/check-out-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { FolderDialogComponent } from '../folder-dialog/folder-dialog.component';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-dots-menu',
@@ -23,12 +24,26 @@ export class DotsMenuComponent implements OnInit {
   costume!: Costume;
   @Input()
   folders: FilterItem[] = [];
+  @Input()
+  type!: 'selected' | 'list';
 
   constructor(public dialog: MatDialog, private eRef: ElementRef) {}
 
   menuVisible: boolean = false;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    initFlowbite();
+  }
+
+  // ngAfterViewInit(): void {
+  //   const button = document.getElementById(
+  //     `dots-dropdown-button-${this.costume?.id}-${this.type}`
+  //   );
+  //   button?.setAttribute(
+  //     'data-dropdown-toggle',
+  //     `dots-dropdown-${this.costume?.id}-${this.type}`
+  //   );
+  // }
 
   @HostListener('document:click', ['$event'])
   clickout(event: any) {

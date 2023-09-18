@@ -3,7 +3,13 @@ import { CostumeListContainerComponent } from './costume-list-container/costume-
 import { CostumeFilters } from './costume-list-container/models/costume';
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { DynamicFormDialogComponent } from './dynamic-form/components/dynamic-form-dialog/dynamic-form-dialog.component';
-import { enableIndexedDbPersistence, getFirestore } from 'firebase/firestore';
+import {
+  Firestore,
+  enableIndexedDbPersistence,
+  getFirestore,
+} from 'firebase/firestore';
+import { environment } from 'src/environments/environment';
+import { initializeApp } from 'firebase/app';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +25,9 @@ export class AppComponent implements OnInit {
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    enableIndexedDbPersistence(getFirestore());
+    const app = initializeApp(environment.firebase);
+    const db = getFirestore(app);
+    enableIndexedDbPersistence(db);
   }
 
   filterChanged(event: { filters: CostumeFilters; closePanel?: boolean }) {

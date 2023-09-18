@@ -19,7 +19,7 @@ export class DynamicFormDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<DynamicFormDialogComponent>,
     private questionService: QuestionService,
     private costumeService: CostumeService,
-    @Inject(MAT_DIALOG_DATA) public data: { costumeToEdit: Costume }
+    @Inject(MAT_DIALOG_DATA) public data?: { costumeToEdit: Costume }
   ) {
     this.questions = this.questionService.getQuestions([], []);
   }

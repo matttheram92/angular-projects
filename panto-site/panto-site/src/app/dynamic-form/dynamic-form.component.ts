@@ -52,10 +52,11 @@ export class DynamicFormComponent implements OnInit {
       notes: this.form.value.notes,
       quantity: this.form.value.sizes,
       type: this.form.value.costumeType,
-      folder: this.form.value.folder,
+      folder: this.form.value.folder ?? '',
       sortableCatNo: this.getSortableCatNo(this.form.value.catalogueNumber),
     };
     if (!!this.costumeToEdit) {
+      costume.folder = this.costumeToEdit.folder;
       costume.imageName = this.costumeToEdit.imageName;
       await this.costumeService.editCostume(this.costumeToEdit.id, costume);
     } else {

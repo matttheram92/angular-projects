@@ -1,15 +1,16 @@
-<div>
+<div class="flex">
   <button
-    id="dots-dropdown-button"
-    data-dropdown-toggle="dots-dropdown"
+    [id]="'dots-dropdown-button-' + costume.id + '-' + type"    
     class="hover:bg-slate-100 text-black font-black text-sm bg-gray-100 font-medium m-2 pt-0 px-2 pb-2 rounded-full inline-flex"
     type="button"
+    (click)="menuVisible = !menuVisible"
   >
     ...
   </button>
   <div
-    id="dots-dropdown"
-    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+    [id]="'dots-dropdown-' + costume.id + '-' + type"
+    *ngIf="menuVisible"
+    class="z-10 absolute right-0 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
   >
     <ul
       aria-labelledby="dots-dropdown-button"
