@@ -55,7 +55,7 @@ export class DynamicFormComponent implements OnInit {
             quantity: this.form.value.sizes,
             type: this.form.value.costumeType,
             folder: this.form.value.folder ?? '',
-            sortableCatNo: this.getSortableCatNo(
+            sortableCatNo: this.costumeService.getSortableCatNo(
                 this.form.value.catalogueNumber
             ),
         };
@@ -80,17 +80,6 @@ export class DynamicFormComponent implements OnInit {
             this.costumeToEdit.id,
             this.form.value.folder
         );
-    }
-
-    private getSortableCatNo(catalogueNumber: string): number {
-        const splitNo = catalogueNumber.toString().split('.');
-        const splitNo1 = Number(splitNo[0]);
-        const splitNo2 = Number(splitNo[1]) / 10000;
-        const sortableString = splitNo1 + splitNo2;
-
-        const sortableCatNo = Number(sortableString);
-
-        return sortableCatNo;
     }
 
     onClose(): void {

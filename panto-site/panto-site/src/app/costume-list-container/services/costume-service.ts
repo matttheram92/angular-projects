@@ -508,34 +508,18 @@ export class CostumeService {
             quantity: costume.quantity,
             type: costume.type,
             folder: costume.folder ?? '',
-            sortableCatNo: costume.sortableCatNo,
+            sortableCatNo: this.getSortableCatNo(costume.catalogueNo),
         });
     }
 
-    async updateSortableCatNo(
-        id: string,
-        costume: CostumeModel
-    ): Promise<void> {
-        const splitNo = costume.catalogueNo.toString().split('.');
+    public getSortableCatNo(catalogueNo: string): number {
+        const splitNo = catalogueNo.toString().split('.');
         const splitNo1 = Number(splitNo[0]);
         const splitNo2 = Number(splitNo[1]) / 10000;
         const sortableString = splitNo1 + splitNo2;
 
         const sortableCatNo = Number(sortableString);
 
-        costume.sortableCatNo = sortableCatNo;
-
-        const db = getFirestore();
-        await setDoc(doc(db, COSTUME_COLLECTION, id), {
-            catalogueNo: costume.catalogueNo,
-            colours: costume.colours,
-            description: costume.description,
-            imageName: costume.imageName,
-            notes: costume.notes,
-            quantity: costume.quantity,
-            type: costume.type,
-            folder: costume.folder ?? '',
-            sortableCatNo: sortableCatNo,
-        });
+        return sortableCatNo;
     }
 }
