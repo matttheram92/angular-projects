@@ -240,11 +240,17 @@ export class CostumeService {
                 costumes = costumes.slice(0, 8);
             }
         } else {
-            costumes = costumes.slice(0, 8);
+            costumes = costumes.slice(0, 9);
         }
+
+        this.checkPages(costumes.length, next, prev);
 
         const trimmedCostumes: Costume[] = [];
         costumes.forEach(async (costume, index) => {
+            if (index === 8) {
+                return;
+            }
+
             this.getImageUrl(costume.imageName).then((url) => {
                 costume.imageUrl = url;
 
@@ -259,6 +265,12 @@ export class CostumeService {
 
                 if (index === 0) {
                     this.firstVisible = costume;
+                    if (!next && !prev) {
+                        this.absoluteFirstId = costume.id;
+                    }
+                    if (this.absoluteFirstId === costume.id) {
+                        this.firstPage = true;
+                    }
                 } else if (index === 7) {
                     this.lastVisible = costume;
                 }
