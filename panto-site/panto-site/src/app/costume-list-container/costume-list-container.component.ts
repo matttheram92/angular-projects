@@ -7,125 +7,126 @@ import { LargeImageDialogComponent } from './components/large-image-dialog/large
 import { getBgColour } from '../helpers/costume-helper';
 
 @Component({
-  selector: 'app-costume-list-container',
-  templateUrl: './costume-list-container.component.html',
-  styleUrls: ['./costume-list-container.component.css'],
+    selector: 'app-costume-list-container',
+    templateUrl: './costume-list-container.component.html',
+    styleUrls: ['./costume-list-container.component.css'],
 })
 export class CostumeListContainerComponent implements OnInit {
-  costumes: Costume[] = [];
-  rawCostumes: Costume[] = [];
-  checkOutHover: string = '';
-  imagesOnly: boolean = false;
-  filters!: CostumeFilters;
+    costumes: Costume[] = [];
+    rawCostumes: Costume[] = [];
+    checkOutHover: string = '';
+    imagesOnly: boolean = false;
+    filters!: CostumeFilters;
 
-  @Input()
-  colours: string[] = [];
-  @Input()
-  folders: FilterItem[] = [];
+    @Input()
+    colours: string[] = [];
+    @Input()
+    folders: FilterItem[] = [];
 
-  constructor(
-    public costumeService: CostumeService,
-    public dialog: MatDialog
-  ) {}
+    constructor(
+        public costumeService: CostumeService,
+        public dialog: MatDialog
+    ) {}
 
-  async ngOnInit(): Promise<void> {
-    this.costumes = await this.costumeService.getCostumes();
-    this.rawCostumes = Object.assign(this.costumes);
-  }
-
-  public async folderSelected(folder: FilterItem): Promise<void> {
-    if (this.folderAlreadySelected(folder)) {
-      return;
+    async ngOnInit(): Promise<void> {
+        this.costumes = await this.costumeService.getCostumes();
+        this.rawCostumes = Object.assign(this.costumes);
     }
 
-    this.filters = new CostumeFilters();
-    if (folder.label === 'All') {
-      this.filters.folders = [];
-    } else {
-      this.filters.folders = [folder];
+    public async folderSelected(folder: FilterItem): Promise<void> {
+        if (this.folderAlreadySelected(folder)) {
+            return;
+        }
+
+        this.filters = new CostumeFilters();
+        if (folder.label === 'All') {
+            this.filters.folders = [];
+        } else {
+            this.filters.folders = [folder];
+        }
+        await this.filterChanged(this.filters);
     }
-    await this.filterChanged(this.filters);
-  }
 
-  private folderAlreadySelected(folder: FilterItem) {
-    return (
-      this.filters &&
-      ((this.filters.folders.length === 0 && folder.label === 'All') ||
-        (this.filters.folders.length > 0 &&
-          this.filters.folders[0].label === folder.label))
-    );
-  }
-
-  public async filterChanged(filters: CostumeFilters): Promise<void> {
-    this.filters = filters;
-    //if (filters.description !== '' && filters.colours.length === 0 && filters.sizes.length === 0 && filters.types.length === 0) {
-    if (filters.description !== '' || filters.sizes.length > 0) {
-      //this.costumes = this.rawCostumes.filter(costume => costume.description.toLowerCase().includes(filters.description.toLowerCase()));
-      this.costumes = await this.costumeService.getCostumesWithLocalFilters(
-        filters
-      );
-    } else {
-      this.costumes = await this.costumeService.getCostumes(filters);
+    private folderAlreadySelected(folder: FilterItem) {
+        return (
+            this.filters &&
+            ((this.filters.folders.length === 0 && folder.label === 'All') ||
+                (this.filters.folders.length > 0 &&
+                    this.filters.folders[0].label === folder.label))
+        );
     }
-  }
 
-  public openCheckOutDialog(costume: Costume): void {
-    this.dialog.open(CheckOutDialogComponent, {
-      width: '500px',
-      data: {
-        costume: costume,
-      },
-    });
-  }
-
-  public openLargeImage(costume: Costume): void {
-    this.dialog.open(LargeImageDialogComponent, {
-      width: '500px',
-      data: {
-        costume: costume,
-      },
-    });
-  }
-
-  public localGetBgColour(colour: string): string {
-    return getBgColour(colour);
-  }
-
-  public async nextPage(): Promise<void> {
-    if (
-      this.filters &&
-      (this.filters.description !== '' || this.filters.sizes.length > 0)
-    ) {
-      this.costumes = await this.costumeService.getCostumesWithLocalFilters(
-        this.filters,
-        true,
-        false
-      );
-    } else {
-      this.costumes = await this.costumeService.getCostumes(
-        this.filters,
-        true,
-        false
-      );
+    public async filterChanged(filters: CostumeFilters): Promise<void> {
+        this.filters = filters;
+        //if (filters.description !== '' && filters.colours.length === 0 && filters.sizes.length === 0 && filters.types.length === 0) {
+        if (filters.description !== '' || filters.sizes.length > 0) {
+            //this.costumes = this.rawCostumes.filter(costume => costume.description.toLowerCase().includes(filters.description.toLowerCase()));
+            this.costumes =
+                await this.costumeService.getCostumesWithLocalFilters(filters);
+        } else {
+            this.costumes = await this.costumeService.getCostumes(filters);
+        }
     }
-  }
 
-  public async prevPage(): Promise<void> {
-    if (
-      this.filters &&
-      (this.filters.description !== '' || this.filters.sizes.length > 0)
-    ) {
-      this.costumes = await this.costumeService.getCostumesWithLocalFilters(
-        this.filters,
-        false,
-        true
-      );
-    } else {
-      this.costumes = await this.costumeService.getCostumes(
-        this.filters,
-        false,
-        true
-      );
+    public openCheckOutDialog(costume: Costume): void {
+        this.dialog.open(CheckOutDialogComponent, {
+            width: '500px',
+            data: {
+                costume: costume,
+            },
+        });
     }
-  }
+
+    public openLargeImage(costume: Costume): void {
+        this.dialog.open(LargeImageDialogComponent, {
+            width: '500px',
+            data: {
+                costume: costume,
+            },
+        });
+    }
+
+    public localGetBgColour(colour: string): string {
+        return getBgColour(colour);
+    }
+
+    public async nextPage(): Promise<void> {
+        if (
+            this.filters &&
+            (this.filters.description !== '' || this.filters.sizes.length > 0)
+        ) {
+            this.costumes =
+                await this.costumeService.getCostumesWithLocalFilters(
+                    this.filters,
+                    true,
+                    false
+                );
+        } else {
+            this.costumes = await this.costumeService.getCostumes(
+                this.filters,
+                true,
+                false
+            );
+        }
+    }
+
+    public async prevPage(): Promise<void> {
+        if (
+            this.filters &&
+            (this.filters.description !== '' || this.filters.sizes.length > 0)
+        ) {
+            this.costumes =
+                await this.costumeService.getCostumesWithLocalFilters(
+                    this.filters,
+                    false,
+                    true
+                );
+        } else {
+            this.costumes = await this.costumeService.getCostumes(
+                this.filters,
+                false,
+                true
+            );
+        }
+    }
 }

@@ -35,7 +35,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -89,9 +89,7 @@
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
-            "scripts": [
-              "../path/to/@themesberg/flowbite/dist/flowbite.bundle.js"
-            ]
+            "scripts": []
           }
         }
       }
