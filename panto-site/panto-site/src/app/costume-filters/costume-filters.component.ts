@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-costume-filters',
     templateUrl: './costume-filters.component.html',
-    styleUrls: ['./costume-filters.component.css'],
+    styleUrls: ['./costume-filters.component.scss'],
 })
 export class CostumeFiltersComponent implements OnInit {
     private _subscription = new Subscription();

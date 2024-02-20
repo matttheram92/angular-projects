@@ -30,8 +30,8 @@ import {
 } from '../models/costume';
 import { BehaviorSubject } from 'rxjs';
 
-const COSTUME_COLLECTION = 'costumes-dev';
-//const COSTUME_COLLECTION = 'costumes';
+//const COSTUME_COLLECTION = 'costumes-dev';
+const COSTUME_COLLECTION = 'costumes';
 
 @Injectable()
 export class CostumeService {
