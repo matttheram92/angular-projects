@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CostumeService } from './services/costume-service';
 import { Costume, CostumeFilters, FilterItem } from './models/costume';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { CheckOutDialogComponent } from './components/check-out-dialog/check-out-dialog.component';
 import { LargeImageDialogComponent } from './components/large-image-dialog/large-image-dialog.component';
 import { getBgColour } from '../helpers/costume-helper';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-costume-list-container',
@@ -19,9 +19,9 @@ export class CostumeListContainerComponent implements OnInit {
     filters!: CostumeFilters;
 
     @Input()
-    colours: string[] = [];
+    filterOptions: CostumeFilters = new CostumeFilters();
     @Input()
-    folders: FilterItem[] = [];
+    colours: string[] = [];
 
     constructor(
         public costumeService: CostumeService,
@@ -29,7 +29,12 @@ export class CostumeListContainerComponent implements OnInit {
     ) {}
 
     async ngOnInit(): Promise<void> {
-        this.costumes = await this.costumeService.getCostumes();
+        this.costumes = await this.costumeService.getCostumes(
+            undefined,
+            false,
+            false,
+            true
+        );
         this.rawCostumes = Object.assign(this.costumes);
     }
 
@@ -82,6 +87,7 @@ export class CostumeListContainerComponent implements OnInit {
             width: '500px',
             data: {
                 costume: costume,
+                filterOptions: this.filterOptions,
             },
         });
     }

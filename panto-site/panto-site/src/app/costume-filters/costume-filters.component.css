@@ -1,10 +1,23 @@
+:host ::ng-deep {
+    mat-spinner {
+        height: 24px !important;
+        width: 24px !important;
+    }
+
+    .mat-mdc-progress-spinner .mdc-circular-progress__determinate-circle,
+    .mat-mdc-progress-spinner
+        .mdc-circular-progress__indeterminate-circle-graphic {
+        stroke: #fff;
+    }
+}
+
 .central-icon {
-  margin: 4px -32px 0;
-  color: rgb(156 163 175);
+    margin: 4px -32px 0;
+    color: rgb(156 163 175);
 }
 
 details {
-  user-select: none;
+    user-select: none;
 }
 
 /* details > summary span.icon {
@@ -19,23 +32,23 @@ details[open] summary span.icon {
 } */
 
 summary {
-  display: flex;
-  cursor: pointer;
+    display: flex;
+    cursor: pointer;
 }
 
 summary::-webkit-details-marker {
-  display: none;
+    display: none;
 }
 
 details > summary {
-  list-style: none;
+    list-style: none;
 }
 
 summary::after {
-  content: " ►";
-  margin: auto 0 auto auto;
+    content: " ►";
+    margin: auto 0 auto auto;
 }
 details[open] summary:after {
-  content: " ▼";
-  margin: auto 0 auto auto;
+    content: " ▼";
+    margin: auto 0 auto auto;
 }

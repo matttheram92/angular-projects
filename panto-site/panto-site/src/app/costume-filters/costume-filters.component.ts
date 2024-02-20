@@ -5,6 +5,7 @@ import {
     FilterItem,
 } from '../costume-list-container/models/costume';
 import { getBgColour } from '../helpers/costume-helper';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-costume-filters',
@@ -12,13 +13,12 @@ import { getBgColour } from '../helpers/costume-helper';
     styleUrls: ['./costume-filters.component.css'],
 })
 export class CostumeFiltersComponent implements OnInit {
-    costumeService: CostumeService;
-
-    filterOptions!: CostumeFilters;
-    filters: CostumeFilters = new CostumeFilters();
-    colourHover: string = '';
-    descriptionSearchValue: string = '';
-    openFilterGroups: FilterTypes[] = [];
+    private _subscription = new Subscription();
+    public filterOptions!: CostumeFilters;
+    public filters: CostumeFilters = new CostumeFilters();
+    public colourHover: string = '';
+    public descriptionSearchValue: string = '';
+    public loading: boolean = false;
 
     @Output()
     filterChanged: EventEmitter<{
@@ -26,19 +26,29 @@ export class CostumeFiltersComponent implements OnInit {
         closePanel?: boolean;
     }> = new EventEmitter<{ filters: CostumeFilters; closePanel?: boolean }>();
 
-    @Output()
-    filtersFetched: EventEmitter<{ filters: CostumeFilters }> =
-        new EventEmitter<{
-            filters: CostumeFilters;
-        }>();
+    constructor(private costumeService: CostumeService) {}
 
-    constructor(costumeService: CostumeService) {
-        this.costumeService = costumeService;
+    ngOnInit(): void {
+        this._subscription.add(
+            this.costumeService
+                .getCostumeFilters()
+                .subscribe((costumeFilters: CostumeFilters) => {
+                    this.filterOptions = costumeFilters;
+                })
+        );
+
+        this._subscription.add(
+            this.costumeService
+                .getLoadingStatus()
+                .subscribe((isLoading: boolean) => {
+                    this.loading = isLoading;
+                })
+        );
     }
 
-    async ngOnInit(): Promise<void> {
-        this.filterOptions = await this.costumeService.getCostumeFilters();
-        this.filtersFetched.emit({ filters: this.filterOptions });
+    public runSearch(): void {
+        this.loading = true;
+        this.filterChanged.emit({ filters: this.filters, closePanel: false });
     }
 
     public coloursLabel(): string {
@@ -59,12 +69,11 @@ export class CostumeFiltersComponent implements OnInit {
             : `Sizes (${this.filters.sizes.length})`;
     }
 
-    onDescriptionChange(): void {
+    public onDescriptionChange(): void {
         this.filters.description = this.descriptionSearchValue;
-        this.filterChanged.emit({ filters: this.filters, closePanel: false });
     }
 
-    colourChecked(val: FilterItem): void {
+    public colourChecked(val: FilterItem): void {
         const index = this.filters.colours.findIndex(
             (x) => x.label === val.label
         );
@@ -73,10 +82,10 @@ export class CostumeFiltersComponent implements OnInit {
         } else {
             this.filters.colours.push(val);
         }
-        this.filterChanged.emit({ filters: this.filters, closePanel: false });
+        this.runSearch();
     }
 
-    typeChecked(val: FilterItem): void {
+    public typeChecked(val: FilterItem): void {
         const index = this.filters.types.findIndex(
             (x) => x.label === val.label
         );
@@ -85,10 +94,10 @@ export class CostumeFiltersComponent implements OnInit {
         } else {
             this.filters.types.push(val);
         }
-        this.filterChanged.emit({ filters: this.filters, closePanel: false });
+        this.runSearch();
     }
 
-    sizeChecked(costumeSize: FilterItem): void {
+    public sizeChecked(costumeSize: FilterItem): void {
         const index = this.filters.sizes.findIndex(
             (x) => x.label === costumeSize.label
         );
@@ -97,7 +106,7 @@ export class CostumeFiltersComponent implements OnInit {
         } else {
             this.filters.sizes.push(costumeSize);
         }
-        this.filterChanged.emit({ filters: this.filters, closePanel: false });
+        this.runSearch();
     }
 
     public localGetBgColour(colour: string): string {

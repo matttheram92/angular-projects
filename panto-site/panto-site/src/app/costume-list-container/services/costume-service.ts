@@ -12,6 +12,7 @@ import {
     getFirestore,
     limit,
     limitToLast,
+    onSnapshot,
     orderBy,
     Query,
     query,
@@ -27,9 +28,10 @@ import {
     CostumeModel,
     FilterItem,
 } from '../models/costume';
+import { BehaviorSubject } from 'rxjs';
 
-//const COSTUME_COLLECTION = 'costumes-dev';
-const COSTUME_COLLECTION = 'costumes';
+const COSTUME_COLLECTION = 'costumes-dev';
+//const COSTUME_COLLECTION = 'costumes';
 
 @Injectable()
 export class CostumeService {
@@ -39,14 +41,25 @@ export class CostumeService {
     public lastPage: boolean = false;
     private absoluteFirstId: string = '';
 
+    private filters$: BehaviorSubject<CostumeFilters> = new BehaviorSubject(
+        new CostumeFilters()
+    );
+
+    private pendingRefresh$: BehaviorSubject<number> = new BehaviorSubject(0);
+
+    private isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
     constructor() {}
 
     async getCostumes(
         filters?: CostumeFilters,
         next?: boolean,
-        prev?: boolean
+        prev?: boolean,
+        isInit?: boolean
     ): Promise<Costume[]> {
         const costumes: Costume[] = [];
+
+        this.setLoadingStatus(true);
 
         const db = getFirestore();
         const ref = collection(db, COSTUME_COLLECTION);
@@ -76,6 +89,11 @@ export class CostumeService {
             queryConstraints.push(
                 where('folder', '==', filters.folders[0].label)
             );
+        }
+
+        if (isInit) {
+            this.setCostumeFilters();
+            this.addSnapshotListener();
         }
 
         let q: any;
@@ -142,7 +160,29 @@ export class CostumeService {
             );
         });
 
+        this.setLoadingStatus(false);
+
         return costumes;
+    }
+
+    private addSnapshotListener(): void {
+        const db = getFirestore();
+        const q = query(collection(db, COSTUME_COLLECTION));
+
+        onSnapshot(q, { includeMetadataChanges: false }, (snapshot: any) => {
+            snapshot.docChanges().forEach((change: any) => {
+                if (!snapshot.metadata.fromCache) {
+                    console.log(`Costume ${change.type}:`, change.doc.data());
+
+                    const source = snapshot.metadata.fromCache
+                        ? 'local cache'
+                        : 'server';
+                    console.log('Data came from ' + source);
+
+                    this.setPendingRefresh(this.pendingRefresh$.getValue() + 1);
+                }
+            });
+        });
     }
 
     private checkPages(length: number, next?: boolean, prev?: boolean): void {
@@ -277,6 +317,8 @@ export class CostumeService {
             });
         });
 
+        this.setLoadingStatus(false);
+
         return trimmedCostumes;
     }
 
@@ -286,9 +328,13 @@ export class CostumeService {
             querySnapshot = await getDocsFromCache(q);
             if (querySnapshot.empty) {
                 querySnapshot = await getDocs(q);
+                console.log('Data came from server');
+            } else {
+                console.log('Data came from local cache');
             }
         } catch (e) {
             querySnapshot = await getDocs(q);
+            console.log('Data came from server');
         }
         return querySnapshot;
     }
@@ -319,7 +365,27 @@ export class CostumeService {
         return true;
     }
 
-    async getCostumeFilters(): Promise<CostumeFilters> {
+    public getPendingRefresh(): BehaviorSubject<number> {
+        return this.pendingRefresh$;
+    }
+
+    public setPendingRefresh(changedItems: number): void {
+        this.pendingRefresh$.next(changedItems);
+    }
+
+    public getLoadingStatus(): BehaviorSubject<boolean> {
+        return this.isLoading$;
+    }
+
+    public setLoadingStatus(isLoading: boolean): void {
+        this.isLoading$.next(isLoading);
+    }
+
+    public getCostumeFilters(): BehaviorSubject<CostumeFilters> {
+        return this.filters$;
+    }
+
+    private async setCostumeFilters(): Promise<void> {
         const filters: CostumeFilters = new CostumeFilters();
 
         const db = getFirestore();
@@ -368,7 +434,7 @@ export class CostumeService {
         filters.sizes.sort(this.sortSizes);
         filters.types.sort((a, b) => (a.label > b.label ? 1 : -1));
 
-        return filters;
+        this.filters$.next(filters);
     }
 
     private populateFolders(
@@ -456,9 +522,13 @@ export class CostumeService {
         const storage = getStorage();
         const storageRef = ref(storage, `costumes/${fileName}`);
 
-        await getDownloadURL(storageRef).then((url) => {
-            imageUrl = url;
-        });
+        await getDownloadURL(storageRef)
+            .then((url) => {
+                imageUrl = url;
+            })
+            .catch((reason: any) => {
+                console.log(`error: ${reason}`);
+            });
 
         return imageUrl;
     }

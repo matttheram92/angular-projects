@@ -5,13 +5,13 @@ import {
     Input,
     OnInit,
 } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { DynamicFormDialogComponent } from 'src/app/dynamic-form/components/dynamic-form-dialog/dynamic-form-dialog.component';
-import { Costume, FilterItem } from '../../models/costume';
+import { Costume, CostumeFilters, FilterItem } from '../../models/costume';
 import { CheckInDialogComponent } from '../check-in-dialog/check-in-dialog.component';
 import { CheckOutDialogComponent } from '../check-out-dialog/check-out-dialog.component';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { FolderDialogComponent } from '../folder-dialog/folder-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-dots-menu',
@@ -22,9 +22,9 @@ export class DotsMenuComponent implements OnInit {
     @Input()
     costume!: Costume;
     @Input()
-    folders: FilterItem[] = [];
-    @Input()
     type!: 'selected' | 'list';
+    @Input()
+    filterOptions: CostumeFilters = new CostumeFilters();
 
     constructor(public dialog: MatDialog, private eRef: ElementRef) {}
 
@@ -62,7 +62,7 @@ export class DotsMenuComponent implements OnInit {
             width: '500px',
             data: {
                 costume: this.costume,
-                folders: this.folders
+                folders: this.filterOptions.folders
                     .filter((f) => f.label !== 'All')
                     .map((f) => f.label),
             },
@@ -83,6 +83,7 @@ export class DotsMenuComponent implements OnInit {
             width: '500px',
             data: {
                 costumeToEdit: this.costume,
+                filterOptions: this.filterOptions,
             },
         });
     }

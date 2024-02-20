@@ -3,9 +3,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { environment } from '../environments/environment';
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 import { provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore } from '@angular/fire/firestore';
 import { provideStorage } from '@angular/fire/storage';
@@ -19,7 +19,6 @@ import { CostumeService } from './costume-list-container/services/costume-servic
 import { MatIconModule } from '@angular/material/icon';
 import { CostumeFiltersComponent } from './costume-filters/costume-filters.component';
 import { DynamicFormDialogComponent } from './dynamic-form/components/dynamic-form-dialog/dynamic-form-dialog.component';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DualInputGroupComponent } from './dynamic-form/components/dual-input-group/dual-input-group.component';
 import { InputDropdownComponent } from './dynamic-form/components/input-dropdown/input-dropdown.component';
@@ -32,42 +31,43 @@ import { DeleteDialogComponent } from './costume-list-container/components/delet
 import { LargeImageDialogComponent } from './costume-list-container/components/large-image-dialog/large-image-dialog.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { FolderDialogComponent } from './costume-list-container/components/folder-dialog/folder-dialog.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  imports: [
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
-    BrowserModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatDialogModule,
-    BrowserAnimationsModule,
-    FormsModule,
-  ],
-  declarations: [
-    AppComponent,
-    DynamicFormComponent,
-    DynamicFormQuestionComponent,
-    TopNavComponent,
-    CostumeListContainerComponent,
-    CostumeFiltersComponent,
-    DynamicFormDialogComponent,
-    DualInputGroupComponent,
-    InputDropdownComponent,
-    FileUploadComponent,
-    DotsMenuComponent,
-    CheckOutDialogComponent,
-    CheckInDialogComponent,
-    DeleteDialogComponent,
-    LargeImageDialogComponent,
-    FolderDialogComponent,
-  ],
-  providers: [CostumeService, FileUploadService, NgxImageCompressService],
-  bootstrap: [AppComponent],
+    imports: [
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideFirestore(() => getFirestore()),
+        provideStorage(() => getStorage()),
+        BrowserModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatDialogModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatProgressSpinnerModule,
+    ],
+    declarations: [
+        AppComponent,
+        DynamicFormComponent,
+        DynamicFormQuestionComponent,
+        TopNavComponent,
+        CostumeListContainerComponent,
+        CostumeFiltersComponent,
+        DynamicFormDialogComponent,
+        DualInputGroupComponent,
+        InputDropdownComponent,
+        FileUploadComponent,
+        DotsMenuComponent,
+        CheckOutDialogComponent,
+        CheckInDialogComponent,
+        DeleteDialogComponent,
+        LargeImageDialogComponent,
+        FolderDialogComponent,
+    ],
+    providers: [CostumeService, FileUploadService, NgxImageCompressService],
+    bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor() {
-  }
+    constructor() {}
 }

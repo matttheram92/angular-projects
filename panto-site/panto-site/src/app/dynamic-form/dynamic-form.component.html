@@ -1,17 +1,33 @@
 <div>
-  <form *ngIf="!savedState" (ngSubmit)="onSubmit()" [formGroup]="form">
-    <div class="form-question">
-      <div *ngFor="let question of questions" class="form-row">
-        <app-question [question]="question" [form]="form" (changed)="valueChanged($event, question.key)"></app-question>
-      </div>
-    </div>
+    <form *ngIf="!savedState" (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div class="form-question">
+            <div *ngFor="let question of questions" class="form-row">
+                <app-question
+                    [question]="question"
+                    [form]="form"
+                    (changed)="valueChanged($event, question.key)"
+                ></app-question>
+            </div>
+        </div>
 
-    <div class="form-row form-submit">
-      <button class="float-right bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg" type="submit" [disabled]="!form.valid">Save</button>
+        <div class="form-row form-submit flex">
+            <button
+                class="ml-auto bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
+                type="submit"
+                [disabled]="!form.valid"
+            >
+                Save
+            </button>
+        </div>
+    </form>
+    <div *ngIf="savedState" class="flex">
+        Successfully Saved!
+        <button
+            class="ml-auto bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg"
+            type="button"
+            (click)="onClose()"
+        >
+            Close
+        </button>
     </div>
-  </form>
-  <div *ngIf="savedState">
-    Successfully Saved!
-    <button class="float-right bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 rounded-lg" type="button" (click)="onClose()">Close</button>
-  </div>
 </div>

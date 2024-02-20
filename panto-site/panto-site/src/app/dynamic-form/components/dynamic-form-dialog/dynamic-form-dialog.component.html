@@ -1,8 +1,10 @@
-<h1 mat-dialog-title>Add new costume</h1>
-<div mat-dialog-content *ngIf="loaded" class="dialog-content">
-    <app-dynamic-form
-      class="w-full"
-      [questions]="questions"
-      [costumeToEdit]="data?.costumeToEdit"
-    ></app-dynamic-form>
+<div>
+    <h2 class="mt-4 ml-5 text-2xl font-bold text-gray-900 dark:text-white">Add new costume</h2>
+    <mat-dialog-content *ngIf="loaded" class="dialog-content">
+        <app-dynamic-form
+            class="w-full"
+            [questions]="questions"
+            [costumeToEdit]="data?.costumeToEdit"
+        ></app-dynamic-form>
+    </mat-dialog-content>
 </div>

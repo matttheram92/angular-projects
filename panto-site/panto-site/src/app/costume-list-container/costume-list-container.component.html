@@ -11,7 +11,7 @@
     </div>
     <div class="flex mr-auto mt-2">
         <div
-            *ngFor="let folder of folders"
+            *ngFor="let folder of filterOptions.folders"
             class="px-3 ml-1 mt-auto border-t border-l border-r border-gray-300 flex cursor-pointer rounded-t-md"
             (click)="folderSelected(folder)"
         >
@@ -80,7 +80,7 @@
                     <app-dots-menu
                         class="float-right"
                         [costume]="costume"
-                        [folders]="folders"
+                        [filterOptions]="filterOptions"
                         type="list"
                     ></app-dots-menu>
                 </div>

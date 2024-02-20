@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import {
     Costume,
     CostumeModel,
@@ -8,6 +7,7 @@ import {
 import { CostumeService } from '../costume-list-container/services/costume-service';
 import { QuestionBase } from './models/question-base';
 import { QuestionControlService } from './services/question-control-service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-dynamic-form',

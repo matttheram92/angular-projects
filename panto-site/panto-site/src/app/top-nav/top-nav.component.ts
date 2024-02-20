@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 
 @Component({
@@ -7,6 +7,8 @@ import { getDownloadURL, getStorage, ref } from 'firebase/storage';
     styleUrls: ['./top-nav.component.css'],
 })
 export class TopNavComponent implements OnInit {
+    @Input()
+    pendingRefresh: number = 0;
     @Output()
     addNew: EventEmitter<void> = new EventEmitter();
     @Output()
@@ -20,7 +22,7 @@ export class TopNavComponent implements OnInit {
         this.logoUrl = await this.getLogoUrl();
     }
 
-    async getLogoUrl(): Promise<string> {
+    public async getLogoUrl(): Promise<string> {
         let imageUrl = '';
         const storage = getStorage();
         const storageRef = ref(storage, `icons/EP-small.png`);
@@ -30,5 +32,9 @@ export class TopNavComponent implements OnInit {
         });
 
         return imageUrl;
+    }
+
+    public refreshData(): void {
+        window.location.reload();
     }
 }

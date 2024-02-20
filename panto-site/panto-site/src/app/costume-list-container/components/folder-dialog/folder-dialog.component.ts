@@ -1,12 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {
-    MatLegacyDialogRef as MatDialogRef,
-    MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA,
-} from '@angular/material/legacy-dialog';
 import { Costume, CostumeSizeModel } from '../../models/costume';
 import { CostumeService } from '../../services/costume-service';
 import { QuestionBase } from 'src/app/dynamic-form/models/question-base';
 import { TextboxQuestion } from 'src/app/dynamic-form/models/question-types';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-folder-dialog',

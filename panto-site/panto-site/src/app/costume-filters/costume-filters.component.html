@@ -6,18 +6,31 @@
     >
         Apply filters
     </button>
-    <div class="ml-20 mr-4 mb-5 justify-center flow-root">
+    <div class="ml-20 mr-4 mb-4 justify-center flow-root">
         <div>
             <p class="py-4 font-sans font-medium">Description</p>
             <div>
                 <input
-                    class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-1 px-4 ring-1 ring-slate-200 shadow-sm"
+                    id="input-description"
+                    class="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-1 px-4 mb-4 ring-1 ring-slate-200 shadow-sm"
                     type="text"
                     [(ngModel)]="descriptionSearchValue"
                     (ngModelChange)="onDescriptionChange()"
                 />
             </div>
         </div>
+
+        <button
+            type="button"
+            class="hidden lg:block w-full bg-indigo-600 text-white text-sm leading-6 font-medium py-2 px-3 m-auto rounded-lg"
+            (click)="runSearch()"
+        >
+            <div class="flex">
+                <mat-spinner *ngIf="loading"></mat-spinner>
+                <mat-icon *ngIf="!loading">search</mat-icon>
+                <p class="mx-auto">Search</p>
+            </div>
+        </button>
     </div>
     <div class="ml-20 mr-4 border-gray-100 border-t justify-center flow-root">
         <details>
@@ -71,6 +84,10 @@
             </summary>
             <div class="pb-4 filter-group">
                 <div
+                    *ngFor="
+                        let costumeType of filterOptions.types;
+                        let index = index
+                    "
                     class="px-2 py-1 mr-2 my-1 border rounded-lg inline-block cursor-pointer"
                     [ngClass]="
                         filters.types.includes(costumeType)
@@ -78,11 +95,12 @@
                             : 'bg-white text-gray-800'
                     "
                     (click)="typeChecked(costumeType)"
-                    *ngFor="
-                        let costumeType of filterOptions.types;
-                        let index = index
-                    "
                 >
+                    <input
+                        class="hidden"
+                        type="checkbox"
+                        [id]="'typeCheckBox' + index"
+                    />
                     <label
                         class="form-check-label inline-block text-sm cursor-pointer"
                         [for]="'typeCheckBox' + index"
@@ -113,6 +131,11 @@
                         let index = index
                     "
                 >
+                    <input
+                        class="hidden"
+                        type="checkbox"
+                        [id]="'sizeCheckBox' + index"
+                    />
                     <label
                         class="form-check-label inline-block text-sm cursor-pointer"
                         [for]="'sizeCheckBox' + index"

@@ -1,21 +1,21 @@
 <div
-  class="bg-white inline-grid fixed h-full w-full m-0 rounded-md overflow-y-auto overflow-x-hidden"
+    class="bg-white inline-grid fixed h-full w-full m-0 rounded-md overflow-y-auto overflow-x-hidden"
 >
-  <app-costume-filters
-    class="absolute flex bg-white z-10 drop-shadow-lg h-full overflow-auto"
-    [ngClass]="mobileFilterVisible ? 'block' : 'hidden lg:block'"
-    (filterChanged)="filterChanged($event)"
-    (filtersFetched)="setFilters($event)"
-  ></app-costume-filters>
-  <div class="pt-6 pb-12 px-0 md:px-10 lg:ml-60 h-full">
-    <app-top-nav
-      class="mb-6 absolute w-full contents"
-      (addNew)="toggleForm()"
-      (openFilter)="mobileFilterVisible = !mobileFilterVisible"
-    ></app-top-nav>
-    <app-costume-list-container
-      #costumeListContainer
-      [folders]="filterOptions.folders"
-    ></app-costume-list-container>
-  </div>
+    <app-costume-filters
+        class="absolute flex bg-white z-10 drop-shadow-lg h-full overflow-auto"
+        [ngClass]="mobileFilterVisible ? 'block' : 'hidden lg:block'"
+        (filterChanged)="filterChanged($event)"
+    ></app-costume-filters>
+    <div class="pt-6 pb-12 px-0 md:px-10 lg:ml-60 h-full">
+        <app-top-nav
+            class="mb-6 absolute w-full contents"
+            (addNew)="toggleForm()"
+            (openFilter)="mobileFilterVisible = !mobileFilterVisible"
+            [pendingRefresh]="pendingRefresh"
+        ></app-top-nav>
+        <app-costume-list-container
+            #costumeListContainer
+            [filterOptions]="filterOptions"
+        ></app-costume-list-container>
+    </div>
 </div>

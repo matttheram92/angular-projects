@@ -1,44 +1,54 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
-import { Costume } from 'src/app/costume-list-container/models/costume';
+import { Component, Inject, OnInit } from '@angular/core';
+import {
+    Costume,
+    CostumeFilters,
+} from 'src/app/costume-list-container/models/costume';
 import { CostumeService } from 'src/app/costume-list-container/services/costume-service';
 import { QuestionBase } from '../../models/question-base';
 import { QuestionService } from '../../services/question-service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-dynamic-form-dialog',
-  templateUrl: './dynamic-form-dialog.component.html',
-  styleUrls: ['./dynamic-form-dialog.component.css'],
-  providers: [QuestionService, CostumeService],
+    selector: 'app-dynamic-form-dialog',
+    templateUrl: './dynamic-form-dialog.component.html',
+    styleUrls: ['./dynamic-form-dialog.component.css'],
+    providers: [QuestionService, CostumeService],
 })
 export class DynamicFormDialogComponent implements OnInit {
-  questions: QuestionBase<any>[] = [];
-  loaded = false;
+    public questions: QuestionBase<any>[] = [];
+    public loaded = false;
 
-  constructor(
-    public dialogRef: MatDialogRef<DynamicFormDialogComponent>,
-    private questionService: QuestionService,
-    private costumeService: CostumeService,
-    @Inject(MAT_DIALOG_DATA) public data?: { costumeToEdit: Costume }
-  ) {
-    this.questions = this.questionService.getQuestions([], []);
-  }
+    constructor(
+        public dialogRef: MatDialogRef<DynamicFormDialogComponent>,
+        private questionService: QuestionService,
+        @Inject(MAT_DIALOG_DATA)
+        public data?: { costumeToEdit: Costume; filterOptions: CostumeFilters }
+    ) {
+        this.questions = this.questionService.getQuestions([], []);
+    }
 
-  async ngOnInit(): Promise<void> {
-    const costumeFilters = await this.costumeService.getCostumeFilters();
-    const costumeColours = costumeFilters.colours.map((colour) => {
-      return { key: colour.label, value: colour.label };
-    });
-    const costumeTypes = costumeFilters.types.map((type) => {
-      return { key: type.label, value: type.label };
-    });
+    ngOnInit(): void {
+        this.setUpQuestions();
+        this.loaded = true;
+    }
 
-    this.questions = this.questionService.getQuestions(
-      costumeColours,
-      costumeTypes,
-      this.data?.costumeToEdit
-    );
+    private setUpQuestions(): void {
+        if (!this.data) {
+            return;
+        }
 
-    this.loaded = true;
-  }
+        const costumeColours = this.data.filterOptions.colours.map((colour) => {
+            return { key: colour.label, value: colour.label };
+        });
+
+        const costumeTypes = this.data.filterOptions.types.map((type) => {
+            return { key: type.label, value: type.label };
+        });
+
+        this.questions = this.questionService.getQuestions(
+            costumeColours,
+            costumeTypes,
+            this.data?.costumeToEdit
+        );
+    }
 }
