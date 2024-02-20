@@ -96,17 +96,11 @@
                     "
                     (click)="typeChecked(costumeType)"
                 >
-                    <input
-                        class="hidden"
-                        type="checkbox"
-                        [id]="'typeCheckBox' + index"
-                    />
-                    <label
+                    <p
                         class="form-check-label inline-block text-sm cursor-pointer"
-                        [for]="'typeCheckBox' + index"
                     >
                         {{ costumeType.label }} ({{ costumeType.count }})
-                    </label>
+                    </p>
                 </div>
             </div>
         </details>
@@ -131,17 +125,11 @@
                         let index = index
                     "
                 >
-                    <input
-                        class="hidden"
-                        type="checkbox"
-                        [id]="'sizeCheckBox' + index"
-                    />
-                    <label
+                    <p
                         class="form-check-label inline-block text-sm cursor-pointer"
-                        [for]="'sizeCheckBox' + index"
                     >
                         {{ costumeSize.label }}
-                    </label>
+                    </p>
                 </div>
             </div>
         </details>
