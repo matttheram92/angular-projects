@@ -4,11 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration=production --base-href https://matttheram92.github.io/angular-projects/little-loft/",
+    "build": "ng build",
     "tailwind": "postcss css/tailwind.css -o public/build/tailwind.css",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "deploy": "ng deploy --base-href /angular-projects/little-loft/"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
