@@ -49,7 +49,7 @@ describe('OptionsListComponent', () => {
 
     const optionElements = fixture.debugElement.queryAll(By.css('a'));
     optionElements.forEach((element) => {
-      expect(element.attributes['href']).toBe('/products');
+      expect(element.attributes['href']).toBe('products');
     });
   });
 
