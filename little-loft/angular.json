@@ -19,7 +19,7 @@
           "options": {
             "outputPath": "dist/little-loft",
             "index": "src/index.html",
-            "baseHref": "/little-loft/",
+            "baseHref": "/angular-projects/little-loft/",
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
