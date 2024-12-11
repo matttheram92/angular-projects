@@ -1,0 +1,169 @@
+<header [class.hidden]="!showHeader" class="sm:inline">
+  <a
+    [href]="skipLinkHref"
+    class="skip-nav focus:block absolute top-0 left-0 bg-blue-600 text-white p-2 rounded"
+  >
+    Skip to main content
+  </a>
+
+  <nav
+    class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
+    aria-label="Global"
+  >
+    <div class="flex lg:flex-1">
+      <a href="#" class="-m-1.5 p-1.5">
+        <span class="sr-only">Little Loft</span>
+        <img
+          class="h-8 w-auto"
+          src="../assets/little-loft.png"
+          alt="Little Loft Logo"
+        />
+      </a>
+    </div>
+    <div class="flex lg:hidden">
+      <app-button
+        type="icon"
+        icon="heart"
+        text="Favourites"
+        href="#"
+      ></app-button>
+      <app-button
+        type="icon"
+        icon="cart"
+        text="Shopping basket"
+        href="#"
+        class="ml-4"
+      ></app-button>
+      <app-button
+        type="icon"
+        icon="burgerMenu"
+        text="Open main menu"
+        (click)="showSideMenu = true"
+        class="ml-4 hidden sm:inline-flex"
+      ></app-button>
+    </div>
+
+    <div class="hidden lg:flex lg:gap-x-12">
+      <div class="relative">
+        <button
+          id="btnSearch"
+          type="button"
+          class="flex items-center gap-x-1 text-sm/6 font-semibold text-gray-900"
+          aria-expanded="false"
+          (click)="showSearchSubMenu = !showSearchSubMenu"
+        >
+          Search
+          <app-icon icon="search"></app-icon>
+        </button>
+        <app-search-section *ngIf="showSearchSubMenu"></app-search-section>
+      </div>
+
+      <a href="/explore" class="text-sm/6 font-semibold text-gray-900"
+        >Explore</a
+      >
+      <a href="/sell" class="text-sm/6 font-semibold text-gray-900">Sell</a>
+      <a href="/inbox" class="text-sm/6 font-semibold text-gray-900">Inbox</a>
+    </div>
+    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+      <a
+        *ngIf="!loggedIn"
+        href="#"
+        class="text-sm/6 p-2.5 font-semibold text-gray-900"
+        >Log in</a
+      >
+      <a *ngIf="loggedIn" href="#" class="text-sm/6 font-semibold text-gray-900"
+        >Profile</a
+      >
+      <a
+        href="#"
+        class="text-sm/6 font-semibold p-2.5 text-gray-900"
+        aria-label="Favourites"
+      >
+        <app-icon icon="heart"></app-icon>
+      </a>
+      <a
+        href="#"
+        class="text-sm/6 font-semibold p-2.5 text-gray-900"
+        aria-label="Shopping basket"
+      >
+        <app-icon icon="cart"></app-icon>
+      </a>
+    </div>
+  </nav>
+
+  <div *ngIf="showSideMenu" class="lg:hidden" role="dialog" aria-modal="true">
+    <div class="fixed inset-0 z-10"></div>
+    <div
+      class="fixed inset-y-0 right-0 z-10 bg-lemon w-full overflow-y-auto px-6 py-6 sm:max-w-sm sm:border-l"
+    >
+      <div class="flex items-center justify-between">
+        <a href="#" class="-m-1.5 p-1.5">
+          <span class="sr-only">Little Loft</span>
+          <img
+            class="h-8 w-auto"
+            src="../assets/wood-blocks-icon.png"
+            alt="Little Loft Logo"
+          />
+        </a>
+        <button
+          type="button"
+          (click)="showSideMenu = false"
+          class="-m-2.5 rounded-md p-2.5 text-gray-700"
+        >
+          <span class="sr-only">Close menu</span>
+          <app-icon icon="close"></app-icon>
+        </button>
+      </div>
+      <div class="mt-6 flow-root">
+        <div class="-my-6 divide-y divide-gray-500/10">
+          <div class="space-y-2 py-6">
+            <div class="-mx-3">
+              <button
+                type="button"
+                class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                aria-controls="disclosure-1"
+                aria-expanded="false"
+              >
+                Search
+                <app-icon icon="downArrow"></app-icon>
+              </button>
+
+              <div class="mt-2 space-y-2" id="disclosure-1">
+                <app-search-section></app-search-section>
+              </div>
+            </div>
+            <a
+              routerLink="/explore"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Explore</a
+            >
+            <a
+              routerLink="/sell"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Sell</a
+            >
+            <a
+              routerLink="/inbox"
+              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Inbox</a
+            >
+          </div>
+          <div class="py-6">
+            <a
+              *ngIf="!loggedIn"
+              href="#"
+              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Log in</a
+            >
+            <a
+              *ngIf="loggedIn"
+              href="#"
+              class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+              >Profile</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

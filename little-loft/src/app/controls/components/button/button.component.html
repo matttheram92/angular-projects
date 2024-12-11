@@ -1,0 +1,11 @@
+<div>
+  <ng-container *ngIf="isIcon && !!icon">
+    <a
+      (click)="click.emit()"
+      class="text-sm/6 font-semibold p-2.5 text-gray-900 cursor-pointer"
+      [attr.aria-label]="text"
+    >
+      <app-icon [icon]="icon"></app-icon>
+    </a>
+  </ng-container>
+</div>

@@ -1,0 +1,26 @@
+<div>
+  <ng-container *ngFor="let section of splashScreenInfo.sections">
+    <ng-container
+      *ngIf="!isMobile || section.index === visibleSplashIndex"
+      [ngComponentOutlet]="getComponentType(section.type)"
+      [ngComponentOutletInjector]="getInjector(section)"
+    ></ng-container>
+  </ng-container>
+
+  <div class="absolute pb-20 sm:hidden bottom-0 right-0 p-8 text-white">
+    <button
+      [class.opacity-20]="!isFirst()"
+      (click)="previous()"
+      class="ml-4 px-4 py-2 rounded-full bg-green"
+    >
+      <
+    </button>
+    <button
+      [class.opacity-20]="!isLast()"
+      (click)="next()"
+      class="ml-4 px-4 py-2 rounded-full bg-green"
+    >
+      >
+    </button>
+  </div>
+</div>

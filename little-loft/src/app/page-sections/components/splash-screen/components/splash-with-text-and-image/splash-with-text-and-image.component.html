@@ -1,0 +1,23 @@
+<div
+  class="p-8 sm:h-96 sm:border-b sm:border-gray sm:flex"
+>
+  <p class="uppercase text-primary text-center font-semibold sm:hidden">
+    {{ sectionData.header }}
+  </p>
+  <div class="sm:flex sm:m-auto">
+    <div class="flex justify-self-end sm:w-1/2">
+      <p [class]="sectionData.color" class="h-32 w-32 text-white text-center">
+        {{ sectionData.step }}
+      </p>
+      <img class="max-h-52" [src]="sectionData.src" [alt]="sectionData.alt" />
+    </div>
+    <div class="sm:w-1/2 sm:m-auto">
+      <h2 class="text-4xl text-primary font-semibold sm:text-center">
+        {{ sectionData.subHeader }}
+      </h2>
+      <p>
+        {{ sectionData.body }}
+      </p>
+    </div>
+  </div>
+</div>

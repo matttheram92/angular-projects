@@ -1,0 +1,15 @@
+<div class="p-8">
+  <p class="uppercase text-primary text-center font-semibold">
+    {{ sectionData.header }}
+  </p>
+  <p class="text-primary text-center font-semibold text-4xl">
+    {{ sectionData.subHeader }}
+  </p>
+
+  <a
+    [href]="sectionData.actionHref"
+    class="block text-center mt-16 md:mt-12 py-4 px-8 m-auto w-2/4 rounded-full bg-black text-white uppercase"
+  >
+    {{ sectionData.actionText }}
+  </a>
+</div>

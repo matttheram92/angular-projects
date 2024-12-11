@@ -1,0 +1,16 @@
+<div class="text-center text-xs m-auto">
+  <a [href]="mobileNav.href">
+    <div>
+      <div class="m-auto h-full">
+        <app-icon
+          class="h-4 m-auto"
+          [icon]="mobileNav.icon"
+          [color]="mobileNav.icon === 'home' ? 'primary' : 'black'"
+        ></app-icon>
+      </div>
+    </div>
+    <p [class]="mobileNav.icon === 'home' ? 'text-primary' : 'text-black'">
+      {{ mobileNav.text }}
+    </p>
+  </a>
+</div>

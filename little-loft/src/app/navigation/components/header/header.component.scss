@@ -1,0 +1,18 @@
+.skip-nav {
+  position: absolute;
+  top: -40px;
+  left: 10px;
+  background-color: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  text-decoration: none;
+  z-index: 1000;
+  transition: top 0.3s ease;
+}
+
+.skip-nav:focus {
+  top: 10px;
+  outline: 2px solid #ffffff;
+}
