@@ -8,6 +8,13 @@ import { HeroSectionModule } from '../page-sections/components/hero-section/hero
 import { PageSectionsModule } from '../page-sections/page-sections.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { SearchPageComponent } from './components/search-page/search-page.component';
+import { InboxComponent } from './components/inbox/inbox.component';
+import { LogInComponent } from './components/log-in/log-in.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProductItemComponent } from './components/product-item/product-item.component';
+import { BasketComponent } from './components/basket/basket.component';
+import { FavouritesComponent } from './components/favourites/favourites.component';
+import { ControlsModule } from '../controls/contols.module';
 
 @NgModule({
   declarations: [
@@ -16,19 +23,32 @@ import { SearchPageComponent } from './components/search-page/search-page.compon
     OnboardingComponent,
     ExploreComponent,
     SearchPageComponent,
+    InboxComponent,
+    LogInComponent,
+    ProfileComponent,
+    ProductItemComponent,
+    BasketComponent,
+    FavouritesComponent,
   ],
   imports: [
     BrowserModule,
     SplashScreenModule,
     HeroSectionModule,
     PageSectionsModule,
+    ControlsModule,
   ],
   exports: [
     DashboardComponent,
     ProductListComponent,
     OnboardingComponent,
     ExploreComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    InboxComponent,
+    LogInComponent,
+    ProfileComponent,
+    ProductItemComponent,
+    BasketComponent,
+    FavouritesComponent,
   ],
   providers: [],
 })

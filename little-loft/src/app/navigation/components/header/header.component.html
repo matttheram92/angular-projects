@@ -1,4 +1,7 @@
-<header [class.hidden]="!showHeader" class="sm:inline">
+<header
+  [class.hidden]="!showHeader"
+  class="fixed z-10 sm:unset bg-lemon w-full sm:inline"
+>
   <a
     [href]="skipLinkHref"
     class="skip-nav focus:block absolute top-0 left-0 bg-blue-600 text-white p-2 rounded"
@@ -11,21 +14,30 @@
     aria-label="Global"
   >
     <div class="flex lg:flex-1">
-      <a href="#" class="-m-1.5 p-1.5">
+      <a
+        href="#"
+        class="-m-1.5 p-1.5"
+        [class.hidden]="!isHome"
+        class="h-8 w-auto sm:inline"
+      >
         <span class="sr-only">Little Loft</span>
-        <img
-          class="h-8 w-auto"
-          src="../assets/little-loft.png"
-          alt="Little Loft Logo"
-        />
+        <img src="../assets/little-loft.png" alt="Little Loft Logo" />
       </a>
+      <app-button
+        type="text-icon-left"
+        icon="leftArrow"
+        text="BACK"
+        (click)="navigateToRoute('home')"
+        [class.hidden]="isHome"
+        class="inline sm:hidden"
+      ></app-button>
     </div>
 
     <div class="hidden lg:flex lg:gap-x-12">
       <div class="relative">
         <app-button
           id="btnSearch"
-          type="text-icon"
+          type="text-icon-right"
           icon="search"
           text="Search"
           (click)="toggleSearchMenu()"
@@ -66,7 +78,7 @@
         id="btnLogIn"
         type="text"
         text="Log in"
-        (click)="(false)"
+        (click)="navigateToRoute('login')"
         class="hidden lg:flex my-auto"
       ></app-button>
 
@@ -75,7 +87,7 @@
         id="btnProfile"
         type="text"
         text="Profile"
-        (click)="(false)"
+        (click)="navigateToRoute('profile')"
         class="hidden lg:flex my-auto"
       ></app-button>
 
@@ -83,7 +95,7 @@
         type="icon"
         icon="heart"
         text="Favourites"
-        href="#"
+        (click)="navigateToRoute('favourites')"
         class="my-auto"
       ></app-button>
 
@@ -91,8 +103,8 @@
         type="icon"
         icon="cart"
         text="Shopping basket"
-        href="#"
-        class="ml-4 my-auto"
+        (click)="navigateToRoute('basket')"
+        class="my-auto"
       ></app-button>
 
       <app-button
@@ -100,7 +112,7 @@
         icon="burgerMenu"
         text="Open main menu"
         (click)="showSideMenu = true"
-        class="ml-4 my-auto hidden sm:inline-flex lg:hidden"
+        class="my-auto hidden sm:inline-flex lg:hidden"
       ></app-button>
     </div>
   </nav>

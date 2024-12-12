@@ -1,30 +1,41 @@
 <div
   id="searchSubMenu"
-  class="top-full z-10 mt-3 mx-auto max-w-md overflow-hidden rounded-3xl bg-lemon lg:absolute lg:-left-8 lg:w-screen lg:shadow-lg lg:ring-1 lg:ring-gray-900/5"
+  class="top-full z-10 pt-6 sm:pt-0 lg:pt-3 mx-auto max-w-auto sm:max-w-md overflow-hidden rounded-3xl bg-lemon lg:absolute lg:-left-8 lg:w-screen lg:shadow-lg lg:ring-1 lg:ring-gray-900/5"
 >
-  <div class="p-4">
-    <label for="search" class="hidden">Search</label>
-    <div class="my-2">
-      <app-input label="Search"></app-input>
-    </div>
-    <div class="grid grid-cols-2 divide-x divide-gray-900/5">
-      <a
-        href="#"
-        class="flex items-center justify-center gap-x-2.5 p-5 text-sm/6 font-semibold text-primary hover:bg-lemonDark"
-      >
-        <app-icon icon="bear" color="primary" [size]="15"></app-icon>
-        Products
-      </a>
+  <div class="pb-4">
+    <div class="fixed sm:relative bg-lemon w-full">
+      <label for="search" class="hidden">Search</label>
+      <div class="my-2 px-10 flex">
+        <app-button
+          type="icon"
+          icon="leftArrow"
+          text="BACK"
+          (click)="navigateToRoute('home')"
+          class="-ml-2.5 inline sm:hidden"
+        ></app-button>
+        <app-input label="Search" icon="search" class="w-full"></app-input>
+      </div>
+      <div class="grid grid-cols-2 divide-x divide-gray-900/5">
+        <a
+          href="#"
+          class="flex items-center justify-center gap-x-2.5 py-5 text-sm/6 font-semibold text-primary hover:bg-lemonDark"
+        >
+          <app-icon icon="bear" color="primary" [size]="15"></app-icon>
+          Products
+        </a>
 
-      <a
-        href="#"
-        class="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-lemonDark"
-      >
-        <app-icon icon="smile"></app-icon>
-        Sellers
-      </a>
+        <a
+          href="#"
+          class="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-lemonDark"
+        >
+          <app-icon icon="smile"></app-icon>
+          Sellers
+        </a>
+      </div>
+      <div class="border-t border-gray-900/5"></div>
     </div>
-    <div class="border-t border-gray-900/5"></div>
-    <app-options-list [options]="searchCategories"></app-options-list>
+    <div class="pt-32 sm:pt-0">
+      <app-options-list [options]="searchCategories"></app-options-list>
+    </div>
   </div>
 </div>

@@ -1,31 +1,35 @@
 <div>
   <ng-container *ngIf="isIcon">
     <button
-      class="text-sm/6 font-semibold p-2.5 text-gray-900 cursor-pointer"
+      class="text-sm/6 font-semibold p-4 text-gray-900 transition ease-in-out hover:bg-lemonDark duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       [attr.aria-label]="text"
     >
       <app-icon *ngIf="!!icon" [icon]="icon"></app-icon>
     </button>
   </ng-container>
-  <ng-container *ngIf="isTextIcon">
+
+  <ng-container *ngIf="isTextIconLeft || isTextIconRight">
     <button
       type="button"
-      class="flex items-center gap-x-1 text-sm/6 p-4 font-semibold text-gray-900 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+      class="flex items-center gap-x-1 text-sm/6 p-4 font-semibold text-gray-900 transition ease-in-out hover:bg-lemonDark duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       aria-expanded="false"
     >
+      <app-icon *ngIf="!!icon && isTextIconLeft" [icon]="icon"></app-icon>
       {{ text }}
-      <app-icon *ngIf="!!icon" [icon]="icon"></app-icon>
+      <app-icon *ngIf="!!icon && isTextIconRight" [icon]="icon"></app-icon>
     </button>
   </ng-container>
+
   <ng-container *ngIf="isText">
     <button
       type="button"
-      class="flex items-center text-sm/6 p-4 font-semibold transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300"
+      class="flex items-center text-sm/6 p-4 font-semibold transition ease-in-out hover:bg-lemonDark duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       aria-expanded="false"
     >
       {{ text }}
     </button>
   </ng-container>
+
   <ng-container *ngIf="isBanner">
     <button
       class="-mx-3 block rounded-lg w-full text-left px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-lemonDark"
@@ -33,6 +37,7 @@
       {{ text }}
     </button>
   </ng-container>
+
   <ng-container *ngIf="isFilled">
     <button
       class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primaryDark duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -40,9 +45,10 @@
       {{ text }}
     </button>
   </ng-container>
+
   <ng-container *ngIf="isPill">
     <button
-      class="py-4 px-8 m-auto w-2/4 rounded-full bg-black text-white uppercase"
+      class="py-4 px-8 m-auto w-2/4 rounded-full bg-black text-white uppercase transition ease-in-out hover:bg-gray-700 duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
     >
       {{ text }}
     </button>

@@ -9,7 +9,6 @@ import { ButtonTypes } from '../../consts/controls.consts';
 export class ButtonComponent {
   @Input() type!: ButtonTypes;
   @Input() text!: string;
-  @Input() href?: string;
   @Input() icon?: string;
   @Input() disabled = false;
 
@@ -28,8 +27,12 @@ export class ButtonComponent {
     return this.type === 'icon';
   }
 
-  get isTextIcon(): boolean {
-    return this.type === 'text-icon';
+  get isTextIconLeft(): boolean {
+    return this.type === 'text-icon-left';
+  }
+
+  get isTextIconRight(): boolean {
+    return this.type === 'text-icon-right';
   }
 
   get isCircle(): boolean {
@@ -42,10 +45,5 @@ export class ButtonComponent {
 
   get isPill(): boolean {
     return this.type === 'pill';
-  }
-
-  public clicked(event: MouseEvent): void {
-    event.stopPropagation();
-    this.click.emit();
   }
 }

@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { HEADER_HIDDEN_FOR_ROUTES } from 'src/app/helpers/router.helper';
 
 @Component({
   selector: 'app-header',
@@ -12,15 +13,13 @@ export class HeaderComponent {
   public loggedIn = false;
   public skipLinkHref = '#main-content';
   public showHeader: boolean = true;
+  public isHome: boolean = true;
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
       this.skipLinkHref = `${this.router.url}#main-content`;
-      if (this.router.url === '/sell') {
-        this.showHeader = false;
-      } else {
-        this.showHeader = true;
-      }
+      this.showHeader = !HEADER_HIDDEN_FOR_ROUTES.includes(this.router.url);
+      this.isHome = this.router.url === '/home';
     });
   }
 

@@ -25,12 +25,12 @@ export class MobileNavComponent {
     {
       text: 'Inbox',
       icon: 'inbox',
-      href: '#',
+      href: 'inbox',
     },
     {
       text: 'Profile',
       icon: 'profile',
-      href: '#',
+      href: 'profile',
     },
   ];
 }

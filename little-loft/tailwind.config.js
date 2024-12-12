@@ -7,6 +7,9 @@ module.exports = {
       fontFamily: {
         sans: ["Montserrat"],
       },
+      fontSize: {
+        "2xl": ["22px", "28px"],
+      },
       colors: {
         primary: "#E0B75B",
         primaryDark: "#B48F47",
