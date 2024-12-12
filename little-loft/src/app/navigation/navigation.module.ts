@@ -7,11 +7,17 @@ import { MobileNavButtonComponent } from './components/mobile-nav/mobile-nav-but
 import { IconsModule } from '../icons/icons.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ControlsModule } from '../controls/contols.module';
+import { SideMenuComponent } from './components/side-menu/side-menu.component';
 
 @NgModule({
-  declarations: [HeaderComponent, MobileNavComponent, MobileNavButtonComponent],
+  declarations: [
+    HeaderComponent,
+    MobileNavComponent,
+    MobileNavButtonComponent,
+    SideMenuComponent,
+  ],
   imports: [PageSectionsModule, IconsModule, BrowserModule, ControlsModule],
-  exports: [HeaderComponent, MobileNavComponent],
+  exports: [HeaderComponent, MobileNavComponent, SideMenuComponent],
   providers: [],
   bootstrap: [],
 })

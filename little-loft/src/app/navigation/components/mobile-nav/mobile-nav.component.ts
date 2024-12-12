@@ -10,27 +10,27 @@ export class MobileNavComponent {
     {
       text: 'Home',
       icon: 'home',
-      href: '/home',
+      href: 'home',
     },
     {
       text: 'Search',
       icon: 'search',
-      href: '/home',
+      href: 'search',
     },
     {
       text: 'Sell',
       icon: 'sell',
-      href: '/sell',
+      href: 'sell',
     },
     {
       text: 'Inbox',
       icon: 'inbox',
-      href: '/home',
+      href: '#',
     },
     {
       text: 'Profile',
       icon: 'profile',
-      href: '/home',
+      href: '#',
     },
   ];
 }

@@ -1,9 +1,12 @@
 <div *ngIf="!!carouselData" class="py-8 lg:mx-8">
   <div class="flex mb-4 mx-8 md:mx-0">
-    <h3 class="text-xl font-bold">{{ carouselData.title }}</h3>
-    <a class="ml-auto pl-8 text-gray-400" [href]="carouselData.href"
-      >All ></a
-    >
+    <h3 class="text-xl my-auto font-bold">{{ carouselData.title }}</h3>
+    <app-button
+      class="ml-auto text-gray-400"
+      (click)="navigateToRoute(carouselData.href)"
+      text="All >"
+      type="text"
+    ></app-button>
   </div>
   <div class="overflow-auto">
     <div
@@ -22,14 +25,16 @@
       <a
         *ngFor="let card of carouselData.cards"
         [href]="card.link"
-        class="flex-none w-full snap-center cursor-pointer"
+        [attr.aria-label]="card.title"
+        class="flex-none w-full rounded snap-center cursor-pointer transition ease-in-out delay-150 hover:translate-y-0 hover:scale-105 duration-300"
       >
         <div
           *ngIf="carouselData.type === carouselTypeButtons"
           class="bg-blue text-white text-center p-2"
         >
-          <a class="w-full" [href]="card.link">{{ card.title }}</a>
+          <p class="w-full">{{ card.title }}</p>
         </div>
+
         <div
           *ngIf="carouselData.type === carouselTypeTextAndCircleImage"
           class="min-w-16 max-w-16"
@@ -45,12 +50,13 @@
             </h3>
           </div>
         </div>
+
         <div *ngIf="carouselData.type === carouselTypeInImage" class="relative">
           <div>
             <img
               [src]="card.image"
               [alt]="card.alt"
-              class="w-full object-cover rounded max-h-72 h-56 sm:h-auto"
+              class="w-full max-w-72 sm:max-w-full object-cover rounded max-h-72 h-56 sm:h-auto"
             />
           </div>
 
@@ -60,6 +66,7 @@
             {{ card.title }}
           </h3>
         </div>
+
         <div
           *ngIf="carouselData.type === carouselTypeSingleRow"
           class="overflow-hidden"
@@ -67,7 +74,7 @@
           <img
             [src]="card.image"
             [alt]="card.alt"
-            class="w-full h-32 md:h-40 object-cover rounded"
+            class="w-full max-w-40 sm:max-w-full h-32 md:h-40 object-cover rounded"
           />
           <div class="p-4">
             <h3 class="text-lg leading-6 font-bold text-gray-900">
@@ -75,6 +82,7 @@
             </h3>
           </div>
         </div>
+
         <div
           *ngIf="carouselData.type === carouselTypeTwoRows"
           class="overflow-hidden"
@@ -82,7 +90,7 @@
           <img
             [src]="card.image"
             [alt]="card.alt"
-            class="w-full h-40 md:h-auto object-cover rounded"
+            class="w-full max-w-40 sm:max-w-full h-40 md:h-auto object-cover rounded"
           />
           <div class="p-4">
             <h3 class="text-lg leading-6 font-bold text-gray-900">

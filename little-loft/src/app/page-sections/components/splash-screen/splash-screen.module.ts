@@ -4,6 +4,7 @@ import { SplashWithTextComponent } from './components/splash-with-text/splash-wi
 import { SplashWithTextAndImageComponent } from './components/splash-with-text-and-image/splash-with-text-and-image.component';
 import { SplashWithActionComponent } from './components/splash-with-action/splash-with-action.component';
 import { SplashScreenComponent } from './components/splash-screen.component';
+import { ControlsModule } from 'src/app/controls/contols.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { SplashScreenComponent } from './components/splash-screen.component';
     SplashWithActionComponent,
     SplashScreenComponent,
   ],
-  imports: [BrowserModule],
+  imports: [BrowserModule, ControlsModule],
   exports: [SplashScreenComponent],
   providers: [],
 })

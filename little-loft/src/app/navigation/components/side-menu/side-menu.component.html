@@ -1,0 +1,81 @@
+<div class="fixed inset-0 z-10"></div>
+<div
+  class="fixed inset-y-0 right-0 z-10 bg-lemon w-full overflow-y-auto px-6 py-6 sm:max-w-sm sm:border-l"
+>
+  <div class="flex items-center justify-between">
+    <a href="#" class="-m-1.5 p-1.5">
+      <span class="sr-only">Little Loft</span>
+      <img
+        class="h-8 w-auto"
+        src="../assets/wood-blocks-icon.png"
+        alt="Little Loft Logo"
+      />
+    </a>
+    <app-button
+      type="icon"
+      icon="close"
+      text="Close menu"
+      (click)="closeMenu.emit()"
+      class="ml-4"
+    ></app-button>
+  </div>
+  <div class="mt-6 flow-root">
+    <div class="-my-6 divide-y divide-gray-500/10">
+      <div class="space-y-2 py-6">
+        <div class="-mx-3">
+          <button
+            type="button"
+            class="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base/7 font-semibold text-gray-900 hover:bg-lemonDark"
+            aria-controls="disclosure-1"
+            aria-expanded="false"
+          >
+            Search
+            <app-icon icon="downArrow"></app-icon>
+          </button>
+
+          <div class="mt-2 space-y-2" id="disclosure-1">
+            <app-search-section></app-search-section>
+          </div>
+        </div>
+
+        <app-button
+          id="btnExploreSide"
+          type="banner"
+          text="Explore"
+          (click)="navigateToRoute('explore')"
+        ></app-button>
+
+        <app-button
+          id="btnSellSide"
+          type="banner"
+          text="Sell"
+          (click)="navigateToRoute('sell')"
+        ></app-button>
+
+        <app-button
+          id="btnInboxSide"
+          type="banner"
+          text="Inbox"
+          (click)="navigateToRoute('inbox')"
+        ></app-button>
+      </div>
+      <div class="py-6">
+        <app-button
+          *ngIf="!loggedIn"
+          id="btnLogInSide"
+          type="banner"
+          text="Log in"
+          (click)="(false)"
+        ></app-button>
+
+        <app-button
+          *ngIf="loggedIn"
+          id="btnProfileSide"
+          type="banner"
+          text="Profile"
+          (click)="(false)"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</div>

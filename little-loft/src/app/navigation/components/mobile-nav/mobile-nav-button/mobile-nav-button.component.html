@@ -3,13 +3,20 @@
     <div>
       <div class="m-auto h-full">
         <app-icon
+          [class.hidden]="onCurrentPage"
           class="h-4 m-auto"
           [icon]="mobileNav.icon"
-          [color]="mobileNav.icon === 'home' ? 'primary' : 'black'"
+          color="black"
+        ></app-icon>
+        <app-icon
+          [class.hidden]="!onCurrentPage"
+          class="h-4 m-auto"
+          [icon]="mobileNav.icon"
+          color="primary"
         ></app-icon>
       </div>
     </div>
-    <p [class]="mobileNav.icon === 'home' ? 'text-primary' : 'text-black'">
+    <p [class.text-primary]="onCurrentPage" [class.text-black]="!onCurrentPage">
       {{ mobileNav.text }}
     </p>
   </a>

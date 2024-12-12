@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { SplashScreenWithAction } from '../../models/splash-screen.models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-splash-with-action',
@@ -8,6 +9,11 @@ import { SplashScreenWithAction } from '../../models/splash-screen.models';
 })
 export class SplashWithActionComponent {
   constructor(
-    @Inject('sectionData') public sectionData: SplashScreenWithAction
+    @Inject('sectionData') public sectionData: SplashScreenWithAction,
+    private router: Router
   ) {}
+
+  public navigateToRoute(route: string): void {
+    this.router.navigate([route]);
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mobile-nav-button',
@@ -7,4 +8,12 @@ import { Component, Input } from '@angular/core';
 })
 export class MobileNavButtonComponent {
   @Input() mobileNav!: any;
+
+  public onCurrentPage: boolean = false;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.onCurrentPage = `/${this.mobileNav.href}` === this.router.url;
+    });
+  }
 }

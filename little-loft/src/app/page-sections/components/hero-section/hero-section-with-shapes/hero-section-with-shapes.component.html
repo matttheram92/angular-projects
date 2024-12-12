@@ -19,12 +19,13 @@
       <p class="w-2/4 lg:w-3/4 m-auto">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit
       </p>
-      <a
-        class="mt-8 md:mt-12 py-4 px-8 m-auto w-2/4 rounded-full bg-black text-white uppercase"
-        href="explore"
+      <app-button
+        class="mt-8 md:mt-12"
+        text="Explore"
+        type="pill"
+        (click)="navigateToRoute('explore')"
       >
-        Explore
-      </a>
+      </app-button>
     </div>
   </div>
 </div>

@@ -35,4 +35,17 @@ export class ButtonComponent {
   get isCircle(): boolean {
     return this.type === 'circle';
   }
+
+  get isBanner(): boolean {
+    return this.type === 'banner';
+  }
+
+  get isPill(): boolean {
+    return this.type === 'pill';
+  }
+
+  public clicked(event: MouseEvent): void {
+    event.stopPropagation();
+    this.click.emit();
+  }
 }

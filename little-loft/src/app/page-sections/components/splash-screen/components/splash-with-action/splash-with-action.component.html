@@ -6,10 +6,11 @@
     {{ sectionData.subHeader }}
   </p>
 
-  <a
-    [href]="sectionData.actionHref"
-    class="block text-center mt-16 md:mt-12 py-4 px-8 m-auto w-2/4 rounded-full bg-black text-white uppercase"
+  <app-button
+    type="pill"
+    [text]="sectionData.actionText"
+    (click)="navigateToRoute(sectionData.actionHref)"
+    class="block text-center mt-16 md:mt-12"
   >
-    {{ sectionData.actionText }}
-  </a>
+  </app-button>
 </div>

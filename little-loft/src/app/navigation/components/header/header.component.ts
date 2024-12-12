@@ -36,4 +36,12 @@ export class HeaderComponent {
       this.showSearchSubMenu = false;
     }
   }
+
+  public navigateToRoute(route: string): void {
+    this.router.navigate([route]);
+  }
+
+  public toggleSearchMenu(): void {
+    this.showSearchSubMenu = !this.showSearchSubMenu;
+  }
 }

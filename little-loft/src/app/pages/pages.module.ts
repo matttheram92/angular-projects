@@ -7,6 +7,7 @@ import { SplashScreenModule } from '../page-sections/components/splash-screen/sp
 import { HeroSectionModule } from '../page-sections/components/hero-section/hero-section.module';
 import { PageSectionsModule } from '../page-sections/page-sections.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { SearchPageComponent } from './components/search-page/search-page.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ProductListComponent,
     OnboardingComponent,
     ExploreComponent,
+    SearchPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +28,7 @@ import { BrowserModule } from '@angular/platform-browser';
     ProductListComponent,
     OnboardingComponent,
     ExploreComponent,
+    SearchPageComponent
   ],
   providers: [],
 })
