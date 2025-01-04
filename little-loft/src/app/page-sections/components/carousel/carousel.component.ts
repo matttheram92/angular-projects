@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { CarouselData, CarouselTypes } from './models/carousel.model';
 import { Router } from '@angular/router';
+import { DashboardCarousel } from 'src/app/page-sections/components/dashboard/models/dashboard.models';
 
 @Component({
   selector: 'app-carousel',
@@ -8,16 +9,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent {
-  @Input()
-  carouselData!: CarouselData;
+  public carouselData: CarouselData;
 
-  constructor(private router: Router) {}
+  constructor(
+    @Inject('sectionData') public sectionData: DashboardCarousel,
+    private router: Router
+  ) {
+    this.carouselData = this.sectionData.carouselData;
+  }
 
   public carouselTypeButtons = CarouselTypes.TextButton;
   public carouselTypeInImage = CarouselTypes.InImage;
   public carouselTypeSingleRow = CarouselTypes.SingleRow;
   public carouselTypeTwoRows = CarouselTypes.TwoRows;
   public carouselTypeTextAndCircleImage = CarouselTypes.TextAndCircleImage;
+
+  public getCarouselTypeStyles(): string {
+    switch (this.carouselData.type) {
+      case CarouselTypes.TextAndCircleImage:
+        return 'gap-8 md:gap-24 lg:gap-8 grid-cols-12 md:w-full';
+      case CarouselTypes.InImage:
+        return 'lg:w-full gap-4 grid-cols-4';
+      default:
+        return 'md:w-full gap-4 grid-cols-4';
+    }
+  }
 
   public navigateToRoute(route: string): void {
     this.router.navigate([route]);

@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  updateBreakpoint(): void {
+  private updateBreakpoint(): void {
     this.isMobile = isMobileView();
   }
 }

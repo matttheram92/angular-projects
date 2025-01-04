@@ -9,19 +9,7 @@
     ></app-button>
   </div>
   <div class="overflow-auto">
-    <div
-      class="grid px-10 md:px-0 w-max"
-      [class.gap-4]="carouselData.type !== carouselTypeTextAndCircleImage"
-      [class.gap-8]="carouselData.type === carouselTypeTextAndCircleImage"
-      [class.md:gap-24]="carouselData.type === carouselTypeTextAndCircleImage"
-      [class.lg:gap-8]="carouselData.type === carouselTypeTextAndCircleImage"
-      [class.grid-cols-4]="carouselData.type !== carouselTypeTextAndCircleImage"
-      [class.grid-cols-12]="
-        carouselData.type === carouselTypeTextAndCircleImage
-      "
-      [class.lg:w-full]="carouselData.type === carouselTypeInImage"
-      [class.md:w-full]="carouselData.type !== carouselTypeInImage"
-    >
+    <div class="grid px-10 md:px-0 w-max overflow-y-hidden" [ngClass]="getCarouselTypeStyles()">
       <a
         *ngFor="let card of carouselData.cards"
         [href]="card.link"

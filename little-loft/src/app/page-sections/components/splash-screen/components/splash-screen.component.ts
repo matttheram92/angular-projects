@@ -5,7 +5,7 @@ import {
   SplashScreenTypes,
 } from '../models/splash-screen.models';
 import { isMobileView } from 'src/app/helpers/breakpoint.helper';
-import { SPLASH_SCREEN_COMPONENTS } from '../consts/splash-screen.consts';
+import { SPLASH_SCREEN_COMPONENTS, SplashScreenComponentsUnion } from '../consts/splash-screen.consts';
 
 @Component({
   selector: 'app-splash-screen',
@@ -24,11 +24,11 @@ export class SplashScreenComponent implements OnInit {
     window.addEventListener('resize', () => this.updateBreakpoint());
   }
 
-  updateBreakpoint(): void {
+  private updateBreakpoint(): void {
     this.isMobile = isMobileView();
   }
 
-  public getComponentType(type: SplashScreenTypes) {
+  public getComponentType(type: SplashScreenTypes): SplashScreenComponentsUnion {
     return SPLASH_SCREEN_COMPONENTS[type];
   }
 

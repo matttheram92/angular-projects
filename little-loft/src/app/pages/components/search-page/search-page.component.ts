@@ -14,7 +14,7 @@ export class SearchPageComponent implements OnInit {
     window.addEventListener('resize', () => this.updateBreakpoint());
   }
 
-  updateBreakpoint(): void {
+  private updateBreakpoint(): void {
     const isMobile = isMobileView();
 
     if (!isMobile) {

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { OnboardingComponent } from './components/onboarding/onboarding.component';
 import { ExploreComponent } from './components/explore/explore.component';
@@ -15,10 +14,10 @@ import { ProductItemComponent } from './components/product-item/product-item.com
 import { BasketComponent } from './components/basket/basket.component';
 import { FavouritesComponent } from './components/favourites/favourites.component';
 import { ControlsModule } from '../controls/contols.module';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
-    DashboardComponent,
     ProductListComponent,
     OnboardingComponent,
     ExploreComponent,
@@ -29,6 +28,7 @@ import { ControlsModule } from '../controls/contols.module';
     ProductItemComponent,
     BasketComponent,
     FavouritesComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +38,6 @@ import { ControlsModule } from '../controls/contols.module';
     ControlsModule,
   ],
   exports: [
-    DashboardComponent,
     ProductListComponent,
     OnboardingComponent,
     ExploreComponent,
