@@ -1,10 +1,17 @@
 <div>
-  <ng-container *ngIf="isIcon">
+  <ng-container *ngIf="isIcon || isIconFilled">
     <button
-      class="text-sm/6 font-semibold p-4 text-gray-900 transition ease-in-out hover:bg-lemonDark duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      class="text-sm/6 font-semibold p-4 rounded-full transition ease-in-out duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      [ngClass]="[
+        isIconFilled ? 'bg-black hover:bg-gray-700' : 'hover:bg-lemonDark'
+      ]"
       [attr.aria-label]="text"
     >
-      <app-icon *ngIf="!!icon" [icon]="icon"></app-icon>
+      <app-icon
+        *ngIf="!!icon"
+        [icon]="icon"
+        [color]="isIconFilled ? 'white' : 'gray'"
+      ></app-icon>
     </button>
   </ng-container>
 
@@ -46,9 +53,15 @@
     </button>
   </ng-container>
 
-  <ng-container *ngIf="isPill">
+  <ng-container *ngIf="isPill || isPillSecondary">
     <button
-      class="py-4 px-8 m-auto w-2/4 rounded-full bg-black text-white uppercase transition ease-in-out hover:bg-gray-700 duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      class="m-auto w-full rounded-full uppercase transition ease-in-out duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      [ngClass]="[
+        isPill
+          ? 'bg-black text-white hover:bg-gray-700'
+          : 'border border-black hover:bg-lemonDark',
+        size === 'sm' ? 'py-2.5 px-5 leading-[14px]' : 'py-4 px-8'
+      ]"
     >
       {{ text }}
     </button>

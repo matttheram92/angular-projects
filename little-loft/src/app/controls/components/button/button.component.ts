@@ -10,6 +10,7 @@ export class ButtonComponent {
   @Input() type!: ButtonTypes;
   @Input() text!: string;
   @Input() icon?: string;
+  @Input() size?: 'sm' | 'md' | 'lg';
   @Input() disabled = false;
 
   @Output()
@@ -25,6 +26,10 @@ export class ButtonComponent {
 
   get isIcon(): boolean {
     return this.type === 'icon';
+  }
+
+  get isIconFilled(): boolean {
+    return this.type === 'icon-filled';
   }
 
   get isTextIconLeft(): boolean {
@@ -45,5 +50,9 @@ export class ButtonComponent {
 
   get isPill(): boolean {
     return this.type === 'pill';
+  }
+
+  get isPillSecondary(): boolean {
+    return this.type === 'pill-secondary';
   }
 }
