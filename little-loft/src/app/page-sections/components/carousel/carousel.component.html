@@ -1,5 +1,5 @@
 <div *ngIf="!!carouselData" class="padding-between-components lg:mx-8">
-  <div class="flex mb-4 px-10 md:px-0">
+  <div class="flex px-10 md:px-0">
     <h3 class="text-2xl font-bold">{{ carouselData.title }}</h3>
     <app-button
       class="-mt-3 ml-auto text-gray-400"
@@ -9,10 +9,13 @@
     ></app-button>
   </div>
   <div class="overflow-auto">
-    <div class="grid px-10 md:px-0 w-max overflow-y-hidden" [ngClass]="getCarouselTypeStyles()">
+    <div
+      class="grid px-10 pt-4 md:px-0 w-max overflow-y-hidden"
+      [ngClass]="getCarouselTypeStyles()"
+    >
       <a
         *ngFor="let card of carouselData.cards"
-        [href]="card.link"
+        (click)="navigateToRoute(card.link)"
         [attr.aria-label]="card.title"
         class="flex-none w-full rounded snap-center cursor-pointer transition ease-in-out delay-150 hover:translate-y-0 hover:scale-105 duration-300"
       >

@@ -1,3 +1,4 @@
+import { ButtonProps } from '@app/controls/models/buttons.model';
 import { CarouselData } from 'src/app/page-sections/components/carousel/models/carousel.model';
 
 export enum DashboardTypes {
@@ -12,8 +13,17 @@ export interface DashboardSectionBase {
   type: DashboardTypes;
 }
 
-export interface DashboardHeroImage extends DashboardSectionBase {
+export interface DashboardHeroSectionBase extends DashboardSectionBase {
+  header: string;
+  subHeader: string;
+  buttonPrimary: ButtonProps;
+}
+
+export interface DashboardHeroImage extends DashboardHeroSectionBase {
   type: DashboardTypes.HeroImage;
+  imageSrc: string;
+  imageAlt: string;
+  buttonSecondary: ButtonProps;
 }
 
 export interface DashboardCarousel extends DashboardSectionBase {
@@ -21,11 +31,13 @@ export interface DashboardCarousel extends DashboardSectionBase {
   carouselData: CarouselData;
 }
 
-export interface DashboardHeroHalfAndHalf extends DashboardSectionBase {
+export interface DashboardHeroHalfAndHalf extends DashboardHeroSectionBase {
   type: DashboardTypes.HeroHalfAndHalf;
+  imageSrc: string;
+  imageAlt: string;
 }
 
-export interface DashboardHeroShapes extends DashboardSectionBase {
+export interface DashboardHeroShapes extends DashboardHeroSectionBase {
   type: DashboardTypes.HeroShapes;
 }
 

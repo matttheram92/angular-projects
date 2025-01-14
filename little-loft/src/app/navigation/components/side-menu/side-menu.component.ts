@@ -5,12 +5,13 @@ import { Router } from '@angular/router';
   selector: 'app-side-menu',
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.scss'],
+  standalone: false,
 })
 export class SideMenuComponent {
   @Input() loggedIn!: boolean;
 
   @Output()
-  closeMenu: EventEmitter<any> = new EventEmitter<any>();
+  closeMenu: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private router: Router) {}
 

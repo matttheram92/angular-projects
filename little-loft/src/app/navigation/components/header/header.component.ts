@@ -1,11 +1,15 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
-import { HEADER_HIDDEN_FOR_ROUTES } from 'src/app/helpers/router.helper';
+import { HEADER_HIDDEN_FOR_ROUTES } from '@app/core/consts/navigation.consts';
+import { AppState } from '@app/store/app.state';
+import { selectWishlistItems } from '@app/store/selectors/wishlist.selectors';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  standalone: false,
 })
 export class HeaderComponent {
   public showSearchSubMenu = false;
@@ -14,12 +18,27 @@ export class HeaderComponent {
   public skipLinkHref = '#main-content';
   public showHeader: boolean = true;
   public isHome: boolean = true;
+  public inBasket: number = 0;
+  public inWishlist: number = 0;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private store: Store<AppState>
+  ) {
     this.router.events.subscribe(() => {
       this.skipLinkHref = `${this.router.url}#main-content`;
       this.showHeader = !HEADER_HIDDEN_FOR_ROUTES.includes(this.router.url);
       this.isHome = this.router.url === '/home';
+    });
+
+    this.store
+      .select((state) => state.basket.itemIds)
+      .subscribe((products) => {
+        this.inBasket = products.length;
+      });
+
+    this.store.select(selectWishlistItems).subscribe((itemIds) => {
+      this.inWishlist = itemIds.length;
     });
   }
 
@@ -34,10 +53,6 @@ export class HeaderComponent {
     if (!isClickInside) {
       this.showSearchSubMenu = false;
     }
-  }
-
-  public navigateToRoute(route: string): void {
-    this.router.navigate([route]);
   }
 
   public toggleSearchMenu(): void {

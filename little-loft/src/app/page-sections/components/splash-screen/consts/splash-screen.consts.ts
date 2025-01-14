@@ -5,7 +5,7 @@ import {
 import { SplashWithActionComponent } from '../components/splash-with-action/splash-with-action.component';
 import { SplashWithTextAndImageComponent } from '../components/splash-with-text-and-image/splash-with-text-and-image.component';
 import { SplashWithTextComponent } from '../components/splash-with-text/splash-with-text.component';
-import { DUMMY_IMAGE_URLS } from 'src/app/helpers/consts/dummy-images.consts';
+import { DUMMY_IMAGE_URLS } from '@app/core/consts/dummy-images.consts';
 
 export const ONBOARDING_SPLASH_SCREEN_DATA: SplashScreenInfo = {
   title: 'Welcome to Our App',

@@ -8,6 +8,7 @@ import { IconsModule } from '../icons/icons.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ControlsModule } from '../controls/contols.module';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { CoreModule } from '@app/core/core.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,13 @@ import { SideMenuComponent } from './components/side-menu/side-menu.component';
     MobileNavButtonComponent,
     SideMenuComponent,
   ],
-  imports: [PageSectionsModule, IconsModule, BrowserModule, ControlsModule],
+  imports: [
+    PageSectionsModule,
+    IconsModule,
+    BrowserModule,
+    ControlsModule,
+    CoreModule,
+  ],
   exports: [HeaderComponent, MobileNavComponent, SideMenuComponent],
   providers: [],
   bootstrap: [],

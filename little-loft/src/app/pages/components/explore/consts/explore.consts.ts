@@ -4,11 +4,12 @@ import {
   SPECIAL_PRICES_CARD_DATA,
   TOP_SELLERS_DATA,
   TOYS_AND_GAMES_CARD_DATA,
-} from 'src/app/helpers/consts/dummy-data.consts';
+} from '@app/core/consts/dummy-data.consts';
 import {
   DashboardInfo,
   DashboardTypes,
 } from '../../../../page-sections/components/dashboard/models/dashboard.models';
+import { DUMMY_IMAGE_URLS } from '@app/core/consts/dummy-images.consts';
 
 export const EXPLORE_DASHBOARD_DATA: DashboardInfo = {
   title: 'Explort',
@@ -21,6 +22,12 @@ export const EXPLORE_DASHBOARD_DATA: DashboardInfo = {
     {
       index: 1,
       type: DashboardTypes.HeroHalfAndHalf,
+      header: 'We Love...',
+      subHeader:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium dolores esse tenetur rem.',
+      imageSrc: DUMMY_IMAGE_URLS.room,
+      imageAlt: 'An image of a childs room',
+      buttonPrimary: { label: 'Read More >', action: '' },
     },
     {
       index: 2,

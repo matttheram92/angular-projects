@@ -1,30 +1,33 @@
 <div class="h-2/4 relative padding-between-components">
   <div class="absolute inset-0">
     <img
-      [src]="imageSrc"
-      alt="An image of a childs room"
+      [src]="sectionData.imageSrc"
+      alt="sectionData.imageAlt"
       class="object-cover object-center w-full h-full"
     />
 
     <div class="absolute inset-0 bg-black opacity-10"></div>
   </div>
   <div
-    class="relative z-10 flex flex-col justify-center items-center h-full mx-auto max-w-2xl py-4 border-b"
+    class="relative z-10 flex flex-col justify-center items-center h-full mx-auto max-w-2xl py-4 border-b border-primary"
   >
     <div class="text-center">
       <h1
         class="text-balance text-5xl font-semibold tracking-tight text-lemon sm:text-7xl"
       >
-        Soft & cuddly
+        {{ sectionData.header }}
       </h1>
       <p class="mt-8 text-pretty text-lg font-medium text-lemon sm:text-xl/8">
-        Anim aute id magna aliqua
+        {{ sectionData.subHeader }}
       </p>
       <div class="mt-10 flex items-center justify-center gap-x-6">
-        <app-button type="filled" text="Get started"></app-button>
+        <app-button
+          type="filled"
+          [text]="sectionData.buttonPrimary.label"
+        ></app-button>
         <app-button
           type="text"
-          text="Discover →"
+          [text]="sectionData.buttonSecondary.label"
           class="text-white"
         ></app-button>
       </div>

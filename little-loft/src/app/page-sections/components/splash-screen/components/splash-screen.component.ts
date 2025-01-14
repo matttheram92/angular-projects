@@ -4,13 +4,14 @@ import {
   SplashScreenSection,
   SplashScreenTypes,
 } from '../models/splash-screen.models';
-import { isMobileView } from 'src/app/helpers/breakpoint.helper';
 import { SPLASH_SCREEN_COMPONENTS, SplashScreenComponentsUnion } from '../consts/splash-screen.consts';
+import { isMobileView } from '@app/core/services/breakpoint.service';
 
 @Component({
-  selector: 'app-splash-screen',
-  templateUrl: './splash-screen.component.html',
-  styleUrls: ['./splash-screen.component.scss'],
+    selector: 'app-splash-screen',
+    templateUrl: './splash-screen.component.html',
+    styleUrls: ['./splash-screen.component.scss'],
+    standalone: false
 })
 export class SplashScreenComponent implements OnInit {
   public visibleSplashIndex: number = 0;

@@ -2,30 +2,26 @@
   class="relative overflow-hidden h-96 padding-between-components sm:h-auto px-8 sm:px-0"
 >
   <div class="flex relative z-20 items-center overflow-hidden h-full">
-    <div class="mx-auto sm:mx-0 lg:mx-8 flex relative h-full">
+    <div class="mx-auto sm:mx-0 lg:mx-8 flex relative h-full w-full">
       <div
         class="absolute bottom-0 right-0 w-60 sm:w-1/2 lg:w-2/5 p-8 flex flex-col sm:relative z-20 bg-blue text-white cursor-pointer"
       >
         <h1 class="uppercase sm:text-4xl font-black flex flex-col leading-none">
-          We Love...
+          {{ sectionData.header }}
         </h1>
-        <p class="text-sm sm:text-base hidden md:block">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          dolores esse tenetur rem.
-        </p>
-        <p class="text-sm sm:text-base md:hidden">
-          Lorem ipsum dolor, sit amet.
+        <p class="text-sm sm:text-base">
+          {{ sectionData.subHeader }}
         </p>
         <div class="flex mt-auto">
           <a href="#" class="uppercase py-2 rounded-lg bg-transparent text-md">
-            Read more >
+            {{ sectionData.buttonPrimary.label }}
           </a>
         </div>
       </div>
       <div class="block w-full lg:w-3/5 relative">
         <img
-          [src]="imageSrc"
-          alt="An image of a childs room"
+          [src]="sectionData.imageSrc"
+          alt="sectionData.imageAlt"
           class="w-80 h-80 object-cover sm:w-full m-auto"
         />
       </div>

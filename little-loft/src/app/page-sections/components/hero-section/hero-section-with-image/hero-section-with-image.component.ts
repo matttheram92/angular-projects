@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { DUMMY_IMAGE_URLS } from 'src/app/helpers/consts/dummy-images.consts';
+import { Component, Inject } from '@angular/core';
+import { DashboardHeroImage } from '../../dashboard/models/dashboard.models';
 
 @Component({
   selector: 'app-hero-section-with-image',
   templateUrl: './hero-section-with-image.component.html',
   styleUrls: ['./hero-section-with-image.component.scss'],
+  standalone: false,
 })
 export class HeroSectionWithImageComponent {
-  imageSrc: string = DUMMY_IMAGE_URLS.childsRoom;
+  constructor(@Inject('sectionData') public sectionData: DashboardHeroImage) {}
 }

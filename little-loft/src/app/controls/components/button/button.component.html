@@ -1,11 +1,11 @@
 <div>
   <ng-container *ngIf="isIcon || isIconFilled">
     <button
-      class="text-sm/6 font-semibold p-4 rounded-full transition ease-in-out duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      class="text-sm/6 font-semibold p-2.5 sm:p-4 rounded-full transition ease-in-out duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       [ngClass]="[
-        isIconFilled ? 'bg-black hover:bg-gray-700' : 'hover:bg-lemonDark'
+        isIconFilled ? 'bg-black hover:bg-gray-700' : 'hover:bg-lemonDark',
       ]"
-      [attr.aria-label]="text"
+      [attr.aria-label]="ariaLabel ?? text"
     >
       <app-icon
         *ngIf="!!icon"
@@ -18,8 +18,8 @@
   <ng-container *ngIf="isTextIconLeft || isTextIconRight">
     <button
       type="button"
+      [attr.aria-label]="ariaLabel ?? text"
       class="flex items-center gap-x-1 text-sm/6 p-4 font-semibold text-gray-900 transition ease-in-out hover:bg-lemonDark duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      aria-expanded="false"
     >
       <app-icon *ngIf="!!icon && isTextIconLeft" [icon]="icon"></app-icon>
       {{ text }}
@@ -30,8 +30,8 @@
   <ng-container *ngIf="isText">
     <button
       type="button"
+      [attr.aria-label]="ariaLabel ?? text"
       class="flex items-center text-sm/6 p-4 font-semibold transition ease-in-out hover:bg-lemonDark duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      aria-expanded="false"
     >
       {{ text }}
     </button>
@@ -40,6 +40,7 @@
   <ng-container *ngIf="isBanner">
     <button
       class="-mx-3 block rounded-lg w-full text-left px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-lemonDark"
+      [attr.aria-label]="ariaLabel ?? text"
     >
       {{ text }}
     </button>
@@ -47,6 +48,7 @@
 
   <ng-container *ngIf="isFilled">
     <button
+      [attr.aria-label]="ariaLabel ?? text"
       class="rounded-md bg-primary px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primaryDark duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
     >
       {{ text }}
@@ -55,13 +57,17 @@
 
   <ng-container *ngIf="isPill || isPillSecondary">
     <button
+      [attr.aria-label]="ariaLabel ?? text"
       class="m-auto w-full rounded-full uppercase transition ease-in-out duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
       [ngClass]="[
-        isPill
-          ? 'bg-black text-white hover:bg-gray-700'
-          : 'border border-black hover:bg-lemonDark',
-        size === 'sm' ? 'py-2.5 px-5 leading-[14px]' : 'py-4 px-8'
+        disabled
+          ? 'bg-lemonDark text-white'
+          : isPill
+            ? 'bg-black text-white hover:bg-gray-700'
+            : 'border border-black hover:bg-lemonDark',
+        size === 'sm' ? 'py-2.5 px-5 leading-[14px]' : 'py-4 px-8',
       ]"
+      [disabled]="disabled"
     >
       {{ text }}
     </button>

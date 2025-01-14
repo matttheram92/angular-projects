@@ -15,15 +15,17 @@
   </div>
   <div class="relative flex h-full">
     <div class="flex flex-col m-auto text-center text-white mt-24">
-      <h1 class="w-full text-2xl sm:text-4xl font-black">Our impact</h1>
+      <h1 class="w-full text-2xl sm:text-4xl font-black">
+        {{ sectionData.header }}
+      </h1>
       <p class="w-2/4 lg:w-3/4 m-auto">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        {{ sectionData.subHeader }}
       </p>
       <app-button
         class="mt-8 md:mt-12"
-        text="Explore"
+        [text]="sectionData.buttonPrimary.label"
         type="pill"
-        (click)="navigateToRoute('explore')"
+        (click)="navigateToRoute(sectionData.buttonPrimary.action)"
       >
       </app-button>
     </div>

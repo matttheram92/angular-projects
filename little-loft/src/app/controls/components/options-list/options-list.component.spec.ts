@@ -65,7 +65,7 @@ describe('OptionsListComponent', () => {
       expect(classes).toContain('w-5/6');
       expect(classes).toContain('m-auto');
       expect(classes).toContain('border-b');
-      expect(classes).toContain('border-gray-900/5');
+      expect(classes).toContain('border-primary');
       expect(classes).toContain('p-4');
       expect(classes).toContain('hover:bg-gray-100');
     });

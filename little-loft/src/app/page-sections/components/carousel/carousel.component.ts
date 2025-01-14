@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CarouselData, CarouselTypes } from './models/carousel.model';
 import { Router } from '@angular/router';
 import { DashboardCarousel } from 'src/app/page-sections/components/dashboard/models/dashboard.models';
@@ -7,9 +7,15 @@ import { DashboardCarousel } from 'src/app/page-sections/components/dashboard/mo
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
+  standalone: false,
 })
 export class CarouselComponent {
   public carouselData: CarouselData;
+  public carouselTypeButtons = CarouselTypes.TextButton;
+  public carouselTypeInImage = CarouselTypes.InImage;
+  public carouselTypeSingleRow = CarouselTypes.SingleRow;
+  public carouselTypeTwoRows = CarouselTypes.TwoRows;
+  public carouselTypeTextAndCircleImage = CarouselTypes.TextAndCircleImage;
 
   constructor(
     @Inject('sectionData') public sectionData: DashboardCarousel,
@@ -17,12 +23,6 @@ export class CarouselComponent {
   ) {
     this.carouselData = this.sectionData.carouselData;
   }
-
-  public carouselTypeButtons = CarouselTypes.TextButton;
-  public carouselTypeInImage = CarouselTypes.InImage;
-  public carouselTypeSingleRow = CarouselTypes.SingleRow;
-  public carouselTypeTwoRows = CarouselTypes.TwoRows;
-  public carouselTypeTextAndCircleImage = CarouselTypes.TextAndCircleImage;
 
   public getCarouselTypeStyles(): string {
     switch (this.carouselData.type) {

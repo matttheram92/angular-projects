@@ -1,4 +1,4 @@
-import { getCurrentBreakpoint, isMobileView } from './breakpoint.helper';
+import { getCurrentBreakpoint, isMobileView } from './breakpoint.service';
 
 describe('getCurrentBreakpoint', () => {
   const originalOuterWidth = window.outerWidth;

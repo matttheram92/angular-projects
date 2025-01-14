@@ -1,32 +1,40 @@
 <div class="md:py-8 pb-40">
   <div class="max-w-6xl mx-auto px-10 sm:px-6 lg:px-8">
-    <div class="flex flex-col md:flex-row">
+    <div
+      class="flex flex-col md:flex-row"
+      tabindex="0"
+      [attr.aria-label]="'product' + product.title"
+    >
       <div class="md:flex-1 px-0 sm:px-4 mb-8 md:mb-4">
         <div class="w-auto sm:w-max md:w-full relative rounded-lg mx-auto">
           <img
             class="md:w-full max-h-96 md:max-h-full m-auto object-cover rounded"
-            [src]="imageSrc"
+            [src]="product.src"
             alt="Product Image"
           />
           <app-button
             class="md:hidden absolute -mt-7 right-2"
             type="icon-filled"
+            ariaLabel="favourite"
             icon="heart"
           ></app-button>
         </div>
       </div>
       <div class="md:flex-1 px-0 sm:px-4">
-        <h2 class="text-2xl font-extrabold mb-2.5">Patchwork Bear</h2>
+        <h2 class="text-2xl font-extrabold mb-2.5">{{ product.title }}</h2>
         <p class="text-gray-600 text-sm font-normal">
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip.
+          {{ product.subtitle }}
         </p>
         <div class="mt-4">
           <p class="text-sm font-semibold mb-2.5">About this seller</p>
           <div class="flex w-full">
-            <img class="h-12 my-auto" [src]="imageSrc" />
+            <img
+              class="h-12 my-auto rounded"
+              [src]="product.seller.imageSrc"
+              [alt]="product.alt"
+            />
             <div class="text-sm pl-3 my-auto">
-              <p class="font-black">Cassie Donk</p>
+              <p class="font-black">{{ product.seller.name }}</p>
               <p class="font-normal">Contact Seller</p>
             </div>
             <div class="ml-auto">
@@ -34,16 +42,19 @@
                 type="text-icon-right"
                 icon="rightArrow"
                 text="SHOP"
+                ariaLabel="Shop. View more items by this seller"
               ></app-button>
             </div>
           </div>
         </div>
 
         <div
-          class="h-[60px] bg-lemon left-0 bottom-0 sm:h-auto flex md:block fixed sm:relative w-screen sm:w-full px-10 sm:p-0 -mt-1 sm:mt-0 border-t-2 sm:border-t-0 mb-16 sm:mb-0"
+          class="h-[60px] bg-lemon left-0 bottom-0 sm:h-auto flex md:block fixed sm:relative w-screen sm:w-full px-10 sm:p-0 -mt-1 sm:mt-0 border-primary border-t-2 sm:border-t-0 mb-16 sm:mb-0"
         >
           <div class="flex mr-4 my-auto sm:mt-4 w-full">
-            <span class="text-xl my-auto font-extrabold">£30</span>
+            <span class="text-xl my-auto font-extrabold">{{
+              product.price
+            }}</span>
             <span class="text-gray-600 text-xs ml-2 self-center"
               >+£3.49 postage</span
             >
@@ -52,36 +63,32 @@
           <div class="flex my-auto w-full">
             <app-button
               class="block md:hidden ml-auto"
+              [disabled]="inBasket"
               text="Buy now"
               type="pill"
               size="sm"
+              (click)="addToBasket()"
             >
             </app-button>
             <app-button
               class="w-full m-2 hidden md:block"
+              [disabled]="inBasket"
               text="Buy now"
               type="pill"
+              (click)="addToBasket()"
             >
             </app-button>
-            <app-button
-              class="w-full m-2 hidden md:block"
-              text="Add to Wishlist"
-              type="pill-secondary"
-            >
-            </app-button>
+            <app-heart-button
+              (buttonClicked)="addToWishlist()"
+              [default]="wishlistButtonDefault"
+            ></app-heart-button>
           </div>
         </div>
 
         <div class="mt-4">
           <span class="text-sm font-semibold mb-4">Product Description</span>
           <p class="text-gray-600 text-sm mt-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed
-            ante justo. Integer euismod libero id mauris malesuada tincidunt.
-            Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue
-            vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae
-            nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum
-            lacinia, non sagittis mauris blandit. Morbi fermentum libero vel
-            nisl suscipit, nec tincidunt mi consectetur.
+            {{ product.description }}
           </p>
         </div>
       </div>

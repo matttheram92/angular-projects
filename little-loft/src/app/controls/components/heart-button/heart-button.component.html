@@ -1,0 +1,18 @@
+<label
+  tabindex="0"
+  aria-label="favourite button"
+  (keydown)="onKeydown($event)"
+  class="like block cursor-pointer overflow-visible rounded-full hover:bg-lemonDark h-16 w-16 mt-1"
+>
+  <input
+    type="checkbox"
+    [attr.disabled]="isDisabled ? true : null"
+    [checked]="isChecked"
+    class="hidden"
+    (click)="heartClicked()"
+  />
+  <div
+    [ngClass]="isChecked ? 'heartChecked' : 'heartUnchecked'"
+    class="heart h-16 w-16"
+  ></div>
+</label>

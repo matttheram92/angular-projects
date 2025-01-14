@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { isMobileView } from './helpers/breakpoint.helper';
-import { HEADER_HIDDEN_FOR_ROUTES } from './helpers/router.helper';
+import { HEADER_HIDDEN_FOR_ROUTES } from './core/consts/navigation.consts';
+import { isMobileView } from './core/services/breakpoint.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: false,
 })
 export class AppComponent implements OnInit {
   public title: string = 'little-loft';

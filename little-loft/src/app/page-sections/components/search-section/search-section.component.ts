@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-search-section',
-  templateUrl: './search-section.component.html',
-  styleUrls: ['./search-section.component.scss'],
+    selector: 'app-search-section',
+    templateUrl: './search-section.component.html',
+    styleUrls: ['./search-section.component.scss'],
+    standalone: false
 })
 export class SearchSectionComponent {
   public searchCategories: string[] = [

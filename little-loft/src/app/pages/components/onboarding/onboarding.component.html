@@ -9,8 +9,15 @@
     </div>
 
     <app-splash-screen
+      *ngIf="isMobile; else onboardingHero"
       class="h-4/6 sm:h-screen w-screen justify-center mb-auto flex flex-col sm:block sm:h-auto sm:w-auto"
       [splashScreenInfo]="splashScreenInfo"
     ></app-splash-screen>
+
+    <ng-template #onboardingHero>
+      <app-hero-section-with-cards
+        [splashScreenInfo]="splashScreenInfo"
+      ></app-hero-section-with-cards>
+    </ng-template>
   </div>
 </div>

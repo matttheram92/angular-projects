@@ -1,10 +1,10 @@
 <div class="lg:h-72 overflow-y-auto">
   <a
     *ngFor="let option of options"
-    href="products"
-    class="flex py-4 px-10 font-semibold m-auto border-b border-gray-900/5 hover:bg-lemonDark"
+    (click)="navigateToRoute('products')"
+    class="cursor-pointer flex py-4 px-10 font-semibold m-auto border-b border-primary hover:bg-lemonDark"
   >
-    <p class="">{{ option }}</p>
-    <p class="ml-auto">></p>
+    <p>{{ option }}</p>
+    <p class="ml-auto"><app-icon icon="rightArrow"></app-icon></p>
   </a>
 </div>

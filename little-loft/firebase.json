@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/little-loft",
+    "public": "dist/little-loft/browser",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

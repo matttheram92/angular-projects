@@ -1,0 +1,40 @@
+<div>
+  <section id="features" class="relative block p-10">
+    <div class="relative mx-auto max-w-5xl text-center">
+      <span
+        class="mb-3 text-primary flex items-center justify-center font-medium uppercase"
+      >
+        {{ splashScreenInfo.sections[0].header }}
+      </span>
+      <h2 class="text-primary font-semibold text-4xl">
+        {{ splashScreenInfo.sections[0].subHeader }}
+      </h2>
+      <p
+        class="mx-auto my-4 w-full max-w-xl text-center font-medium leading-relaxed tracking-wide text-gray-400"
+      >
+        {{ splashScreenInfo.sections[0].body }}
+      </p>
+    </div>
+
+    <div
+      class="grid grid-cols-1 text-center sm:grid-cols-2 sm:gap-x-12 gap-y-12 md:grid-cols-3 md:gap-0 mt-8"
+    >
+      <div
+        *ngFor="let bullet of bullets; index as i"
+        class="md:p-8 lg:p-14 border-l md:border-gray-200 flex flex-col justify-center items-center"
+        [class.border-l]="i > 0"
+      >
+        <div
+          class="w-14 h-14 rounded-full flex justify-center items-center"
+          [ngClass]="bullet.color"
+        >
+          <i class="text-3xl text-gray-900"></i>
+        </div>
+        <h3 class="mt-12 text-xl font-bold text-gray-900">
+          {{ bullet.subHeader }}
+        </h3>
+        <p class="mt-5 text-base text-gray-600">{{ bullet.body }}.</p>
+      </div>
+    </div>
+  </section>
+</div>

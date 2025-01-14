@@ -9,7 +9,7 @@
         <app-button
           type="icon"
           icon="leftArrow"
-          text="BACK"
+          ariaLabel="back to home page"
           (click)="navigateToRoute('home')"
           class="-ml-2.5 inline sm:hidden"
         ></app-button>
@@ -17,22 +17,22 @@
       </div>
       <div class="grid grid-cols-2 divide-x divide-gray-900/5">
         <a
-          href="#"
-          class="flex items-center justify-center gap-x-2.5 py-5 text-sm/6 font-semibold text-primary hover:bg-lemonDark"
+          (click)="navigateToRoute('home')"
+          class="flex items-center cursor-pointer justify-center gap-x-2.5 py-5 text-sm/6 font-semibold text-primary hover:bg-lemonDark"
         >
           <app-icon icon="bear" color="primary" [size]="15"></app-icon>
           Products
         </a>
 
         <a
-          href="#"
-          class="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-lemonDark"
+          (click)="navigateToRoute('home')"
+          class="flex items-center cursor-pointer justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-lemonDark"
         >
           <app-icon icon="smile"></app-icon>
           Sellers
         </a>
       </div>
-      <div class="border-t border-gray-900/5"></div>
+      <div class="border-t border-primary"></div>
     </div>
     <div class="pt-32 sm:pt-0">
       <app-options-list [options]="searchCategories"></app-options-list>

@@ -15,10 +15,10 @@
   >
     <div class="flex lg:flex-1">
       <a
-        href="#"
+        [appNavigateTo]="'home'"
         class="-m-1.5 p-1.5"
         [class.hidden]="!isHome"
-        class="h-8 w-auto sm:inline"
+        class="h-8 w-auto sm:inline cursor-pointer"
       >
         <span class="sr-only">Little Loft</span>
         <img src="../assets/little-loft.png" alt="Little Loft Logo" />
@@ -27,7 +27,7 @@
         type="text-icon-left"
         icon="leftArrow"
         text="BACK"
-        (click)="navigateToRoute('home')"
+        [appNavigateTo]="'home'"
         [class.hidden]="isHome"
         class="inline sm:hidden"
       ></app-button>
@@ -51,7 +51,7 @@
         id="btnExplore"
         type="text"
         text="Explore"
-        (click)="navigateToRoute('explore')"
+        [appNavigateTo]="'explore'"
         class="flex"
       ></app-button>
 
@@ -59,7 +59,7 @@
         id="btnSell"
         type="text"
         text="Sell"
-        (click)="navigateToRoute('sell')"
+        [appNavigateTo]="'sell'"
         class="flex"
       ></app-button>
 
@@ -67,7 +67,7 @@
         id="btnInbox"
         type="text"
         text="Inbox"
-        (click)="navigateToRoute('inbox')"
+        [appNavigateTo]="'inbox'"
         class="flex"
       ></app-button>
     </div>
@@ -78,7 +78,7 @@
         id="btnLogIn"
         type="text"
         text="Log in"
-        (click)="navigateToRoute('login')"
+        [appNavigateTo]="'login'"
         class="hidden lg:flex my-auto"
       ></app-button>
 
@@ -87,30 +87,54 @@
         id="btnProfile"
         type="text"
         text="Profile"
-        (click)="navigateToRoute('profile')"
+        [appNavigateTo]="'profile'"
         class="hidden lg:flex my-auto"
       ></app-button>
 
-      <app-button
-        type="icon"
-        icon="heart"
-        text="Favourites"
-        (click)="navigateToRoute('favourites')"
-        class="my-auto"
-      ></app-button>
+      <div
+        class="relative border-2 border-transparent text-gray-800 rounded-full focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
+      >
+        <app-button
+          type="icon"
+          icon="heart"
+          ariaLabel="Favourites"
+          [appNavigateTo]="'favourites'"
+          class="my-auto"
+        ></app-button>
+        <span class="absolute w-4 h-4 inset-0 object-right-top mt-6 ml-8">
+          <div
+            *ngIf="inWishlist > 0"
+            class="text-center w-4 h-4 rounded-full text-xs font-semibold leading-4 bg-red-500 text-white"
+          >
+            {{ inWishlist }}
+          </div>
+        </span>
+      </div>
 
-      <app-button
-        type="icon"
-        icon="cart"
-        text="Shopping basket"
-        (click)="navigateToRoute('basket')"
-        class="my-auto"
-      ></app-button>
+      <div
+        class="relative border-2 border-transparent text-gray-800 rounded-full focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
+      >
+        <app-button
+          type="icon"
+          icon="cart"
+          ariaLabel="Shopping basket"
+          [appNavigateTo]="'basket'"
+          class="my-auto"
+        ></app-button>
+        <span class="absolute w-4 h-4 inset-0 object-right-top mt-6 ml-8">
+          <div
+            *ngIf="inBasket > 0"
+            class="text-center w-4 h-4 rounded-full text-xs font-semibold leading-4 bg-red-500 text-white"
+          >
+            {{ inBasket }}
+          </div>
+        </span>
+      </div>
 
       <app-button
         type="icon"
         icon="burgerMenu"
-        text="Open main menu"
+        ariaLabel="Open side menu"
         (click)="showSideMenu = true"
         class="my-auto hidden sm:inline-flex lg:hidden"
       ></app-button>

@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { IconService } from '../services/icon.service';
 
 @Component({
-  selector: 'app-icon',
-  templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss'],
+    selector: 'app-icon',
+    templateUrl: './icon.component.html',
+    styleUrls: ['./icon.component.scss'],
+    standalone: false
 })
 export class IconComponent {
   @Input() icon!: string;

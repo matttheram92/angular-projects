@@ -1,4 +1,4 @@
-<div>
+<div class="p-8">
   <ng-container *ngFor="let section of splashScreenInfo.sections">
     <ng-container
       *ngIf="!isMobile || section.index === visibleSplashIndex"
@@ -7,20 +7,20 @@
     ></ng-container>
   </ng-container>
 
-  <div class="absolute pb-20 sm:hidden bottom-0 right-0 p-8 text-white">
+  <div class="absolute mb-20 sm:hidden bottom-0 right-0 px-8">
     <button
       [class.opacity-20]="!isFirst()"
       (click)="previous()"
-      class="ml-4 px-4 py-2 rounded-full bg-green"
+      class="ml-4 p-2 rounded-full bg-green"
     >
-      <
+      <app-icon icon="leftArrow" color="white"></app-icon>
     </button>
     <button
       [class.opacity-20]="!isLast()"
       (click)="next()"
-      class="ml-4 px-4 py-2 rounded-full bg-green"
+      class="ml-4 p-2 rounded-full bg-green"
     >
-      >
+      <app-icon icon="rightArrow" color="white"></app-icon>
     </button>
   </div>
 </div>
