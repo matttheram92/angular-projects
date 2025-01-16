@@ -42,7 +42,7 @@ export class HeartButtonComponent implements OnChanges {
     }, 1000);
   }
 
-  public onKeydown(event: KeyboardEvent) {
+  public onKeydown(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       this.heartClicked();
     }

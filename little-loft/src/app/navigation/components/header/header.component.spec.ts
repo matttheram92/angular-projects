@@ -1,7 +1,6 @@
 import { HeaderComponent } from './header.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReplaySubject } from 'rxjs';
 import { provideMockStore } from '@ngrx/store/testing';
 import { wishlistReducer } from '@app/store/reducers/wishlist.reducer';
 import { basketReducer } from '@app/store/reducers/basket.reducer';
@@ -15,18 +14,9 @@ const initialState = {
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
-  let routerMock: Router;
-  //   let store: MockStore<AppState>;
-  //   let router: Router;
   let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(() => {
-    const events = new ReplaySubject<any>(1);
-    routerMock = {
-      events,
-      navigate: jest.fn(),
-      url: '/home',
-    } as unknown as Router;
 
     TestBed.configureTestingModule({
       declarations: [HeaderComponent],
@@ -43,15 +33,12 @@ describe('HeaderComponent', () => {
           provide: ActivatedRoute,
           useValue: { snapshot: { params: { id: '1' } } },
         },
-        { provide: Router, useValue: routerMock },
       ],
     });
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    // store = TestBed.inject(MockStore);
-    // router = TestBed.inject(Router);
   });
 
   it('should initialize with correct properties', () => {

@@ -24,10 +24,11 @@
       </app-body>
 
       <app-button
+        *ngIf="!!sectionData.buttonPrimary"
         class="mt-8 md:mt-12"
-        [text]="sectionData.buttonPrimary?.label"
+        [text]="sectionData.buttonPrimary.label"
         [pill]="true"
-        [appNavigateTo]="sectionData.buttonPrimary?.action"
+        [appNavigateTo]="sectionData.buttonPrimary.action"
       >
       </app-button>
     </div>

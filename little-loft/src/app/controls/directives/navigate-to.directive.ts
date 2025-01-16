@@ -16,7 +16,7 @@ export class NavigateToDirective {
   }
 
   @HostListener('keydown.enter', ['$event'])
-  onKeydown(_event: KeyboardEvent): void {
+  onKeydown(): void {
     this.navigate();
   }
 

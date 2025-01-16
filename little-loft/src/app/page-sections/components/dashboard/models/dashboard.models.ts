@@ -16,14 +16,14 @@ export interface DashboardSectionBase {
 export interface DashboardHeroSectionBase extends DashboardSectionBase {
   header: string;
   subHeader: string;
-  buttonPrimary: ButtonProps;
+  buttonPrimary?: ButtonProps;
 }
 
 export interface DashboardHeroImage extends DashboardHeroSectionBase {
   type: DashboardTypes.HeroImage;
   imageSrc: string;
   imageAlt: string;
-  buttonSecondary: ButtonProps;
+  buttonSecondary?: ButtonProps;
 }
 
 export interface DashboardCarousel extends DashboardSectionBase {

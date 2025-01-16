@@ -2,8 +2,7 @@ import {
   Component,
   Input,
   OnChanges,
-  OnInit,
-  SimpleChanges,
+  OnInit
 } from '@angular/core';
 
 @Component({
@@ -33,7 +32,7 @@ export class ButtonComponent implements OnInit, OnChanges {
     this.setDefaultsByType();
   }
 
-  ngOnChanges(_changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.setDefaultsByType();
   }
 

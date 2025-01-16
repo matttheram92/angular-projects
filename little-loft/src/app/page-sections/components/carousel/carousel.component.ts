@@ -25,7 +25,7 @@ export class CarouselComponent implements OnInit {
   public carouselTypeTextAndCircleImage = CarouselTypes.TextAndCircleImage;
 
   @ViewChild('carouselContainer', { static: false })
-  public carouselContainer!: ElementRef<any>;
+  public carouselContainer!: ElementRef<HTMLDivElement>;
 
   constructor(@Inject('sectionData') public sectionData: DashboardCarousel) {
     this.carouselData = this.sectionData.carouselData;
@@ -44,7 +44,7 @@ export class CarouselComponent implements OnInit {
     }
   }
 
-  get hiddenSideScrollClasses(): any {
+  get hiddenSideScrollClasses(): { [key: string]: boolean } {
     return {
       'lg:hidden': this.carouselData.type === this.carouselTypeInImage,
       'md:hidden':

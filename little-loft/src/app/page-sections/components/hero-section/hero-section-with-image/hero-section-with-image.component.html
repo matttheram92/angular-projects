@@ -16,19 +16,23 @@
       <h1
         id="section-title"
         class="text-balance text-5xl font-semibold tracking-tight text-lemon sm:text-7xl"
-      >{{ sectionData.header }}</h1>
+      >
+        {{ sectionData.header }}
+      </h1>
       <p class="mt-8 text-pretty text-lg font-medium text-lemon sm:text-xl/8">
         {{ sectionData.subHeader }}
       </p>
       <div class="mt-10 flex items-center justify-center gap-x-6">
         <app-button
+          *ngIf="sectionData.buttonPrimary"
           [filled]="true"
-          [text]="sectionData.buttonPrimary?.label"
-          [appNavigateTo]="sectionData.buttonPrimary?.action"
+          [text]="sectionData.buttonPrimary.label"
+          [appNavigateTo]="sectionData.buttonPrimary.action"
         ></app-button>
         <app-button
-          [text]="sectionData.buttonSecondary?.label"
-          [appNavigateTo]="sectionData.buttonSecondary?.action"
+          *ngIf="sectionData.buttonSecondary"
+          [text]="sectionData.buttonSecondary.label"
+          [appNavigateTo]="sectionData.buttonSecondary.action"
           fillColor="transparent"
           textColor="white"
           class="text-white"

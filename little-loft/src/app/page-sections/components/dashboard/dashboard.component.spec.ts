@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { BrowserModule, By } from '@angular/platform-browser';
 
 import { DashboardComponent } from './dashboard.component';
 import { HOME_DASHBOARD_DATA } from '@app/pages/components/home/consts/home.consts';
@@ -7,7 +7,11 @@ import {
   DashboardHeroHalfAndHalf,
   DashboardHeroImage,
 } from './models/dashboard.models';
-import { PageSectionsModule } from '@app/page-sections/page-sections.module';
+import { ControlsModule } from '@app/controls/contols.module';
+import { CommonModule } from '@angular/common';
+import { HeroSectionModule } from '../hero-section/hero-section.module';
+import { CarouselComponent } from '../carousel/carousel.component';
+import { TypeographyModule } from '@app/typography/typography.module';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -15,8 +19,8 @@ describe('DashboardComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DashboardComponent],
-      imports: [PageSectionsModule],
+      declarations: [DashboardComponent, CarouselComponent],
+      imports: [ControlsModule, CommonModule, BrowserModule, HeroSectionModule, TypeographyModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
@@ -46,7 +50,7 @@ describe('DashboardComponent', () => {
     const header = heroImageSection.query(By.css('#section-title'))
       .nativeElement.textContent;
     expect(header).toBe(
-      (HOME_DASHBOARD_DATA.sections[0] as DashboardHeroImage).header
+      ` ${(HOME_DASHBOARD_DATA.sections[0] as DashboardHeroImage).header} `
     );
 
     const image = heroImageSection.query(

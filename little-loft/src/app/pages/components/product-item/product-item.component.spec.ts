@@ -7,8 +7,7 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from '@app/store/actions/wishlist.actions';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PRODUCT_EXAMPLE_DATA } from '@app/core/consts/dummy-data.consts';
 import { ProductItem } from '@app/core/models/product-list.models';
 import { ControlsModule } from '@app/controls/contols.module';
