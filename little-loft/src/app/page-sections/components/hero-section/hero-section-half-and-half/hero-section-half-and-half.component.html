@@ -1,4 +1,5 @@
 <div
+  id="hero-half-and-half"
   class="relative overflow-hidden h-96 padding-between-components sm:h-auto px-8 sm:px-0"
 >
   <div class="flex relative z-20 items-center overflow-hidden h-full">
@@ -6,20 +7,27 @@
       <div
         class="absolute bottom-0 right-0 w-60 sm:w-1/2 lg:w-2/5 p-8 flex flex-col sm:relative z-20 bg-blue text-white cursor-pointer"
       >
-        <h1 class="uppercase sm:text-4xl font-black flex flex-col leading-none">
-          {{ sectionData.header }}
-        </h1>
-        <p class="text-sm sm:text-base">
-          {{ sectionData.subHeader }}
-        </p>
+        <h1
+          id="section-title"
+          class="uppercase sm:text-4xl font-black flex flex-col leading-none"
+        >{{ sectionData.header }}</h1>
+        <app-heading4>
+          <span class="hidden sm:block">
+            {{ sectionData.subHeader }}
+          </span>
+          <span class="sm:hidden">
+            {{ sectionData.subHeaderShort }}
+          </span>
+        </app-heading4>
         <div class="flex mt-auto">
           <a href="#" class="uppercase py-2 rounded-lg bg-transparent text-md">
-            {{ sectionData.buttonPrimary.label }}
+            {{ sectionData.buttonPrimary?.label }}
           </a>
         </div>
       </div>
       <div class="block w-full lg:w-3/5 relative">
         <img
+          id="section-image"
           [src]="sectionData.imageSrc"
           alt="sectionData.imageAlt"
           class="w-80 h-80 object-cover sm:w-full m-auto"

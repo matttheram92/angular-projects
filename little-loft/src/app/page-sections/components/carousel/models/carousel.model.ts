@@ -10,7 +10,7 @@ export interface CarouselCard {
   id: number;
   title: string;
   link: string;
-  image?: string;
+  imageSrc?: string;
   alt?: string;
   description?: string;
   price?: number;

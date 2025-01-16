@@ -1,98 +1,128 @@
-<div *ngIf="!!carouselData" class="padding-between-components lg:mx-8">
-  <div class="flex px-10 md:px-0">
-    <h3 class="text-2xl font-bold">{{ carouselData.title }}</h3>
+<div
+  *ngIf="!!carouselData"
+  id="carousel"
+  class="relative padding-between-components lg:mx-8"
+>
+  <div class="flex px-10 md:px-2">
+    <app-heading3>{{ carouselData.title }}</app-heading3>
     <app-button
       class="-mt-3 ml-auto text-gray-400"
-      (click)="navigateToRoute(carouselData.href)"
-      text="All >"
-      type="text"
+      [appNavigateTo]="carouselData.href"
+      text="All"
+      appendIcon="rightArrow"
+      textColor="gray-400"
     ></app-button>
   </div>
-  <div class="overflow-auto">
-    <div
-      class="grid px-10 pt-4 md:px-0 w-max overflow-y-hidden"
-      [ngClass]="getCarouselTypeStyles()"
-    >
-      <a
-        *ngFor="let card of carouselData.cards"
-        (click)="navigateToRoute(card.link)"
-        [attr.aria-label]="card.title"
-        class="flex-none w-full rounded snap-center cursor-pointer transition ease-in-out delay-150 hover:translate-y-0 hover:scale-105 duration-300"
+  <div class="flex overflow-x-auto">
+    <div class="flex h-full m-auto" [ngClass]="hiddenSideScrollClasses">
+      <app-button
+        (click)="scrollLeft()"
+        fillColor="lemon"
+        icon="leftArrow"
+      ></app-button>
+    </div>
+    <div #carouselContainer class="overflow-x-auto w-full mx-auto">
+      <div
+        class="grid px-10 sm:px-2 py-2 w-max overflow-y-hidden mx-auto"
+        [ngClass]="getCarouselTypeStyles()"
       >
-        <div
-          *ngIf="carouselData.type === carouselTypeButtons"
-          class="bg-blue text-white text-center p-2"
+        <a
+          *ngFor="let card of carouselData.cards"
+          [appNavigateTo]="card.link"
+          [attr.aria-label]="card.title"
+          tabindex="0"
+          class="flex-none w-full rounded snap-center cursor-pointer transition ease-in-out delay-150 hover:translate-y-0 hover:scale-105 duration-300"
         >
-          <p class="w-full">{{ card.title }}</p>
-        </div>
-
-        <div
-          *ngIf="carouselData.type === carouselTypeTextAndCircleImage"
-          class="min-w-16 max-w-16"
-        >
-          <img
-            [src]="card.image"
-            [alt]="card.alt"
-            class="w-16 h-16 object-cover rounded-full"
-          />
-          <div class="text-center">
-            <h3 class="text-lg leading-6 font-bold text-gray-900">
-              {{ card.title }}
-            </h3>
-          </div>
-        </div>
-
-        <div *ngIf="carouselData.type === carouselTypeInImage" class="relative">
-          <div>
-            <img
-              [src]="card.image"
-              [alt]="card.alt"
-              class="w-full max-w-72 sm:max-w-full object-cover rounded max-h-72 h-56 sm:h-auto"
-            />
-          </div>
-
-          <h3
-            class="absolute bottom-0 left-0 px-6 m-2 py-2 text-lg leading-6 font-bold text-gray-900"
+          <div
+            *ngIf="carouselData.type === carouselTypeButtons"
+            class="bg-black text-white text-center p-2"
           >
-            {{ card.title }}
-          </h3>
-        </div>
-
-        <div
-          *ngIf="carouselData.type === carouselTypeSingleRow"
-          class="overflow-hidden"
-        >
-          <img
-            [src]="card.image"
-            [alt]="card.alt"
-            class="w-full max-w-40 sm:max-w-full h-32 md:h-40 object-cover rounded"
-          />
-          <div class="p-4">
-            <h3 class="text-lg leading-6 font-bold text-gray-900">
-              {{ card.title }}
-            </h3>
+            <p class="w-full">{{ card.title }}</p>
           </div>
-        </div>
 
-        <div
-          *ngIf="carouselData.type === carouselTypeTwoRows"
-          class="overflow-hidden"
-        >
-          <img
-            [src]="card.image"
-            [alt]="card.alt"
-            class="w-full max-w-40 sm:max-w-full h-40 md:h-auto object-cover rounded"
-          />
-          <div class="p-4">
-            <h3 class="text-lg leading-6 font-bold text-gray-900">
-              {{ card.title }}
-            </h3>
-            <p *ngIf="card.price" class="text-gray-600 mt-2 text-sm">
-              £{{ card.price }}
-            </p>
+          <div
+            *ngIf="carouselData.type === carouselTypeTextAndCircleImage"
+            class="min-w-16 max-w-16"
+          >
+            <img
+              [src]="card.imageSrc"
+              [alt]="card.alt"
+              class="w-16 h-16 object-cover rounded-full"
+            />
+            <div class="text-center">
+              <h3 class="text-lg leading-6 font-bold text-gray-900">
+                {{ card.title }}
+              </h3>
+            </div>
           </div>
-        </div>
-      </a>
+
+          <div
+            *ngIf="carouselData.type === carouselTypeInImage"
+            class="relative"
+          >
+            <div>
+              <img
+                [src]="card.imageSrc"
+                [alt]="card.alt"
+                class="w-full max-w-72 sm:max-w-full object-cover rounded max-h-72 h-56 sm:h-auto"
+              />
+            </div>
+
+            <app-heading4 class="absolute bottom-0 left-0 px-6 m-2 py-2">
+              {{ card.title }}
+            </app-heading4>
+          </div>
+
+          <div
+            *ngIf="carouselData.type === carouselTypeSingleRow"
+            class="overflow-hidden"
+          >
+            <img
+              [src]="card.imageSrc"
+              [alt]="card.alt"
+              class="w-full max-w-40 sm:max-w-full h-32 md:h-40 object-cover rounded"
+            />
+            <div class="pt-2.5">
+              <p
+                class="text-sm/[14px] sm:text-base/5 font-bold text-wrap line-clamp-3 md:line-clamp-2"
+              >
+                {{ card.title }}
+              </p>
+            </div>
+          </div>
+
+          <div
+            *ngIf="carouselData.type === carouselTypeTwoRows"
+            class="overflow-hidden w-40 md:w-auto"
+          >
+            <img
+              [src]="card.imageSrc"
+              [alt]="card.alt"
+              class="w-full max-w-full h-40 md:h-auto object-cover rounded"
+            />
+            <div class="pt-2.5">
+              <p
+                class="text-sm/[14px] sm:text-base/5 font-bold text-wrap line-clamp-3 md:line-clamp-2"
+              >
+                {{ card.title }}
+              </p>
+              <p
+                *ngIf="card.price"
+                class="text-xs/4 sm:text-sm font-bold opacity-30 block mt-1.5 sm:mt-0"
+              >
+                £{{ card.price }}
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="flex h-full m-auto" [ngClass]="hiddenSideScrollClasses">
+      <app-button
+        (click)="scrollRight()"
+        fillColor="lemon"
+        icon="rightArrow"
+      ></app-button>
     </div>
   </div>
 </div>

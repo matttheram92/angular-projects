@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OnboardingComponent } from './onboarding.component';
+import { HeroSectionModule } from '@app/page-sections/components/hero-section/hero-section.module';
 
 describe('OnboardingComponent', () => {
   let component: OnboardingComponent;
@@ -8,7 +9,8 @@ describe('OnboardingComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [OnboardingComponent]
+      imports: [HeroSectionModule],
+      declarations: [OnboardingComponent],
     });
     fixture = TestBed.createComponent(OnboardingComponent);
     component = fixture.componentInstance;

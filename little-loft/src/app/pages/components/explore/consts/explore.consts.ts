@@ -25,6 +25,7 @@ export const EXPLORE_DASHBOARD_DATA: DashboardInfo = {
       header: 'We Love...',
       subHeader:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium dolores esse tenetur rem.',
+      subHeaderShort: 'Lorem ipsum dolor sit amet.',
       imageSrc: DUMMY_IMAGE_URLS.room,
       imageAlt: 'An image of a childs room',
       buttonPrimary: { label: 'Read More >', action: '' },

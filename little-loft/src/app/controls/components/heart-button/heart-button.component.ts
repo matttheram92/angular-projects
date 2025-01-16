@@ -16,6 +16,7 @@ import {
 export class HeartButtonComponent implements OnChanges {
   @Input() isDisabled = false;
   @Input() default = false;
+  @Input() filled = false;
   @Output()
   buttonClicked: EventEmitter<void> = new EventEmitter<void>();
   public isChecked = false;

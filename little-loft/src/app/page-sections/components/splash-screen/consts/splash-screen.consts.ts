@@ -28,6 +28,7 @@ export const ONBOARDING_SPLASH_SCREEN_DATA: SplashScreenInfo = {
       src: DUMMY_IMAGE_URLS.teddy,
       alt: 'An image of a cuddly toy',
       color: 'bg-green',
+      icon: 'cart',
     },
     {
       index: 2,
@@ -39,6 +40,7 @@ export const ONBOARDING_SPLASH_SCREEN_DATA: SplashScreenInfo = {
       src: DUMMY_IMAGE_URLS.childsRoomCrop,
       alt: 'An image of a childs room',
       color: 'bg-blue',
+      icon: 'heart',
     },
     {
       index: 3,
@@ -50,6 +52,7 @@ export const ONBOARDING_SPLASH_SCREEN_DATA: SplashScreenInfo = {
       src: DUMMY_IMAGE_URLS.dinosaur,
       alt: 'An image of a soft dinosaur',
       color: 'bg-purple',
+      icon: 'search',
     },
     {
       index: 4,

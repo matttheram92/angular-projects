@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeroSectionWithImageComponent } from './hero-section-with-image.component';
+import { ControlsModule } from '@app/controls/contols.module';
 
 describe('HeroSectionWithImageComponent', () => {
   let component: HeroSectionWithImageComponent;
@@ -8,7 +9,14 @@ describe('HeroSectionWithImageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HeroSectionWithImageComponent]
+      declarations: [HeroSectionWithImageComponent],
+      imports: [ControlsModule],
+      providers: [
+        {
+          provide: 'sectionData',
+          useValue: {},
+        },
+      ],
     });
     fixture = TestBed.createComponent(HeroSectionWithImageComponent);
     component = fixture.componentInstance;

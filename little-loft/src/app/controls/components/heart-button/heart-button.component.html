@@ -2,7 +2,8 @@
   tabindex="0"
   aria-label="favourite button"
   (keydown)="onKeydown($event)"
-  class="like block cursor-pointer overflow-visible rounded-full hover:bg-lemonDark h-16 w-16 mt-1"
+  class="like block cursor-pointer overflow-visible rounded-full h-16 w-16 duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition ease-in-out"
+  [ngClass]="[filled ? 'bg-black hover:bg-gray-600' : 'hover:bg-lemonDark']"
 >
   <input
     type="checkbox"

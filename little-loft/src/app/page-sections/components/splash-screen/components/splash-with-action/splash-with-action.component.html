@@ -1,15 +1,16 @@
 <div>
-  <p class="uppercase text-primary text-center font-semibold">
+  <app-eyebrow class="text-center">
     {{ sectionData.header }}
-  </p>
-  <p class="text-primary text-center font-semibold text-4xl">
+  </app-eyebrow>
+
+  <app-heading1 class="text-center">
     {{ sectionData.subHeader }}
-  </p>
+  </app-heading1>
 
   <app-button
-    type="pill"
+    [pill]="true"
     [text]="sectionData.actionText"
-    (click)="navigateToRoute(sectionData.actionHref)"
+    [appNavigateTo]="sectionData.actionHref"
     class="block text-center mt-16 md:mt-12 m-auto md:w-1/4"
   >
   </app-button>

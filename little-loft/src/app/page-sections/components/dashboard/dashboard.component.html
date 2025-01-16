@@ -1,8 +1,8 @@
 <div class="h-screen relative isolate mx-auto max-w-2xl lg:max-w-7xl">
-  <ng-container *ngFor="let section of dashboardInfo.sections">
+  <ng-container *ngFor="let injector of injectors">
     <ng-container
-      [ngComponentOutlet]="getComponentType(section.type)"
-      [ngComponentOutletInjector]="getInjector(section)"
+      [ngComponentOutlet]="injector.currentComponentType"
+      [ngComponentOutletInjector]="injector.currentInjector"
     ></ng-container>
   </ng-container>
   <div id="footer" class="flex h-56 pb-16 sm:pb-0 bg-primary">

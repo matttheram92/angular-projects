@@ -6,6 +6,8 @@ import { SplashWithActionComponent } from './components/splash-with-action/splas
 import { SplashScreenComponent } from './components/splash-screen.component';
 import { ControlsModule } from 'src/app/controls/contols.module';
 import { IconsModule } from '@app/icons/icons.module';
+import { CoreModule } from '@app/core/core.module';
+import { TypeographyModule } from '@app/typography/typography.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,13 @@ import { IconsModule } from '@app/icons/icons.module';
     SplashWithActionComponent,
     SplashScreenComponent,
   ],
-  imports: [BrowserModule, ControlsModule, IconsModule],
+  imports: [
+    BrowserModule,
+    ControlsModule,
+    IconsModule,
+    CoreModule,
+    TypeographyModule,
+  ],
   exports: [SplashScreenComponent],
   providers: [],
 })

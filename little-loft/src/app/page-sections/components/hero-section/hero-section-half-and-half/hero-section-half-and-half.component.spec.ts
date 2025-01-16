@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeroSectionHalfAndHalfComponent } from './hero-section-half-and-half.component';
+import { TypeographyModule } from '@app/typography/typography.module';
 
 describe('HeroSectionHalfAndHalfComponent', () => {
   let component: HeroSectionHalfAndHalfComponent;
@@ -8,7 +9,14 @@ describe('HeroSectionHalfAndHalfComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HeroSectionHalfAndHalfComponent]
+      declarations: [HeroSectionHalfAndHalfComponent],
+      imports: [TypeographyModule],
+      providers: [
+        {
+          provide: 'sectionData',
+          useValue: {},
+        },
+      ],
     });
     fixture = TestBed.createComponent(HeroSectionHalfAndHalfComponent);
     component = fixture.componentInstance;

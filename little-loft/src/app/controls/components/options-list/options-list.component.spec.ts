@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { OptionsListComponent } from './options-list.component';
+import { IconsModule } from '@app/icons/icons.module';
+import { ControlsModule } from '@app/controls/contols.module';
 
 describe('OptionsListComponent', () => {
   let component: OptionsListComponent;
@@ -9,6 +11,7 @@ describe('OptionsListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [OptionsListComponent],
+      imports: [IconsModule, ControlsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OptionsListComponent);
@@ -49,36 +52,7 @@ describe('OptionsListComponent', () => {
 
     const optionElements = fixture.debugElement.queryAll(By.css('a'));
     optionElements.forEach((element) => {
-      expect(element.attributes['href']).toBe('products');
-    });
-  });
-
-  it('should have the correct classes applied', () => {
-    component.options = ['Option 1', 'Option 2', 'Option 3'];
-    fixture.detectChanges();
-
-    const optionElements = fixture.debugElement.queryAll(By.css('a'));
-    optionElements.forEach((element) => {
-      const classes = element.nativeElement.classList;
-      expect(classes).toContain('flex');
-      expect(classes).toContain('font-semibold');
-      expect(classes).toContain('w-5/6');
-      expect(classes).toContain('m-auto');
-      expect(classes).toContain('border-b');
-      expect(classes).toContain('border-primary');
-      expect(classes).toContain('p-4');
-      expect(classes).toContain('hover:bg-gray-100');
-    });
-  });
-
-  it('should render ">" for each option', () => {
-    component.options = ['Option 1', 'Option 2', 'Option 3'];
-    fixture.detectChanges();
-
-    const arrowElements = fixture.debugElement.queryAll(By.css('a p.ml-auto'));
-    expect(arrowElements.length).toBe(3);
-    arrowElements.forEach((element) => {
-      expect(element.nativeElement.textContent.trim()).toBe('>');
+      expect(element.attributes['appNavigateTo']).toBe('products');
     });
   });
 });

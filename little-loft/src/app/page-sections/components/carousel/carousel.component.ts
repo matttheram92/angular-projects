@@ -1,15 +1,22 @@
-import { Component, Inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { CarouselData, CarouselTypes } from './models/carousel.model';
-import { Router } from '@angular/router';
-import { DashboardCarousel } from 'src/app/page-sections/components/dashboard/models/dashboard.models';
+import { DashboardCarousel } from '../dashboard/models/dashboard.models';
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: false,
 })
-export class CarouselComponent {
+export class CarouselComponent implements OnInit {
   public carouselData: CarouselData;
   public carouselTypeButtons = CarouselTypes.TextButton;
   public carouselTypeInImage = CarouselTypes.InImage;
@@ -17,12 +24,14 @@ export class CarouselComponent {
   public carouselTypeTwoRows = CarouselTypes.TwoRows;
   public carouselTypeTextAndCircleImage = CarouselTypes.TextAndCircleImage;
 
-  constructor(
-    @Inject('sectionData') public sectionData: DashboardCarousel,
-    private router: Router
-  ) {
+  @ViewChild('carouselContainer', { static: false })
+  public carouselContainer!: ElementRef<any>;
+
+  constructor(@Inject('sectionData') public sectionData: DashboardCarousel) {
     this.carouselData = this.sectionData.carouselData;
   }
+
+  ngOnInit(): void {}
 
   public getCarouselTypeStyles(): string {
     switch (this.carouselData.type) {
@@ -35,7 +44,39 @@ export class CarouselComponent {
     }
   }
 
-  public navigateToRoute(route: string): void {
-    this.router.navigate([route]);
+  get hiddenSideScrollClasses(): any {
+    return {
+      'lg:hidden': this.carouselData.type === this.carouselTypeInImage,
+      'md:hidden':
+        this.carouselData.type === this.carouselTypeSingleRow ||
+        this.carouselData.type === this.carouselTypeTwoRows ||
+        this.carouselData.type === this.carouselTypeTextAndCircleImage,
+      'sm:block': this.carouselData.type !== this.carouselTypeButtons,
+      hidden: true,
+    };
+  }
+
+  scrollLeft(): void {
+    if (this.carouselContainer && this.carouselContainer.nativeElement) {
+      const container = this.carouselContainer.nativeElement;
+      const targetScrollLeft = container.scrollLeft - 150;
+
+      container.scrollTo({
+        left: targetScrollLeft,
+        behavior: 'smooth',
+      });
+    }
+  }
+
+  scrollRight(): void {
+    if (this.carouselContainer && this.carouselContainer.nativeElement) {
+      const container = this.carouselContainer.nativeElement;
+      const targetScrollLeft = container.scrollLeft + 150;
+
+      container.scrollTo({
+        left: targetScrollLeft,
+        behavior: 'smooth',
+      });
+    }
   }
 }

@@ -12,6 +12,15 @@ export class NavigateToDirective {
 
   @HostListener('click')
   onClick(): void {
+    this.navigate();
+  }
+
+  @HostListener('keydown.enter', ['$event'])
+  onKeydown(_event: KeyboardEvent): void {
+    this.navigate();
+  }
+
+  private navigate(): void {
     if (this.appNavigateTo) {
       this.router.navigate([this.appNavigateTo]);
     }

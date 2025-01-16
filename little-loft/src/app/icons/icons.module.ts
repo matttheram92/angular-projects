@@ -4,7 +4,6 @@ import { SafeHtmlPipe } from './services/safe-html.pipe';
 
 @NgModule({
   declarations: [IconComponent, SafeHtmlPipe],
-  imports: [],
   exports: [IconComponent],
   providers: [],
   bootstrap: [],

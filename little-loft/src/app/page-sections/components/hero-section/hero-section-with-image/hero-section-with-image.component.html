@@ -1,6 +1,7 @@
-<div class="h-2/4 relative padding-between-components">
+<div id="hero-image" class="h-2/4 relative padding-between-components">
   <div class="absolute inset-0">
     <img
+      id="section-image"
       [src]="sectionData.imageSrc"
       alt="sectionData.imageAlt"
       class="object-cover object-center w-full h-full"
@@ -13,21 +14,23 @@
   >
     <div class="text-center">
       <h1
+        id="section-title"
         class="text-balance text-5xl font-semibold tracking-tight text-lemon sm:text-7xl"
-      >
-        {{ sectionData.header }}
-      </h1>
+      >{{ sectionData.header }}</h1>
       <p class="mt-8 text-pretty text-lg font-medium text-lemon sm:text-xl/8">
         {{ sectionData.subHeader }}
       </p>
       <div class="mt-10 flex items-center justify-center gap-x-6">
         <app-button
-          type="filled"
-          [text]="sectionData.buttonPrimary.label"
+          [filled]="true"
+          [text]="sectionData.buttonPrimary?.label"
+          [appNavigateTo]="sectionData.buttonPrimary?.action"
         ></app-button>
         <app-button
-          type="text"
-          [text]="sectionData.buttonSecondary.label"
+          [text]="sectionData.buttonSecondary?.label"
+          [appNavigateTo]="sectionData.buttonSecondary?.action"
+          fillColor="transparent"
+          textColor="white"
           class="text-white"
         ></app-button>
       </div>

@@ -1,7 +1,7 @@
 <div class="lg:h-72 overflow-y-auto">
   <a
     *ngFor="let option of options"
-    (click)="navigateToRoute('products')"
+    appNavigateTo="products"
     class="cursor-pointer flex py-4 px-10 font-semibold m-auto border-b border-primary hover:bg-lemonDark"
   >
     <p>{{ option }}</p>

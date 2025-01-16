@@ -12,7 +12,6 @@
       />
     </a>
     <app-button
-      type="icon"
       icon="close"
       ariaLabel="Close side menu"
       (click)="closeMenu.emit()"
@@ -40,40 +39,40 @@
 
         <app-button
           id="btnExploreSide"
-          type="banner"
+          [banner]="true"
           text="Explore"
-          (click)="navigateToRoute('explore')"
+          appNavigateTo="explore"
         ></app-button>
 
         <app-button
           id="btnSellSide"
-          type="banner"
+          [banner]="true"
           text="Sell"
-          (click)="navigateToRoute('sell')"
+          appNavigateTo="sell"
         ></app-button>
 
         <app-button
           id="btnInboxSide"
-          type="banner"
+          [banner]="true"
           text="Inbox"
-          (click)="navigateToRoute('inbox')"
+          appNavigateTo="inbox"
         ></app-button>
       </div>
       <div class="py-6">
         <app-button
           *ngIf="!loggedIn"
           id="btnLogInSide"
-          type="banner"
+          [banner]="true"
           text="Log in"
-          (click)="navigateToRoute('login')"
+          appNavigateTo="login"
         ></app-button>
 
         <app-button
           *ngIf="loggedIn"
           id="btnProfileSide"
-          type="banner"
+          [banner]="true"
           text="Profile"
-          (click)="navigateToRoute('profile')"
+          appNavigateTo="profile"
         ></app-button>
       </div>
     </div>

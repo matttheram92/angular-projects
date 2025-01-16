@@ -1,5 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { ButtonTypes } from '../../consts/controls.consts';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -7,51 +12,86 @@ import { ButtonTypes } from '../../consts/controls.consts';
   styleUrls: ['./button.component.scss'],
   standalone: false,
 })
-export class ButtonComponent {
-  @Input() type!: ButtonTypes;
-  @Input() text!: string;
-  @Input() ariaLabel?: string;
+export class ButtonComponent implements OnInit, OnChanges {
+  @Input() ariaLabel!: string;
+  @Input() text?: string;
   @Input() icon?: string;
+  @Input() prependIcon?: string;
+  @Input() appendIcon?: string;
+  @Input() textColor?: string;
+  @Input() filled: boolean = false;
+  @Input() fillColor?: string;
+  @Input() pill: boolean = false;
+  @Input() outlined: boolean = false;
+  @Input() banner: boolean = false;
   @Input() size?: 'sm' | 'md' | 'lg';
-  @Input() disabled = false;
+  @Input() disabled: boolean = false;
 
-  get isFilled(): boolean {
-    return this.type === 'filled';
+  constructor() {}
+
+  ngOnInit(): void {
+    this.setDefaultsByType();
   }
 
-  get isText(): boolean {
-    return this.type === 'text';
+  ngOnChanges(_changes: SimpleChanges): void {
+    this.setDefaultsByType();
   }
 
-  get isIcon(): boolean {
-    return this.type === 'icon';
+  private setDefaultsByType(): void {
+    if (this.filled) {
+      this.setFilledDefaults();
+    }
+
+    if (this.pill) {
+      this.setPillDefaults();
+    }
+
+    if (this.disabled) {
+      this.fillColor = 'lemonDark';
+    }
+
+    this.fillColor = this.fillColor ?? 'lemon';
+    this.textColor = this.textColor ?? 'black';
   }
 
-  get isIconFilled(): boolean {
-    return this.type === 'icon-filled';
+  private setFilledDefaults(): void {
+    this.fillColor = this.fillColor ?? 'primary';
+    this.textColor = this.textColor ?? 'white';
+    this.size = this.size ?? 'sm';
   }
 
-  get isTextIconLeft(): boolean {
-    return this.type === 'text-icon-left';
+  private setPillDefaults(): void {
+    this.fillColor = this.fillColor ?? 'black';
+    this.textColor = this.textColor ?? 'white';
+    this.size = this.size ?? 'lg';
   }
 
-  get isTextIconRight(): boolean {
-    return this.type === 'text-icon-right';
+  get buttonClasses(): string[] {
+    return [
+      'text-' + this.textColor,
+      'bg-' + this.fillColor,
+      this.icon && !this.text ? 'rounded-full' : '',
+      this.filled ? 'shadow-sm' : '',
+      this.pill ? 'w-full rounded-full uppercase' : '',
+      !this.disabled
+        ? this.fillColor === 'black'
+          ? 'hover:bg-gray-700'
+          : 'hover:brightness-90'
+        : 'hover:brightness-100',
+      this.outlined ? 'border border-black' : '',
+      this.paddingClasses,
+    ].filter(Boolean);
   }
 
-  get isCircle(): boolean {
-    return this.type === 'circle';
-  }
-
-  get isBanner(): boolean {
-    return this.type === 'banner';
-  }
-
-  get isPill(): boolean {
-    return this.type === 'pill';
-  }
-
-  get isPillSecondary(): boolean {
-    return this.type === 'pill-secondary';
+  get paddingClasses(): string {
+    switch (this.size) {
+      case 'sm':
+        return 'px-5 py-2.5';
+      case 'md':
+      default:
+        return 'p-2.5 sm:p-4';
+      case 'lg':
+        return 'py-[18px] px-8';
+    }
   }
 }

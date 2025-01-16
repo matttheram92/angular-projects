@@ -18,8 +18,8 @@ export const HOME_DASHBOARD_DATA: DashboardInfo = {
       subHeader: 'Anim aute id magna aliqua',
       imageSrc: DUMMY_IMAGE_URLS.childsRoom,
       imageAlt: 'An image of a childs room',
-      buttonPrimary: { label: 'Get started', action: '' },
-      buttonSecondary: { label: 'Discover →', action: '' },
+      buttonPrimary: { label: 'Get started', action: 'sell' },
+      buttonSecondary: { label: 'Discover →', action: 'explore' },
     },
     {
       index: 1,
@@ -30,7 +30,9 @@ export const HOME_DASHBOARD_DATA: DashboardInfo = {
       index: 2,
       type: DashboardTypes.HeroHalfAndHalf,
       header: 'We Love...',
-      subHeader: 'Lorem ipsum dolor sit amet.',
+      subHeader:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium dolores esse tenetur rem.',
+      subHeaderShort: 'Lorem ipsum dolor sit amet.',
       imageSrc: DUMMY_IMAGE_URLS.room,
       imageAlt: 'An image of a childs room',
       buttonPrimary: { label: 'Read More >', action: '' },

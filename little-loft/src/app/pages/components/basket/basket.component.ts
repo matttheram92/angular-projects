@@ -5,7 +5,6 @@ import { AppState } from '@app/store/app.state';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import * as BasketActions from '@app/store/actions/basket.actions';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-basket',
@@ -16,10 +15,7 @@ import { Router } from '@angular/router';
 export class BasketComponent {
   public basketProducts: ProductItem[] = [];
 
-  constructor(
-    private router: Router,
-    private store: Store<AppState>
-  ) {
+  constructor(private store: Store<AppState>) {
     this.getProductsFromStorage();
   }
 
@@ -42,7 +38,9 @@ export class BasketComponent {
     this.store.dispatch(BasketActions.removeFromBasket({ id: productId }));
   }
 
-  public navigateToRoute(route: string): void {
-    this.router.navigate([route]);
+  get basketTotal(): number {
+    return this.basketProducts
+      .map((p) => p.price)
+      .reduce((previous, current) => previous + current, 0);
   }
 }

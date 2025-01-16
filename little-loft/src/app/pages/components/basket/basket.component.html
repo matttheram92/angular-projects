@@ -2,67 +2,16 @@
   <div class="max-w-7xl pb-16 mx-auto">
     <div class="md:flex">
       <div class="w-full md:w-3/4 pb-8 md:border-r border-primary">
-        <div class="flex justify-between border-b border-primary px-8 pb-8">
-          <h1 class="font-bold text-2xl">My Basket</h1>
-          <h2 class="text-2xl">{{ basketProducts.length }} Items</h2>
-        </div>
-        <div
-          *ngIf="basketProducts && basketProducts.length > 0; else emptyBasket"
-        >
-          <div
-            *ngFor="let product of basketProducts"
-            class="flex items-strech p-8 md:py-10 lg:py-8 border-b border-primary"
-          >
-            <div class="max-h-32 w-4/12 sm:w-2/12 md:w-4/12 2xl:w-1/4">
-              <img
-                [src]="product.src"
-                alt="Product image"
-                class="m-auto h-full object-center object-cover"
-              />
-            </div>
-            <div
-              class="p-2.5 pb-0 w-8/12 sm:w-10/12 md:w-8/12 2xl:w-3/4 flex flex-col justify-center"
-            >
-              <div class="flex items-center justify-between pb-2.5 w-full">
-                <a
-                  (click)="navigateToRoute('product/' + product.id)"
-                  class="text-base font-extrabold cursor-pointer leading-none line-clamp-3 text-gray-800"
-                >
-                  {{ product.title }}
-                </a>
-              </div>
-              <p
-                class="font-extrabold sm:w-3/4 text-xs leading-3 opacity-30 pb-2.5"
-              >
-                Ref: 045568{{ product.id }}
-              </p>
-              <div class="flex items-center justify-between mt-auto">
-                <p class="text-base font-black leading-none text-gray-800">
-                  {{ product.price }}
-                </p>
-                <div class="flex items-center">
-                  <app-button
-                    type="icon"
-                    icon="bin"
-                    ariaLabel="remove from basket"
-                    class="text-red-600"
-                    (click)="removeFromBasket(product.id)"
-                  ></app-button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <ng-template #emptyBasket>
-          <div class="h-full content-center">
-            <p class="m-auto text-center opacity-30 pt-3">Basket is empty.</p>
-          </div>
-        </ng-template>
+        <app-item-list
+          [items]="basketProducts"
+          title="Basket"
+          (removeItem)="removeFromBasket($event)"
+        ></app-item-list>
       </div>
       <div id="summary" class="w-full md:w-1/4 md:w-1/2">
-        <h1 class="font-bold text-2xl border-b border-primary px-8 pb-8">
-          Order Summary
-        </h1>
+        <app-heading3 class="border-b border-primary block px-8 pb-8"
+          >Order Summary</app-heading3
+        >
         <div
           [class.opacity-10]="!(basketProducts && basketProducts.length > 0)"
         >
@@ -72,7 +21,7 @@
                 <span class="font-semibold text-sm uppercase"
                   >{{ basketProducts.length }} Items</span
                 >
-                <span class="font-semibold text-sm">£0</span>
+                <span class="font-semibold text-sm">£{{ basketTotal }}</span>
               </div>
               <div>
                 <label class="font-medium inline-block mb-3 text-sm uppercase">
@@ -96,11 +45,7 @@
                   class="p-2 text-sm w-full"
                 />
               </div>
-              <app-button
-                type="text-icon-right"
-                icon="rightArrow"
-                text="APPLY"
-              ></app-button>
+              <app-button appendIcon="rightArrow" text="APPLY"></app-button>
             </form>
           </div>
           <div class="border-t border-primary">
@@ -109,9 +54,9 @@
                 class="flex font-semibold justify-between py-6 text-sm uppercase"
               >
                 <span>Total cost</span>
-                <span>£0</span>
+                <span>£{{ basketTotal }}</span>
               </div>
-              <app-button class="w-full m-2" text="Buy now" type="pill">
+              <app-button class="w-full m-2" text="Buy now" [pill]="true">
               </app-button>
             </div>
           </div>

@@ -15,6 +15,7 @@ import { ControlsModule } from '@app/controls/contols.module';
 import { basketReducer } from '@app/store/reducers/basket.reducer';
 import { wishlistReducer } from '@app/store/reducers/wishlist.reducer';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { TypeographyModule } from '@app/typography/typography.module';
 
 const mockRouter = {
   navigate: jest.fn(),
@@ -36,6 +37,7 @@ describe('ProductItemComponent', () => {
       declarations: [ProductItemComponent],
       imports: [
         ControlsModule,
+        TypeographyModule,
         StoreModule.forRoot({
           basket: basketReducer,
           wishlist: wishlistReducer,

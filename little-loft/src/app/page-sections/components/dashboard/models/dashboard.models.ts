@@ -33,6 +33,7 @@ export interface DashboardCarousel extends DashboardSectionBase {
 
 export interface DashboardHeroHalfAndHalf extends DashboardHeroSectionBase {
   type: DashboardTypes.HeroHalfAndHalf;
+  subHeaderShort: string;
   imageSrc: string;
   imageAlt: string;
 }

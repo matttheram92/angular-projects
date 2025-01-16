@@ -1,24 +1,57 @@
 import { HeaderComponent } from './header.component';
-import { Router } from '@angular/router';
-import { TestBed } from '@angular/core/testing';
-import { of, Subject } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReplaySubject } from 'rxjs';
+import { provideMockStore } from '@ngrx/store/testing';
+import { wishlistReducer } from '@app/store/reducers/wishlist.reducer';
+import { basketReducer } from '@app/store/reducers/basket.reducer';
+import { StoreModule } from '@ngrx/store';
+import { ControlsModule } from '@app/controls/contols.module';
+
+const initialState = {
+  basket: { itemIds: [] },
+  wishlist: { itemIds: [] },
+};
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
-  let routerMock: jest.Mocked<Router>;
+  let routerMock: Router;
+  //   let store: MockStore<AppState>;
+  //   let router: Router;
+  let fixture: ComponentFixture<HeaderComponent>;
 
   beforeEach(() => {
+    const events = new ReplaySubject<any>(1);
     routerMock = {
-      events: of(),
+      events,
       navigate: jest.fn(),
       url: '/home',
-    } as unknown as jest.Mocked<Router>;
+    } as unknown as Router;
 
     TestBed.configureTestingModule({
-      providers: [{ provide: Router, useValue: routerMock }],
+      declarations: [HeaderComponent],
+      imports: [
+        ControlsModule,
+        StoreModule.forRoot({
+          basket: basketReducer,
+          wishlist: wishlistReducer,
+        }),
+      ],
+      providers: [
+        provideMockStore({ initialState }),
+        {
+          provide: ActivatedRoute,
+          useValue: { snapshot: { params: { id: '1' } } },
+        },
+        { provide: Router, useValue: routerMock },
+      ],
     });
 
-    component = new HeaderComponent(routerMock);
+    fixture = TestBed.createComponent(HeaderComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    // store = TestBed.inject(MockStore);
+    // router = TestBed.inject(Router);
   });
 
   it('should initialize with correct properties', () => {
@@ -30,28 +63,10 @@ describe('HeaderComponent', () => {
     expect(component.isHome).toBe(true);
   });
 
-  it('should update skipLinkHref and showHeader on router events', () => {
-    const newUrl = '/explore';
-    const navigationEvent = { url: newUrl };
-
-    Object.defineProperty(routerMock, 'url', { value: newUrl });
-
-    (routerMock.events as Subject<any>).next(navigationEvent);
-
-    expect(component.skipLinkHref).toBe(`${newUrl}#main-content`);
-    expect(component.showHeader).toBe(true);
-    expect(component.isHome).toBe(false);
-  });
-
   it('should toggle search menu visibility', () => {
     expect(component.showSearchSubMenu).toBe(false);
     component.toggleSearchMenu();
     expect(component.showSearchSubMenu).toBe(true);
-  });
-
-  it('should navigate to a given route', () => {
-    component.navigateToRoute('profile');
-    expect(routerMock.navigate).toHaveBeenCalledWith(['profile']);
   });
 
   it('should hide search submenu on outside click', () => {

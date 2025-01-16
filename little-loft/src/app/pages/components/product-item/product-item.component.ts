@@ -8,8 +8,9 @@ import {
 } from '@app/store/actions/wishlist.actions';
 import { AppState } from '@app/store/app.state';
 import { ProductItem } from '@app/core/models/product-list.models';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PRODUCT_EXAMPLE_DATA } from '@app/core/consts/dummy-data.consts';
+import { NavigationService } from '@app/controls/services/navigation.service';
 
 @Component({
   selector: 'app-product-item',
@@ -25,8 +26,8 @@ export class ProductItemComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private navigationService: NavigationService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -64,7 +65,7 @@ export class ProductItemComponent implements OnInit {
   public addToBasket(): void {
     this.inBasket = true;
     this.store.dispatch(addToBasket({ id: this.product.id }));
-    this.navigateToRoute('basket');
+    this.navigationService.navigateTo('basket');
   }
 
   public addToWishlist(): void {
@@ -75,9 +76,9 @@ export class ProductItemComponent implements OnInit {
     }
 
     this.inWishlist = !this.inWishlist;
-  }
 
-  public navigateToRoute(route: string): void {
-    this.router.navigate([route]);
+    setTimeout(() => {
+      this.wishlistButtonDefault = this.inWishlist;
+    }, 1000);
   }
 }

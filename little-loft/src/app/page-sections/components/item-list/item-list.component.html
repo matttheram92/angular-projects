@@ -1,0 +1,53 @@
+<div class="w-full">
+  <div class="flex justify-between border-b border-primary px-8 pb-8">
+    <app-heading3>My {{ title }}</app-heading3>
+    <h2 class="text-2xl">{{ items.length }} Items</h2>
+  </div>
+  <div *ngIf="items && items.length > 0; else emptyState">
+    <div
+      *ngFor="let item of items"
+      class="flex items-strech p-8 md:py-10 lg:py-8 border-b border-primary"
+    >
+      <div class="max-h-32 w-4/12 sm:w-2/12 md:w-4/12 2xl:w-1/4">
+        <img
+          [src]="item.imageSrc"
+          alt="Product image"
+          class="m-auto h-full object-center object-cover"
+        />
+      </div>
+      <div
+        class="p-2.5 pb-0 w-8/12 sm:w-10/12 md:w-8/12 2xl:w-3/4 flex flex-col justify-center"
+      >
+        <div class="flex items-center justify-between w-full">
+          <a
+            [appNavigateTo]="'product/' + item.id"
+            class="cursor-pointer line-clamp-3"
+            ><app-heading4>{{ item.title }}</app-heading4>
+          </a>
+        </div>
+        <div class="sm:w-3/4 pb-2.5">
+          <app-small-text>Ref: 045568{{ item.id }}</app-small-text>
+        </div>
+        <div class="flex items-center justify-between mt-auto">
+          <p class="text-base font-black leading-none text-gray-800">
+            £{{ item.price }}
+          </p>
+          <div class="flex items-center">
+            <app-button
+              icon="bin"
+              ariaLabel="remove from basket"
+              textColor="red-600"
+              class="text-red-600"
+              (click)="onDeleteClick(item.id)"
+            ></app-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #emptyState>
+    <div class="h-full content-center">
+      <p class="m-auto text-center opacity-30 pt-3">{{ title }} is empty.</p>
+    </div>
+  </ng-template>
+</div>

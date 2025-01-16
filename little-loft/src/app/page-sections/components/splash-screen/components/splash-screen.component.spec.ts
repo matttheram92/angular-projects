@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SplashScreenComponent } from './splash-screen.component';
+import { ONBOARDING_SPLASH_SCREEN_DATA } from '../consts/splash-screen.consts';
+import { IconsModule } from '@app/icons/icons.module';
 
 describe('SplashScreenComponent', () => {
   let component: SplashScreenComponent;
@@ -8,9 +10,11 @@ describe('SplashScreenComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SplashScreenComponent],
+      imports: [IconsModule]
     });
     fixture = TestBed.createComponent(SplashScreenComponent);
     component = fixture.componentInstance;
+    component.splashScreenInfo = ONBOARDING_SPLASH_SCREEN_DATA;
     fixture.detectChanges();
   });
 

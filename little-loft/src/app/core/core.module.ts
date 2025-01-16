@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavigateToDirective } from './directives/navigate-to.directive';
 
 @NgModule({
-  declarations: [NavigateToDirective],
+  declarations: [],
   imports: [CommonModule],
-  exports: [NavigateToDirective],
+  exports: [],
 })
 export class CoreModule {}

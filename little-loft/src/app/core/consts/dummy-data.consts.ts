@@ -73,7 +73,7 @@ const SELLERS_EXAMPLE_DATA: Seller[] = [
 export const PRODUCT_EXAMPLE_DATA: ProductItem[] = [
   {
     id: 1,
-    src: DUMMY_IMAGE_URLS.dinosaur,
+    imageSrc: DUMMY_IMAGE_URLS.dinosaur,
     alt: 'A soft gray dinosaur toy',
     title:
       'Dino Plush - a gray cuddly toy with a spike on its head and a black patch on its belly',
@@ -81,139 +81,139 @@ export const PRODUCT_EXAMPLE_DATA: ProductItem[] = [
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£30',
+    price: 30,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 2,
-    src: DUMMY_IMAGE_URLS.keys,
+    imageSrc: DUMMY_IMAGE_URLS.keys,
     alt: 'Plastic keys on a teething ring.',
     title: 'The Keys',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£30',
+    price: 30,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 3,
-    src: DUMMY_IMAGE_URLS.blocks,
+    imageSrc: DUMMY_IMAGE_URLS.blocks,
     alt: 'Building block cubes with letter on.',
     title: 'Wood Letters',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£15',
+    price: 15,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 4,
-    src: DUMMY_IMAGE_URLS.teddy,
+    imageSrc: DUMMY_IMAGE_URLS.teddy,
     alt: 'A bear with a stripy head and legs and a teething ring on its arm.',
     title: 'Teddy Bear',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£20',
+    price: 20,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 5,
-    src: DUMMY_IMAGE_URLS.dinosaur,
+    imageSrc: DUMMY_IMAGE_URLS.dinosaur,
     alt: 'A soft gray dinosaur toy',
     title: 'Dino Plush',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£30',
+    price: 30,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 6,
-    src: DUMMY_IMAGE_URLS.keys,
+    imageSrc: DUMMY_IMAGE_URLS.keys,
     alt: 'Plastic keys on a teething ring.',
     title: 'The Keys',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£30',
+    price: 30,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 7,
-    src: DUMMY_IMAGE_URLS.blocks,
+    imageSrc: DUMMY_IMAGE_URLS.blocks,
     alt: 'Building block cubes with letter on.',
     title: 'Wood Letters',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£15',
+    price: 15,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 8,
-    src: DUMMY_IMAGE_URLS.teddy,
+    imageSrc: DUMMY_IMAGE_URLS.teddy,
     alt: 'A bear with a stripy head and legs and a teething ring on its arm.',
     title: 'Teddy Bear',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£20',
+    price: 20,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 9,
-    src: DUMMY_IMAGE_URLS.dinosaur,
+    imageSrc: DUMMY_IMAGE_URLS.dinosaur,
     alt: 'A soft gray dinosaur toy',
     title: 'Dino Plush',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£30',
+    price: 30,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 10,
-    src: DUMMY_IMAGE_URLS.keys,
+    imageSrc: DUMMY_IMAGE_URLS.keys,
     alt: 'Plastic keys on a teething ring.',
     title: 'The Keys',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£30',
+    price: 30,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 11,
-    src: DUMMY_IMAGE_URLS.blocks,
+    imageSrc: DUMMY_IMAGE_URLS.blocks,
     alt: 'Building block cubes with letter on.',
     title: 'Wood Letters',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£15',
+    price: 15,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
   {
     id: 12,
-    src: DUMMY_IMAGE_URLS.teddy,
+    imageSrc: DUMMY_IMAGE_URLS.teddy,
     alt: 'A bear with a stripy head and legs and a teething ring on its arm.',
     title: 'Teddy Bear',
     subtitle:
       'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed ante justo. Integer euismod libero id mauris malesuada tincidunt. Vivamus commodo nulla ut lorem rhoncus aliquet. Duis dapibus augue vel ipsum pretium, et venenatis sem blandit. Quisque ut erat vitae nisi ultrices placerat non eget velit. Integer ornare mi sed ipsum lacinia, non sagittis mauris blandit. Morbi fermentum libero vel nisl suscipit, nec tincidunt mi consectetur.',
-    price: '£20',
+    price: 20,
     seller: SELLERS_EXAMPLE_DATA[0],
   },
 ];
@@ -225,7 +225,7 @@ export const CATEGORY_CARD_DATA: CarouselData = {
   cards: [
     {
       id: 1,
-      image: DUMMY_IMAGE_URLS.teddy,
+      imageSrc: DUMMY_IMAGE_URLS.teddy,
       alt: 'A bear with a stripy head and legs and a teething ring on its arm.',
       title: 'Soft Toys',
       description: '',
@@ -234,7 +234,7 @@ export const CATEGORY_CARD_DATA: CarouselData = {
     },
     {
       id: 2,
-      image: DUMMY_IMAGE_URLS.blocks,
+      imageSrc: DUMMY_IMAGE_URLS.blocks,
       alt: 'Building block cubes with letter on.',
       title: 'Wooden Toys',
       description: '',
@@ -243,7 +243,7 @@ export const CATEGORY_CARD_DATA: CarouselData = {
     },
     {
       id: 3,
-      image: DUMMY_IMAGE_URLS.keys,
+      imageSrc: DUMMY_IMAGE_URLS.keys,
       alt: 'Plastic keys on a teething ring.',
       title: 'Plastic Toys',
       description: '',
@@ -252,7 +252,7 @@ export const CATEGORY_CARD_DATA: CarouselData = {
     },
     {
       id: 4,
-      image: DUMMY_IMAGE_URLS.dinosaur,
+      imageSrc: DUMMY_IMAGE_URLS.dinosaur,
       alt: 'A soft gray dinosaur toy',
       title: 'Dinosaur Toys',
       description: '',
@@ -298,7 +298,7 @@ export const TOP_SELLERS_DATA: CarouselData = {
     (seller): CarouselCard => ({
       id: seller.id,
       title: seller.name,
-      image: seller.imageSrc,
+      imageSrc: seller.imageSrc,
       alt: 'A picture of the seller of the product',
       link: 'products',
     })
@@ -309,88 +309,34 @@ export const SHOP_LOCAL_CARD_DATA: CarouselData = {
   title: 'Shop Local',
   type: CarouselTypes.TwoRows,
   href: 'products',
-  cards: [
-    {
-      id: 1,
-      image: DUMMY_IMAGE_URLS.dinosaur,
-      alt: 'A soft gray dinosaur toy',
-      title: 'Dino Plush',
-      description: '',
-      price: 30,
-      link: 'products',
-    },
-    {
-      id: 2,
-      image: DUMMY_IMAGE_URLS.keys,
-      alt: 'Plastic keys on a teething ring.',
-      title: 'The Keys',
-      description: '',
-      price: 30,
-      link: 'products',
-    },
-    {
-      id: 3,
-      image: DUMMY_IMAGE_URLS.blocks,
-      alt: 'Building block cubes with letter on.',
-      title: 'Wood Letters',
-      description: '',
-      price: 15,
-      link: 'products',
-    },
-    {
-      id: 4,
-      image: DUMMY_IMAGE_URLS.teddy,
-      alt: 'A bear with a stripy head and legs and a teething ring on its arm.',
-      title: 'Teddy Bear',
-      description: '',
-      price: 20,
-      link: 'products',
-    },
-  ],
+  cards: PRODUCT_EXAMPLE_DATA.filter((p) => [4, 6, 3, 1].includes(p.id)).map(
+    (product): CarouselCard => ({
+      id: product.id,
+      imageSrc: product.imageSrc,
+      alt: product.alt,
+      title: product.title,
+      description: product.subtitle,
+      price: product.price,
+      link: `product/${product.id}`,
+    })
+  ),
 };
 
 export const SPECIAL_PRICES_CARD_DATA: CarouselData = {
   title: 'Special Prices',
   type: CarouselTypes.TwoRows,
   href: 'products',
-  cards: [
-    {
-      id: 1,
-      image: DUMMY_IMAGE_URLS.blocks,
-      alt: 'Building block cubes with letter on.',
-      title: 'Wood Letters',
-      description: '',
-      price: 15,
-      link: 'products',
-    },
-    {
-      id: 2,
-      image: DUMMY_IMAGE_URLS.dinosaur,
-      alt: 'A soft gray dinosaur toy',
-      title: 'Dino Plush',
-      description: '',
-      price: 30,
-      link: 'products',
-    },
-    {
-      id: 3,
-      image: DUMMY_IMAGE_URLS.keys,
-      alt: 'Plastic keys on a teething ring.',
-      title: 'The Keys',
-      description: '',
-      price: 30,
-      link: 'products',
-    },
-    {
-      id: 4,
-      image: DUMMY_IMAGE_URLS.teddy,
-      alt: 'A bear with a stripy head and legs and a teething ring on its arm.',
-      title: 'Teddy Bear',
-      description: '',
-      price: 20,
-      link: 'products',
-    },
-  ],
+  cards: PRODUCT_EXAMPLE_DATA.filter((p) => [3, 5, 6, 8].includes(p.id)).map(
+    (product): CarouselCard => ({
+      id: product.id,
+      imageSrc: product.imageSrc,
+      alt: product.alt,
+      title: product.title,
+      description: product.subtitle,
+      price: product.price,
+      link: `product/${product.id}`,
+    })
+  ),
 };
 
 export const TOYS_AND_GAMES_CARD_DATA: CarouselData = {
@@ -400,28 +346,28 @@ export const TOYS_AND_GAMES_CARD_DATA: CarouselData = {
   cards: [
     {
       id: 1,
-      image: DUMMY_IMAGE_URLS.blocks,
+      imageSrc: DUMMY_IMAGE_URLS.blocks,
       alt: 'Building block cubes with letter on.',
       title: 'Early play',
       link: 'products',
     },
     {
       id: 2,
-      image: DUMMY_IMAGE_URLS.dinosaur,
+      imageSrc: DUMMY_IMAGE_URLS.dinosaur,
       alt: 'A soft gray dinosaur toy',
       title: 'Sub category',
       link: 'products',
     },
     {
       id: 3,
-      image: DUMMY_IMAGE_URLS.keys,
+      imageSrc: DUMMY_IMAGE_URLS.keys,
       alt: 'Plastic keys on a teething ring.',
       title: 'Sub category',
       link: 'products',
     },
     {
       id: 4,
-      image: DUMMY_IMAGE_URLS.teddy,
+      imageSrc: DUMMY_IMAGE_URLS.teddy,
       alt: 'A bear with a stripy head and legs and a teething ring on its arm.',
       title: 'Sub category',
       link: 'products',

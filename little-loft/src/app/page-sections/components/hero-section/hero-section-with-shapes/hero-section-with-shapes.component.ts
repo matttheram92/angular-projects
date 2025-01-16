@@ -1,5 +1,4 @@
 import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { DashboardHeroShapes } from '../../dashboard/models/dashboard.models';
 
 @Component({
@@ -9,12 +8,5 @@ import { DashboardHeroShapes } from '../../dashboard/models/dashboard.models';
   standalone: false,
 })
 export class HeroSectionWithShapesComponent {
-  constructor(
-    private router: Router,
-    @Inject('sectionData') public sectionData: DashboardHeroShapes
-  ) {}
-
-  public navigateToRoute(route: string): void {
-    this.router.navigate([route]);
-  }
+  constructor(@Inject('sectionData') public sectionData: DashboardHeroShapes) {}
 }

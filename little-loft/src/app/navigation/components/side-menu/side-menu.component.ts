@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-menu',
@@ -13,10 +12,5 @@ export class SideMenuComponent {
   @Output()
   closeMenu: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private router: Router) {}
-
-  public navigateToRoute(route: string): void {
-    this.router.navigate([route]);
-    this.closeMenu.emit();
-  }
+  constructor() {}
 }

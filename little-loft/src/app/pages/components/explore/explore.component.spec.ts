@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ExploreComponent } from './explore.component';
+import { PageSectionsModule } from '@app/page-sections/page-sections.module';
 
 describe('ExploreComponent', () => {
   let component: ExploreComponent;
@@ -8,7 +9,8 @@ describe('ExploreComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ExploreComponent]
+      declarations: [ExploreComponent],
+      imports: [PageSectionsModule],
     });
     fixture = TestBed.createComponent(ExploreComponent);
     component = fixture.componentInstance;

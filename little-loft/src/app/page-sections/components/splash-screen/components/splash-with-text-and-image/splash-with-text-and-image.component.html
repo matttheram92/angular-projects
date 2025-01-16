@@ -1,23 +1,24 @@
-<div
-  class="sm:h-96 sm:border-b sm:border-primary sm:flex"
->
-  <p class="uppercase text-primary text-center font-semibold sm:hidden">
+<div>
+  <app-eyebrow class="text-center">
     {{ sectionData.header }}
-  </p>
-  <div class="sm:flex sm:m-auto">
-    <div class="flex justify-self-end sm:w-1/2">
-      <p [class]="sectionData.color" class="h-32 w-32 text-white text-center">
+  </app-eyebrow>
+  <div>
+    <div class="flex justify-self-end">
+      <p
+        [class]="sectionData.color"
+        class="h-32 w-32 text-lg/5 font-semibold tracking-wider content-center text-white text-center"
+      >
         {{ sectionData.step }}
       </p>
       <img class="max-h-52" [src]="sectionData.src" [alt]="sectionData.alt" />
     </div>
-    <div class="sm:w-1/2 sm:m-auto">
-      <h2 class="text-4xl text-primary font-semibold sm:text-center">
+    <div>
+      <app-heading2>
         {{ sectionData.subHeader }}
-      </h2>
-      <p>
+      </app-heading2>
+      <app-body>
         {{ sectionData.body }}
-      </p>
+      </app-body>
     </div>
   </div>
 </div>

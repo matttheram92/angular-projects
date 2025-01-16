@@ -7,17 +7,16 @@
       <label for="search" class="hidden">Search</label>
       <div class="my-2 px-10 flex">
         <app-button
-          type="icon"
           icon="leftArrow"
           ariaLabel="back to home page"
-          (click)="navigateToRoute('home')"
+          appNavigateTo="home"
           class="-ml-2.5 inline sm:hidden"
         ></app-button>
         <app-input label="Search" icon="search" class="w-full"></app-input>
       </div>
       <div class="grid grid-cols-2 divide-x divide-gray-900/5">
         <a
-          (click)="navigateToRoute('home')"
+          appNavigateTo="home"
           class="flex items-center cursor-pointer justify-center gap-x-2.5 py-5 text-sm/6 font-semibold text-primary hover:bg-lemonDark"
         >
           <app-icon icon="bear" color="primary" [size]="15"></app-icon>
@@ -25,7 +24,7 @@
         </a>
 
         <a
-          (click)="navigateToRoute('home')"
+          appNavigateTo="home"
           class="flex items-center cursor-pointer justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-lemonDark"
         >
           <app-icon icon="smile"></app-icon>

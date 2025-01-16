@@ -15,6 +15,8 @@ import { BasketComponent } from './components/basket/basket.component';
 import { FavouritesComponent } from './components/favourites/favourites.component';
 import { ControlsModule } from '../controls/contols.module';
 import { HomeComponent } from './components/home/home.component';
+import { CoreModule } from '@app/core/core.module';
+import { TypeographyModule } from '@app/typography/typography.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { HomeComponent } from './components/home/home.component';
     HeroSectionModule,
     PageSectionsModule,
     ControlsModule,
+    CoreModule,
+    TypeographyModule,
   ],
   exports: [
     ProductListComponent,

@@ -22,6 +22,7 @@ export interface SplashScreenWithTextAndImage extends SplashScreenSectionBase {
   src: string;
   alt: string;
   color: string;
+  icon: string;
 }
 
 export interface SplashScreenWithAction extends SplashScreenSectionBase {

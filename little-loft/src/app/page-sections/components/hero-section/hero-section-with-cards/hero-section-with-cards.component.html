@@ -1,19 +1,17 @@
 <div>
   <section id="features" class="relative block p-10">
     <div class="relative mx-auto max-w-5xl text-center">
-      <span
-        class="mb-3 text-primary flex items-center justify-center font-medium uppercase"
-      >
+      <app-eyebrow class="block mb-3">
         {{ splashScreenInfo.sections[0].header }}
-      </span>
-      <h2 class="text-primary font-semibold text-4xl">
+      </app-eyebrow>
+
+      <app-heading1>
         {{ splashScreenInfo.sections[0].subHeader }}
-      </h2>
-      <p
-        class="mx-auto my-4 w-full max-w-xl text-center font-medium leading-relaxed tracking-wide text-gray-400"
-      >
-        {{ splashScreenInfo.sections[0].body }}
-      </p>
+      </app-heading1>
+
+      <app-body class="block my-4 tracking-wide">{{
+        splashScreenInfo.sections[0].body
+      }}</app-body>
     </div>
 
     <div
@@ -21,19 +19,25 @@
     >
       <div
         *ngFor="let bullet of bullets; index as i"
-        class="md:p-8 lg:p-14 border-l md:border-gray-200 flex flex-col justify-center items-center"
+        class="md:p-8 lg:p-14 border-l md:border-gray-200 flex flex-col items-center"
         [class.border-l]="i > 0"
       >
         <div
           class="w-14 h-14 rounded-full flex justify-center items-center"
           [ngClass]="bullet.color"
         >
-          <i class="text-3xl text-gray-900"></i>
+          <app-icon
+            [icon]="bullet.icon"
+            color="white"
+            class="text-3xl text-gray-900"
+          ></app-icon>
         </div>
-        <h3 class="mt-12 text-xl font-bold text-gray-900">
+        <app-heading3 class="mt-12 justify-end">
           {{ bullet.subHeader }}
-        </h3>
-        <p class="mt-5 text-base text-gray-600">{{ bullet.body }}.</p>
+        </app-heading3>
+        <app-body class="mt-auto pt-2 text-gray-600">{{
+          bullet.body
+        }}</app-body>
       </div>
     </div>
   </section>

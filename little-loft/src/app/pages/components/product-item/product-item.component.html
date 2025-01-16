@@ -9,24 +9,24 @@
         <div class="w-auto sm:w-max md:w-full relative rounded-lg mx-auto">
           <img
             class="md:w-full max-h-96 md:max-h-full m-auto object-cover rounded"
-            [src]="product.src"
+            [src]="product.imageSrc"
             alt="Product Image"
           />
-          <app-button
-            class="md:hidden absolute -mt-7 right-2"
-            type="icon-filled"
-            ariaLabel="favourite"
-            icon="heart"
-          ></app-button>
+          <app-heart-button
+            class="md:hidden absolute -mt-7 right-2 bg-black rounded-full"
+            (buttonClicked)="addToWishlist()"
+            [default]="wishlistButtonDefault"
+            [filled]="true"
+          ></app-heart-button>
         </div>
       </div>
       <div class="md:flex-1 px-0 sm:px-4">
-        <h2 class="text-2xl font-extrabold mb-2.5">{{ product.title }}</h2>
-        <p class="text-gray-600 text-sm font-normal">
+        <app-heading3 class="mb-2.5">{{ product.title }}</app-heading3>
+        <app-body class="text-gray-600">
           {{ product.subtitle }}
-        </p>
+        </app-body>
         <div class="mt-4">
-          <p class="text-sm font-semibold mb-2.5">About this seller</p>
+          <app-heading5>About this seller</app-heading5>
           <div class="flex w-full">
             <img
               class="h-12 my-auto rounded"
@@ -39,9 +39,9 @@
             </div>
             <div class="ml-auto">
               <app-button
-                type="text-icon-right"
-                icon="rightArrow"
+                appendIcon="rightArrow"
                 text="SHOP"
+                appNavigateTo="products"
                 ariaLabel="Shop. View more items by this seller"
               ></app-button>
             </div>
@@ -52,33 +52,34 @@
           class="h-[60px] bg-lemon left-0 bottom-0 sm:h-auto flex md:block fixed sm:relative w-screen sm:w-full px-10 sm:p-0 -mt-1 sm:mt-0 border-primary border-t-2 sm:border-t-0 mb-16 sm:mb-0"
         >
           <div class="flex mr-4 my-auto sm:mt-4 w-full">
-            <span class="text-xl my-auto font-extrabold">{{
-              product.price
-            }}</span>
-            <span class="text-gray-600 text-xs ml-2 self-center"
-              >+£3.49 postage</span
+            <span class="text-xl my-auto font-extrabold"
+              >£{{ product.price }}</span
+            >
+            <app-small-text class="ml-2 self-center"
+              >+£3.49 postage</app-small-text
             >
           </div>
 
           <div class="flex my-auto w-full">
             <app-button
               class="block md:hidden ml-auto"
-              [disabled]="inBasket"
+              [pill]="true"
               text="Buy now"
-              type="pill"
               size="sm"
+              [disabled]="inBasket"
               (click)="addToBasket()"
             >
             </app-button>
             <app-button
               class="w-full m-2 hidden md:block"
-              [disabled]="inBasket"
+              [pill]="true"
               text="Buy now"
-              type="pill"
+              [disabled]="inBasket"
               (click)="addToBasket()"
             >
             </app-button>
             <app-heart-button
+              class="hidden md:block"
               (buttonClicked)="addToWishlist()"
               [default]="wishlistButtonDefault"
             ></app-heart-button>
@@ -86,10 +87,10 @@
         </div>
 
         <div class="mt-4">
-          <span class="text-sm font-semibold mb-4">Product Description</span>
-          <p class="text-gray-600 text-sm mt-2">
+          <app-heading5>Product Description</app-heading5>
+          <app-body class="text-gray-600 mt-2">
             {{ product.description }}
-          </p>
+          </app-body>
         </div>
       </div>
     </div>

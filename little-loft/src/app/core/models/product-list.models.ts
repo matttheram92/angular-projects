@@ -2,12 +2,12 @@ import { Seller } from './seller.models';
 
 export interface ProductItem {
   id: number;
-  src: string;
+  imageSrc: string;
   alt: string;
   title: string;
   subtitle: string;
   description: string;
-  price: string;
+  price: number;
   seller: Seller;
   _links?: {
     self: { href: string };
