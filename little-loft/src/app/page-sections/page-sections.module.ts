@@ -8,6 +8,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CoreModule } from '@app/core/core.module';
 import { ItemListComponent } from './components/item-list/item-list.component';
 import { TypeographyModule } from '@app/typography/typography.module';
+import { ImageCardComponent } from './components/image-card/image-card.component';
+import { ImageCircleCardComponent } from './components/image-circle-card/image-circle-card.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { TypeographyModule } from '@app/typography/typography.module';
     SearchSectionComponent,
     DashboardComponent,
     ItemListComponent,
+    ImageCardComponent,
+    ImageCircleCardComponent,
   ],
   imports: [
     ControlsModule,
@@ -28,6 +32,8 @@ import { TypeographyModule } from '@app/typography/typography.module';
     SearchSectionComponent,
     DashboardComponent,
     ItemListComponent,
+    ImageCardComponent,
+    ImageCircleCardComponent,
   ],
   providers: [],
 })

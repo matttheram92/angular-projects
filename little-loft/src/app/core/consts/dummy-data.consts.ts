@@ -290,6 +290,18 @@ export const CATEGORY_BUTTONS: CarouselData = {
   ],
 };
 
+export const PRODUCT_LIST_DATA: CarouselCard[] = PRODUCT_EXAMPLE_DATA.map(
+  (product): CarouselCard => ({
+    id: product.id,
+    imageSrc: product.imageSrc,
+    alt: product.alt,
+    title: product.title,
+    description: product.subtitle,
+    price: product.price,
+    link: `product/${product.id}`,
+  })
+);
+
 export const TOP_SELLERS_DATA: CarouselData = {
   title: 'Top Sellers',
   type: CarouselTypes.TextAndCircleImage,

@@ -1,4 +1,4 @@
-<div class="mx-auto max-w-2xl px-10 pb-32 md:px-6 lg:max-w-7xl lg:px-8">
+<div class="mx-auto px-10 pb-32 lg:max-w-7xl">
   <div class="mx-auto flex justify-between pb-6">
     <app-heading3>Soft Toys</app-heading3>
     <app-button prependIcon="filter" text="FILTER"></app-button>
@@ -13,23 +13,7 @@
       class="group cursor-pointer transition ease-in-out delay-150 hover:translate-y-0 hover:scale-105 duration-300"
       *ngFor="let product of products"
     >
-      <img
-        [src]="product.imageSrc"
-        [alt]="product.alt"
-        class="w-full max-w-full h-40 md:h-auto object-cover rounded"
-      />
-      <div class="pt-2.5">
-        <p
-          class="text-sm/[14px] sm:text-base/5 font-bold text-wrap line-clamp-3 md:line-clamp-2"
-        >
-          {{ product.title }}
-        </p>
-        <p
-          class="text-xs/4 sm:text-sm font-bold opacity-30 block mt-1.5 sm:mt-0"
-        >
-          £{{ product.price }}
-        </p>
-      </div>
+      <app-image-card [item]="product"></app-image-card>
     </a>
   </div>
 </div>

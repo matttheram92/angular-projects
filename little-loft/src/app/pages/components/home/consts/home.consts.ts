@@ -19,7 +19,7 @@ export const HOME_DASHBOARD_DATA: DashboardInfo = {
       imageSrc: DUMMY_IMAGE_URLS.childsRoom,
       imageAlt: 'An image of a childs room',
       buttonPrimary: { label: 'Get started', action: 'sell' },
-      buttonSecondary: { label: 'Discover →', action: 'explore' },
+      buttonSecondary: { label: 'DISCOVER', action: 'explore' },
     },
     {
       index: 1,

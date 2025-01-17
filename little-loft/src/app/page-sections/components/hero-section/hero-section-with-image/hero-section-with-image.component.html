@@ -1,37 +1,43 @@
 <div id="hero-image" class="h-2/4 relative padding-between-components">
-  <div class="absolute inset-0">
+  <div class="absolute inset-0 overflow-hidden">
     <img
       id="section-image"
       [src]="sectionData.imageSrc"
       alt="sectionData.imageAlt"
-      class="object-cover object-center w-full h-full"
+      class="scale-150 sm:transform-none translate-x-24 -translate-y-16 sm:translate-0 object-cover object-75 w-full h-full"
     />
 
     <div class="absolute inset-0 bg-black opacity-10"></div>
   </div>
   <div
-    class="relative z-10 flex flex-col justify-center items-center h-full mx-auto max-w-2xl py-4 border-b border-primary"
+    class="absolute sm:relative z-10 flex flex-col bg-primary sm:bg-transparent bottom-0 justify-end sm:justify-center sm:w-full rounded-tl-full rounded-tr-full sm:rounded-0 h-48 sm:h-full -ml-32 sm:mx-auto max-w-sm sm:max-w-2xl py-4 pl-16 sm:pl-0"
   >
-    <div class="text-center">
+    <div class="text-left sm:text-center w-3/4 sm:w-full pl-24 sm:p-0">
       <h1
         id="section-title"
-        class="text-balance text-5xl font-semibold tracking-tight text-lemon sm:text-7xl"
+        class="text-balance text-3xl font-semibold tracking-tight text-lemon sm:text-7xl sm:drop-shadow"
       >
         {{ sectionData.header }}
       </h1>
-      <p class="mt-8 text-pretty text-lg font-medium text-lemon sm:text-xl/8">
+      <p
+        class="hidden sm:block mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8 drop-shadow-md"
+      >
         {{ sectionData.subHeader }}
       </p>
-      <div class="mt-10 flex items-center justify-center gap-x-6">
+      <div
+        class="-ml-4 sm:ml-0 sm:mt-10 flex items-center justify-center gap-x-6"
+      >
         <app-button
           *ngIf="sectionData.buttonPrimary"
           [filled]="true"
           [text]="sectionData.buttonPrimary.label"
           [appNavigateTo]="sectionData.buttonPrimary.action"
+          class="hidden sm:block"
         ></app-button>
         <app-button
           *ngIf="sectionData.buttonSecondary"
           [text]="sectionData.buttonSecondary.label"
+          appendIcon="rightArrow"
           [appNavigateTo]="sectionData.buttonSecondary.action"
           fillColor="transparent"
           textColor="white"

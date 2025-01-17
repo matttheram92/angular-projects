@@ -1,0 +1,12 @@
+<div *ngIf="!!item">
+  <img
+    [src]="item.imageSrc"
+    [alt]="item.alt"
+    class="w-16 h-16 object-cover rounded-full"
+  />
+  <div class="text-center">
+    <h3 class="text-lg leading-6 font-bold text-gray-900">
+      {{ item.title }}
+    </h3>
+  </div>
+</div>

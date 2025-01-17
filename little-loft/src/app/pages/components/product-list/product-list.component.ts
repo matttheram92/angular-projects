@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductItem } from '@app/core/models/product-list.models';
-import { PRODUCT_EXAMPLE_DATA } from '@app/core/consts/dummy-data.consts';
+import { PRODUCT_LIST_DATA } from '@app/core/consts/dummy-data.consts';
+import { CarouselCard } from '@app/page-sections/components/carousel/models/carousel.model';
 
 @Component({
   selector: 'app-product-list',
@@ -10,7 +10,7 @@ import { PRODUCT_EXAMPLE_DATA } from '@app/core/consts/dummy-data.consts';
   standalone: false,
 })
 export class ProductListComponent {
-  products: ProductItem[] = PRODUCT_EXAMPLE_DATA;
+  products: CarouselCard[] = PRODUCT_LIST_DATA;
 
   constructor(private router: Router) {}
 

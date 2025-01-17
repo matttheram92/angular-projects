@@ -10,8 +10,8 @@ import {
 import { ControlsModule } from '@app/controls/contols.module';
 import { CommonModule } from '@angular/common';
 import { HeroSectionModule } from '../hero-section/hero-section.module';
-import { CarouselComponent } from '../carousel/carousel.component';
 import { TypeographyModule } from '@app/typography/typography.module';
+import { PageSectionsModule } from '@app/page-sections/page-sections.module';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -19,8 +19,15 @@ describe('DashboardComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DashboardComponent, CarouselComponent],
-      imports: [ControlsModule, CommonModule, BrowserModule, HeroSectionModule, TypeographyModule],
+      declarations: [DashboardComponent],
+      imports: [
+        ControlsModule,
+        CommonModule,
+        BrowserModule,
+        HeroSectionModule,
+        TypeographyModule,
+        PageSectionsModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);

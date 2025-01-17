@@ -1,6 +1,6 @@
 <div class="bg-lemon h-screen">
   <app-header></app-header>
-  <div id="main-content" [class.pt-32]="showHeader" class="pt-0">
+  <div id="main-content" [ngClass]="{ 'pt-24 sm:pt-28': showHeader }" class="pt-0">
     <router-outlet class="h-full"></router-outlet>
   </div>
   <app-mobile-nav class="sm:hidden fixed w-full bottom-0"></app-mobile-nav>
