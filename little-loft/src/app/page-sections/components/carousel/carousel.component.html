@@ -12,6 +12,7 @@
       text="All"
       appendIcon="rightArrow"
       textColor="gray-400"
+      [ariaLabel]="'View all ' + carouselData.title"
     ></app-button>
   </div>
   <div class="flex overflow-x-auto">
@@ -21,11 +22,12 @@
         (click)="scrollLeft()"
         fillColor="lemon"
         icon="leftArrow"
+        [tabindex]="'-1'"
       ></app-button>
     </div>
-    <div #carouselContainer class="overflow-x-auto w-full mx-auto">
+    <div #carouselContainer class="overflow-x-auto w-full mx-auto scroll-y-hidden">
       <div
-        class="grid px-10 lg:px-2 py-2 w-max overflow-y-hidden mx-auto"
+        class="grid px-10 lg:px-2 py-2 overflow-y-hidden mx-auto"
         [ngClass]="getCarouselTypeStyles()"
       >
         <a
@@ -33,42 +35,12 @@
           [appNavigateTo]="card.link"
           [attr.aria-label]="card.title"
           tabindex="0"
-          class="flex-none w-full rounded snap-center cursor-pointer transition ease-in-out delay-150 hover:translate-y-0 hover:scale-105 duration-300"
+          class="flex-none w-full max-w-screen rounded snap-center cursor-pointer transition ease-in-out delay-150 hover:translate-y-0 hover:scale-105 duration-300"
         >
-          <div
-            *ngIf="carouselData.type === carouselTypeButtons"
-            class="bg-black text-white text-center p-2"
-          >
-            <p class="w-full">{{ card.title }}</p>
-          </div>
-
-          <div
-            *ngIf="carouselData.type === carouselTypeTextAndCircleImage"
-            class="min-w-16 max-w-16"
-          >
-            <app-image-circle-card [item]="card"></app-image-circle-card>
-          </div>
-
-          <div
-            *ngIf="carouselData.type === carouselTypeInImage"
-            class="relative max-w-72 sm:max-w-full"
-          >
-            <app-image-card [item]="card" [inImage]="true"></app-image-card>
-          </div>
-
-          <div
-            *ngIf="carouselData.type === carouselTypeSingleRow"
-            class="overflow-hidden"
-          >
-            <app-image-card [item]="card"></app-image-card>
-          </div>
-
-          <div
-            *ngIf="carouselData.type === carouselTypeTwoRows"
-            class="overflow-hidden w-40 md:w-auto"
-          >
-            <app-image-card [item]="card"></app-image-card>
-          </div>
+          <app-carousel-card
+            [type]="carouselData.type"
+            [card]="card"
+          ></app-carousel-card>
         </a>
       </div>
     </div>
@@ -78,6 +50,8 @@
         (click)="scrollRight()"
         fillColor="lemon"
         icon="rightArrow"
+        tabindex="-1"
+        [tabindex]="'-1'"
       ></app-button>
     </div>
   </div>

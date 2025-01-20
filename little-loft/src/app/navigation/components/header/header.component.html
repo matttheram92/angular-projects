@@ -16,9 +16,10 @@
     <div class="flex lg:flex-1">
       <a
         appNavigateTo="home"
-        class="-m-1.5 p-1.5"
         [class.hidden]="!isHome"
         class="h-8 w-auto sm:inline cursor-pointer"
+        tabindex="0"
+        aria-label="Home"
       >
         <span class="sr-only">Little Loft</span>
         <img src="../assets/little-loft.png" alt="Little Loft Logo" />
@@ -29,6 +30,7 @@
         appNavigateTo="home"
         [class.hidden]="isHome"
         class="inline sm:hidden"
+        ariaLabel="Back to home"
       ></app-button>
     </div>
 

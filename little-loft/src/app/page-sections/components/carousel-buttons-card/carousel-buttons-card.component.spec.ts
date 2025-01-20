@@ -1,24 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImageCircleCardComponent } from './image-circle-card.component';
+import { CarouselButtonsCardComponent } from './carousel-buttons-card.component';
 
-describe('ImageCircleCardComponent', () => {
-  let component: ImageCircleCardComponent;
-  let fixture: ComponentFixture<ImageCircleCardComponent>;
+describe('CarouselButtonsCardComponent', () => {
+  let component: CarouselButtonsCardComponent;
+  let fixture: ComponentFixture<CarouselButtonsCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ImageCircleCardComponent],
+      declarations: [CarouselButtonsCardComponent],
       providers: [
         {
           provide: 'item',
           useValue: {},
         },
       ],
-    })
-    .compileComponents();
+    }).compileComponents();
 
-    fixture = TestBed.createComponent(ImageCircleCardComponent);
+    fixture = TestBed.createComponent(CarouselButtonsCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

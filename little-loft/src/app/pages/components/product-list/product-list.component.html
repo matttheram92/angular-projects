@@ -13,7 +13,8 @@
       class="group cursor-pointer transition ease-in-out delay-150 hover:translate-y-0 hover:scale-105 duration-300"
       *ngFor="let product of products"
     >
-      <app-image-card [item]="product"></app-image-card>
+      <app-carousel-card [card]="product" [type]="twoRowCarouselType">
+      </app-carousel-card>
     </a>
   </div>
 </div>

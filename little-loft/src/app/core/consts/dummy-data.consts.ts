@@ -15,7 +15,7 @@ const SELLERS_EXAMPLE_DATA: Seller[] = [
   },
   {
     id: 2,
-    name: 'John Smith',
+    name: 'Johnathan Johnson-Thompson',
     imageSrc: DUMMY_IMAGE_URLS.seller,
   },
   {

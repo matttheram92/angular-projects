@@ -10,6 +10,8 @@ import { ItemListComponent } from './components/item-list/item-list.component';
 import { TypeographyModule } from '@app/typography/typography.module';
 import { ImageCardComponent } from './components/image-card/image-card.component';
 import { ImageCircleCardComponent } from './components/image-circle-card/image-circle-card.component';
+import { CarouselButtonsCardComponent } from './components/carousel-buttons-card/carousel-buttons-card.component';
+import { CarouselCardComponent } from './components/carousel-card/carousel-card.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ImageCircleCardComponent } from './components/image-circle-card/image-c
     ItemListComponent,
     ImageCardComponent,
     ImageCircleCardComponent,
+    CarouselButtonsCardComponent,
+    CarouselCardComponent,
   ],
   imports: [
     ControlsModule,
@@ -34,6 +38,8 @@ import { ImageCircleCardComponent } from './components/image-circle-card/image-c
     ItemListComponent,
     ImageCardComponent,
     ImageCircleCardComponent,
+    CarouselButtonsCardComponent,
+    CarouselCardComponent,
   ],
   providers: [],
 })

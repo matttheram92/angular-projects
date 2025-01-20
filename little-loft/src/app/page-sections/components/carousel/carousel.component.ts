@@ -36,27 +36,28 @@ export class CarouselComponent implements OnInit {
   public getCarouselTypeStyles(): string {
     switch (this.carouselData.type) {
       case CarouselTypes.TextAndCircleImage:
-        return 'gap-8 md:gap-24 lg:gap-8 grid-cols-12 md:w-full';
+        return 'w-max gap-2.5 lg:gap-1 xl:gap-5 grid-cols-12 w-full';
       case CarouselTypes.InImage:
-        return 'lg:w-full gap-4 grid-cols-4';
+        return 'w-max lg:w-full gap-4 grid-cols-4';
       default:
-        return 'md:w-full gap-4 grid-cols-4';
+        return 'w-max md:w-full gap-4 grid-cols-4';
     }
   }
 
   get hiddenSideScrollClasses(): { [key: string]: boolean } {
     return {
-      'lg:hidden': this.carouselData.type === this.carouselTypeInImage,
+      'lg:hidden':
+        this.carouselData.type === this.carouselTypeInImage ||
+        this.carouselData.type === this.carouselTypeTextAndCircleImage,
       'md:hidden':
         this.carouselData.type === this.carouselTypeSingleRow ||
-        this.carouselData.type === this.carouselTypeTwoRows ||
-        this.carouselData.type === this.carouselTypeTextAndCircleImage,
+        this.carouselData.type === this.carouselTypeTwoRows,
       'sm:block': this.carouselData.type !== this.carouselTypeButtons,
       hidden: true,
     };
   }
 
-  scrollLeft(): void {
+  public scrollLeft(): void {
     if (this.carouselContainer && this.carouselContainer.nativeElement) {
       const container = this.carouselContainer.nativeElement;
       const targetScrollLeft = container.scrollLeft - 150;
@@ -68,7 +69,7 @@ export class CarouselComponent implements OnInit {
     }
   }
 
-  scrollRight(): void {
+  public scrollRight(): void {
     if (this.carouselContainer && this.carouselContainer.nativeElement) {
       const container = this.carouselContainer.nativeElement;
       const targetScrollLeft = container.scrollLeft + 150;

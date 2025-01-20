@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CarouselCard } from '../carousel/models/carousel.model';
+import { Component, Inject, OnInit } from '@angular/core';
+import { CarouselCard, CarouselTypes } from '../carousel/models/carousel.model';
 
 @Component({
   selector: 'app-image-card',
@@ -8,12 +8,18 @@ import { CarouselCard } from '../carousel/models/carousel.model';
   standalone: false,
 })
 export class ImageCardComponent implements OnInit {
-  @Input() item!: CarouselCard;
-  @Input() inImage: boolean = false;
+  constructor(
+    @Inject('item') public item: CarouselCard,
+    @Inject('type') public type: CarouselTypes
+  ) {}
 
   ngOnInit(): void {}
 
   get isSingleLine(): boolean {
-    return !this.item.price;
+    return this.type === CarouselTypes.SingleRow;
+  }
+
+  get inImage(): boolean {
+    return this.type === CarouselTypes.InImage;
   }
 }

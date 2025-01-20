@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { HEADER_HIDDEN_FOR_ROUTES } from '@app/core/consts/navigation.consts';
@@ -23,10 +24,11 @@ export class HeaderComponent {
 
   constructor(
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private location: Location
   ) {
     this.router.events.subscribe(() => {
-      this.skipLinkHref = `${this.router.url}#main-content`;
+      this.skipLinkHref = `${this.location.path()}#main-content`;
       this.showHeader = !HEADER_HIDDEN_FOR_ROUTES.includes(this.router.url);
       this.isHome = this.router.url === '/home';
     });

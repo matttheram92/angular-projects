@@ -1,8 +1,8 @@
-<div *ngIf="!!item">
+<div *ngIf="!!item" [ngClass]="inImage ? 'relative' : 'w-auto overflow-hidden'">
   <img
     [src]="item.imageSrc"
     [alt]="item.alt"
-    class="w-full max-w-full object-cover rounded"
+    class="w-full max-w-44 md:max-w-full object-cover rounded"
     [ngClass]="
       inImage
         ? 'max-h-72 h-56 sm:h-auto'
@@ -21,7 +21,7 @@
   <ng-template #doubleLine>
     <div class="pt-2.5">
       <p
-        class="text-sm/[14px] sm:text-base/5 font-bold text-wrap line-clamp-3 md:line-clamp-2"
+        class="max-w-44 md:max-w-full text-sm/[14px] sm:text-base/5 font-bold text-wrap line-clamp-3 lg:line-clamp-2"
       >
         {{ item.title }}
       </p>

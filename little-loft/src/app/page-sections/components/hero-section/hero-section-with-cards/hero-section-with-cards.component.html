@@ -1,6 +1,6 @@
 <div>
   <section id="features" class="relative block p-10">
-    <div class="relative mx-auto max-w-5xl text-center">
+    <div class="relative mx-auto max-w-5xl text-center" tabindex="0">
       <app-eyebrow class="block mb-3">
         {{ splashScreenInfo.sections[0].header }}
       </app-eyebrow>
@@ -21,6 +21,7 @@
         *ngFor="let bullet of bullets; index as i"
         class="md:p-8 lg:p-14 border-l md:border-gray-200 flex flex-col items-center"
         [class.border-l]="i > 0"
+        tabindex="0"
       >
         <div
           class="w-14 h-14 rounded-full flex justify-center items-center"

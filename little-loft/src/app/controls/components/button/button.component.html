@@ -6,6 +6,7 @@
       [disabled]="disabled"
       class="flex items-center rounded text-sm/[14px] gap-x-1 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 duration-300 transition ease-in-out"
       [ngClass]="buttonClasses"
+      [attr.tabindex]="tabindex"
     >
       <app-icon
         *ngIf="!!icon || !!prependIcon"

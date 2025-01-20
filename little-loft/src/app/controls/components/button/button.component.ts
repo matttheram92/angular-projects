@@ -1,9 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -25,6 +20,7 @@ export class ButtonComponent implements OnInit, OnChanges {
   @Input() banner: boolean = false;
   @Input() size?: 'sm' | 'md' | 'lg';
   @Input() disabled: boolean = false;
+  @Input() tabindex?: string = '0';
 
   constructor() {}
 
